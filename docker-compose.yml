@@ -1,0 +1,46 @@
+﻿services:
+  identitydb:
+    image: postgres
+    container_name: identitydb
+    environment:
+      POSTGRES_USER: identity
+      POSTGRES_PASSWORD: identity
+      POSTGRES_DB: identity
+    ports: 
+      - "5432:5432"
+    
+  identity:
+    image: identity
+    build:
+      context: .
+      dockerfile: Identity/Dockerfile
+
+  class:
+    image: class
+    build:
+      context: .
+      dockerfile: Class/Dockerfile
+
+  gateway:
+    image: gateway
+    build:
+      context: .
+      dockerfile: Gateway/Dockerfile
+
+  notification:
+    image: notification
+    build:
+      context: .
+      dockerfile: Notification/Dockerfile
+
+  core:
+    image: core
+    build:
+      context: .
+      dockerfile: Core/Dockerfile
+
+  infrastructure:
+    image: infrastructure
+    build:
+      context: .
+      dockerfile: Infrastructure/Dockerfile

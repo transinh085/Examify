@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option csharp_namespace = "Notification";
+
+package classroom;
+
+service Classroom {
+  rpc GetClassroom (ClassroomRequest) returns (ClassroomReply);
+}
+
+message ClassroomRequest {
+  string id = 1;
+}
+
+message ClassroomReply {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+}
