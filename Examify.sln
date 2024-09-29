@@ -4,7 +4,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examify.Identity", "Examify
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{0273B55A-4323-4319-99BE-B3B83781EBA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examify.Class", "Examify.Class\Examify.Class.csproj", "{9DEECA16-AFCE-4A68-891B-97F56A8A9E70}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examify.Classroom", "Examify.Classroom\Examify.Classroom.csproj", "{9DEECA16-AFCE-4A68-891B-97F56A8A9E70}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateways", "Gateways", "{DBBCD54D-DD6C-4D17-9EC7-FA71F0E8AFB3}"
 EndProject

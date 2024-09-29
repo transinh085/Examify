@@ -10,10 +10,23 @@
     <ItemGroup>
         <Protobuf Include="Protos\classroom.proto" GrpcServices="Server"/>
     </ItemGroup>
+
+    <ItemGroup>
+        <Compile Include="..\Shared\ActivityExtensions.cs" Link="Extensions\ActivityExtensions.cs" />
+        <Compile Include="..\Shared\MigrateDbContextExtensions.cs" Link="Extensions\MigrateDbContextExtensions.cs" />
+    </ItemGroup>
     
     <ItemGroup>
-        <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.2.0" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
+    
+    <ItemGroup>
+        <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.2.1" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
         <PackageReference Include="Grpc.AspNetCore" Version="2.57.0"/>
     </ItemGroup>
@@ -31,6 +44,12 @@
     <ItemGroup>
       <_ContentIncludedByDefault Remove="Logs\class service.logs20240923.json" />
       <_ContentIncludedByDefault Remove="Logs\class service.logs20240924.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Features\" />
+      <Folder Include="Infrastructure\Data\Configuration\" />
+      <Folder Include="Infrastructure\Data\Migrations\" />
     </ItemGroup>
 
 </Project>

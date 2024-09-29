@@ -1,12 +1,12 @@
 var builder = DistributedApplication.CreateBuilder(args);
 
-var postgreSql = builder.AddPostgres("postgreSql");
-var identityDB = postgreSql.AddDatabase("identityDB");
+var postgreSql = builder.AddPostgres("postgreSql").WithPgAdmin();
+var classDb = postgreSql.AddDatabase("classDb");
 
-var identityService = builder.AddProject<Projects.Examify_Identity>("identity-api").WithReference(identityDB);
-var classService = builder.AddProject<Projects.Examify_Class>("class-api")
+var identityService = builder.AddProject<Projects.Examify_Identity>("identity-api");
+var classService = builder.AddProject<Projects.Examify_Classroom>("class-api")
     .WithHttpsEndpoint(port: 57119)
-    .WithReference(postgreSql);
+    .WithReference(classDb);
 
 var notificationService = builder.AddProject<Projects.Examify_Notification>("notification-api")
     .WithHttpsEndpoint();

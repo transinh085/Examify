@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Examify.Core": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:64979;http://localhost:64980"
+    }
+  }
+}

@@ -21,6 +21,7 @@ public static class Extensions
         var config = builder.Configuration;
         var appOptions = builder.Services.BindValidateReturn<AppOptions>(config);
     
+        // Cors
         builder.Services.AddCors(options => options.AddPolicy(
             name: AllowAllOrigins,
             builder =>
@@ -30,6 +31,7 @@ public static class Extensions
                     .AllowAnyMethod()
                     .AllowAnyOrigin();
             }));
+        
         builder.Services.AddExceptionMiddleware();
         builder.Services.AddEndpoints(applicationAssembly);
         builder.Services.AddEndpointsApiExplorer();

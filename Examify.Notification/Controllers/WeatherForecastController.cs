@@ -20,7 +20,7 @@ public class WeatherForecastController : ControllerBase
     [HttpGet]
     public IActionResult Get()
     {
-        var classroom = _classroomClient.GetClassroom(new ClassroomRequest { Id = "C004" });
+        var classroom = _classroomClient.GetClassroom(new ClassroomRequest { Id = 4 });
         _logger.LogInformation("Classroom: {classroom}", classroom);
         return Ok(classroom);
     }

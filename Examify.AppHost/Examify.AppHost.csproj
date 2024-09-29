@@ -17,7 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Examify.Class\Examify.Class.csproj" />
+        <ProjectReference Include="..\Examify.Classroom\Examify.Classroom.csproj" />
         <ProjectReference Include="..\Examify.Core\Examify.Core.csproj" />
         <ProjectReference Include="..\Examify.Gateway\Examify.Gateway.csproj" />
         <ProjectReference Include="..\Examify.Identity\Examify.Identity.csproj" />

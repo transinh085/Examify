@@ -1,4 +1,4 @@
-﻿namespace Examify.Class.Domain;
+﻿namespace Examify.Classroom.Domain;
 
 public class WeatherForecast
 {

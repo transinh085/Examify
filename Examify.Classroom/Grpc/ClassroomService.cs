@@ -1,11 +1,10 @@
-﻿using Class;
-using Examify.Class.Domain;
+﻿using Classroom;
+using Examify.Classroom.Domain;
 using Grpc.Core;
-using Classroom = Class.Classroom;
 
-namespace Examify.Class.Grpc;
+namespace Examify.Classroom.Grpc;
 
-public class ClassroomService : Classroom.ClassroomBase
+public class ClassroomService : global::Classroom.Classroom.ClassroomBase
 {
     private readonly ILogger<ClassroomService> _logger;
     
