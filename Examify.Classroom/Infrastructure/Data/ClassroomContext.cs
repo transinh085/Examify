@@ -9,7 +9,7 @@ namespace Examify.Classroom.Data;
 /// </remarks>
 public class ClassroomContext(DbContextOptions options) : DbContext(options)
 {
-    public DbSet<Domain.Classroom> Classrooms { get; set; }
+    public DbSet<Entities.Classroom> Classrooms { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

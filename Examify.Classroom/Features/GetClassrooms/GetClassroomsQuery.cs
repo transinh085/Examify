@@ -2,7 +2,7 @@
 
 namespace Examify.Classroom.Features.GetClassrooms;
 
-public class GetClassroomsQuery : IRequest<List<Domain.Classroom>>
+public class GetClassroomsQuery : IRequest<List<Entities.Classroom>>
 {
     
 }

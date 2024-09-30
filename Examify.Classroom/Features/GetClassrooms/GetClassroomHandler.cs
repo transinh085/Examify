@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Examify.Classroom.Features.GetClassrooms;
 
 public class GetClassroomHandler
-    : IRequestHandler<GetClassroomsQuery, List<Domain.Classroom>>
+    : IRequestHandler<GetClassroomsQuery, List<Entities.Classroom>>
 {
     
     private readonly ClassroomContext context;
@@ -17,7 +17,7 @@ public class GetClassroomHandler
         this.logger = logger;
     }
     
-    public async Task<List<Domain.Classroom>> Handle(GetClassroomsQuery request, CancellationToken cancellationToken)
+    public async Task<List<Entities.Classroom>> Handle(GetClassroomsQuery request, CancellationToken cancellationToken)
     {
         logger.LogInformation("Getting all classrooms");
         var classroom = await context.Classrooms

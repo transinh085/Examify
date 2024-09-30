@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 
-namespace Examify.Classroom.Domain;
+namespace Examify.Classroom.Entities;
 
 public class Classroom
 {
