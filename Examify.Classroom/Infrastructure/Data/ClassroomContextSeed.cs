@@ -2,7 +2,7 @@
 
 public class ClassroomContextSeed : IDbSeeder<ClassroomContext>
 {
-    public Task SeedAsync(ClassroomContext context)
+    public async Task SeedAsync(ClassroomContext context)
     {
         var classrooms = new List<Domain.Classroom>
         {
@@ -69,6 +69,6 @@ public class ClassroomContextSeed : IDbSeeder<ClassroomContext>
         };
         
         context.Classrooms.AddRange(classrooms);
-        return context.SaveChangesAsync();
+        context.SaveChangesAsync();
     }
 }

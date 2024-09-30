@@ -4,9 +4,8 @@ using FluentValidation;
 using Examify.Infrastructure.Behaviors;
 using Examify.Infrastructure.Endpoint;
 using Examify.Infrastructure.Hosting;
-using Examify.Infrastructure.Logging.Serilog;
 using Examify.Infrastructure.Middlewares;
-using Examify.Infrastructure.Services;
+using Examify.Infrastructure.Serializers;
 using Examify.Infrastructure.Swagger;
 
 namespace Examify.Infrastructure;
@@ -35,19 +34,19 @@ public static class Extensions
         builder.Services.AddExceptionMiddleware();
         builder.Services.AddEndpoints(applicationAssembly);
         builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddSerializers();
         // builder.ConfigureSerilog(appOptions.Name);
         builder.Services.AddRouting(options => options.LowercaseUrls = true);
         if (applicationAssembly != null)
         {
             builder.Services.AddAutoMapper(applicationAssembly);
             builder.Services.AddBehaviors();
-            builder.Services.AddValidatorsFromAssembly(applicationAssembly);
-            builder.Services.AddMediatR(o => o.RegisterServicesFromAssembly(applicationAssembly));
+            builder.Services.AddValidatorsFromAssembly(applicationAssembly, ServiceLifetime.Transient);
+            builder.Services.AddMediatR(config => config.RegisterServicesFromAssembly(applicationAssembly));
         }
 
         if (enableSwagger) builder.Services.AddSwaggerExtension(config);
         builder.AddServiceDefaults();
-        builder.Services.AddInternalServices();
     }
     
     public static void UseInfrastructure(this WebApplication app, IWebHostEnvironment env, bool enableSwagger = true)

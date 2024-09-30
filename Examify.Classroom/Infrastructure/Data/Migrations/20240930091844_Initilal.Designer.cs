@@ -8,11 +8,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Examify.Classroom.Migrations
+namespace Examify.Classroom.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ClassroomContext))]
-    [Migration("20240929111057_Initial")]
-    partial class Initial
+    [Migration("20240930091844_Initilal")]
+    partial class Initilal
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

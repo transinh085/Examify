@@ -47,9 +47,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Features\" />
       <Folder Include="Infrastructure\Data\Configuration\" />
-      <Folder Include="Infrastructure\Data\Migrations\" />
     </ItemGroup>
 
 </Project>

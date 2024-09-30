@@ -1,8 +1,6 @@
-﻿using Examify.Core.Services;
+﻿namespace Examify.Core.Serializers;
 
-namespace Examify.Core.Serializers;
-
-public interface ISerializerService : ITransientService
+public interface ISerializerService
 {
     string Serialize<T>(T obj);
 

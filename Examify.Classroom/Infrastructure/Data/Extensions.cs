@@ -6,7 +6,6 @@ public static class Extensions
 {
     public static IHostApplicationBuilder AddPersistence(this IHostApplicationBuilder builder)
     {
-        builder.Services.AddMigration<ClassroomContext, ClassroomContextSeed>();
 
         builder.AddNpgsqlDbContext<ClassroomContext>("classDb", configureDbContextOptions:
             dbContextOptionsBuilder =>
@@ -20,7 +19,6 @@ public static class Extensions
             });
 
         builder.Services.AddMigration<ClassroomContext, ClassroomContextSeed>();
-
         return builder;
     }
 }

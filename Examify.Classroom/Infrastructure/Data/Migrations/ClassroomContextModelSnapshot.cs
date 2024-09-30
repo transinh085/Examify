@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Examify.Classroom.Migrations
+namespace Examify.Classroom.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ClassroomContext))]
     partial class ClassroomContextModelSnapshot : ModelSnapshot

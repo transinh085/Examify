@@ -19,7 +19,7 @@ public class ExceptionDetails
         {
             Title = "Validation Failed",
             Detail = "One or More Validations failed",
-            Status = (int)HttpStatusCode.BadRequest,
+            Status = (int)HttpStatusCode.UnprocessableEntity,
             Errors = new(),
         };
         if (exception.Errors.Count() == 1)

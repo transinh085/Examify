@@ -17,10 +17,10 @@ public class WeatherForecastController : ControllerBase
         _classroomClient = classroomClient;
     }
 
-    [HttpGet]
-    public IActionResult Get()
+    [HttpGet("{id}")]
+    public IActionResult Get([FromRoute] int id)
     {
-        var classroom = _classroomClient.GetClassroom(new ClassroomRequest { Id = 4 });
+        var classroom = _classroomClient.GetClassroom(new ClassroomRequest { Id = id });
         _logger.LogInformation("Classroom: {classroom}", classroom);
         return Ok(classroom);
     }
