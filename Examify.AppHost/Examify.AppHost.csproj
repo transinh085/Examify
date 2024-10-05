@@ -11,11 +11,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Aspire.Hosting.AppHost" Version="8.1.0" />
-        <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="8.1.0" />
-        <PackageReference Include="Aspire.Hosting.RabbitMQ" Version="8.1.0" />
-       
-        <PackageReference Include="Aspirant.Hosting" />
+        <PackageReference Include="Aspire.Hosting.AppHost" Version="8.2.1" />
+        <PackageReference Include="Aspire.Hosting.Keycloak" Version="8.2.1-preview.1.24473.4" />
+        <PackageReference Include="Aspire.Hosting.MongoDB" Version="8.2.1" />
+        <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="8.2.1" />
+        <PackageReference Include="Aspire.Hosting.RabbitMQ" Version="8.2.1" />
+        <PackageReference Include="Aspirant.Hosting" Version="0.0.4" />
     </ItemGroup>
 
     <ItemGroup>

@@ -14,6 +14,7 @@
 
     <ItemGroup>
         <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.10.0"/>
+        <PackageReference Include="Keycloak.AuthServices.OpenTelemetry" Version="1.0.0" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.8"/>
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
@@ -45,6 +46,10 @@
 
     <ItemGroup>
         <None Remove="Properties\launchSettings.json"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="SignalR\" />
     </ItemGroup>
 
 </Project>

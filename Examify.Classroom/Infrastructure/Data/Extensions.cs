@@ -14,7 +14,7 @@ public static class Extensions
                     .UseNpgsql(optionsBuilder =>
                     {
                         optionsBuilder.MigrationsAssembly(typeof(ClassroomContext).Assembly.FullName);
-                        optionsBuilder.EnableRetryOnFailure(15, TimeSpan.FromSeconds(30), null);
+                        optionsBuilder.CommandTimeout(300);
                     });
             });
 

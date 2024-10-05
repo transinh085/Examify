@@ -10,9 +10,14 @@ var builder = WebApplication.CreateBuilder(args);
 var assembly = Assembly.GetExecutingAssembly();
 
 builder.AddInfrashtructure(assembly);
-
 builder.Services.AddGrpc();
 builder.AddPersistence();
+
+builder.Services.AddAuthentication()
+    .AddKeycloakJwtBearer("keycloak", realm: "examify", options =>
+    {
+        options.Audience = "weather.api";
+    });
 
 var app = builder.Build();
 

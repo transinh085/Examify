@@ -1,16 +1,4 @@
-﻿using System.Net;
+﻿namespace Examify.Core.Exceptions;
 
-namespace Examify.Core.Exceptions;
-
-public class ConfigurationMissingException : CustomException
-{
-    public ConfigurationMissingException(string sectionName) : base($"{sectionName} Missing in Configurations",
-        HttpStatusCode.NotFound)
-    {
-    }
-
-    public ConfigurationMissingException(string message, HttpStatusCode statusCode = HttpStatusCode.NotFound) : base(
-        message, statusCode)
-    {
-    }
-}
+public class ConfigurationMissingException(string sectionName)
+    : Exception($"Configuration section {sectionName} is missing.");

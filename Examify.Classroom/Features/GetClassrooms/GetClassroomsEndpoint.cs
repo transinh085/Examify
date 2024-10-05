@@ -8,6 +8,7 @@ public class GetClassroomsEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapGet("/api/classrooms", (ISender sender) => sender.Send(new GetClassroomsQuery()));
+        app.MapGet("/api/classrooms", (ISender sender) => sender.Send(new GetClassroomsQuery()))
+            .RequireAuthorization();
     }
 }

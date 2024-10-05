@@ -3,8 +3,8 @@ using Examify.Infrastructure.Options;
 using FluentValidation;
 using Examify.Infrastructure.Behaviors;
 using Examify.Infrastructure.Endpoint;
+using Examify.Infrastructure.Exceptions;
 using Examify.Infrastructure.Hosting;
-using Examify.Infrastructure.Middlewares;
 using Examify.Infrastructure.Serializers;
 using Examify.Infrastructure.Swagger;
 
@@ -31,17 +31,17 @@ public static class Extensions
                     .AllowAnyOrigin();
             }));
         
-        builder.Services.AddExceptionMiddleware();
         builder.Services.AddEndpoints(applicationAssembly);
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSerializers();
+        builder.Services.AddCustomExceptionHandler();
         // builder.ConfigureSerilog(appOptions.Name);
         builder.Services.AddRouting(options => options.LowercaseUrls = true);
         if (applicationAssembly != null)
         {
             builder.Services.AddAutoMapper(applicationAssembly);
-            builder.Services.AddBehaviors();
-            builder.Services.AddValidatorsFromAssembly(applicationAssembly, ServiceLifetime.Transient);
+            builder.Services.AddBehaviours();
+            builder.Services.AddValidatorsFromAssembly(applicationAssembly);
             builder.Services.AddMediatR(config => config.RegisterServicesFromAssembly(applicationAssembly));
         }
 
@@ -53,9 +53,9 @@ public static class Extensions
     {
         //Preserve Order
         app.UseCors(AllowAllOrigins);
-        app.UseExceptionMiddleware();
-        // app.UseAuthentication();
-        // app.UseAuthorization();
+        app.UseAuthentication();
+        app.UseAuthorization();
+        app.UseCustomExceptionHandler();
         app.MapEndpoints();
         app.MapDefaultEndpoints();
         if (enableSwagger) app.UseSwaggerExtension(env);

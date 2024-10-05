@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Examify.Classroom.Features.CreateClassroom;
 
-public record CreateClassroomCommand(string Name, string Description) : IRequest<Entities.Classroom>;
+public record CreateClassroomCommand(string Name, string Description) : IRequest<Entities .Classroom>;
 
 public class CreateClassroomValidator : AbstractValidator<CreateClassroomCommand>
 {
