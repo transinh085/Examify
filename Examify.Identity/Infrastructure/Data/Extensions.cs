@@ -16,6 +16,7 @@ public static class Extensions
                         optionsBuilder.MigrationsAssembly(typeof(IdentityContext).Assembly.FullName);
                         optionsBuilder.CommandTimeout(300);
                     });
+                dbContextOptionsBuilder.UseOpenIddict();
             });
 
         builder.Services.AddMigration<IdentityContext, IdentityContextSeed>();

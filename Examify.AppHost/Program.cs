@@ -14,7 +14,6 @@ var identityService = builder.AddProject<Projects.Examify_Identity>("identity-ap
     .WaitFor(indentityDb); 
 
 var classService = builder.AddProject<Projects.Examify_Classroom>("class-api")
-    .WithHttpsEndpoint(port: 57119)
     .WithReference(classDb)
     .WaitFor(classDb);
 

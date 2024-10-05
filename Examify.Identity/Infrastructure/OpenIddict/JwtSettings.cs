@@ -1,6 +1,8 @@
-﻿namespace Examify.Identity.Infrastructure.Jwt;
+﻿using Examify.Infrastructure.Options;
 
-public class JwtSettings
+namespace Examify.Identity.Infrastructure.Jwt;
+
+public class JwtSettings : IOptionsRoot
 {
     public string Secret { get; set; }
     public string Issuer { get; set; }

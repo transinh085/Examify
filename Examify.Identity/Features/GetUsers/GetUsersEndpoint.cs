@@ -10,6 +10,6 @@ public class GetUsersEndpoint : IEndpoint
         app.MapGet("/api/users", (ISender sender) =>
         {
             return sender.Send(new GetUsersQuery());
-        }).RequireAuthorization();
+        });
     }
 }
