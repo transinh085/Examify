@@ -1,12 +1,11 @@
-﻿using Ardalis.Result;
-using Examify.Identity.Entities;
+﻿using Examify.Identity.Dtos;
 using Examify.Identity.Interfaces;
 using FluentValidation;
 using MediatR;
 
 namespace Examify.Identity.Features.CreateUser;
 
-public record CreateUserCommand(string Email, string Password) : IRequest<Result<AppUser>>;
+public record CreateUserCommand(string FirstName, string LastName, string Email, string Password) : IRequest<AppUserDto>;
 
 public class CreateUserValidator : AbstractValidator<CreateUserCommand>
 {
@@ -14,6 +13,10 @@ public class CreateUserValidator : AbstractValidator<CreateUserCommand>
     public CreateUserValidator(IUserRepository userRepository)
     {
         _userRepository = userRepository;
+        RuleFor(x => x.FirstName)
+            .NotEmpty();
+        RuleFor(x => x.LastName)
+            .NotEmpty();
         RuleFor(x => x.Email)
             .NotEmpty()
             .EmailAddress()

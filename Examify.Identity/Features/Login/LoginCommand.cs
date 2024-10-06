@@ -4,9 +4,9 @@ using MediatR;
 
 namespace Examify.Identity.Features.Login;
 
-public record LoginCommand(string Email, string Password) : IRequest<LoginResponse>;
+public record LoginCommand(string Email, string Password) : IRequest<AuthenticationResponse>;
 
-public class LoginResponse
+public class AuthenticationResponse
 {
     public string Token { get; set; }
     public int ExpiresIn { get; set; }

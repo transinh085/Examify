@@ -12,6 +12,6 @@ public class DeleteUserHandler(IUserRepository userRepository) : IRequestHandler
         var user = await userRepository.GetByIdAsync(request.Id);
         Guard.Against.NotFound(request.Id, user);
         userRepository.DeleteAsync(user);
-        return Result.Success();
+        return Result.NoContent();
     }
 }

@@ -5,6 +5,7 @@ using Examify.Infrastructure.Behaviors;
 using Examify.Infrastructure.Endpoint;
 using Examify.Infrastructure.Exceptions;
 using Examify.Infrastructure.Hosting;
+using Examify.Infrastructure.Jwt;
 using Examify.Infrastructure.Serializers;
 using Examify.Infrastructure.Swagger;
 
@@ -36,6 +37,9 @@ public static class Extensions
         builder.Services.AddSerializers();
         builder.Services.AddCustomExceptionHandler();
         // builder.ConfigureSerilog(appOptions.Name);
+        
+        builder.Services.AddJwt(config);
+        
         builder.Services.AddRouting(options => options.LowercaseUrls = true);
         if (applicationAssembly != null)
         {

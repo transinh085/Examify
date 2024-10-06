@@ -11,7 +11,7 @@ public class CreateUserEndpoint : IEndpoint
         app.MapPost("/api/users", async (CreateUserCommand command, ISender sender) =>
         {
             var result = await sender.Send(command);
-            return Result.Created(result);
-        });
+            return result;
+        }).WithTags("Users");
     }
 }

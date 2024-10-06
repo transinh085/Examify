@@ -8,7 +8,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddGrpc();
 builder.Services.AddGrpcClient<Classroom.ClassroomClient>(
-    o => o.Address = new("https://localhost:57119"));
+    o => o.Address = new("https://localhost:7118"));
 
 
 var app  = builder.Build();

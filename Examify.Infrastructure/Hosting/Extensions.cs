@@ -40,8 +40,7 @@ public static class Extensions
             {
                 metrics.AddAspNetCoreInstrumentation()
                     .AddHttpClientInstrumentation()
-                    .AddRuntimeInstrumentation()
-                    .AddKeycloakAuthServicesInstrumentation();
+                    .AddRuntimeInstrumentation();
             })
             .WithTracing(tracing =>
             {
@@ -52,8 +51,7 @@ public static class Extensions
 
                 tracing
                     .AddAspNetCoreInstrumentation()
-                    .AddHttpClientInstrumentation()
-                    .AddKeycloakAuthServicesInstrumentation();
+                    .AddHttpClientInstrumentation();
             });
 
         builder.AddOpenTelemetryExporters();

@@ -1,4 +1,5 @@
 ﻿using Examify.Identity.Entities;
+using Examify.Identity.Features.GetUsers;
 
 namespace Examify.Identity.Interfaces;
 

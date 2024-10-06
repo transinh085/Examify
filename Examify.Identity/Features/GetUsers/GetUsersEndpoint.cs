@@ -7,9 +7,7 @@ public class GetUsersEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapGet("/api/users", (ISender sender) =>
-        {
-            return sender.Send(new GetUsersQuery());
-        }).RequireAuthorization();
+        app.MapGet("/api/users", (ISender sender) => sender.Send(new GetUsersQuery()))
+            .WithTags("Users");
     }
 }

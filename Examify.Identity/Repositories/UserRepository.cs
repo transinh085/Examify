@@ -1,6 +1,8 @@
 ﻿using Examify.Identity.Entities;
+using Examify.Identity.Features.GetUsers;
 using Examify.Identity.Interfaces;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Examify.Identity.Repositories;
 
@@ -23,9 +25,9 @@ public class UserRepository(UserManager<AppUser> userManager) : IUserRepository
         return user == null;
     }
 
-    public Task<IEnumerable<AppUser>> GetUsersAsync()
+    public async Task<IEnumerable<AppUser>> GetUsersAsync()
     {
-        return Task.FromResult(userManager.Users.AsEnumerable());
+        return await userManager.Users.ToListAsync();
     }
 
     public async Task<AppUser> GetByIdAsync(string id)

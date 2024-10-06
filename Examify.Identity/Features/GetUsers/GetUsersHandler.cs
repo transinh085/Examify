@@ -1,13 +1,16 @@
-﻿using Examify.Identity.Entities;
+﻿using AutoMapper;
+using Examify.Identity.Dtos;
 using Examify.Identity.Interfaces;
 using MediatR;
 
 namespace Examify.Identity.Features.GetUsers;
 
-public class GetUsersHandler(IUserRepository userRepository) : IRequestHandler<GetUsersQuery, IEnumerable<AppUser>>
+public class GetUsersHandler(IUserRepository userRepository, IMapper mapper)
+    : IRequestHandler<GetUsersQuery, IEnumerable<AppUserDto>>
 {
-    public Task<IEnumerable<AppUser>> Handle(GetUsersQuery request, CancellationToken cancellationToken)
+    public async Task<IEnumerable<AppUserDto>> Handle(GetUsersQuery request, CancellationToken cancellationToken)
     {
-        return userRepository.GetUsersAsync();
+        var users = await userRepository.GetUsersAsync();
+        return mapper.Map<IEnumerable<AppUserDto>>(users);
     }
 }

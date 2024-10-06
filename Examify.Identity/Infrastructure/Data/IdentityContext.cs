@@ -12,6 +12,9 @@ namespace Examify.Identity.Infrastructure.Data;
 /// </remarks>
 public class IdentityContext(DbContextOptions options) : IdentityDbContext<AppUser>(options)
 {
+    
+    public DbSet<RefreshToken> RefreshTokens { get; set; }
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

@@ -1,16 +1,15 @@
 ﻿using System.Text;
+using Examify.Infrastructure.Options;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Examify.Identity.Infrastructure.Jwt;
+namespace Examify.Infrastructure.Jwt;
 
 public static class Extensions
 {
     public static IServiceCollection AddJwt(this IServiceCollection services, IConfiguration configuration)
     {
-        var jwtSettings = new JwtSettings();
-        configuration.Bind(nameof(JwtSettings), jwtSettings);
-        services.AddSingleton(jwtSettings);
+        var jwtOptions = services.BindValidateReturn<JwtOptions>(configuration);
 
         services.AddAuthentication(options =>
             {
@@ -25,11 +24,17 @@ public static class Extensions
                     ValidateAudience = true,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
-                    ValidIssuer = jwtSettings.Issuer,
-                    ValidAudience = jwtSettings.Audience,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Secret))
+                    ValidIssuer = jwtOptions.Issuer,
+                    ValidAudience = jwtOptions.Audience,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.Secret))
                 };
             });
+        
+        services.AddAuthorization(options =>
+        {
+            options.AddPolicy("Admin", policy => policy.RequireRole("Admin"));
+            options.AddPolicy("User", policy => policy.RequireRole("User"));
+        });
 
         return services;
     }

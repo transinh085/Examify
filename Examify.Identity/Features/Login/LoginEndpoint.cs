@@ -11,7 +11,7 @@ public class LoginEndpoint : IEndpoint
         app.MapPost("api/auth/login", async (LoginCommand command, ISender sender) =>
         {
             var result = await sender.Send(command);
-            return Result.Success(result);
-        });
+            return result;
+        }).WithTags("Authentication");
     }
 }

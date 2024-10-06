@@ -11,7 +11,7 @@ public class DeleteUserEndpoint : IEndpoint
         app.MapDelete("/api/users/{id}", (string id, ISender sender) =>
         {
             sender.Send(new DeleteUserCommand(id));
-            return Result.NoContent();
-        });
+            return TypedResults.NoContent();
+        }).WithTags("Users");
     }
 }
