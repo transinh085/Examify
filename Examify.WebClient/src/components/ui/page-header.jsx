@@ -1,5 +1,5 @@
-import { Breadcrumb, Space, Typography } from "antd";
-import { Link } from "react-router-dom";
+import { Breadcrumb, Space, Typography } from 'antd';
+import { Link } from 'react-router-dom';
 
 const PageHeader = ({ heading, links, ...props }) => {
   const breadcrumbItems = links.map((link) => {

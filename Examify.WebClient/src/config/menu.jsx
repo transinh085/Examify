@@ -1,18 +1,18 @@
 import {
-  HomeOutlined,
   ScheduleOutlined,
   UserOutlined,
-  TeamOutlined,
   FileSearchOutlined,
-  DollarOutlined,
-  BarChartOutlined,
-  TruckOutlined,
+  SettingOutlined,
+  LoginOutlined,
+  CameraOutlined,
+  FolderOutlined,
+  ThunderboltOutlined,
 } from '@ant-design/icons';
 
 const adminMenu = Object.freeze([
   {
     key: '1',
-    icon: <HomeOutlined />,
+    icon: <ThunderboltOutlined />,
     label: 'Explore',
     path: '/admin',
   },
@@ -30,42 +30,33 @@ const adminMenu = Object.freeze([
   },
   {
     key: '4',
-    icon: <UserOutlined />,
+    icon: <SettingOutlined />,
     label: 'Settings',
     path: '/admin/settings',
   },
   {
     key: '5',
-    icon: <DollarOutlined />,
+    icon: <CameraOutlined />,
     label: 'Memes',
     path: '/admin/memes',
   },
   {
     key: '6',
-    icon: <TeamOutlined />,
+    icon: <FolderOutlined />,
     label: 'Collections',
     path: '/admin/collections',
   },
   {
     key: '7',
-    icon: <TruckOutlined />,
+    icon: <UserOutlined />,
     label: 'Profile',
     path: '/admin/profile',
   },
   {
     key: '8',
-    icon: <BarChartOutlined />,
+    icon: <LoginOutlined />,
     label: 'Logout',
   },
 ]);
 
-const userMenu = Object.freeze([
-  { title: 'Home', href: '/' },
-  { title: 'Schedule', href: '/schedules' },
-  { title: 'Tickets', href: '/tickets' },
-  { title: 'Orders', href: '/orders' },
-  { title: 'Contact', href: '/contacts' },
-  { title: 'About', href: '/about' },
-]);
-
-export { adminMenu, userMenu };
+export { adminMenu };
