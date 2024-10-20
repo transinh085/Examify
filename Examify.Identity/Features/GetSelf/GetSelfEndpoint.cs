@@ -17,6 +17,6 @@ public class GetSelfEndpoint : IEndpoint
                 return user.Identity.Name;
             })
             .WithTags("Authentication")
-            .RequireAuthorization();
+            .RequireAuthorization(); // yêu cầu login
     }
 }

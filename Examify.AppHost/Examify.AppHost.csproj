@@ -20,6 +20,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\Examify.Catalog\Examify.Catalog.csproj" />
         <ProjectReference Include="..\Examify.Classroom\Examify.Classroom.csproj" />
         <ProjectReference Include="..\Examify.Core\Examify.Core.csproj" />
         <ProjectReference Include="..\Examify.Gateway\Examify.Gateway.csproj" />

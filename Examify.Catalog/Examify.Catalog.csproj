@@ -4,12 +4,7 @@
         <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
-
-    <ItemGroup>
-        <Protobuf Include="Protos\classroom.proto" GrpcServices="Server"/>
-    </ItemGroup>
 
     <!--  Start Copy-->
     <ItemGroup>
@@ -33,22 +28,12 @@
     <!--  End Copy-->
 
     <ItemGroup>
-        <Content Include="..\.dockerignore">
-            <Link>.dockerignore</Link>
-        </Content>
+      <Folder Include="Features\Subject\CreateSubject\" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Examify.Infrastructure\Examify.Infrastructure.csproj"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <_ContentIncludedByDefault Remove="Logs\class service.logs20240923.json"/>
-        <_ContentIncludedByDefault Remove="Logs\class service.logs20240924.json"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <Folder Include="Infrastructure\Data\Configurations\"/>
+      <ProjectReference Include="..\Examify.Core\Examify.Core.csproj" />
+      <ProjectReference Include="..\Examify.Infrastructure\Examify.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>
