@@ -1,5 +1,5 @@
-import { Button, Flex, Result } from "antd";
-import { useNavigate } from "react-router-dom";
+import { Button, Flex, Result } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 const NotFoundRoute = () => {
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ const NotFoundRoute = () => {
           <Button
             type="primary"
             onClick={() => {
-              navigate("/");
+              navigate('/');
             }}
           >
             Back Home
