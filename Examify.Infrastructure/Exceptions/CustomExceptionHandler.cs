@@ -5,41 +5,36 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Examify.Infrastructure.Exceptions;
 
-public class CustomExceptionHandler : IExceptionHandler
+public class CustomExceptionHandler(ILogger<CustomExceptionHandler> logger) : IExceptionHandler
 {
-    
-    private readonly Dictionary<Type, Func<HttpContext, Exception, Task>> _exceptionHandlers;
-    private readonly ILogger _logger;
-
-    public CustomExceptionHandler()
-    {
-        // Register known exception types and handlers.
-        _exceptionHandlers = new()
-        {
-            { typeof(ValidationException), HandleValidationException },
-            { typeof(NotFoundException), HandleNotFoundException },
-            { typeof(UnauthorizedAccessException), HandleUnauthorizedAccessException },
-            { typeof(ForbiddenAccessException), HandleForbiddenAccessException }
-        };
-    }
-
     public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
     {
-        var exceptionType = exception.GetType();
-
-        if (_exceptionHandlers.ContainsKey(exceptionType))
+        logger.LogError(exception, "An unhandled exception has occurred");
+        
+        switch (exception)
         {
-            await _exceptionHandlers[exceptionType].Invoke(httpContext, exception);
-            return true;
+            case ValidationException validationException:
+                await HandleValidationException(httpContext, validationException);
+                break;
+            case NotFoundException notFoundException:
+                await HandleNotFoundException(httpContext, notFoundException);
+                break;
+            case UnauthorizedAccessException:
+                await HandleUnauthorizedAccessException(httpContext, exception);
+                break;
+            case ForbiddenAccessException:
+                await HandleForbiddenAccessException(httpContext, exception);
+                break;
+            default:
+                await HandleGenericException(httpContext, exception);
+                break;
         }
 
-        return false;
+        return true;
     }
     
-    private async Task HandleValidationException(HttpContext httpContext, Exception ex)
+    private async Task HandleValidationException(HttpContext httpContext, ValidationException exception)
     {
-        var exception = (ValidationException)ex;
-
         httpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
 
         await httpContext.Response.WriteAsJsonAsync(new ValidationProblemDetails(exception.Errors)
@@ -49,10 +44,8 @@ public class CustomExceptionHandler : IExceptionHandler
         });
     }
 
-    private async Task HandleNotFoundException(HttpContext httpContext, Exception ex)
+    private async Task HandleNotFoundException(HttpContext httpContext, NotFoundException exception)
     {
-        var exception = (NotFoundException)ex;
-
         httpContext.Response.StatusCode = StatusCodes.Status404NotFound;
 
         await httpContext.Response.WriteAsJsonAsync(new ProblemDetails()
@@ -85,6 +78,19 @@ public class CustomExceptionHandler : IExceptionHandler
             Status = StatusCodes.Status403Forbidden,
             Title = "Forbidden",
             Type = "https://tools.ietf.org/html/rfc7231#section-6.5.3"
+        });
+    }
+
+    private async Task HandleGenericException(HttpContext httpContext, Exception ex)
+    {
+        httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
+
+        await httpContext.Response.WriteAsJsonAsync(new ProblemDetails
+        {
+            Status = StatusCodes.Status500InternalServerError,
+            Title = "Internal Server Error",
+            Type = "https://tools.ietf.org/html/rfc7231#section-6.6.1",
+            Detail = ex.Message
         });
     }
 }

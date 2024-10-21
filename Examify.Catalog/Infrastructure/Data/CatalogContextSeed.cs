@@ -6,12 +6,19 @@ public class CatalogContextSeed : IDbSeeder<CatalogContext>
 {
     public Task SeedAsync(CatalogContext context)
     {
-        var subject = new Subject
+        var subjects = new List<Subject>();
+
+        for (int i = 1; i <= 30; i++)
         {
-            Name = "Mathematics"
-        };
-        context.Subjects.Add(subject);
+            subjects.Add(new Subject
+            {
+                Name = $"Subject {i}"
+            });
+        }
+
+        context.Subjects.AddRange(subjects);
         context.SaveChanges();
+
         return Task.CompletedTask;
     }
 }

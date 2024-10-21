@@ -1,4 +1,5 @@
 ﻿using Examify.Catalog.Infrastructure.Data;
+using Examify.Core.Pagination;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,7 +9,13 @@ public class GetAllSubjectHandler(CatalogContext context) : IRequestHandler<GetA
 {
     public async Task<IResult> Handle(GetAllSubjectQuery request, CancellationToken cancellationToken)
     {
-        var subjects = await context.Subjects.ToListAsync(cancellationToken);
+        IQueryable<Entities.Subject> query = context.Subjects;
+
+        var subjects = await query.PaginatedListAsync(
+            pageNumber: request.PageNumber,
+            pageSize: request.PageSize
+        );
+
         return TypedResults.Ok(subjects);
     }
 }

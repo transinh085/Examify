@@ -1,23 +1,36 @@
-﻿namespace Examify.Core.Pagination;
+﻿using System.Text.Json.Serialization;
+using Microsoft.EntityFrameworkCore;
 
-public class PagedList<T>
+namespace Examify.Core.Pagination;
+
+public class PagedList<T>(IReadOnlyCollection<T> items, int count, int pageNumber, int pageSize)
 {
-    public IList<T> Data { get; }
-    public PagedList(IEnumerable<T> items, int totalItems, int pageNumber, int pageSize)
+    public IReadOnlyCollection<T> Items { get; } = items;
+
+    public PageMeta Meta { get; set; } = new()
     {
-        PageNumber = pageNumber;
-        PageSize = pageSize;
-        TotalItems = totalItems;
-        if (totalItems > 0)
-        {
-            TotalPages = (int)Math.Ceiling(totalItems / (double)pageSize);
-        }
-        Data = items as IList<T> ?? new List<T>(items);
+        CurrentPage = pageNumber,
+        PageSize = pageSize,
+        TotalCount = count,
+        TotalPages = (int)Math.Ceiling(count / (double)pageSize)
+    };
+
+    public static async Task<PagedList<T>> CreateAsync(IQueryable<T> source, int pageNumber, int pageSize)
+    {
+        var count = await source.CountAsync();
+        var items = await source.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
+
+        return new PagedList<T>(items, count, pageNumber, pageSize);
     }
-    public int PageNumber { get; }
-    public int PageSize { get; }
-    public int TotalPages { get; }
-    public int TotalItems { get; }
-    public bool IsFirstPage => PageNumber == 1;
-    public bool IsLastPage => PageNumber == TotalPages && TotalPages > 0;    
+}
+
+public class PageMeta
+{
+    [JsonPropertyName("current_page")] public int CurrentPage { get; set; }
+
+    [JsonPropertyName("page_size")] public int PageSize { get; set; }
+
+    [JsonPropertyName("total_pages")] public int TotalPages { get; set; }
+
+    [JsonPropertyName("total_count")] public int TotalCount { get; set; }
 }
