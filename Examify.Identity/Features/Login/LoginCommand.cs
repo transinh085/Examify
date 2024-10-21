@@ -1,5 +1,4 @@
-﻿using Ardalis.Result;
-using FluentValidation;
+﻿using FluentValidation;
 using MediatR;
 
 namespace Examify.Identity.Features.Login;

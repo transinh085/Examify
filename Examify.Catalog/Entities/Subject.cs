@@ -1,7 +1,12 @@
-﻿namespace Examify.Catalog.Entities;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Examify.Catalog.Entities;
 
 public class Subject
 {
-    public string Id { get; set; }
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int Id { get; set; }
     public string Name { get; set; }
 }

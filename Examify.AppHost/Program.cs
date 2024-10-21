@@ -1,5 +1,3 @@
-using Aspirant.Hosting;
-
 var builder = DistributedApplication.CreateBuilder(args);
 
 var postgreSql = builder.AddPostgres("postgreSql")

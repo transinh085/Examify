@@ -1,5 +1,4 @@
-﻿using Ardalis.Result;
-using Examify.Core.Endpoints;
+﻿using Examify.Core.Endpoints;
 using MediatR;
 
 namespace Examify.Identity.Features.Login;

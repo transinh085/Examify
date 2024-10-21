@@ -28,10 +28,6 @@
     <!--  End Copy-->
 
     <ItemGroup>
-      <Folder Include="Features\Subject\CreateSubject\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\Examify.Core\Examify.Core.csproj" />
       <ProjectReference Include="..\Examify.Infrastructure\Examify.Infrastructure.csproj" />
     </ItemGroup>

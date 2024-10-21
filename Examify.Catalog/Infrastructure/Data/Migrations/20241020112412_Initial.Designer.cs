@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Examify.Catalog.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(CatalogContext))]
-    [Migration("20241019180811_Initial")]
+    [Migration("20241020112412_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -26,8 +26,11 @@ namespace Examify.Catalog.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("Examify.Catalog.Entities.Subject", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()

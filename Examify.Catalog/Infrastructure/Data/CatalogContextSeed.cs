@@ -8,7 +8,6 @@ public class CatalogContextSeed : IDbSeeder<CatalogContext>
     {
         var subject = new Subject
         {
-            Id = "1",
             Name = "Mathematics"
         };
         context.Subjects.Add(subject);
