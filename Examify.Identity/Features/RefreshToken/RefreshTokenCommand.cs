@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Examify.Identity.Features.RefreshToken;
 
-public record RefreshTokenCommand(string Token) : IRequest<AuthenticationResponse>;
+public record RefreshTokenCommand(string Token) : IRequest<IResult>;
 
 public class RefreshTokenValidator : AbstractValidator<RefreshTokenCommand>
 {

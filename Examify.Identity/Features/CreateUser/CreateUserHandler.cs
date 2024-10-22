@@ -6,11 +6,11 @@ using MediatR;
 
 namespace Examify.Identity.Features.CreateUser;
 
-public class CreateUserHandler(IUserRepository userRepository, IMapper mapper) : IRequestHandler<CreateUserCommand, AppUserDto>
+public class CreateUserHandler(IUserRepository userRepository, IMapper mapper) : IRequestHandler<CreateUserCommand, IResult>
 {
-    public async Task<AppUserDto> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+    public async Task<IResult> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
-        AppUser user = new AppUser
+        var user = new AppUser
         {
             FirstName = request.FirstName, 
             LastName = request.LastName, 
@@ -18,6 +18,6 @@ public class CreateUserHandler(IUserRepository userRepository, IMapper mapper) :
             UserName = request.Email
         };
         await userRepository.CreateUserAsync(user, request.Password);
-        return mapper.Map<AppUserDto>(user);
+        return TypedResults.Ok(mapper.Map<AppUserDto>(user));
     }
 }

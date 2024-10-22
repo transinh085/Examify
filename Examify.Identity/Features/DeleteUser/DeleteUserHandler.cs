@@ -10,7 +10,7 @@ public class DeleteUserHandler(IUserRepository userRepository) : IRequestHandler
     {
         var user = await userRepository.GetByIdAsync(request.Id);
         Guard.Against.NotFound(request.Id, user);
-        userRepository.DeleteAsync(user);
+        await userRepository.DeleteAsync(user);
         return Results.NoContent();
     }
 }
