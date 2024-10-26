@@ -11,7 +11,7 @@ const AppProvider = ({ children }) => {
           fontFamily: 'Inter',
           borderRadius: 4,
           controlHeight: 37,
-          colorPrimary: '#00afff',
+          colorPrimary: '#2C3A47',
         },
         components: {
           Table: {
