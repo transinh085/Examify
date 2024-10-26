@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Examify.Catalog.Entities;
 
-public class Subject
+public class Language
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

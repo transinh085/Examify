@@ -16,6 +16,17 @@ public class CatalogContextSeed : IDbSeeder<CatalogContext>
             });
         }
 
+        var languages = new List<Language>();
+        
+        for(int i = 1; i <= 10; i++)
+        {
+            languages.Add(new Language
+            {
+                Name = $"Language {i}"
+            });
+        }
+        
+        context.Languages.AddRange(languages);
         context.Subjects.AddRange(subjects);
         context.SaveChanges();
 
