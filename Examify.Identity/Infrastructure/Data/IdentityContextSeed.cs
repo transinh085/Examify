@@ -28,6 +28,16 @@ public class IdentityContextSeed(UserManager<AppUser> userManager) : IDbSeeder<I
         userManager.CreateAsync(user2, "12345678").Wait();
         userManager.AddToRoleAsync(user2, "User").Wait();
 
+        var user3 = new AppUser
+        {
+            UserName = "hgbaodev",
+            Email = "musicanime2501@gmail.com",
+            FirstName = "Gia",
+            LastName = "Bảo"
+        };
+        userManager.CreateAsync(user3, "12345678").Wait();
+        userManager.AddToRoleAsync(user3, "Admin").Wait();
+
         return Task.CompletedTask;
     }
 }
