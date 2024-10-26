@@ -1,16 +1,16 @@
-import { Button, Col, Flex, Row } from 'antd';
-import QuizItem from '../../../components/ui/quizzes/QuizItem';
+import { Col, Flex, Pagination, Row } from 'antd';
 import { useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import QuizItem from '~/components/ui/quizzes/QuizItem';
 
-const RecentQuizList = () => {
-  const recentQuizzes = useMemo(
+const TopicDetailsPage = () => {
+  const quizzes = useMemo(
     () => [
       {
         id: 1,
         title: 'The basis of NodeJS',
         description: 'Learn the basic of NodeJS',
-        image: 'https://quizizz.com/_media/quizzes/ceab73a2-cd9d-466b-9dd8-6a0542929083-v2_200_200',
+        image:
+          'https://quizizz.com/media/resource/gs/quizizz-media/quizzes/eb5f16ad-fc3e-41ea-824d-c11dd08cebb5?w=200&h=200',
         percent: 60,
         questions: 10,
       },
@@ -19,7 +19,7 @@ const RecentQuizList = () => {
         title: 'The basis of JavaScript',
         description: 'Learn the basic of JavaScript',
         image:
-          'https://quizizz.com/media/resource/gs/quizizz-media/quizzes/d03df85b-786b-4b70-87c9-6a44de4a8488?w=200&h=200',
+          'https://quizizz.com/media/resource/gs/quizizz-media/quizzes/7a3e981b-8d06-4110-b375-25d53690695d?w=200&h=200',
         percent: 100,
         questions: 24,
       },
@@ -45,22 +45,37 @@ const RecentQuizList = () => {
     [],
   );
   return (
-    <>
-      <Flex align="center" justify="space-between" className="w-full">
-        <h1 className="text-lg font-semibold">Hoạt động gần đây</h1>
-        <Link to="/topics/1" className="text-blue-500">
-          <Button type="default">Xem thêm</Button>
-        </Link>
-      </Flex>
-      <Row gutter={[16, 16]}>
-        {recentQuizzes.map((quiz) => (
+    <div className="py-4">
+      <h1 className="text-lg mb-4">
+        Bài kiểm tra phổ biến cho <strong>Toán</strong>
+      </h1>
+      <Row gutter={[20, 20]}>
+        {quizzes.map((quiz) => (
+          <Col span={6} key={quiz.id}>
+            <QuizItem {...quiz} />
+          </Col>
+        ))}
+        {quizzes.map((quiz) => (
+          <Col span={6} key={quiz.id}>
+            <QuizItem {...quiz} />
+          </Col>
+        ))}
+        {quizzes.map((quiz) => (
+          <Col span={6} key={quiz.id}>
+            <QuizItem {...quiz} />
+          </Col>
+        ))}
+        {quizzes.map((quiz) => (
           <Col span={6} key={quiz.id}>
             <QuizItem {...quiz} />
           </Col>
         ))}
       </Row>
-    </>
+      <Flex justify="end" className="py-6">
+        <Pagination defaultCurrent={1} total={50} />
+      </Flex>
+    </div>
   );
 };
 
-export default RecentQuizList;
+export default TopicDetailsPage;

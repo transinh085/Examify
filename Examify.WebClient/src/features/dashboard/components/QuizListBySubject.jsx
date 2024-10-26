@@ -2,6 +2,7 @@ import { Button, Col, Flex, Row } from 'antd';
 import QuizItem from '../../../components/ui/quizzes/QuizItem';
 import PropTypes from 'prop-types';
 import StartIcon from '~/components/icons/StartIcon';
+import { Link } from 'react-router-dom';
 
 const QuizListBySubject = ({ subjectName, quizzes = [] }) => {
   return (
@@ -10,7 +11,9 @@ const QuizListBySubject = ({ subjectName, quizzes = [] }) => {
         <Flex align="center" gap={8}>
           <StartIcon /> <h1 className="text-lg font-semibold">{subjectName}</h1>
         </Flex>
-        <Button type="default">Xem thêm</Button>
+        <Link to="/topics/1" className="text-blue-500">
+          <Button type="default">Xem thêm</Button>
+        </Link>
       </Flex>
       <Row gutter={[16, 16]}>
         {quizzes.map((quiz) => (
