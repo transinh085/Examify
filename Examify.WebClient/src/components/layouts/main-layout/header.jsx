@@ -44,9 +44,11 @@ const Header = () => {
       </Flex>
 
       <Flex align="center" gap={20}>
-        <Button variant="filled" color="default" icon={<PlusCircleOutlined />}>
-          Create a quiz
-        </Button>
+        <Link to="/create-quiz">
+          <Button variant="filled" color="default" icon={<PlusCircleOutlined />}>
+            Create a quiz
+          </Button>
+        </Link>
         <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
       </Flex>
     </AntHeader>
