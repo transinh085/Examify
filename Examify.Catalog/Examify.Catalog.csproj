@@ -32,4 +32,11 @@
       <ProjectReference Include="..\Examify.Infrastructure\Examify.Infrastructure.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Features\Grades\Command\" />
+      <Folder Include="Features\Grades\Query\" />
+      <Folder Include="Features\Subject\Command\" />
+      <Folder Include="Features\Subject\Query\" />
+    </ItemGroup>
+
 </Project>

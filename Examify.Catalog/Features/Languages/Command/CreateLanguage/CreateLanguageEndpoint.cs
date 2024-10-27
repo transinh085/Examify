@@ -7,7 +7,7 @@ public class CreateLanguageEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPost("/api/languages", (ISender sender, CreateLanguageCommand command) => sender.Send(command))
+        app.MapPost("/languages", (ISender sender, CreateLanguageCommand command) => sender.Send(command))
             .Produces<Entities.Language>()
             .WithTags("Languages"); 
     }

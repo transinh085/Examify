@@ -8,7 +8,7 @@ class UpdateLanguageEndpoint: IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPut("/api/languages/{id}", async (Guid id, UpdateLanguageRequest request, ISender sender) =>
+        app.MapPut("/languages/{id}", async (Guid id, UpdateLanguageRequest request, ISender sender) =>
             {
                 var command = new UpdateLanguageCommand(id, request.Name);
                 return await sender.Send(command);

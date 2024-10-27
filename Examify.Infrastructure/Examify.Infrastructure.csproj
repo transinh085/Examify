@@ -18,22 +18,10 @@
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
     </ItemGroup>
-
-    <ItemGroup>
-        <PackageReference Include="Serilog" Version="4.0.1"/>
-        <PackageReference Include="Serilog.AspNetCore" Version="8.0.2"/>
-        <PackageReference Include="Serilog.Enrichers.Environment" Version="3.0.1"/>
-        <PackageReference Include="Serilog.Enrichers.Process" Version="3.0.0"/>
-        <PackageReference Include="Serilog.Enrichers.Thread" Version="4.0.0"/>
-        <PackageReference Include="Serilog.Exceptions" Version="8.4.0"/>
-        <PackageReference Include="Serilog.Sinks.Async" Version="2.0.0"/>
-        <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0"/>
-        <PackageReference Include="Serilog.Sinks.File" Version="6.0.0"/>
-    </ItemGroup>
-
+    
     <ItemGroup>
         <PackageReference Include="Microsoft.Extensions.Http.Resilience"/>
-        <PackageReference Include="Microsoft.Extensions.ServiceDiscovery"/>
+        <PackageReference Include="Microsoft.Extensions.ServiceDiscovery" Version="8.2.1" />
         <PackageReference Include="AspNetCore.HealthChecks.Uris"/>
         <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.8.1" />
         <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.8.1" />
@@ -45,10 +33,6 @@
 
     <ItemGroup>
         <None Remove="Properties\launchSettings.json"/>
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="SignalR\" />
     </ItemGroup>
 
 </Project>

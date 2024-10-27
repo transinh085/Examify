@@ -14,13 +14,12 @@ namespace Examify.Infrastructure;
 public static class Extensions
 {
     private static readonly string AllowAllOrigins = "CorsPolicy";
-    
+
     public static void AddInfrashtructure(this WebApplicationBuilder builder, Assembly? applicationAssembly = null,
         bool enableSwagger = true)
     {
         var config = builder.Configuration;
-        var appOptions = builder.Services.BindValidateReturn<AppOptions>(config);
-    
+
         // Cors
         builder.Services.AddCors(options => options.AddPolicy(
             name: AllowAllOrigins,
@@ -31,15 +30,12 @@ public static class Extensions
                     .AllowAnyMethod()
                     .AllowAnyOrigin();
             }));
-        
+
         builder.Services.AddEndpoints(applicationAssembly);
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSerializers();
         builder.Services.AddCustomExceptionHandler();
-        // builder.ConfigureSerilog(appOptions.Name);
-        
-        builder.Services.AddJwt(config);
-        
+
         builder.Services.AddRouting(options => options.LowercaseUrls = true);
         if (applicationAssembly != null)
         {
@@ -52,14 +48,20 @@ public static class Extensions
         if (enableSwagger) builder.Services.AddSwaggerExtension(config);
         builder.AddServiceDefaults();
     }
-    
-    public static void UseInfrastructure(this WebApplication app, IWebHostEnvironment env, bool enableSwagger = true)
+
+    public static void UseInfrastructure(this WebApplication app, IWebHostEnvironment env, bool enableSwagger = true,
+        bool useAuthentication = false)
     {
         //Preserve Order
-        app.UseCors(AllowAllOrigins);
-        app.UseAuthentication();
-        app.UseAuthorization();
         app.UseCustomExceptionHandler();
+        app.UseCors(AllowAllOrigins);
+
+        if (useAuthentication)
+        {
+            app.UseAuthentication();
+            app.UseAuthorization();
+        }
+
         app.MapEndpoints();
         app.MapDefaultEndpoints();
         if (enableSwagger) app.UseSwaggerExtension(env);

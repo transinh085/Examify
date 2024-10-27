@@ -7,7 +7,7 @@ public class GetSelfEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapGet("api/auth/self",
+        app.MapGet("auth/self",
                 (ILogger<GetSelfEndpoint> logger, IHttpContextAccessor httpContextAccessor, ClaimsPrincipal user) =>
                 {
                     var ipAddress = httpContextAccessor.HttpContext.Connection.RemoteIpAddress;

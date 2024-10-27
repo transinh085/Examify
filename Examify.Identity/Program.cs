@@ -17,10 +17,12 @@ builder.AddIdentityInfrastructure();
 builder.AddPersistence();
 builder.AddInfrashtructure(assembly);
 
+builder.Services.AddJwt(builder.Configuration);
+
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ITokenProvider, TokenProvider>();
 
 var app = builder.Build();
 
-app.UseInfrastructure(app.Environment);
+app.UseInfrastructure(app.Environment, useAuthentication: true);
 app.Run();

@@ -4,12 +4,12 @@ using MediatR;
 
 namespace Examify.Catalog.Features.Languages.UpdateLanguage;
 
-public record UpdateLanguageCommand(Guid Id, string Name): IRequest<IResult>;
+public record UpdateLanguageCommand(Guid Id, string Name) : IRequest<IResult>;
 
 public class UpdateLanguageValidateCommand : AbstractValidator<UpdateLanguageCommand>
 {
     private readonly ILanguageRepository _languageRepository;
-    
+
     public UpdateLanguageValidateCommand(ILanguageRepository languageRepository)
     {
         _languageRepository = languageRepository;

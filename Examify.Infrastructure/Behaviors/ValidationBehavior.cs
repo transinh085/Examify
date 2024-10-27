@@ -2,11 +2,12 @@
 using MediatR;
 using ValidationException = Examify.Core.Exceptions.ValidationException;
 
+namespace Examify.Infrastructure.Behaviors;
+
 public class ValidationBehaviour<TRequest, TResponse>(IEnumerable<IValidator<TRequest>> validators)
     : IPipelineBehavior<TRequest, TResponse>
     where TRequest : notnull
 {
-
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next,
         CancellationToken cancellationToken)
     {

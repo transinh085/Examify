@@ -8,7 +8,7 @@ public class RefreshTokenEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPost("/api/auth/refresh-token", async (RefreshTokenCommand command, ISender sender) =>
+        app.MapPost("auth/refresh-token", async (RefreshTokenCommand command, ISender sender) =>
                 await sender.Send(command)
             )
             .Produces<AuthenticationResponse>()
