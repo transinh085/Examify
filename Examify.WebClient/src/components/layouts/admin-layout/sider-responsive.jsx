@@ -3,7 +3,7 @@ import Sider from 'antd/es/layout/Sider';
 import { Link } from 'react-router-dom';
 import MenuCustom from '~/components/layouts/admin-layout/menu';
 import useMenuStore from '~/stores/menu-store';
-import logo from '~/assets/quiz-logo.png';
+import logo from '~/assets/examify-logo.png';
 
 const SiderResponsive = () => {
   const breakpoint = Grid.useBreakpoint();
@@ -33,7 +33,7 @@ const SiderResponsive = () => {
         >
           <>
             <Link to="/">
-              <img src={logo} alt="logo" className="h-[54px] mx-auto mt-1 mb-4 object-contain" />
+              <img src={logo} alt="logo" className="h-[40px] mx-auto my-3 object-contain" />
             </Link>
             <MenuCustom mode="inline" theme="light" isMobile={isMobile} onClose={() => setSiderVisible(false)} />
           </>
