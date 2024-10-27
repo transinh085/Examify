@@ -10,8 +10,8 @@ const AppProvider = ({ children }) => {
         token: {
           fontFamily: 'Inter',
           borderRadius: 4,
-          controlHeight: 37,
-          colorPrimary: '#2C3A47',
+          controlHeight: 35,
+          colorPrimary: '#027f91',
         },
         components: {
           Table: {

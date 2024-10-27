@@ -12,12 +12,14 @@ const QuizListBySubject = ({ subjectName, quizzes = [] }) => {
           <StartIcon /> <h1 className="text-lg font-semibold">{subjectName}</h1>
         </Flex>
         <Link to="/topics/1" className="text-blue-500">
-          <Button type="default">Xem thêm</Button>
+          <Button variant="outlined" color="primary">
+            Xem thêm
+          </Button>
         </Link>
       </Flex>
       <Row gutter={[16, 16]}>
         {quizzes.map((quiz) => (
-          <Col span={6} key={quiz.id}>
+          <Col xs={24} sm={12} md={8} lg={6} key={quiz.id}>
             <QuizItem {...quiz} />
           </Col>
         ))}

@@ -2,6 +2,11 @@ import { Card, Flex, Progress, Tag } from 'antd';
 import PropTypes from 'prop-types';
 
 const QuizItem = ({ title, description, image, percent, questions }) => {
+  const twoColors = {
+    '0%': '#108ee9',
+    '100%': '#87d068',
+  };
+
   return (
     <Card
       styles={{
@@ -23,16 +28,10 @@ const QuizItem = ({ title, description, image, percent, questions }) => {
       <Flex vertical justify="space-between" className="p-3 h-[150px]" gap={2}>
         <div>
           <h1 className="text-base font-semibold line-clamp-2 overflow-hidden text-ellipsis">{title}</h1>
-          <p className="line-clamp-2 overflow-hidden text-ellipsis">{description}</p>
+          <p className="line-clamp-2 overflow-hidden text-ellipsis text-xs mt-2 text-[#444]">{description}</p>
         </div>
-        <Progress
-          percent={percent}
-          percentPosition={{
-            align: 'center',
-            type: 'inner',
-          }}
-          size={[null, 12]}
-        />
+
+        <Progress percent={percent} size={[null, 12]} strokeColor={twoColors} />
       </Flex>
     </Card>
   );
