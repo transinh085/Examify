@@ -34,6 +34,18 @@ namespace Examify.Catalog.Infrastructure.Data.Migrations
                 {
                     table.PrimaryKey("PK_Subjects", x => x.Id);
                 });
+            
+            migrationBuilder.CreateTable(
+                name: "Grades",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Grades", x => x.Id);
+                });
         }
 
         /// <inheritdoc />
@@ -44,6 +56,9 @@ namespace Examify.Catalog.Infrastructure.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Subjects");
+            
+            migrationBuilder.DropTable(
+                name: "Grades");
         }
     }
 }

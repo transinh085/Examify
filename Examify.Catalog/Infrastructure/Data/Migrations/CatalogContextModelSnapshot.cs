@@ -51,6 +51,21 @@ namespace Examify.Catalog.Infrastructure.Data.Migrations
 
                     b.ToTable("Subjects");
                 });
+            
+            modelBuilder.Entity("Examify.Catalog.Entities.Grade", b =>
+            {
+                b.Property<Guid>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uuid");
+
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasColumnType("text");
+
+                b.HasKey("Id");
+
+                b.ToTable("Grades");
+            });
 #pragma warning restore 612, 618
         }
     }
