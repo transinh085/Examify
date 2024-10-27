@@ -26,8 +26,20 @@ public class CatalogContextSeed : IDbSeeder<CatalogContext>
             });
         }
         
+        var grades = new List<Grade>();
+        
+        for(int i = 1; i <= 12; i++)
+        {
+            grades.Add(new Grade
+            {
+                Name = $"L{i}"
+            });
+        }
+        grades.Add(new Grade { Name = "Đại học" });
+
         context.Languages.AddRange(languages);
         context.Subjects.AddRange(subjects);
+        context.Grades.AddRange(grades);
         context.SaveChanges();
 
         return Task.CompletedTask;

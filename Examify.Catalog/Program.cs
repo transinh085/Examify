@@ -1,5 +1,6 @@
 using System.Reflection;
 using Examify.Catalog.Infrastructure.Data;
+using Examify.Catalog.Repositories.Grades;
 using Examify.Catalog.Repositories.Language;
 using Examify.Infrastructure;
 using Examify.Infrastructure.Jwt;
@@ -10,6 +11,7 @@ builder.AddInfrashtructure(assembly);
 builder.AddPersistence();
 
 builder.Services.AddScoped<ILanguageRepository, LanguageRepository>();
+builder.Services.AddScoped<IGradeRepository, GradeRepository>();
 
 var app = builder.Build();
 
