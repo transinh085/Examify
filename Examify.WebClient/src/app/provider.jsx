@@ -9,7 +9,7 @@ const AppProvider = ({ children }) => {
       theme={{
         token: {
           fontFamily: 'Inter',
-          borderRadius: 4,
+          borderRadius: 6,
           controlHeight: 35,
           colorPrimary: '#027f91',
         },
@@ -20,6 +20,9 @@ const AppProvider = ({ children }) => {
               bordered: true,
               scroll: { x: true },
             },
+          },
+          Select: {
+            defaultProps: {},
           },
         },
         hashed: false,
