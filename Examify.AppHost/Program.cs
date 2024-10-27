@@ -3,7 +3,7 @@ var builder = DistributedApplication.CreateBuilder(args);
 var postgreSql = builder.AddPostgres("postgreSql")
     .WithPgAdmin();
 
-// var redis = builder.AddRedis("redis").WithRedisCommander();
+// var redis = builder.AddRedis("redis").WithRedisInsight();
 
 var classDb = postgreSql.AddDatabase("classDb");
 var indentityDb = postgreSql.AddDatabase("identityDb");
@@ -21,12 +21,15 @@ var catalogService = builder.AddProject<Projects.Examify_Catalog>("catalog-api")
     .WithReference(catalogDb)
     .WaitFor(catalogDb);
 
-var notificationService = builder.AddProject<Projects.Examify_Notification>("notification-api")
-    .WithHttpsEndpoint();
+var resultService = builder.AddProject<Projects.Examify_Result>("result-api");
+
+// var notificationService = builder.AddProject<Projects.Examify_Notification>("notification-api")
+//     .WithHttpsEndpoint();
 
 builder.AddProject<Projects.Examify_Gateway>("gateway")
     .WithReference(identityService)
     .WithReference(classService)
-    .WithReference(notificationService);
+    .WithReference(catalogService)
+    .WithReference(resultService);
 
 builder.Build().Run();

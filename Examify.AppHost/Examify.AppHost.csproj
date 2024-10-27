@@ -12,10 +12,10 @@
 
     <ItemGroup>
         <PackageReference Include="Aspire.Hosting.AppHost" Version="9.0.0-rc.1.24511.1" />
-        <PackageReference Include="Aspire.Hosting.MongoDB" Version="8.2.1" />
-        <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="8.2.1" />
+        <PackageReference Include="Aspire.Hosting.MongoDB" Version="9.0.0-rc.1.24511.1" />
+        <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="9.0.0-rc.1.24511.1" />
         <PackageReference Include="Aspire.Hosting.RabbitMQ" Version="8.2.1" />
-        <PackageReference Include="Aspire.Hosting.Redis" Version="8.2.1" />
+        <PackageReference Include="Aspire.Hosting.Redis" Version="9.0.0-rc.1.24511.1" />
     </ItemGroup>
 
     <ItemGroup>
@@ -26,6 +26,7 @@
         <ProjectReference Include="..\Examify.Identity\Examify.Identity.csproj" />
         <ProjectReference Include="..\Examify.Infrastructure\Examify.Infrastructure.csproj" />
         <ProjectReference Include="..\Examify.Notification\Examify.Notification.csproj" />
+        <ProjectReference Include="..\Examify.Result\Examify.Result.csproj" />
     </ItemGroup>
 
 </Project>

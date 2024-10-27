@@ -9,8 +9,7 @@ public class CustomExceptionHandler(ILogger<CustomExceptionHandler> logger) : IE
 {
     public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
     {
-        logger.LogError(exception, "An unhandled exception has occurred");
-        
+        logger.LogInformation(nameof(exception));
         switch (exception)
         {
             case ValidationException validationException:
