@@ -5,3 +5,12 @@
 .ant-form-item-explain-error {
   font-size: 13px;
 }
+
+.ant-modal .ant-modal-header {
+  margin-bottom: 14px;
+}
+
+.add-question-modal .ant-form-item,
+.card-question .ant-form-item {
+  margin-bottom: 0;
+}

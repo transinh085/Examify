@@ -20,6 +20,13 @@ const CustomerRoutes = {
         return { Component: DashboardRoute.default };
       },
     },
+    {
+      path: '/topics/:id',
+      lazy: async () => {
+        const TopicDetailsPage = await import('../pages/customer/topics/[id]');
+        return { Component: TopicDetailsPage.default };
+      },
+    },
   ],
 };
 

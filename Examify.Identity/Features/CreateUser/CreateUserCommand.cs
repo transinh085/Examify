@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Examify.Identity.Features.CreateUser;
 
-public record CreateUserCommand(string FirstName, string LastName, string Email, string Password) : IRequest<AppUserDto>;
+public record CreateUserCommand(string FirstName, string LastName, string Email, string Password) : IRequest<IResult>;
 
 public class CreateUserValidator : AbstractValidator<CreateUserCommand>
 {

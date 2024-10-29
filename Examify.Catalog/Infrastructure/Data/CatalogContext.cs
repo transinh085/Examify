@@ -11,7 +11,9 @@ namespace Examify.Catalog.Infrastructure.Data;
 public class CatalogContext(DbContextOptions options) : DbContext(options)
 {
     public DbSet<Subject> Subjects { get; set; }
-
+    public DbSet<Language> Languages { get; set; }
+    
+    public DbSet<Grade> Grades { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

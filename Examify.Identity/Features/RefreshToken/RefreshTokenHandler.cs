@@ -4,11 +4,11 @@ using MediatR;
 
 namespace Examify.Identity.Features.RefreshToken;
 
-public class RefreshTokenHandler(ITokenProvider tokenProvider) : IRequestHandler<RefreshTokenCommand, AuthenticationResponse>
+public class RefreshTokenHandler(ITokenProvider tokenProvider) : IRequestHandler<RefreshTokenCommand, IResult>
 {
-    public async Task<AuthenticationResponse> Handle(RefreshTokenCommand request, CancellationToken cancellationToken)
+    public async Task<IResult> Handle(RefreshTokenCommand request, CancellationToken cancellationToken)
     {
         var authenticatedResponse = await tokenProvider.RefreshTokenAsync(request.Token);
-        return authenticatedResponse;
+        return TypedResults.Ok(authenticatedResponse);
     }
 }

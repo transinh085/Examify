@@ -7,10 +7,12 @@ public class LoginEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPost("api/auth/login", async (LoginCommand command, ISender sender) =>
-        {
-            var result = await sender.Send(command);
-            return result;
-        }).WithTags("Authentication");
+        app.MapPost("auth/login", async (LoginCommand command, ISender sender) =>
+            {
+                var result = await sender.Send(command);
+                return result;
+            })
+            .Produces<AuthenticationResponse>()
+            .WithTags("Authentication");
     }
 }

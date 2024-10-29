@@ -5,11 +5,11 @@ using MediatR;
 namespace Examify.Identity.Features.Login;
 
 public class LoginCommandHandler(IUserRepository userRepository, ITokenProvider tokenProvider)
-    : IRequestHandler<LoginCommand, AuthenticationResponse>
+    : IRequestHandler<LoginCommand, IResult>
 {
-    public async Task<AuthenticationResponse> Handle(LoginCommand request, CancellationToken cancellationToken)
+    public async Task<IResult> Handle(LoginCommand request, CancellationToken cancellationToken)
     {
         var authenticatedResponse = await tokenProvider.AuthenticateAsync(request.Email, request.Password);
-        return authenticatedResponse;
+        return TypedResults.Ok(authenticatedResponse);
     }
 }

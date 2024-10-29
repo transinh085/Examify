@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Examify.Identity.Features.Login;
 
-public record LoginCommand(string Email, string Password) : IRequest<AuthenticationResponse>;
+public record LoginCommand(string Email, string Password) : IRequest<IResult>;
 
 public class AuthenticationResponse
 {

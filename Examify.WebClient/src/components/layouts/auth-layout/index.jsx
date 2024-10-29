@@ -1,6 +1,6 @@
 import { Flex } from 'antd';
 import { Outlet } from 'react-router-dom';
-import logo from '~/assets/quiz-logo.png';
+import logo from '~/assets/examify-logo.png';
 
 export default function AuthLayout() {
   return (
