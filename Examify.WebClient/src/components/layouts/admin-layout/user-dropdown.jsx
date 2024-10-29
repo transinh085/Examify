@@ -11,6 +11,9 @@ const UserDropdown = () => {
       key: '1',
       label: 'Account info',
       icon: <UserOutlined />,
+      onClick: () => {
+        navigate('/admin/profile');
+      },
     },
     {
       key: '2',
