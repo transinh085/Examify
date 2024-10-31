@@ -27,7 +27,7 @@ const items = [
     key: '3',
     label: 'Activity',
     icon: <ClockCircleOutlined />,
-    url: '/activity',
+    url: '/activities',
   },
 ];
 
