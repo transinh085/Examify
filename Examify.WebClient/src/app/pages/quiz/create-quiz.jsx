@@ -12,7 +12,7 @@ import SettingModal from '~/features/quiz/components/SettingModal';
 import Question from '~/features/quiz/components/Question';
 import AddQuestionModal from '~/features/quiz/components/AddQuestionModal';
 import { useLoaderData, useNavigate } from 'react-router-dom';
-import { getQuizQueryOptions } from '~/features/quiz/api/get-quiz';
+import { getQuizQueryOptions, useGetQuiz } from '~/features/quiz/api/get-quiz';
 const { Header, Content } = Layout;
 
 export const CreateQuizLoader =
@@ -23,11 +23,14 @@ export const CreateQuizLoader =
   };
 
 const CreateQuizPage = () => {
-  const quizData = useLoaderData();
-
-  const { title } = quizData;
-
   const navigate = useNavigate();
+  const initialQuizData = useLoaderData();
+
+  const { data: quizData } = useGetQuiz({
+    id: initialQuizData.id,
+    queryConfig: { initialData: initialQuizData, enabled: false },
+  });
+
   const { value: isSettingModalOpen, setTrue: openSettingModal, setFalse: closeSettingModal } = useBoolean();
   const {
     value: isAddQuestionModalOpen,
@@ -41,7 +44,7 @@ const CreateQuizPage = () => {
         <Space>
           <Button icon={<LeftOutlined />} onClick={() => navigate(-1)} />
           <Button type="text" onClick={openSettingModal}>
-            {title}
+            {quizData?.title}
           </Button>
         </Space>
         <Space>
