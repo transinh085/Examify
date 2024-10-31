@@ -1,7 +1,5 @@
-import { QueryClient } from '@tanstack/react-query';
 import { CreateQuizLoader } from '~/app/pages/quiz/create-quiz';
-
-const queryClient = new QueryClient();
+import { queryClient } from '~/lib/queryClient';
 
 const QuizRoutes = {
   path: 'quiz/:quizId',
@@ -9,9 +7,7 @@ const QuizRoutes = {
     const CreateQuizPage = await import('../pages/quiz/create-quiz');
     return { Component: CreateQuizPage.default };
   },
-  loader: async ({ params }) => {
-    return CreateQuizLoader(queryClient)({ params });
-  },
+  loader: CreateQuizLoader(queryClient),
 };
 
 export default QuizRoutes;

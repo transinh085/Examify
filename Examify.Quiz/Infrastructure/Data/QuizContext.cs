@@ -11,6 +11,8 @@ namespace Examify.Quiz.Infrastructure.Data;
 public class QuizContext(DbContextOptions options) : BaseDbContext(options)
 {
     public DbSet<Entities.Quiz> Quizzes { get; init; }
+    public DbSet<Entities.Question> Questions { get; init; }
+    public DbSet<Entities.Option> Options { get; init; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -1,5 +1,4 @@
 export const QuizVisibility = Object.freeze({
-  PUBLIC: 'public',
-  PRIVATE: 'private',
-  UNLISTED: 'unlisted',
+  PUBLIC: 0,
+  PRIVATE: 1,
 });

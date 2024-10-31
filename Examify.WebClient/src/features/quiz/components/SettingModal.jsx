@@ -52,13 +52,13 @@ const SettingModal = ({ data, open, onCancel }) => {
             <Form.Item label="Title" name="title" rules={[{ required: true, message: 'Title is required' }]}>
               <Input placeholder="Untitled Quiz" />
             </Form.Item>
-            <Form.Item label="Subject" name="subject">
+            <Form.Item label="Subject" name="subjectId">
               <Select placeholder="Select a subject" options={subjects} fieldNames={{ label: 'name', value: 'id' }} />
             </Form.Item>
-            <Form.Item label="Grade" name="grade">
+            <Form.Item label="Grade" name="gradeId">
               <Select placeholder="Select a grade" options={grades} fieldNames={{ label: 'name', value: 'id' }} />
             </Form.Item>
-            <Form.Item label="Langaue" name="language">
+            <Form.Item label="Langaue" name="languageId">
               <Select placeholder="Select a language" options={languages} fieldNames={{ label: 'name', value: 'id' }} />
             </Form.Item>
             <Form.Item label="Visibility" name="visibility">

@@ -37,6 +37,7 @@
       <Folder Include="Features\Grades\Query\" />
       <Folder Include="Features\Subject\Command\" />
       <Folder Include="Features\Subject\Query\" />
+      <Folder Include="Grpc\" />
     </ItemGroup>
 
 </Project>

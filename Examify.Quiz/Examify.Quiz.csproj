@@ -8,6 +8,7 @@
 
     <ItemGroup>
         <Folder Include="Extensions\"/>
+        <Folder Include="Features\Questions\" />
         <Folder Include="Infrastructure\Data\Configurations\"/>
     </ItemGroup>
 
