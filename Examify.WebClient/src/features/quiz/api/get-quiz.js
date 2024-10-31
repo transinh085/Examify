@@ -7,7 +7,7 @@ export const getQuiz = ({ id }) => {
 
 export const getQuizQueryOptions = (id) => {
   return queryOptions({
-    queryKey: ['quiz', id],
+    queryKey: ['quiz', { id }],
     queryFn: () => getQuiz({ id }),
   });
 };

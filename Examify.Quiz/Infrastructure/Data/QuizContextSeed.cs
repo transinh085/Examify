@@ -22,9 +22,21 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
             GradeId = Guid.NewGuid(),
             LanguageId = Guid.NewGuid(),
             OwnerId = Guid.NewGuid(),
-            CreatedDate = DateTime.UtcNow,
-            UpdatedDate = DateTime.UtcNow
         });
+
+        context.Quizzes.AddAsync(new Entities.Quiz
+        {
+            Id = Guid.NewGuid(),
+            Title = "Another Test Quiz",
+            Cover = "https://example.com/cover.jpg",
+            Description = "This is another test quiz",
+            Visibility = Visibility.Public,
+            SubjectId = Guid.NewGuid(),
+            GradeId = Guid.NewGuid(),
+            LanguageId = Guid.NewGuid(),
+            OwnerId = Guid.NewGuid(),
+        });
+        
         return context.SaveChangesAsync();
     }
 }
