@@ -8,8 +8,8 @@ public class GetAllLanguageEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapGet("/languages", ([AsParameters] GetAllLanguageQuery query, ISender sender) => sender.Send(query))
-            .Produces<PagedList<Entities.Language>>()
+        app.MapGet("/languages", (ISender sender) => sender.Send(new GetAllLanguageQuery()))
+            .Produces<List<Entities.Language>>()
             .WithTags("Languages");
     }
 }

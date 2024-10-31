@@ -11,22 +11,37 @@ import { useBoolean } from '~/hooks/useBoolean';
 import SettingModal from '~/features/quiz/components/SettingModal';
 import Question from '~/features/quiz/components/Question';
 import AddQuestionModal from '~/features/quiz/components/AddQuestionModal';
+import { useLoaderData, useNavigate } from 'react-router-dom';
+import { getQuizQueryOptions } from '~/features/quiz/api/get-quiz';
 const { Header, Content } = Layout;
 
+export const CreateQuizLoader =
+  (queryClient) =>
+  async ({ params }) => {
+    const query = getQuizQueryOptions(params.quizId);
+    return queryClient.getQueryData(query.queryKey) ?? (await queryClient.fetchQuery(query));
+  };
+
 const CreateQuizPage = () => {
+  const quizData = useLoaderData();
+
+  const { title } = quizData;
+
+  const navigate = useNavigate();
   const { value: isSettingModalOpen, setTrue: openSettingModal, setFalse: closeSettingModal } = useBoolean();
   const {
     value: isAddQuestionModalOpen,
     setTrue: openAddQuestionModal,
     setFalse: closeAddQuestionModal,
   } = useBoolean();
+
   return (
     <Layout className="bg-[#f2f2f2] min-h-screen">
       <Header className="sticky top-0 z-50 flex items-center justify-between bg-white border-b border-1 px-4 shadow-sm">
         <Space>
-          <Button icon={<LeftOutlined />} />
+          <Button icon={<LeftOutlined />} onClick={() => navigate(-1)} />
           <Button type="text" onClick={openSettingModal}>
-            Untitled quiz
+            {title}
           </Button>
         </Space>
         <Space>
@@ -122,7 +137,7 @@ const CreateQuizPage = () => {
           </Col>
         </Row>
       </Content>
-      <SettingModal open={isSettingModalOpen} onCancel={closeSettingModal} />
+      <SettingModal data={quizData} open={isSettingModalOpen} onCancel={closeSettingModal} />
       <AddQuestionModal open={isAddQuestionModalOpen} onCancel={closeAddQuestionModal} />
     </Layout>
   );

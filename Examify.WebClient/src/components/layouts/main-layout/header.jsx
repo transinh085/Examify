@@ -1,4 +1,4 @@
-import { Avatar, Button, Flex, Input, Layout, Menu } from 'antd';
+import { App, Avatar, Button, Flex, Input, Layout, Menu } from 'antd';
 import logo from '~/assets/examify-logo.png';
 import {
   ClockCircleOutlined,
@@ -7,7 +7,8 @@ import {
   QuestionCircleOutlined,
   UserOutlined,
 } from '@ant-design/icons';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useCreateQuiz } from '~/features/quiz/api/create-quiz';
 const { Header: AntHeader } = Layout;
 
 const items = [
@@ -32,11 +33,31 @@ const items = [
 ];
 
 const Header = () => {
+  const { message } = App.useApp();
+  const navigate = useNavigate();
+
+  const { mutate } = useCreateQuiz({
+    mutationConfig: {
+      onSuccess: (data) => {
+        console.log('data', data);
+        navigate(`/quiz/${data.id}`);
+      },
+      onError: (error) => {
+        message.error(error.message);
+      },
+    },
+  });
+
+  const createQuizHandler = () => {
+    console.log('createQuizHandler');
+    mutate();
+  };
+
   return (
     <AntHeader className="sticky top-0 z-50 flex items-center justify-between bg-white border-b border-1 px-4">
       <Flex align="center" gap={40} className="flex-1">
         <Link to="/">
-          <img src={logo} alt="logo" className="h-[40px] w-auto" />
+          <img src={logo} alt="logo" className="h-[40px] w-auto object-cover" />
         </Link>
         <Input.Search placeholder="Find a quiz" style={{ width: 250 }} />
 
@@ -44,11 +65,9 @@ const Header = () => {
       </Flex>
 
       <Flex align="center" gap={20}>
-        <Link to="/create-quiz">
-          <Button variant="filled" color="default" icon={<PlusCircleOutlined />}>
-            Create a quiz
-          </Button>
-        </Link>
+        <Button variant="filled" color="default" icon={<PlusCircleOutlined />} onClick={createQuizHandler}>
+          Create a quiz
+        </Button>
         <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
       </Flex>
     </AntHeader>

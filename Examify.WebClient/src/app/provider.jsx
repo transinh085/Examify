@@ -10,7 +10,7 @@ const AppProvider = ({ children }) => {
         token: {
           fontFamily: 'Inter',
           borderRadius: 6,
-          controlHeight: 35,
+          controlHeight: 34,
           colorPrimary: '#027f91',
         },
         components: {
@@ -29,9 +29,9 @@ const AppProvider = ({ children }) => {
       }}
     >
       <QueryClientProvider client={queryClient}>
-        <AuthProvider>
+        {/* <AuthProvider> */}
           <AntApp>{children}</AntApp>
-        </AuthProvider>
+        {/* </AuthProvider> */}
       </QueryClientProvider>
     </ConfigProvider>
   );
