@@ -11,10 +11,7 @@ export const useUpdateQuiz = ({ mutationConfig }) => {
   const { onSuccess, ...restConfig } = mutationConfig || {};
   return useMutation({
     onSuccess: async (data, ...args) => {
-      queryClient.invalidateQueries({
-        queryKey: getQuizQueryOptions(data.id).queryKey,
-      });
-
+      queryClient.setQueriesData(getQuizQueryOptions(data.id).queryKey, (old) => ({ ...old, ...data }));
       onSuccess?.(data, ...args);
     },
     ...restConfig,
