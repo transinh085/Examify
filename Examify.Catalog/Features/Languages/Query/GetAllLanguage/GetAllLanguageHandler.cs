@@ -7,10 +7,7 @@ public class GetAllLanguageHandler(ILanguageRepository languageRepository) : IRe
 {
     public async Task<IResult> Handle(GetAllLanguageQuery request, CancellationToken cancellationToken)
     {
-        var languages = await languageRepository.GetLanguagesAsync(
-            pageNumber: request.PageNumber,
-            pageSize: request.PageSize
-        );
+        var languages = await languageRepository.GetLanguagesAsync();
         
         return TypedResults.Ok(languages);
     }

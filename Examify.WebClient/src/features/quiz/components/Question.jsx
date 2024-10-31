@@ -8,6 +8,28 @@ import {
   HolderOutlined,
 } from '@ant-design/icons';
 
+const questionTypes = [
+  { label: 'Multiple choice', value: 'multiple-choice' },
+  { label: 'True or false', value: 'true-or-false' },
+  { label: 'Fill in the blanks', value: 'fill-in-the-blanks' },
+];
+
+const timeOptions = [
+  { label: '5 seconds', value: 5 },
+  { label: '10 seconds', value: 10 },
+  { label: '20 seconds', value: 20 },
+  { label: '30 seconds', value: 30 },
+  { label: '45 seconds', value: 45 },
+];
+
+const pointOptions = [
+  { label: '1 point', value: 1 },
+  { label: '2 points', value: 2 },
+  { label: '3 points', value: 3 },
+  { label: '4 points', value: 4 },
+  { label: '5 points', value: 5 },
+];
+
 const Question = () => {
   return (
     <Card className="card-question">
@@ -23,38 +45,13 @@ const Question = () => {
             <Button variant="filled" color="default" icon={<HolderOutlined />} size="small" className="cursor-move" />
             <p className="inline-block bg-primary text-white px-3 py-[2px] rounded-full ">Câu 1</p>
             <Form.Item name="question_type">
-              <Select
-                options={[
-                  { label: 'Multiple choice', value: 'multiple-choice' },
-                  { label: 'True or false', value: 'true-or-false' },
-                  { label: 'Fill in the blanks', value: 'fill-in-the-blanks' },
-                ]}
-                size="small"
-              />
+              <Select options={questionTypes} size="small" />
             </Form.Item>
             <Form.Item name="time">
-              <Select
-                options={[
-                  { label: '5 seconds', value: 5 },
-                  { label: '10 seconds', value: 10 },
-                  { label: '20 seconds', value: 20 },
-                  { label: '30 seconds', value: 30 },
-                  { label: '45 seconds', value: 45 },
-                ]}
-                size="small"
-              />
+              <Select options={timeOptions} size="small" />
             </Form.Item>
             <Form.Item name="point">
-              <Select
-                options={[
-                  { label: '1 point', value: 1 },
-                  { label: '2 points', value: 2 },
-                  { label: '3 points', value: 3 },
-                  { label: '4 points', value: 4 },
-                  { label: '5 points', value: 5 },
-                ]}
-                size="small"
-              />
+              <Select options={pointOptions} size="small" style={{ width: 100 }} />
             </Form.Item>
           </Space>
           <Space>
@@ -67,7 +64,7 @@ const Question = () => {
               <Button icon={<CopyOutlined />} size="small" />
             </Tooltip>
             <Tooltip title="Delete this question">
-              <Button icon={<DeleteOutlined />} size="small" />
+              <Button variant="filled" color="danger" icon={<DeleteOutlined />} size="small" />
             </Tooltip>
           </Space>
         </Flex>

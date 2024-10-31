@@ -7,8 +7,8 @@ public class GetGradesEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapGet("/grades", ([AsParameters] GetGradesQuery query, ISender sender) => sender.Send(query))
-            .Produces<Entities.Grade>()
+        app.MapGet("/grades", (ISender sender) => sender.Send(new GetGradesQuery()))
+            .Produces<List<Entities.Grade>>()
             .WithTags("Grades");
     }
 }

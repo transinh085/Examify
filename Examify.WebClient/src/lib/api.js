@@ -7,7 +7,7 @@ function authRequestInterceptor(config) {
     config.headers['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
   }
 
-  config.withCredentials = true;
+  // config.withCredentials = true;
   return config;
 }
 

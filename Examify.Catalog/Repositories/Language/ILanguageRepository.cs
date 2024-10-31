@@ -6,7 +6,7 @@ public interface ILanguageRepository
 {
     Task<Entities.Language> CreateLanguageAsync(Entities.Language language);
     
-    Task<PagedList<Entities.Language>> GetLanguagesAsync(int pageNumber, int pageSize);
+    Task<List<Entities.Language>> GetLanguagesAsync();
     
     Task<Entities.Language> FindLanguageByIdAsync(Guid languageId);
     

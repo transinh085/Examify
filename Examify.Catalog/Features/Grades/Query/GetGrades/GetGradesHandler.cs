@@ -7,10 +7,7 @@ public class GetGradesHandler(IGradeRepository gradeRepository) : IRequestHandle
 {
     public async Task<IResult> Handle(GetGradesQuery request, CancellationToken cancellationToken)
     {
-        var grades = await gradeRepository.GetAll(
-            pageNumber: request.PageNumber,
-            pageSize: request.PageSize
-        );
+        var grades = await gradeRepository.GetAll();
         
         return Results.Ok(grades);
     }

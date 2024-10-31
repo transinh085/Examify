@@ -14,3 +14,8 @@
 .card-question .ant-form-item {
   margin-bottom: 0;
 }
+
+.upload-cover .ant-upload-select {
+  width: 100% !important;
+  height: 200px !important;
+}

@@ -5,7 +5,7 @@ namespace Examify.Catalog.Repositories.Grades;
 public interface IGradeRepository
 {
     Task<Entities.Grade> Create(Entities.Grade grade);
-    Task<PagedList<Entities.Grade>> GetAll(int pageNumber, int pageSize);
+    Task<List<Entities.Grade>> GetAll();
     
     Task<Entities.Grade?> FindById(Guid id);
     
