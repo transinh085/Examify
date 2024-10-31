@@ -21,6 +21,13 @@ const CustomerRoutes = {
       },
     },
     {
+      path: '/activities',
+      lazy: async () => {
+        const Activities = await import('../pages/customer/activities');
+        return { Component: Activities.default };
+      },
+    },
+    {
       path: '/topics/:id',
       lazy: async () => {
         const TopicDetailsPage = await import('../pages/customer/topics/[id]');
