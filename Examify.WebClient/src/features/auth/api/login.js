@@ -1,8 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
 import { api } from '~/lib/api';
 
-export const useLogin = ({ data }) => {
-  return api.post(`/auth/login`, data);
+export const useLogin = ({ email, password }) => {
+  return api.post(`/identity-service/auth/login`, { email, password });
 };
 
 export const useLoginMutation = ({ mutationConfig }) => {

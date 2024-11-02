@@ -21,6 +21,11 @@ const RegisterRoute = () => {
   const handleRegister = () => {
     mutation.mutate({ data: form.getFieldsValue() });
   };
+
+  const moveToLogin = () => {
+    navigate('/auth/login');
+  }
+
   return (
     <div
       className="p-8 rounded-[8px] w-[90%] md:w-[460px]"
@@ -28,25 +33,25 @@ const RegisterRoute = () => {
         boxShadow: 'rgba(0, 0, 0, 0.15) 0px 2px 8px',
       }}
     >
-      <Typography className="text-[22px] font-semibold">Đăng ký</Typography>
+      <Typography className="text-[22px] font-semibold">Register</Typography>
       <Form form={form} className="pt-4" onFinish={handleRegister} layout="vertical">
         <Flex vertical>
-          <Form.Item label="Họ tên" name="name" rules={RULES.register.name} required={false}>
-            <Input placeholder="Nhập họ tên..." />
+          <Form.Item label="Full name" name="name" rules={RULES.register.name} required={false}>
+            <Input placeholder="Enter your fullname..." />
           </Form.Item>
           <Form.Item label="Email" name="email" rules={RULES.register.email} required={false}>
-            <Input placeholder="Nhập email..." />
+            <Input placeholder="Enter your email..." />
           </Form.Item>
-          <Form.Item label="Mật khẩu" name="password" rules={RULES.register.password} required={false}>
-            <Input.Password placeholder="Nhập mật khẩu..." />
+          <Form.Item label="Password" name="password" rules={RULES.register.password} required={false}>
+            <Input.Password placeholder="Enter your password..." />
           </Form.Item>
         </Flex>
         <Form.Item className="pt-4 m-0">
           <Button loading={mutation.isPending} type="primary" htmlType="submit" className="w-full">
-            Tạo tài khoản
+            Create account
           </Button>
           <Typography className="text-center mt-6">
-            Bạn đã có tài khoản? <a href="login">Đăng nhập</a>
+            Do your have an account yet? <span onClick={moveToLogin} className='underline text-blue-400 cursor-pointer'>Login</span>
           </Typography>
         </Form.Item>
       </Form>

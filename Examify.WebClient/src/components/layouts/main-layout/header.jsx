@@ -1,11 +1,10 @@
-import { App, Avatar, Button, Flex, Input, Layout, Menu } from 'antd';
+import { App, Button, Flex, Input, Layout, Menu } from 'antd';
 import logo from '~/assets/examify-logo.png';
 import {
   ClockCircleOutlined,
   HomeOutlined,
   PlusCircleOutlined,
   QuestionCircleOutlined,
-  UserOutlined,
 } from '@ant-design/icons';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCreateQuiz } from '~/features/quiz/api/create-quiz';
@@ -54,7 +53,7 @@ const Header = () => {
   };
 
   return (
-    <AntHeader className="sticky top-0 z-50 flex items-center justify-between bg-white border-b border-1 px-4">
+    <AntHeader className="sticky top-0 z-50 flex items-center justify-between bg-white border-b px-4">
       <Flex align="center" gap={40} className="flex-1">
         <Link to="/">
           <img src={logo} alt="logo" className="h-[40px] w-auto object-cover" />
@@ -68,7 +67,7 @@ const Header = () => {
         <Button variant="filled" color="default" icon={<PlusCircleOutlined />} onClick={createQuizHandler}>
           Create a quiz
         </Button>
-        <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
+        <Button type='primary' onClick={() => navigate('/auth/login')}>Login</Button>
       </Flex>
     </AntHeader>
   );

@@ -1,14 +1,18 @@
 import { Flex } from 'antd';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import logo from '~/assets/examify-logo.png';
 
 export default function AuthLayout() {
+  const navigate = useNavigate();
+
+  const moveToHome = () => {
+    navigate('/');
+  }
+
   return (
     <Flex vertical align="center" justify="center" className="w-[100vw] h-[100vh] relative">
       <AuthBackground />
-      <a href="/">
-        <img src={logo} alt="logo" className="w-[160px] h-auto mb-4" />
-      </a>
+      <img src={logo} alt="logo" className="w-[160px] h-auto mb-4 cursor-pointer" onClick={moveToHome} />
       <Outlet />
     </Flex>
   );
