@@ -26,6 +26,10 @@ const SettingModal = ({ data, open, onCancel }) => {
     },
   });
 
+  console.log('Grade', grades);
+  console.log('Subject', subjects);
+  console.log('Language', languages);
+
   useEffect(() => {
     if (open) {
       form.setFieldsValue(data);

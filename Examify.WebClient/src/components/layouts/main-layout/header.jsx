@@ -1,11 +1,6 @@
 import { App, Button, Flex, Input, Layout, Menu } from 'antd';
 import logo from '~/assets/examify-logo.png';
-import {
-  ClockCircleOutlined,
-  HomeOutlined,
-  PlusCircleOutlined,
-  QuestionCircleOutlined,
-} from '@ant-design/icons';
+import { ClockCircleOutlined, HomeOutlined, PlusCircleOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCreateQuiz } from '~/features/quiz/api/create-quiz';
 const { Header: AntHeader } = Layout;
@@ -35,7 +30,7 @@ const Header = () => {
   const { message } = App.useApp();
   const navigate = useNavigate();
 
-  const { mutate } = useCreateQuiz({
+  const createQuizMutation = useCreateQuiz({
     mutationConfig: {
       onSuccess: (data) => {
         console.log('data', data);
@@ -49,7 +44,7 @@ const Header = () => {
 
   const createQuizHandler = () => {
     console.log('createQuizHandler');
-    mutate();
+    createQuizMutation.mutate();
   };
 
   return (
@@ -64,10 +59,18 @@ const Header = () => {
       </Flex>
 
       <Flex align="center" gap={20}>
-        <Button variant="filled" color="default" icon={<PlusCircleOutlined />} onClick={createQuizHandler}>
+        <Button
+          variant="filled"
+          color="default"
+          icon={<PlusCircleOutlined />}
+          onClick={createQuizHandler}
+          loading={createQuizMutation.isPending}
+        >
           Create a quiz
         </Button>
-        <Button type='primary' onClick={() => navigate('/auth/login')}>Login</Button>
+        <Button type="primary" onClick={() => navigate('/auth/login')}>
+          Login
+        </Button>
       </Flex>
     </AntHeader>
   );
