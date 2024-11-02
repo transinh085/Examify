@@ -5,19 +5,15 @@ import fb from '~/assets/svg/fb.svg';
 import gg from '~/assets/svg/gg.svg';
 import wt from '~/assets/svg/wt.svg';
 import { useNavigate } from 'react-router-dom';
-import useAuthStore from '~/stores/auth-store';
 
 const LoginRoute = () => {
   const navigate = useNavigate();
-  const { setUser } = useAuthStore();
 
   const [form] = Form.useForm();
   const mutation = useLoginMutation({
     mutationConfig: {
       onSuccess: (data) => {
-        localStorage.setItem('token', data?.token);
-        setUser(data?.user);
-        navigate('/');
+        console.log(data);
       },
       onError: ({ response }) => {
         message.error(response?.data?.detail || 'Something went wrong!');
@@ -25,8 +21,11 @@ const LoginRoute = () => {
     },
   });
   
-  const handleLogin = () => {
-    mutation.mutate({ data: form.getFieldsValue() });
+  const handleLogin = (data) => {
+    mutation.mutate({ 
+      email: data.email,
+      password: data.password
+     });
   };
 
   const moveToRegister = () => {

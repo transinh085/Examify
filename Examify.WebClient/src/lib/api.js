@@ -1,15 +1,12 @@
 import Axios from 'axios';
-import Cookies from 'cookies';
+import Cookies from 'js-cookie';
 import { BACKEND_ENDPOINT } from '~/config/env';
 
 function authRequestInterceptor(config) {
   if (config.headers) {
-    var cookies = new Cookies()
-    let token = cookies.get('token');
-    if (token) {
-      config.headers['Authorization'] = `Bearer ${token}`;
-    }
+    let token = Cookies.get('token');
     config.headers.Accept = 'application/json';
+    config.headers['Authorization'] = `Bearer ${token || ''}`;
   }
 
   // config.withCredentials = true;
