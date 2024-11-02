@@ -4,8 +4,9 @@ import AuthRoutes from './auth-routes';
 import AdminRoutes from './admin-routes';
 import ErrorRoutes from './error-routes';
 import QuizRoutes from '~/app/routes/quiz-routes';
+import JoinRoutes from '~/app/routes/join-routes';
 
-const createAppRouter = () => createBrowserRouter([AuthRoutes, CustomerRoutes, AdminRoutes, ErrorRoutes, QuizRoutes]);
+const createAppRouter = () => createBrowserRouter([AuthRoutes, CustomerRoutes, AdminRoutes, ErrorRoutes, QuizRoutes, JoinRoutes]);
 
 export const AppRouter = () => {
   const router = createAppRouter();

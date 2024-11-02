@@ -5,19 +5,15 @@ import fb from '~/assets/svg/fb.svg';
 import gg from '~/assets/svg/gg.svg';
 import wt from '~/assets/svg/wt.svg';
 import { useNavigate } from 'react-router-dom';
-import useAuthStore from '~/stores/auth-store';
 
 const LoginRoute = () => {
   const navigate = useNavigate();
-  const { setUser } = useAuthStore();
 
   const [form] = Form.useForm();
   const mutation = useLoginMutation({
     mutationConfig: {
       onSuccess: (data) => {
-        localStorage.setItem('token', data?.token);
-        setUser(data?.user);
-        navigate('/');
+        console.log(data);
       },
       onError: ({ response }) => {
         message.error(response?.data?.detail || 'Something went wrong!');
@@ -25,41 +21,46 @@ const LoginRoute = () => {
     },
   });
   
-  console.log()
-
-  const handleLogin = () => {
-    mutation.mutate({ data: form.getFieldsValue() });
+  const handleLogin = (data) => {
+    mutation.mutate({ 
+      email: data.email,
+      password: data.password
+     });
   };
+
+  const moveToRegister = () => {
+    navigate('/auth/register');
+  }
 
   return (
     <div className="p-8 rounded-[8px] w-[90%] md:w-[460px] bg-white border shadow-sm">
-      <Typography className="text-[22px] font-semibold">Đăng nhập</Typography>
+      <Typography className="text-[22px] font-semibold">Login</Typography>
       <Form form={form} className="pt-4" onFinish={handleLogin} layout="vertical" variant="filled">
         <Flex vertical>
           <Form.Item label="Email" name="email" rules={RULES.login.email} required={false} validateTrigger="onBlur">
-            <Input placeholder="Nhập email..." />
+            <Input placeholder="Enter your email..." />
           </Form.Item>
           <Form.Item
-            label="Mật khẩu"
+            label="Password"
             name="password"
             rules={RULES.login.password}
             required={false}
             validateTrigger="onBlur"
           >
-            <Input.Password placeholder="Nhập mật khẩu..." />
+            <Input.Password placeholder="Enter your password..." />
           </Form.Item>
         </Flex>
         <Form.Item className="pt-2 m-0">
           <a href="forgot-password" className="block mb-3">
-            Quên mật khẩu?
+            Forgot password
           </a>
           <Button loading={mutation.isPending} type="primary" htmlType="submit" className="w-full">
-            Đăng nhập
+            Login
           </Button>
         </Form.Item>
         <Form.Item className="pt-4 m-0">
           <Divider>
-            <Typography className="text-[#333] mb-2">Hoặc</Typography>
+            <Typography className="text-[#333] mb-2">Or</Typography>
           </Divider>
           <Row gutter={12}>
             <Col span={8}>
@@ -82,7 +83,7 @@ const LoginRoute = () => {
             </Col>
           </Row>
           <Typography className="text-center mt-6">
-            Bạn chưa có tài khoản? <a href="register">Đăng ký</a>
+            Do you have an account yet? <span className='cursor-pointer underline text-blue-400' onClick={moveToRegister}>Register</span>
           </Typography>
         </Form.Item>
       </Form>

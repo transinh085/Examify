@@ -33,7 +33,7 @@ const CustomerRoutes = {
         const TopicDetailsPage = await import('../pages/customer/topics/[id]');
         return { Component: TopicDetailsPage.default };
       },
-    },
+    }
   ],
 };
 
