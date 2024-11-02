@@ -1,5 +1,4 @@
 using Examify.Infrastructure.Hosting;
-using Microsoft.AspNetCore.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
 

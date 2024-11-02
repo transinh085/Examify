@@ -6,13 +6,13 @@ import {
   LoginOutlined,
   CameraOutlined,
   FolderOutlined,
-  ThunderboltOutlined,
+  HomeOutlined,
 } from '@ant-design/icons';
 
 const adminMenu = Object.freeze([
   {
     key: '1',
-    icon: <ThunderboltOutlined />,
+    icon: <HomeOutlined />,
     label: 'Explore',
     path: '/admin',
   },
