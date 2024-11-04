@@ -1,5 +1,5 @@
 import { Button, Flex, Form, Input, message, Typography } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import RULES from '~/config/rule';
 import { useRegisterMutation } from '~/features/auth/api/register';
 
@@ -24,7 +24,7 @@ const RegisterRoute = () => {
 
   const moveToLogin = () => {
     navigate('/auth/login');
-  }
+  };
 
   return (
     <div
@@ -51,7 +51,12 @@ const RegisterRoute = () => {
             Create account
           </Button>
           <Typography className="text-center mt-6">
-            Do your have an account yet? <span onClick={moveToLogin} className='underline text-blue-400 cursor-pointer'>Login</span>
+            <Link to={'/auth/login'}>
+              Do your have an account yet?
+              <span onClick={moveToLogin} className="underline text-blue-400 cursor-pointer">
+                Login
+              </span>
+            </Link>
           </Typography>
         </Form.Item>
       </Form>

@@ -1,12 +1,13 @@
-import AdminGuard from '../guards/admin-guard';
 import AdminLayout from '~/components/layouts/admin-layout';
+import PrivateGuard from '../guards/private-guard';
 
+// require authenticated to access admin routes
 const AdminRoutes = {
   path: '/admin',
   element: (
-    <AdminGuard>
+    <PrivateGuard>
       <AdminLayout />
-    </AdminGuard>
+    </PrivateGuard>
   ),
   children: [
     {

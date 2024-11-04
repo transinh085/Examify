@@ -8,7 +8,7 @@ var postgreSql = builder.AddPostgres("postgreSql")
 var classDb = postgreSql.AddDatabase("classDb");
 var indentityDb = postgreSql.AddDatabase("identityDb");
 var catalogDb = postgreSql.AddDatabase("catalogDb");
-var quizDb = postgreSql.AddDatabase("quizDb");
+var quizDb = postgreSql.AddDatabase("quizDb"); 
 
 var identityService = builder.AddProject<Projects.Examify_Identity>("identity-api")
     .WithReference(indentityDb)
