@@ -1,7 +1,7 @@
 import { Button, Flex, Form, Input, message, Typography } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
-import RULES from '~/config/rule';
 import { useRegisterMutation } from '~/features/auth/api/register';
+import RULES from '~/features/auth/rules';
 
 const RegisterRoute = () => {
   const navigate = useNavigate();
@@ -36,8 +36,11 @@ const RegisterRoute = () => {
       <Typography className="text-[22px] font-semibold">Register</Typography>
       <Form form={form} className="pt-4" onFinish={handleRegister} layout="vertical">
         <Flex vertical>
-          <Form.Item label="Full name" name="name" rules={RULES.register.name} required={false}>
-            <Input placeholder="Enter your fullname..." />
+          <Form.Item label="First name" name="firstName" rules={RULES.register.firstName} required={false}>
+            <Input placeholder="Enter your first name..." />
+          </Form.Item>
+          <Form.Item label="Last name" name="lastName" rules={RULES.register.lastName} required={false}>
+            <Input placeholder="Enter your last name..." />
           </Form.Item>
           <Form.Item label="Email" name="email" rules={RULES.register.email} required={false}>
             <Input placeholder="Enter your email..." />
