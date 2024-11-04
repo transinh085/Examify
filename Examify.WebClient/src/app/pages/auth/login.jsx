@@ -4,7 +4,8 @@ import { useLoginMutation } from '~/features/auth/api/login';
 import fb from '~/assets/svg/fb.svg';
 import gg from '~/assets/svg/gg.svg';
 import wt from '~/assets/svg/wt.svg';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 const LoginRoute = () => {
   const navigate = useNavigate();
@@ -13,24 +14,21 @@ const LoginRoute = () => {
   const mutation = useLoginMutation({
     mutationConfig: {
       onSuccess: (data) => {
-        console.log(data);
+        Cookies.set('token', data?.token);
+        navigate('/');
       },
       onError: ({ response }) => {
         message.error(response?.data?.detail || 'Something went wrong!');
       },
     },
   });
-  
-  const handleLogin = (data) => {
-    mutation.mutate({ 
-      email: data.email,
-      password: data.password
-     });
-  };
 
-  const moveToRegister = () => {
-    navigate('/auth/register');
-  }
+  const handleLogin = (data) => {
+    mutation.mutate({
+      email: data.email,
+      password: data.password,
+    });
+  };
 
   return (
     <div className="p-8 rounded-[8px] w-[90%] md:w-[460px] bg-white border shadow-sm">
@@ -83,7 +81,9 @@ const LoginRoute = () => {
             </Col>
           </Row>
           <Typography className="text-center mt-6">
-            Do you have an account yet? <span className='cursor-pointer underline text-blue-400' onClick={moveToRegister}>Register</span>
+            <Link to={'/auth/register'}>
+              Do you have an account yet? <span className="cursor-pointer underline text-blue-400">Register</span>
+            </Link>
           </Typography>
         </Form.Item>
       </Form>

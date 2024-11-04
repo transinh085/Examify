@@ -1,7 +1,7 @@
 import { QueryClientProvider } from '@tanstack/react-query';
 import { App as AntApp, ConfigProvider } from 'antd';
-// import AuthProvider from './auth-provider';
 import { queryClient } from '~/lib/queryClient';
+import AuthProvider from './auth-provider';
 
 const AppProvider = ({ children }) => {
   return (
@@ -29,9 +29,9 @@ const AppProvider = ({ children }) => {
       }}
     >
       <QueryClientProvider client={queryClient}>
-        {/* <AuthProvider> */}
-        <AntApp>{children}</AntApp>
-        {/* </AuthProvider> */}
+        <AuthProvider>
+          <AntApp>{children}</AntApp>
+        </AuthProvider>
       </QueryClientProvider>
     </ConfigProvider>
   );

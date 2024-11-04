@@ -1,6 +1,7 @@
 import MainLayout from '~/components/layouts/main-layout';
 import PrivateGuard from '../guards/private-guard';
 
+// can access as an guest or authenticated user
 const CustomerRoutes = {
   path: '/',
   element: (
@@ -33,7 +34,7 @@ const CustomerRoutes = {
         const TopicDetailsPage = await import('../pages/customer/topics/[id]');
         return { Component: TopicDetailsPage.default };
       },
-    }
+    },
   ],
 };
 

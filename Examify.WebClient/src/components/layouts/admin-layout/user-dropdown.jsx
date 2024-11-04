@@ -1,47 +1,68 @@
 import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
-import { Avatar, Dropdown } from 'antd';
+import { Avatar, Dropdown, Flex } from 'antd';
+import Cookies from 'js-cookie';
+import { useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuthStore from '~/stores/auth-store';
 
 const UserDropdown = () => {
   const navigate = useNavigate();
-  const { resetUser } = useAuthStore();
-  const items = [
-    {
-      key: '1',
-      label: 'Account info',
-      icon: <UserOutlined />,
-      onClick: () => {
-        navigate('/admin/profile');
+  const { user, resetUser } = useAuthStore();
+
+  const handleLogout = useCallback(() => {
+    Cookies.remove('token');
+    resetUser();
+    navigate('/auth/login');
+  }, [navigate, resetUser]);
+
+  const items = useMemo(
+    () => [
+      {
+        key: '1',
+        label: 'Account info',
+        icon: <UserOutlined />,
+        onClick: () => {
+          navigate('/admin/profile');
+        },
       },
-    },
-    {
-      key: '2',
-      label: 'Settings',
-      icon: <SettingOutlined />,
-    },
-    {
-      key: '3',
-      label: 'Logout',
-      icon: <LogoutOutlined />,
-      onClick: () => {
-        localStorage.removeItem('token');
-        resetUser();
-        navigate('/auth/login');
+      {
+        key: '2',
+        label: 'Settings',
+        icon: <SettingOutlined />,
       },
-    },
-  ];
+      {
+        key: '3',
+        label: 'Logout',
+        icon: <LogoutOutlined />,
+        onClick: handleLogout,
+      },
+    ],
+    [navigate, handleLogout],
+  );
+
   return (
-    <Dropdown
-      menu={{
-        items,
-      }}
-      trigger={['click']}
-      placement="bottomLeft"
-      arrow
-    >
-      <Avatar size="default" src={'https://avatars.githubusercontent.com/u/45101901?v=4'} className="cursor-pointer" />
-    </Dropdown>
+    <Flex align="center" gap={8} justify="end">
+      <Flex vertical justify="end">
+        <p className="text-end text-primary font-medium text-base">{user?.fullName}</p>
+        <p className="text-end text-[red]] text-xs">{user?.email}</p>
+      </Flex>
+      <Dropdown
+        menu={{
+          items,
+        }}
+        trigger={['click']}
+        placement="bottomRight"
+        arrow
+      >
+        <Avatar
+          src="https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1727740800&semt=ais_hybrid"
+          className="border-2 border-primary"
+          size={40}
+        >
+          P
+        </Avatar>
+      </Dropdown>
+    </Flex>
   );
 };
 
