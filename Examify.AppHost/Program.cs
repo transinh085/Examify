@@ -1,6 +1,7 @@
 var builder = DistributedApplication.CreateBuilder(args);
 
 var postgreSql = builder.AddPostgres("postgreSql")
+    .WithPgWeb(c => c.WithLifetime(ContainerLifetime.Persistent))
     .WithLifetime(ContainerLifetime.Persistent);
 
 // var redis = builder.AddRedis("redis").WithRedisInsight();

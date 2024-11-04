@@ -1,4 +1,4 @@
-import { Avatar, Button, Dropdown, Flex, Space } from 'antd';
+import { Avatar, Button, Dropdown, Flex, Space, Tag } from 'antd';
 import {
   DeleteOutlined,
   HeatMapOutlined,
@@ -18,14 +18,19 @@ const TestCard = ({ id, imgSrc, title, author, date, tags, details }) => {
     navigate(`/admin/quiz/${id}`);
   };
   return (
-    <Flex className="bg-white px-4 py-2 rounded-lg" justify="space-between">
+    <Flex className="bg-white px-2 py-2 rounded-lg border" justify="space-between">
       <Space size="middle">
-        <img onClick={handleCardClick} className="w-[120px] h-[120px] rounded-sm cursor-pointer" src={imgSrc} alt="imgTest" />
+        <img
+          onClick={handleCardClick}
+          className="w-[120px] h-[120px] rounded-sm cursor-pointer"
+          src={imgSrc}
+          alt="imgTest"
+        />
         <Space direction="vertical" size="small">
-          <span className="bg-slate-50 border border-slate-200 rounded-full px-2 text-xs font-bold text-slate-400">
-            {tags}
-          </span>
-          <h1 onClick={handleCardClick} className="font-bold cursor-pointer hover:underline">{title}</h1>
+          <Tag>{tags}</Tag>
+          <h1 onClick={handleCardClick} className="font-bold cursor-pointer hover:underline">
+            {title}
+          </h1>
           <Space size="small">
             {/* Icon info */}
             <Space>
@@ -76,14 +81,13 @@ const DropdownMenu = () => {
       label: 'Delete',
       key: '2',
       icon: <DeleteOutlined />,
+      danger: true,
     },
   ];
   return (
     <Dropdown menu={{ items }} trigger={['click']}>
       <a onClick={(e) => e.preventDefault()}>
-        <Space>
-          <MoreOutlined />
-        </Space>
+        <Button type="text" icon={<MoreOutlined />} size="small" />
       </a>
     </Dropdown>
   );

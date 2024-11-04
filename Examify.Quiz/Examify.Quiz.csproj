@@ -8,7 +8,7 @@
 
     <ItemGroup>
         <Folder Include="Extensions\"/>
-        <Folder Include="Features\Questions\" />
+        <Folder Include="Features\Questions\Command\UpdateQuestion\" />
         <Folder Include="Infrastructure\Data\Configurations\"/>
     </ItemGroup>
 

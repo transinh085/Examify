@@ -2,7 +2,7 @@ import { App, Button, Flex, Input, Layout, Menu } from 'antd';
 import logo from '~/assets/examify-logo.png';
 import { ClockCircleOutlined, HomeOutlined, PlusCircleOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import { Link, useNavigate } from 'react-router-dom';
-import { useCreateQuiz } from '~/features/quiz/api/create-quiz';
+import { useCreateQuiz } from '~/features/quiz/api/quizzes/create-quiz';
 const { Header: AntHeader } = Layout;
 
 const items = [

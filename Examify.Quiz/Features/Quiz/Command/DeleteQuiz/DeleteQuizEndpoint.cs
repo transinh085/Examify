@@ -9,6 +9,7 @@ public class DeleteQuizEndpoint : IEndpoint
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
         app.MapDelete("/quizzes/{id}", async (ISender sender, Guid id) => sender.Send(new DeleteQuizCommand(id)))
-            .Produces<NoContent>();
+            .Produces<NoContent>()
+            .WithTags("Quiz");
     }
 }

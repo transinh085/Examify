@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { getQuizQueryOptions } from '~/features/quiz/api/get-quiz';
+import { getQuizQueryOptions } from '~/features/quiz/api/quizzes/get-quiz';
 import { api } from '~/lib/api';
 
 export const updateQuiz = ({ id, data }) => {
