@@ -1,13 +1,15 @@
 import { Button, Col, Divider, Flex, Form, Input, message, Row, Typography } from 'antd';
-import RULES from '~/config/rule';
 import { useLoginMutation } from '~/features/auth/api/login';
 import fb from '~/assets/svg/fb.svg';
 import gg from '~/assets/svg/gg.svg';
 import wt from '~/assets/svg/wt.svg';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import RULES from '~/features/auth/rules';
 
 const LoginRoute = () => {
+  const [searchParams] = useSearchParams();
+  const redirect = searchParams.get('redirect');
   const navigate = useNavigate();
 
   const [form] = Form.useForm();
@@ -15,7 +17,7 @@ const LoginRoute = () => {
     mutationConfig: {
       onSuccess: (data) => {
         Cookies.set('token', data?.token);
-        navigate('/');
+        navigate(redirect ? redirect : '/');
       },
       onError: ({ response }) => {
         message.error(response?.data?.detail || 'Something went wrong!');

@@ -14,12 +14,20 @@ const RULES = {
     ],
   },
   register: {
-    name: [
-      { required: true, message: 'Please enter the employee name!' },
-      { min: 3, message: 'Name must be at least 3 characters!' },
+    firstName: [
+      { required: true, message: 'Please enter your first name!' },
+      { min: 2, message: 'First name must be at least 3 characters!' },
       {
         max: 30,
-        message: 'Name must be at most 30 characters!',
+        message: 'First name must be at most 30 characters!',
+      },
+    ],
+    lastName: [
+      { required: true, message: 'Please enter your last name!' },
+      { min: 2, message: 'Last name must be at least 3 characters!' },
+      {
+        max: 30,
+        message: 'Last name must be at most 30 characters!',
       },
     ],
     email: [
@@ -36,4 +44,5 @@ const RULES = {
     ],
   },
 };
+
 export default RULES;
