@@ -63,17 +63,19 @@ const Header = () => {
       </Flex>
 
       <Flex align="center" gap={20}>
-        <Button
-          variant="filled"
-          color="default"
-          icon={<PlusCircleOutlined />}
-          onClick={createQuizHandler}
-          loading={createQuizMutation.isPending}
-        >
-          Create a quiz
-        </Button>
         {isAuthenticated ? (
-          <UserDropdown />
+          <>
+            <Button
+              variant="filled"
+              color="default"
+              icon={<PlusCircleOutlined />}
+              onClick={createQuizHandler}
+              loading={createQuizMutation.isPending}
+            >
+              Create a quiz
+            </Button>
+            <UserDropdown />
+          </>
         ) : (
           <Button type="primary" onClick={() => navigate('/auth/login')}>
             Login
