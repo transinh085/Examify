@@ -40,50 +40,68 @@ const ProfilePage = () => {
       },
     },
   };
-  // Mảng chứa danh sách các button
-  const buttonList = [
-    { id: 1, label: 'Lớp 1' },
-    { id: 2, label: 'Lớp 2' },
-    { id: 3, label: 'Lớp 3' },
-    { id: 4, label: 'Lớp 4' },
-    { id: 5, label: 'Lớp 5' },
-    { id: 6, label: 'Lớp 6' },
-    { id: 7, label: 'Lớp 7' },
-    { id: 8, label: 'Lớp 8' },
-    { id: 9, label: 'Lớp 9' },
-    { id: 10, label: 'Lớp 10' },
-    { id: 11, label: 'Lớp 11' },
-    { id: 12, label: 'Lớp 12' },
-    { id: 13, label: 'Đại học' },
-  ];
+  const [gradeList, setGradeList] = useState([]);
+  useEffect(() => {
+    const fetchGradetList = async () => {
+      try {
+        const response = await fetch('http://localhost:5084/grades?pageNumber=1&pageSize=13');
+        const data = await response.json();
+
+        if (Array.isArray(data.items)) {
+          const formattedGrades = data.items.map(item => ({
+            id: item.id,
+            name: item.name
+          }));
+          setGradeList(formattedGrades);
+        } else {
+          console.log(data)
+        }
+
+      } catch (error) {
+        console.error('Error fetching subject list:', error);
+      }
+    };
+
+    fetchGradetList();
+  }, []);
   // State lưu trữ trạng thái background của button
-  const [activeButtons, setActiveButtons] = useState([]);
+  const [activeGrades, setActiveGrades] = useState([]);
 
   // Hàm thay đổi trạng thái khi button được nhấn
   const handleClick = (id) => {
-    setActiveButtons((prev) => {
+    setActiveGrades((prev) => {
       const newSelection = prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id];
       form.setFieldsValue({ grade: newSelection });
       return newSelection;
     });
   };
 
+  const [subjectList, setSubjectList] = useState([]);
+  const [showAllSubjects, setShowAllSubjects] = useState(false);
   // Mảng chứa danh sách các button
-  const subjectList = [
-    { id: 1, label: 'Toán' },
-    { id: 2, label: 'Tiếng Anh' },
-    { id: 3, label: 'Vật lý' },
-    { id: 4, label: 'Hóa học' },
-    { id: 5, label: 'Sinh học' },
-    { id: 6, label: 'Địa lý' },
-    { id: 7, label: 'Lịch sử' },
-    { id: 8, label: 'Máy tính' },
-    { id: 9, label: 'Thể dục' },
-    { id: 10, label: 'Triết học' },
-    { id: 11, label: 'Khoa học Xã hội' },
-    { id: 12, label: 'Khoa học' },
-    { id: 13, label: 'Kỹ năng sống' },
-  ];
+  useEffect(() => {
+    const fetchSubjectList = async () => {
+      try {
+        const response = await fetch('http://localhost:5084/subjects?pageNumber=1&pageSize=30');
+        const data = await response.json();
+
+        if (Array.isArray(data.items)) {
+          const formattedSubjects = data.items.map(item => ({
+            id: item.id,
+            name: item.name
+          }));
+          setSubjectList(formattedSubjects);
+        } else {
+          console.log(data)
+        }
+
+      } catch (error) {
+        console.error('Error fetching subject list:', error);
+      }
+    };
+
+    fetchSubjectList();
+  }, []);
   // State lưu trữ trạng thái background của button
   const [activeSubjects, setActiveSubjects] = useState([]);
 
@@ -95,6 +113,14 @@ const ProfilePage = () => {
       return newSelection;
     });
   };
+
+  const toggleShowAllSubjects = () => {
+    setShowAllSubjects(!showAllSubjects);
+  };
+
+  // Limit to 12 subjects unless showing all
+  const displayedSubjects = showAllSubjects ? subjectList : subjectList.slice(0, 11);
+
   const [form] = Form.useForm();
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
@@ -227,19 +253,19 @@ const ProfilePage = () => {
                 <Flex horizontal>
                   <Form.Item name="grade" label="Lớp">
                     <Flex gap="small" wrap>
-                      {buttonList.map((button) => (
+                      {gradeList.map((grade) => (
                         <Button
-                          key={button.id}
+                          key={grade.id}
                           color="default"
                           variant="filled"
-                          onClick={() => handleClick(button.id)}
+                          onClick={() => handleClick(grade.id)}
                           style={{
                             margin: '5px',
-                            backgroundColor: activeButtons.includes(button.id) ? '#4CAF50' : '#fff',
-                            color: activeButtons.includes(button.id) ? '#fff' : '#000',
+                            backgroundColor: activeGrades.includes(grade.id) ? '#4CAF50' : '#fff',
+                            color: activeGrades.includes(grade.id) ? '#fff' : '#000',
                           }}
                         >
-                          {button.label}
+                          {grade.name}
                         </Button>
                       ))}
                     </Flex>
@@ -248,7 +274,7 @@ const ProfilePage = () => {
                 <Flex horizontal>
                   <Form.Item name="subject" label="Môn học">
                     <Flex gap="small" wrap>
-                      {subjectList.map((subject) => (
+                      {displayedSubjects.map((subject) => (
                         <Button
                           key={subject.id}
                           color="default"
@@ -257,12 +283,17 @@ const ProfilePage = () => {
                           style={{
                             margin: '5px',
                             backgroundColor: activeSubjects.includes(subject.id) ? '#4CAF50' : '#fff',
-                            color: activeSubjects[subject.id] ? '#fff' : '#000',
+                            color: activeSubjects.includes(subject.id) ? '#fff' : '#000',
                           }}
                         >
-                          {subject.label}
+                          {subject.name}
                         </Button>
                       ))}
+                      {subjectList.length > 11 && (
+                        <Button onClick={toggleShowAllSubjects} style={{ margin: '5px' }}>
+                          {showAllSubjects ? 'Show Less' : 'Show More'}
+                        </Button>
+                      )}
                     </Flex>
                   </Form.Item>
                 </Flex>

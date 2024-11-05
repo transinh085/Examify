@@ -19,6 +19,9 @@ const UserDropdown = () => {
       key: '2',
       label: 'Settings',
       icon: <SettingOutlined />,
+      onClick: () => {
+        navigate('/admin/settings');
+      },
     },
     {
       key: '3',
