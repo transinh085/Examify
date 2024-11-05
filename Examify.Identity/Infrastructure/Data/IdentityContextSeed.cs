@@ -12,7 +12,8 @@ public class IdentityContextSeed(UserManager<AppUser> userManager) : IDbSeeder<I
             UserName = "admin",
             Email = "admin@gmail.com",
             FirstName = "Admin",
-            LastName = "Admin"
+            LastName = "Admin",
+            Image = "https://avatars.githubusercontent.com/u/120194990?v=4"
         };
 
         userManager.CreateAsync(user, "12345678").Wait();
@@ -23,7 +24,8 @@ public class IdentityContextSeed(UserManager<AppUser> userManager) : IDbSeeder<I
             UserName = "user",
             Email = "transinh085@gmail.com",
             FirstName = "Sinh",
-            LastName = "Tran"
+            LastName = "Tran",
+            Image = "https://avatars.githubusercontent.com/u/45101901?v=4"
         };
         userManager.CreateAsync(user2, "12345678").Wait();
         userManager.AddToRoleAsync(user2, "User").Wait();
@@ -33,10 +35,33 @@ public class IdentityContextSeed(UserManager<AppUser> userManager) : IDbSeeder<I
             UserName = "hgbaodev",
             Email = "musicanime2501@gmail.com",
             FirstName = "Gia",
-            LastName = "Bảo"
+            LastName = "Bảo",
+            Image = "https://avatars.githubusercontent.com/u/120194990?v=4"
         };
         userManager.CreateAsync(user3, "12345678").Wait();
-        userManager.AddToRoleAsync(user3, "Admin").Wait();
+        userManager.AddToRoleAsync(user3, "User").Wait();
+
+        var user4 = new AppUser
+        {
+            UserName = "quanphat",
+            Email = "quanphat@gmail.com",
+            FirstName = "Quan",
+            LastName = "Phat",
+            Image = "https://avatars.githubusercontent.com/u/93178609?v=4"
+        };
+        userManager.CreateAsync(user4, "12345678").Wait();
+        userManager.AddToRoleAsync(user4, "User").Wait();
+        
+        var user5 = new AppUser
+        {
+            UserName = "tungbao",
+            Email = "tungbao@gmail.com",
+            FirstName = "Tung",
+            LastName = "Bao",
+            Image = "https://avatars.githubusercontent.com/u/93178609?v=4"
+        };
+        userManager.CreateAsync(user5, "12345678").Wait();
+        userManager.AddToRoleAsync(user5, "User").Wait();
 
         return Task.CompletedTask;
     }
