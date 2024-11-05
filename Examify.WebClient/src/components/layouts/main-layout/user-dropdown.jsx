@@ -1,8 +1,10 @@
 import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
-import { Avatar, Dropdown, Flex } from 'antd';
+import { Avatar, Divider, Dropdown, Flex, Space, theme } from 'antd';
 import Cookies from 'js-cookie';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuthStore from '~/stores/auth-store';
+const { useToken } = theme;
 
 const UserDropdown = () => {
   const navigate = useNavigate();
@@ -14,6 +16,17 @@ const UserDropdown = () => {
     console.log('Logout');
     navigate('/auth/login');
   };
+
+  const { token } = useToken();
+  const contentStyle = {
+    backgroundColor: token.colorBgElevated,
+    borderRadius: token.borderRadiusLG,
+    boxShadow: token.boxShadowSecondary,
+  };
+  const menuStyle = {
+    boxShadow: 'none',
+  };
+
   const items = [
     {
       key: '1',
@@ -34,26 +47,42 @@ const UserDropdown = () => {
     },
   ];
   return (
-    <Flex align="center" gap={8} justify="end">
-      <Flex vertical justify="end">
-        <p className="text-end text-primary font-medium text-base">
-          {user?.firstName} {user?.lastName}
-        </p>
-        <p className="text-end text-[red]] text-xs">{user?.email}</p>
-      </Flex>
-      <Dropdown
-        menu={{
-          items,
-        }}
-        trigger={['click']}
-        placement="bottomRight"
-        arrow
-      >
-        <Avatar src={user?.image} className="border-2 border-primary" size={40}>
-          P
-        </Avatar>
-      </Dropdown>
-    </Flex>
+    <Dropdown
+      menu={{
+        items,
+      }}
+      dropdownRender={(menu) => (
+        <div style={contentStyle}>
+          <Space
+            style={{
+              padding: 8,
+            }}
+          >
+            <Flex vertical justify="start">
+              <p className="text-primary font-medium text-sm">
+                {user?.firstName} {user?.lastName}
+              </p>
+              <p className="text-[red]] text-xs">{user?.email}</p>
+            </Flex>
+          </Space>
+          <Divider
+            style={{
+              margin: 0,
+            }}
+          />
+          {React.cloneElement(menu, {
+            style: menuStyle,
+          })}
+        </div>
+      )}
+      trigger={['click']}
+      placement="bottomRight"
+      arrow
+    >
+      <Avatar src={user?.image} className="border-2 border-primary cursor-pointer" size={40}>
+        P
+      </Avatar>
+    </Dropdown>
   );
 };
 

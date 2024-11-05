@@ -13,7 +13,7 @@ const AuthProvider = ({ children }) => {
     dataUpdatedAt,
     isLoading,
   } = useAuthentication({
-    enabled: true,
+    enabled: !!Cookies.get('token'),
   });
 
   useEffect(() => {
@@ -29,8 +29,8 @@ const AuthProvider = ({ children }) => {
 
   if (isLoading) {
     return (
-      <Flex className="w-[100vw] h-[100vh] bg-gray-400" align="center" justify="center">
-        <Spin indicator={<LoadingOutlined spin />} />
+      <Flex className="w-[100vw] h-[100vh] bg-white" align="center" justify="center">
+        <Spin indicator={<LoadingOutlined />} size="large" />
       </Flex>
     );
   }
