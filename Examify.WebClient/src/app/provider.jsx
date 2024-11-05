@@ -32,6 +32,7 @@ const AppProvider = ({ children }) => {
         <AuthProvider>
           <AntApp>{children}</AntApp>
         </AuthProvider>
+        <AntApp>{children}</AntApp>
       </QueryClientProvider>
     </ConfigProvider>
   );

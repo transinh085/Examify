@@ -3,9 +3,6 @@ import {
   UserOutlined,
   FileSearchOutlined,
   SettingOutlined,
-  LoginOutlined,
-  CameraOutlined,
-  FolderOutlined,
   HomeOutlined,
 } from '@ant-design/icons';
 
@@ -36,27 +33,10 @@ const adminMenu = Object.freeze([
   },
   {
     key: '5',
-    icon: <CameraOutlined />,
-    label: 'Memes',
-    path: '/admin/memes',
-  },
-  {
-    key: '6',
-    icon: <FolderOutlined />,
-    label: 'Collections',
-    path: '/admin/collections',
-  },
-  {
-    key: '7',
     icon: <UserOutlined />,
     label: 'Profile',
     path: '/admin/profile',
-  },
-  {
-    key: '8',
-    icon: <LoginOutlined />,
-    label: 'Logout',
-  },
+  }
 ]);
 
 export { adminMenu };

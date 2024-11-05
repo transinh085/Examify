@@ -1,3 +1,4 @@
+using Examify.Notification.Services;
 using Microsoft.AspNetCore.Mvc;
 using Notification;
 
@@ -9,12 +10,15 @@ public class WeatherForecastController : ControllerBase
 {
     private readonly ILogger<WeatherForecastController> _logger;
     private readonly Classroom.ClassroomClient _classroomClient;
+    private readonly EmailService _emailService;
 
     public WeatherForecastController(ILogger<WeatherForecastController> logger,
-        Classroom.ClassroomClient classroomClient)
+        Classroom.ClassroomClient classroomClient,
+        EmailService emailService)
     {
         _logger = logger;
         _classroomClient = classroomClient;
+        _emailService = emailService;
     }
 
     [HttpGet("{id}")]
@@ -24,4 +28,18 @@ public class WeatherForecastController : ControllerBase
         _logger.LogInformation("Classroom: {classroom}", classroom);
         return Ok(classroom);
     }
+    
+    [HttpPost("send-email")]
+    public async Task<IActionResult> SendEmail([FromBody] EmailRequest emailRequest)
+    {
+        await _emailService.SendEmailAsync(emailRequest.ToEmail, emailRequest.Subject, emailRequest.Message);
+        return Ok("Email sent successfully");
+    }
+}
+
+public class EmailRequest
+{
+    public string ToEmail { get; set; }
+    public string Subject { get; set; }
+    public string Message { get; set; }
 }

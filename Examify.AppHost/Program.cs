@@ -29,15 +29,15 @@ var quizService = builder.AddProject<Projects.Examify_Quiz>("quiz-api")
 
 var resultService = builder.AddProject<Projects.Examify_Result>("result-api");
 
-// var notificationService = builder.AddProject<Projects.Examify_Notification>("notification-api")
-//     .WithHttpsEndpoint();
-
+var notificationService = builder.AddProject<Projects.Examify_Notification>("notification-api")
+    .WithHttpsEndpoint();
 
 builder.AddProject<Projects.Examify_Gateway>("gateway")
     .WithReference(identityService)
     .WithReference(classService)
     .WithReference(catalogService)
     .WithReference(resultService)
-    .WithReference(quizService);
+    .WithReference(quizService)
+    .WithReference(notificationService);
 
 builder.Build().Run();
