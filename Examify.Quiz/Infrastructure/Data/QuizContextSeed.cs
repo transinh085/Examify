@@ -22,6 +22,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
             GradeId = Guid.NewGuid(),
             LanguageId = Guid.NewGuid(),
             OwnerId = Guid.NewGuid(),
+            IsPublished = true
         });
 
         context.Quizzes.AddAsync(new Entities.Quiz
@@ -35,6 +36,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
             GradeId = Guid.NewGuid(),
             LanguageId = Guid.NewGuid(),
             OwnerId = Guid.NewGuid(),
+            IsPublished = true
         });
         
         return context.SaveChangesAsync();

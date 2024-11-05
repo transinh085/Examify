@@ -9,6 +9,7 @@ public class UploadImageEndpoint : IEndpoint
     {
         app.MapPost("/upload-image",
                 async (IFormFile file, ISender sender) => await sender.Send(new UploadImageCommand(file)))
-            .DisableAntiforgery();
+            .DisableAntiforgery()
+            .WithTags("Upload Image");
     }
 }

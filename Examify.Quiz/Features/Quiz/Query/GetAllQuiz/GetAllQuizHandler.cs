@@ -8,7 +8,7 @@ public class GetAllQuizHandler(QuizContext context) : IRequestHandler<GetAllQuiz
 {
     public async Task<IResult> Handle(GetAllQuizQuery request, CancellationToken cancellationToken)
     {
-        var quizzes = await context.Quizzes.ToListAsync(cancellationToken);
+        var quizzes = await context.Quizzes.AsNoTracking().ToListAsync(cancellationToken);
         return TypedResults.Ok(quizzes);
     }
 }

@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { getQuizQueryOptions } from '~/features/quiz/api/get-quiz';
+import { getQuizQueryOptions } from '~/features/quiz/api/quizzes/get-quiz';
 import { api } from '~/lib/api';
 
 export const updateQuiz = ({ id, data }) => {
@@ -11,7 +11,7 @@ export const useUpdateQuiz = ({ mutationConfig }) => {
   const { onSuccess, ...restConfig } = mutationConfig || {};
   return useMutation({
     onSuccess: async (data, ...args) => {
-      queryClient.setQueriesData(getQuizQueryOptions(data.id).queryKey, (old) => ({ ...old, ...data }));
+      queryClient.setQueryData(getQuizQueryOptions(data.id).queryKey, (old) => ({ ...old, ...data }));
       onSuccess?.(data, ...args);
     },
     ...restConfig,

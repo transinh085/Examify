@@ -3,11 +3,11 @@ import { useForm } from 'antd/es/form/Form';
 import { useGetGrades } from '~/features/quiz/api/get-grades';
 import { useGetSubjects } from '~/features/quiz/api/get-subjects';
 import { useGetLanguages } from '~/features/quiz/api/get-languages';
-import UploadCover from '~/features/quiz/components/UploadCover';
+import UploadCover from '~/features/quiz/components/question/UploadCover';
 import { useEffect } from 'react';
-import { useUpdateQuiz } from '~/features/quiz/api/update-quiz';
+import { useUpdateQuiz } from '~/features/quiz/api/quizzes/update-quiz';
 
-const SettingModal = ({ data, open, onCancel }) => {
+const QuizSettingModal = ({ data, open, onCancel }) => {
   const [form] = useForm();
   const { message } = App.useApp();
 
@@ -44,6 +44,7 @@ const SettingModal = ({ data, open, onCancel }) => {
       title="Quiz settings"
       onOk={form.submit}
       confirmLoading={updateQuizMutation.isPending}
+      destroyOnClose
       centered
     >
       <Form form={form} onFinish={onFinish} layout="vertical" variant="filled">
@@ -65,8 +66,8 @@ const SettingModal = ({ data, open, onCancel }) => {
               <Select
                 placeholder="Select visibility"
                 options={[
-                  { label: 'Public', value: 'public' },
-                  { label: 'Private', value: 'private' },
+                  { label: 'Public', value: 1 },
+                  { label: 'Private', value: 0 },
                 ]}
               />
             </Form.Item>
@@ -76,7 +77,7 @@ const SettingModal = ({ data, open, onCancel }) => {
               <Input.TextArea rows={4} placeholder="Description" />
             </Form.Item>
             <Form.Item label="Cover" name="cover">
-              <UploadCover />
+              <UploadCover url={data.cover} setFieldsValue={(value) => form.setFieldsValue({ cover: value })} />
             </Form.Item>
           </Col>
         </Row>
@@ -85,4 +86,4 @@ const SettingModal = ({ data, open, onCancel }) => {
   );
 };
 
-export default SettingModal;
+export default QuizSettingModal;

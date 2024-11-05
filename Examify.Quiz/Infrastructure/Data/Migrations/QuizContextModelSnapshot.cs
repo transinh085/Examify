@@ -104,6 +104,9 @@ namespace Examify.Quiz.Infrastructure.Data.Migrations
                     b.Property<Guid?>("GradeId")
                         .HasColumnType("uuid");
 
+                    b.Property<bool>("IsPublished")
+                        .HasColumnType("boolean");
+
                     b.Property<Guid?>("LanguageId")
                         .HasColumnType("uuid");
 
@@ -131,7 +134,7 @@ namespace Examify.Quiz.Infrastructure.Data.Migrations
             modelBuilder.Entity("Examify.Quiz.Entities.Option", b =>
                 {
                     b.HasOne("Examify.Quiz.Entities.Question", "Question")
-                        .WithMany()
+                        .WithMany("Options")
                         .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -142,12 +145,22 @@ namespace Examify.Quiz.Infrastructure.Data.Migrations
             modelBuilder.Entity("Examify.Quiz.Entities.Question", b =>
                 {
                     b.HasOne("Examify.Quiz.Entities.Quiz", "Quiz")
-                        .WithMany()
+                        .WithMany("Questions")
                         .HasForeignKey("QuizId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Quiz");
+                });
+
+            modelBuilder.Entity("Examify.Quiz.Entities.Question", b =>
+                {
+                    b.Navigation("Options");
+                });
+
+            modelBuilder.Entity("Examify.Quiz.Entities.Quiz", b =>
+                {
+                    b.Navigation("Questions");
                 });
 #pragma warning restore 612, 618
         }

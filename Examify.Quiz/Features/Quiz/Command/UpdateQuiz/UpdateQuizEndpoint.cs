@@ -9,6 +9,7 @@ public class UpdateQuizEndpoint : IEndpoint
     {
         app.MapPut("/quizzes/{id}",
                 async (ISender sender, UpdateQuizCommand command, Guid id) => await sender.Send(command with { Id = id }))
-            .Produces<Entities.Quiz>();
+            .Produces<Entities.Quiz>()
+            .WithTags("Quiz");
     }
 }

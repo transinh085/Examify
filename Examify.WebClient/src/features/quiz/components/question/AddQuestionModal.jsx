@@ -1,33 +1,31 @@
-import { Button, Checkbox, Empty, Flex, Form, Input, Modal, Popover, Select, Space, Tooltip } from 'antd';
+import { App, Button, Checkbox, Empty, Flex, Form, Input, Modal, Popover, Select, Space, Tooltip } from 'antd';
 import { CustomerServiceOutlined, DeleteOutlined, EditOutlined, OpenAIOutlined, PlusOutlined } from '@ant-design/icons';
+import { useCreateQuestion } from '~/features/quiz/api/questions/create-question';
+import { timeOptions } from '~/features/quiz/constant/timeOptions';
+import { pointOptions } from '~/features/quiz/constant/pointOptions';
+import { questionTypesOptions } from '~/features/quiz/constant/questionTypesOptions';
 
-const questionTypes = [
-  { label: 'Multiple choice', value: 'multiple-choice' },
-  { label: 'True or false', value: 'true-or-false' },
-  { label: 'Fill in the blanks', value: 'fill-in-the-blanks' },
-];
-
-const timeOptions = [
-  { label: '5 seconds', value: 5 },
-  { label: '10 seconds', value: 10 },
-  { label: '20 seconds', value: 20 },
-  { label: '30 seconds', value: 30 },
-  { label: '45 seconds', value: 45 },
-];
-
-const pointOptions = [
-  { label: '1 point', value: 1 },
-  { label: '2 points', value: 2 },
-  { label: '3 points', value: 3 },
-  { label: '4 points', value: 4 },
-  { label: '5 points', value: 5 },
-];
-
-const AddQuestionModal = ({ open, onCancel }) => {
+const AddQuestionModal = ({ quizId, open, onCancel }) => {
   const [form] = Form.useForm();
+  const { message } = App.useApp();
+
+  const createQuestionMutation = useCreateQuestion({
+    mutationConfig: {
+      onSuccess: () => {
+        onCancel();
+        message.success('Question added successfully');
+      },
+      onError: (error) => {
+        message.error(error.message);
+      },
+    },
+  });
 
   const onFinish = (values) => {
-    console.log('Received values:', values);
+    createQuestionMutation.mutate({
+      quizId,
+      data: values,
+    });
   };
 
   return (
@@ -39,17 +37,19 @@ const AddQuestionModal = ({ open, onCancel }) => {
       className="add-question-modal"
       onOk={form.submit}
       maskClosable={false}
+      confirmLoading={createQuestionMutation.isLoading}
       centered
     >
       <Form
         form={form}
         initialValues={{
-          question_type: 'multiple-choice',
-          time: 10,
-          point: 1,
-          question: '',
+          type: 0,
+          duration: 10,
+          points: 1,
+          content: '',
         }}
         onFinish={onFinish}
+        onFinishFailed={() => message.error('Please fill in all required fields')}
         layout="vertical"
       >
         <Flex align="center" justify="space-between" className="mb-5">
@@ -63,19 +63,19 @@ const AddQuestionModal = ({ open, onCancel }) => {
             </Popover>
           </Space>
           <Space align="center">
-            <Form.Item name="question_type">
-              <Select options={questionTypes} size="small" style={{ width: 150 }} />
+            <Form.Item name="type">
+              <Select options={questionTypesOptions} size="small" style={{ width: 150 }} />
             </Form.Item>
-            <Form.Item name="time">
+            <Form.Item name="duration">
               <Select options={timeOptions} size="small" />
             </Form.Item>
-            <Form.Item name="point">
+            <Form.Item name="points">
               <Select options={pointOptions} size="small" style={{ width: 90 }} />
             </Form.Item>
           </Space>
         </Flex>
         <Form.Item
-          name="question"
+          name="content"
           label="Question"
           rules={[
             {

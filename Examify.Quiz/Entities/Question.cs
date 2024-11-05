@@ -13,6 +13,10 @@ public class Question : BaseEntity
     
     public QuestionType Type { get; set; }
     
+    // public int Order { get; set; }
+    
     public Guid QuizId { get; set; }
     public Quiz Quiz { get; set; }
+    
+    public List<Option> Options { get; set; }
 }
