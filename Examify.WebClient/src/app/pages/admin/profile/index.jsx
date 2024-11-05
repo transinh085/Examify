@@ -82,7 +82,7 @@ const ProfilePage = () => {
   useEffect(() => {
     const fetchSubjectList = async () => {
       try {
-        const response = await fetch('http://localhost:5084/subjects?pageNumber=1&pageSize=30');
+        const response = await fetch('http://localhost:5084/subjects');
         const data = await response.json();
 
         if (Array.isArray(data.items)) {
