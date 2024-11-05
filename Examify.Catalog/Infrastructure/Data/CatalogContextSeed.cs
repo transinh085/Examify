@@ -6,42 +6,52 @@ public class CatalogContextSeed : IDbSeeder<CatalogContext>
 {
     public Task SeedAsync(CatalogContext context)
     {
-        var subjects = new List<Subject>();
-
-        for (int i = 1; i <= 30; i++)
+        if (!context.Subjects.Any())
         {
-            subjects.Add(new Subject
+            var subjects = new List<Subject>();
+
+            for (int i = 1; i <= 30; i++)
             {
-                Name = $"Subject {i}"
-            });
+                subjects.Add(new Subject
+                {
+                    Name = $"Subject {i}"
+                });
+            }
+
+            context.Subjects.AddRange(subjects);
         }
 
-        var languages = new List<Language>();
-        
-        for(int i = 1; i <= 10; i++)
+        if (!context.Languages.Any())
         {
-            languages.Add(new Language
-            {
-                Name = $"Language {i}"
-            });
-        }
-        
-        var grades = new List<Grade>();
-        
-        for(int i = 1; i <= 12; i++)
-        {
-            grades.Add(new Grade
-            {
-                Name = $"L{i}"
-            });
-        }
-        grades.Add(new Grade { Name = "Đại học" });
+            var languages = new List<Language>();
 
-        context.Languages.AddRange(languages);
-        context.Subjects.AddRange(subjects);
-        context.Grades.AddRange(grades);
+            for (int i = 1; i <= 10; i++)
+            {
+                languages.Add(new Language
+                {
+                    Name = $"Language {i}"
+                });
+            }
+
+            context.Languages.AddRange(languages);
+        }
+
+        if (!context.Grades.Any())
+        {
+            var grades = new List<Grade>();
+
+            for (int i = 1; i <= 12; i++)
+            {
+                grades.Add(new Grade
+                {
+                    Name = $"L{i}"
+                });
+            }
+
+            grades.Add(new Grade { Name = "Đại học" });
+            context.Grades.AddRange(grades);
+        }
         context.SaveChanges();
-
         return Task.CompletedTask;
     }
 }

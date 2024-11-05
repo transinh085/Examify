@@ -8,8 +8,8 @@ public class GetAllSubjectEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapGet("/subjects", ([AsParameters] GetAllSubjectQuery query, ISender sender) => sender.Send(query))
-            .Produces<PagedList<Entities.Subject>>()
+        app.MapGet("/subjects", (ISender sender) => sender.Send(new GetAllSubjectQuery()))
+            .Produces<List<Entities.Subject>>()
             .WithTags("Subjects");
     }
 }

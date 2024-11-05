@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Folder Include="Extensions\"/>
+        <Folder Include="Features\Questions\Command\UpdateQuestion\" />
+        <Folder Include="Infrastructure\Data\Configurations\"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.2.1"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.8">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="CloudinaryDotNet" Version="1.26.2"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Include="..\Shared\ActivityExtensions.cs" Link="Extensions\ActivityExtensions.cs"/>
+        <Compile Include="..\Shared\MigrateDbContextExtensions.cs" Link="Extensions\MigrateDbContextExtensions.cs"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Examify.Core\Examify.Core.csproj"/>
+        <ProjectReference Include="..\Examify.Infrastructure\Examify.Infrastructure.csproj"/>
+    </ItemGroup>
+
+</Project>

@@ -1,13 +1,10 @@
-import { Avatar, Button, Flex, Input, Layout, Menu } from 'antd';
+import { App, Button, Flex, Input, Layout, Menu } from 'antd';
 import logo from '~/assets/examify-logo.png';
-import {
-  ClockCircleOutlined,
-  HomeOutlined,
-  PlusCircleOutlined,
-  QuestionCircleOutlined,
-  UserOutlined,
-} from '@ant-design/icons';
-import { Link } from 'react-router-dom';
+import { ClockCircleOutlined, HomeOutlined, PlusCircleOutlined, QuestionCircleOutlined } from '@ant-design/icons';
+import { Link, useNavigate } from 'react-router-dom';
+import { useCreateQuiz } from '~/features/quiz/api/quizzes/create-quiz';
+import useAuthStore from '~/stores/auth-store';
+import UserDropdown from './user-dropdown';
 const { Header: AntHeader } = Layout;
 
 const items = [
@@ -27,16 +24,38 @@ const items = [
     key: '3',
     label: 'Activity',
     icon: <ClockCircleOutlined />,
-    url: '/activity',
+    url: '/activities',
   },
 ];
 
 const Header = () => {
+  const { message } = App.useApp();
+  const navigate = useNavigate();
+
+  const { isAuthenticated } = useAuthStore();
+
+  const createQuizMutation = useCreateQuiz({
+    mutationConfig: {
+      onSuccess: (data) => {
+        console.log('data', data);
+        navigate(`/quiz/${data.id}`);
+      },
+      onError: (error) => {
+        message.error(error.message);
+      },
+    },
+  });
+
+  const createQuizHandler = () => {
+    console.log('createQuizHandler');
+    createQuizMutation.mutate();
+  };
+
   return (
-    <AntHeader className="sticky top-0 z-50 flex items-center justify-between bg-white border-b border-1 px-4">
+    <AntHeader className="sticky top-0 z-50 flex items-center justify-between bg-white border-b px-4">
       <Flex align="center" gap={40} className="flex-1">
         <Link to="/">
-          <img src={logo} alt="logo" className="h-[40px] w-auto" />
+          <img src={logo} alt="logo" className="h-[40px] w-auto object-cover" />
         </Link>
         <Input.Search placeholder="Find a quiz" style={{ width: 250 }} />
 
@@ -44,12 +63,25 @@ const Header = () => {
       </Flex>
 
       <Flex align="center" gap={20}>
-        <Link to="/create-quiz">
-          <Button variant="filled" color="default" icon={<PlusCircleOutlined />}>
-            Create a quiz
+        <Button
+          variant="filled"
+          color="default"
+          icon={<PlusCircleOutlined />}
+          onClick={createQuizHandler}
+          loading={createQuizMutation.isPending}
+        >
+          Create a quiz
+        </Button>
+        <Button type="primary" onClick={() => navigate('/auth/login')}>
+          Login
+        </Button>
+        {isAuthenticated ? (
+          <UserDropdown />
+        ) : (
+          <Button type="primary" onClick={() => navigate('/auth/login')}>
+            Login
           </Button>
-        </Link>
-        <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
+        )}
       </Flex>
     </AntHeader>
   );

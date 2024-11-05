@@ -14,3 +14,51 @@
 .card-question .ant-form-item {
   margin-bottom: 0;
 }
+
+.upload-cover .ant-upload-select {
+  width: 100% !important;
+  height: 200px !important;
+  overflow: hidden;
+  border-style: solid!important;
+}
+
+/* Hiệu ứng nền tia sấm sét */
+.bg-lightning-pattern {
+  background-image: radial-gradient(circle at 50% 50%, #ff8c00, #ff0080, #8000ff, #0080ff, #00ff80, #ff8c00);
+  clip-path: polygon(
+    0% 0%,
+    15% 25%,
+    30% 15%,
+    45% 35%,
+    60% 15%,
+    75% 30%,
+    90% 10%,
+    100% 20%,
+    100% 100%,
+    85% 75%,
+    70% 85%,
+    55% 65%,
+    40% 85%,
+    25% 70%,
+    10% 90%,
+    0% 80%
+  );
+  background-size: 300% 300%;
+  animation: lightningEffect 6s infinite linear;
+}
+
+@keyframes lightningEffect {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+.draggable-container {
+  position: relative;
+}

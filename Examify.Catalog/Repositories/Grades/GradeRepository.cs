@@ -1,5 +1,6 @@
 ﻿using Examify.Catalog.Infrastructure.Data;
 using Examify.Core.Pagination;
+using Microsoft.EntityFrameworkCore;
 
 namespace Examify.Catalog.Repositories.Grades;
 
@@ -12,12 +13,9 @@ public class GradeRepository(CatalogContext catalogContext) : IGradeRepository
         return grade;
     }
     
-    public async Task<PagedList<Entities.Grade>> GetAll(int pageNumber, int pageSize)
+    public async Task<List<Entities.Grade>> GetAll()
     {
-        return await catalogContext.Grades.PaginatedListAsync(
-            pageNumber: pageNumber,
-            pageSize: pageSize
-        );
+        return await catalogContext.Grades.ToListAsync();
     }
     
     public async Task<Entities.Grade?> FindById(Guid id)

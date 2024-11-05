@@ -13,12 +13,9 @@ public class LanguageRepository(CatalogContext catalogContext) : ILanguageReposi
         return language;
     }
 
-    public async Task<PagedList<Entities.Language>> GetLanguagesAsync(int pageNumber, int pageSize)
+    public async Task<List<Entities.Language>> GetLanguagesAsync()
     {
-        return await catalogContext.Languages.PaginatedListAsync(
-            pageNumber: pageNumber,
-            pageSize: pageSize
-        );
+        return await catalogContext.Languages.ToListAsync();
     }
     
     public async Task<Entities.Language> FindLanguageByIdAsync(Guid languageId)

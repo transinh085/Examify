@@ -1,13 +1,9 @@
 import MainLayout from '~/components/layouts/main-layout';
-import PrivateGuard from '../guards/private-guard';
 
+// can access as an guest or authenticated user
 const CustomerRoutes = {
   path: '/',
-  element: (
-    <PrivateGuard>
-      <MainLayout />
-    </PrivateGuard>
-  ),
+  element: <MainLayout />,
   errorElement: async () => {
     let NotFoundRoute = await import('../pages/not-found');
     return { Component: NotFoundRoute.default };
@@ -18,6 +14,13 @@ const CustomerRoutes = {
       lazy: async () => {
         const DashboardRoute = await import('../pages/customer/dashboard');
         return { Component: DashboardRoute.default };
+      },
+    },
+    {
+      path: '/activities',
+      lazy: async () => {
+        const Activities = await import('../pages/customer/activities');
+        return { Component: Activities.default };
       },
     },
     {

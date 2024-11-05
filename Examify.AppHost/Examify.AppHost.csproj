@@ -26,6 +26,7 @@
         <ProjectReference Include="..\Examify.Identity\Examify.Identity.csproj" />
         <ProjectReference Include="..\Examify.Infrastructure\Examify.Infrastructure.csproj" />
         <ProjectReference Include="..\Examify.Notification\Examify.Notification.csproj" />
+        <ProjectReference Include="..\Examify.Quiz\Examify.Quiz.csproj" />
         <ProjectReference Include="..\Examify.Result\Examify.Result.csproj" />
     </ItemGroup>
 

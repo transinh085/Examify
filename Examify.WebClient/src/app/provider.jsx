@@ -1,8 +1,8 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClientProvider } from '@tanstack/react-query';
 import { App as AntApp, ConfigProvider } from 'antd';
+import { queryClient } from '~/lib/queryClient';
 import AuthProvider from './auth-provider';
 
-const queryClient = new QueryClient();
 const AppProvider = ({ children }) => {
   return (
     <ConfigProvider
@@ -10,7 +10,7 @@ const AppProvider = ({ children }) => {
         token: {
           fontFamily: 'Inter',
           borderRadius: 6,
-          controlHeight: 35,
+          controlHeight: 34,
           colorPrimary: '#027f91',
         },
         components: {
