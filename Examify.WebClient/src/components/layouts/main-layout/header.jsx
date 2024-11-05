@@ -3,6 +3,8 @@ import logo from '~/assets/examify-logo.png';
 import { ClockCircleOutlined, HomeOutlined, PlusCircleOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCreateQuiz } from '~/features/quiz/api/quizzes/create-quiz';
+import useAuthStore from '~/stores/auth-store';
+import UserDropdown from './user-dropdown';
 const { Header: AntHeader } = Layout;
 
 const items = [
@@ -29,6 +31,8 @@ const items = [
 const Header = () => {
   const { message } = App.useApp();
   const navigate = useNavigate();
+
+  const { isAuthenticated } = useAuthStore();
 
   const createQuizMutation = useCreateQuiz({
     mutationConfig: {
@@ -71,6 +75,13 @@ const Header = () => {
         <Button type="primary" onClick={() => navigate('/auth/login')}>
           Login
         </Button>
+        {isAuthenticated ? (
+          <UserDropdown />
+        ) : (
+          <Button type="primary" onClick={() => navigate('/auth/login')}>
+            Login
+          </Button>
+        )}
       </Flex>
     </AntHeader>
   );

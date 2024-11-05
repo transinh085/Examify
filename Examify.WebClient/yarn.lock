@@ -666,9 +666,9 @@
   integrity sha512-Ufz0fX79W9937euBI4qEdh2xLb0Lzo4GiZ7xxDpueEZxWdPbow6gnTRokSzSgtqRFs1vFgcgm7Ci/KnOo15MIg==
 
 "@rollup/rollup-freebsd-arm64@4.24.1":
-  version "4.24.3"
-  resolved "https://registry.yarnpkg.com/@rollup/rollup-freebsd-arm64/-/rollup-freebsd-arm64-4.24.3.tgz#27145e414986e216e0d9b9a8d488028f33c39566"
-  integrity sha512-CsC+ZdIiZCZbBI+aRlWpYJMSWvVssPuWqrDy/zi9YfnatKKSLFCe6fjna1grHuo/nVaHG+kiglpRhyBQYRTK4A==
+  version "4.25.0-0"
+  resolved "https://registry.yarnpkg.com/@rollup/rollup-freebsd-arm64/-/rollup-freebsd-arm64-4.25.0-0.tgz#274f152156fa123ad740089adb81073be2607ab3"
+  integrity sha512-QjIsSZoH1oFZJDySdByzWVh3VHH1NNnt4ss4zuSkTPHAytx76as2bgOYSTPEeVK4cMH9epZ38+XrSg5pVtpppw==
 
 "@rollup/rollup-freebsd-x64@4.24.1":
   version "4.24.1"
