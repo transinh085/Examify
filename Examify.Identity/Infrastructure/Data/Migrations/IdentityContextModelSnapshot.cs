@@ -45,6 +45,10 @@ namespace Examify.Identity.Infrastructure.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("text");
@@ -274,11 +278,13 @@ namespace Examify.Identity.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("Examify.Identity.Entities.RefreshToken", b =>
                 {
-                    b.HasOne("Examify.Identity.Entities.AppUser", null)
+                    b.HasOne("Examify.Identity.Entities.AppUser", "AppUser")
                         .WithMany("RefreshTokens")
                         .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("AppUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

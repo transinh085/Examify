@@ -10,7 +10,7 @@ public class SampleEndpoint : IEndpoint
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
         app.MapPost("/sample", async(
-            IHubContext< Hub<IResultHub>, IResultHub > hubContext
+            IHubContext< ResultHub, IResultHub > hubContext
             ) =>
         {
             await hubContext.Clients.All.SendMessage("Hello from SampleEndpoint");

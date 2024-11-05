@@ -85,71 +85,30 @@ const ExplorePage = () => {
             </Button>
           </Flex>
         </Col>
-        <Col className="gutter-row" span={6}>
+        <Col className="gutter-row mb-2" xs={24} md={12} lg={8} xl={6}>
           <Card
-          cover={<img alt="example" className='h-[200px]' src="https://quizizz.com/_media/quizzes/fb05126a-f901-4462-868f-f3451b582902_400_400" />}
+          cover={<img alt="example" className='h-[200px]]' src="https://quizizz.com/media/resource/gs/quizizz-media/quizzes/4bec310a-4e33-412c-9279-559126f87136?w=400&h=400" />}
           >
             <Meta title="Europe Street beat" description="www.instagram.com" />
           </Card>
         </Col>
-        <Col className="gutter-row" span={6}>
+        <Col className="gutter-row mb-2" xs={24} md={12} lg={8} xl={6}>
           <Card
-          cover={<img alt="example" className='h-[200px]' src="https://quizizz.com/media/resource/gs/quizizz-media/quizzes/4bec310a-4e33-412c-9279-559126f87136?w=400&h=400" />}
+          cover={<img alt="example" className='h-[200px]]' src="https://quizizz.com/media/resource/gs/quizizz-media/quizzes/4bec310a-4e33-412c-9279-559126f87136?w=400&h=400" />}
           >
             <Meta title="Europe Street beat" description="www.instagram.com" />
           </Card>
         </Col>
-        <Col className="gutter-row" span={6}>
+        <Col className="gutter-row mb-2" xs={24} md={12} lg={8} xl={6}>
           <Card
-          cover={<img alt="example" className='h-[200px]' src="https://quizizz.com/_media/quizzes/fb05126a-f901-4462-868f-f3451b582902_400_400" />}
+          cover={<img alt="example" className='h-[200px]]' src="https://quizizz.com/media/resource/gs/quizizz-media/quizzes/4bec310a-4e33-412c-9279-559126f87136?w=400&h=400" />}
           >
             <Meta title="Europe Street beat" description="www.instagram.com" />
           </Card>
         </Col>
-        <Col className="gutter-row" span={6}>
+        <Col className="gutter-row mb-2" xs={24} md={12} lg={8} xl={6}>
           <Card
-          cover={<img alt="example"  className='h-[200px]' src="https://quizizz.com/_media/quizzes/fb05126a-f901-4462-868f-f3451b582902_400_400" />}
-          >
-            <Meta title="Europe Street beat" description="www.instagram.com" />
-          </Card>
-        </Col>
-      </Row>
-      <Row gutter={16} className='mb-6'>
-        <Col span={24}>
-          <Flex justify="space-between" className='mb-4'>
-            <Space size={'middle'}>
-              <StarFilled className="text-yellow-500" style={{ fontSize: '24px' }} />
-              <h3 className="font-bold text-lg">Ice breaker</h3>
-            </Space>
-            <Button type='primary' iconPosition="end" icon={<RightOutlined />}>
-              See more
-            </Button>
-          </Flex>
-        </Col>
-        <Col className="gutter-row" span={6}>
-          <Card
-          cover={<img alt="example" className='h-[200px]' src="https://quizizz.com/_media/quizzes/fb05126a-f901-4462-868f-f3451b582902_400_400" />}
-          >
-            <Meta title="Europe Street beat" description="www.instagram.com" />
-          </Card>
-        </Col>
-        <Col className="gutter-row" span={6}>
-          <Card
-          cover={<img alt="example" className='h-[200px]' src="https://quizizz.com/media/resource/gs/quizizz-media/quizzes/4bec310a-4e33-412c-9279-559126f87136?w=400&h=400" />}
-          >
-            <Meta title="Europe Street beat" description="www.instagram.com" />
-          </Card>
-        </Col>
-        <Col className="gutter-row" span={6}>
-          <Card
-          cover={<img alt="example" className='h-[200px]' src="https://quizizz.com/_media/quizzes/fb05126a-f901-4462-868f-f3451b582902_400_400" />}
-          >
-            <Meta title="Europe Street beat" description="www.instagram.com" />
-          </Card>
-        </Col>
-        <Col className="gutter-row" span={6}>
-          <Card
-          cover={<img alt="example"  className='h-[200px]' src="https://quizizz.com/_media/quizzes/fb05126a-f901-4462-868f-f3451b582902_400_400" />}
+          cover={<img alt="example" className='h-[200px]]' src="https://quizizz.com/media/resource/gs/quizizz-media/quizzes/4bec310a-4e33-412c-9279-559126f87136?w=400&h=400" />}
           >
             <Meta title="Europe Street beat" description="www.instagram.com" />
           </Card>
