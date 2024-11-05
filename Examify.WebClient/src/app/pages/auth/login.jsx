@@ -3,14 +3,9 @@ import { useLoginMutation } from '~/features/auth/api/login';
 import fb from '~/assets/svg/fb.svg';
 import gg from '~/assets/svg/gg.svg';
 import wt from '~/assets/svg/wt.svg';
-<<<<<<< Updated upstream
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import RULES from '~/features/auth/rules';
-=======
-import { useNavigate } from 'react-router-dom';
-import Cookies from 'js-cookie';
->>>>>>> Stashed changes
 
 const LoginRoute = () => {
   const [searchParams] = useSearchParams();
@@ -21,42 +16,20 @@ const LoginRoute = () => {
   const mutation = useLoginMutation({
     mutationConfig: {
       onSuccess: (data) => {
-<<<<<<< Updated upstream
         Cookies.set('token', data?.token);
         navigate(redirect ? redirect : '/');
-=======
-        console.log(data);
-        const { token, expiresIn, refreshToken } = data;
-        const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
-        Cookies.set('token', token, { expires: expirationDate });
-        Cookies.set('refreshToken', refreshToken);
-        navigate('/admin')
->>>>>>> Stashed changes
       },
       onError: ({ response }) => {
         message.error(response?.data?.detail || 'Something went wrong!');
       },
     },
   });
-<<<<<<< Updated upstream
 
   const handleLogin = (data) => {
     mutation.mutate({
       email: data.email,
       password: data.password,
     });
-=======
-
-  const handleLogin = (data) => {
-    mutation.mutate({
-      email: data.email,
-      password: data.password,
-    });
-  };
-
-  const moveToRegister = () => {
-    navigate('/auth/register');
->>>>>>> Stashed changes
   };
 
   return (
@@ -110,16 +83,9 @@ const LoginRoute = () => {
             </Col>
           </Row>
           <Typography className="text-center mt-6">
-<<<<<<< Updated upstream
             <Link to={'/auth/register'}>
               Do you have an account yet? <span className="cursor-pointer underline text-blue-400">Register</span>
             </Link>
-=======
-            Do you have an account yet?{' '}
-            <span className="cursor-pointer underline text-blue-400" onClick={moveToRegister}>
-              Register
-            </span>
->>>>>>> Stashed changes
           </Typography>
         </Form.Item>
       </Form>

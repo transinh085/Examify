@@ -29,13 +29,10 @@ const AppProvider = ({ children }) => {
       }}
     >
       <QueryClientProvider client={queryClient}>
-<<<<<<< Updated upstream
         <AuthProvider>
           <AntApp>{children}</AntApp>
         </AuthProvider>
-=======
         <AntApp>{children}</AntApp>
->>>>>>> Stashed changes
       </QueryClientProvider>
     </ConfigProvider>
   );

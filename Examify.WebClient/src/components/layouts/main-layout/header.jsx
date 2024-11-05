@@ -72,9 +72,6 @@ const Header = () => {
         >
           Create a quiz
         </Button>
-        <Button type="primary" onClick={() => navigate('/auth/login')}>
-          Login
-        </Button>
         {isAuthenticated ? (
           <UserDropdown />
         ) : (

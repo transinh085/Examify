@@ -18,8 +18,10 @@ async function refreshAccessToken() {
   }
 
   try {
-    const response = await Axios.post(`${BACKEND_ENDPOINT}/identity-service/api/auth/refresh-token`, { token: refreshTokenLocal });
-    const { token, refreshToken , expiresIn } = response.data;
+    const response = await Axios.post(`${BACKEND_ENDPOINT}/identity-service/api/auth/refresh-token`, {
+      token: refreshTokenLocal,
+    });
+    const { token, refreshToken, expiresIn } = response.data;
 
     // Calculate the expiration date
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
@@ -45,9 +47,6 @@ api.interceptors.response.use(
   (response) => {
     return response.data;
   },
-<<<<<<< Updated upstream
-  (error) => {
-=======
   async (error) => {
     const originalRequest = error.config;
 
@@ -64,8 +63,6 @@ api.interceptors.response.use(
         // window.location.href = '/auth/login';
       }
     }
-
->>>>>>> Stashed changes
     return Promise.reject(error);
   },
 );

@@ -18,6 +18,7 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     if (user) {
+      console.log('user', user);
       setUser(user);
     }
 
