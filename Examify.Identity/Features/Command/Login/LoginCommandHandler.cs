@@ -1,5 +1,4 @@
-﻿using Examify.Core.Reponse;
-using Examify.Identity.Infrastructure.Jwt;
+﻿using Examify.Identity.Infrastructure.Jwt;
 using Examify.Identity.Interfaces;
 using MediatR;
 
@@ -11,6 +10,6 @@ public class LoginCommandHandler(IUserRepository userRepository, ITokenProvider 
     public async Task<IResult> Handle(LoginCommand request, CancellationToken cancellationToken)
     {
         var authenticatedResponse = await tokenProvider.AuthenticateAsync(request.Email, request.Password);
-        return BaseResponse.SendSuccess(authenticatedResponse, "Login successful");
+        return TypedResults.Ok(authenticatedResponse);
     }
 }

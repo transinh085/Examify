@@ -11,6 +11,6 @@ public class GetSelfHandler(IUserRepository userRepository, IMapper mapper)
     public async Task<IResult> Handle(GetSelfQuery request, CancellationToken cancellationToken)
     {
         var user = await userRepository.GetByIdAsync(request.username);
-        return TypedResults.Ok(user);
+        return TypedResults.Ok(mapper.Map<AppUserDto>(user));
     }
 }

@@ -43,7 +43,9 @@ const UserDropdown = () => {
   return (
     <Flex align="center" gap={8} justify="end">
       <Flex vertical justify="end">
-        <p className="text-end text-primary font-medium text-base">{user?.fullName}</p>
+        <p className="text-end text-primary font-medium text-base">
+          {user?.firstName} {user?.lastName}
+        </p>
         <p className="text-end text-[red]] text-xs">{user?.email}</p>
       </Flex>
       <Dropdown
@@ -54,11 +56,7 @@ const UserDropdown = () => {
         placement="bottomRight"
         arrow
       >
-        <Avatar
-          src="https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1727740800&semt=ais_hybrid"
-          className="border-2 border-primary"
-          size={40}
-        >
+        <Avatar src={user?.image} className="border-2 border-primary" size={40}>
           P
         </Avatar>
       </Dropdown>
