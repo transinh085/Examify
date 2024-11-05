@@ -6,17 +6,20 @@ import wt from '~/assets/svg/wt.svg';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import RULES from '~/features/auth/rules';
+import useAuthStore from '~/stores/auth-store';
 
 const LoginRoute = () => {
   const [searchParams] = useSearchParams();
   const redirect = searchParams.get('redirect');
   const navigate = useNavigate();
+  const { setUser } = useAuthStore();
 
   const [form] = Form.useForm();
   const mutation = useLoginMutation({
     mutationConfig: {
       onSuccess: (data) => {
         Cookies.set('token', data?.token);
+        setUser(data);
         navigate(redirect ? redirect : '/');
       },
       onError: ({ response }) => {
@@ -35,7 +38,17 @@ const LoginRoute = () => {
   return (
     <div className="p-8 rounded-[8px] w-[90%] md:w-[460px] bg-white border shadow-sm">
       <Typography className="text-[22px] font-semibold">Login</Typography>
-      <Form form={form} className="pt-4" onFinish={handleLogin} layout="vertical" variant="filled">
+      <Form
+        form={form}
+        className="pt-4"
+        onFinish={handleLogin}
+        layout="vertical"
+        variant="filled"
+        initialValues={{
+          email: 'transinh085@gmail.com',
+          password: '12345678',
+        }}
+      >
         <Flex vertical>
           <Form.Item label="Email" name="email" rules={RULES.login.email} required={false} validateTrigger="onBlur">
             <Input placeholder="Enter your email..." />

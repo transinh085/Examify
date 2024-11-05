@@ -14,6 +14,7 @@ const UserDropdown = () => {
     console.log('Logout');
     navigate('/auth/login');
   };
+
   const items = [
     {
       key: '1',
