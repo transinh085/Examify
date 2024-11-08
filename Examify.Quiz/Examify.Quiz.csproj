@@ -11,6 +11,12 @@
         <Folder Include="Features\Questions\Command\UpdateQuestion\" />
         <Folder Include="Infrastructure\Data\Configurations\"/>
     </ItemGroup>
+    
+    <ItemGroup>
+        <Protobuf Include="Protos\grade.proto" GrpcServices="Client" />
+        <Protobuf Include="Protos\language.proto" GrpcServices="Client" />
+        <Protobuf Include="Protos\subject.proto" GrpcServices="Client" />
+    </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.2.1"/>
@@ -21,6 +27,13 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="CloudinaryDotNet" Version="1.26.2"/>
+        <PackageReference Include="Grpc.AspNetCore.Server.ClientFactory" Version="2.66.0"/>
+        <PackageReference Include="Grpc.Net.Client" Version="2.66.0"/>
+        <PackageReference Include="Grpc.Tools" Version="2.66.0">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Google.Protobuf" Version="3.28.2"/>
     </ItemGroup>
 
     <ItemGroup>

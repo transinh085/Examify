@@ -1,15 +1,14 @@
 ﻿using Examify.Quiz.Infrastructure.Data;
+using Examify.Quiz.Repositories.Quiz;
 using MediatR;
 
 namespace Examify.Quiz.Features.Quiz.Command.DeleteQuiz;
 
-public class DeleteQuizHandler(QuizContext context) : IRequestHandler<DeleteQuizCommand, IResult>
+public class DeleteQuizHandler(IQuizRepository _quizRepository) : IRequestHandler<DeleteQuizCommand, IResult>
 {
     public async Task<IResult> Handle(DeleteQuizCommand request, CancellationToken cancellationToken)
     {
-        var quiz = await context.Quizzes.FindAsync(request, cancellationToken);
-        context.Quizzes.Remove(quiz);
-        await context.SaveChangesAsync(cancellationToken);
+        _quizRepository.DeleteQuizById(request.QuizId, cancellationToken);
         return TypedResults.NoContent();
     }
 }

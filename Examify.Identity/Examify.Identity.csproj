@@ -37,6 +37,7 @@
       <Folder Include="Extensions\" />
       <Folder Include="Features\Command\" />
       <Folder Include="Features\Query\" />
+      <Folder Include="Grpc\" />
     </ItemGroup>
 
     <ItemGroup>

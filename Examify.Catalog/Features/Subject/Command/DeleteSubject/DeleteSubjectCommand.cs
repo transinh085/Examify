@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Examify.Catalog.Features.Subject.Command.DeleteSubject;
 
-public record DeleteSubjectCommand(int Id) : IRequest<IResult>;
+public record DeleteSubjectCommand(Guid Id) : IRequest<IResult>;
 
 public class DeleteSubjectValidator : AbstractValidator<DeleteSubjectCommand>
 {

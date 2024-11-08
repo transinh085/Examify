@@ -13,6 +13,13 @@ public class QuizDto
     public int Duration { get; set; }
     public List<QuestionDto> Questions { get; set; }
     public bool IsPublished { get; set; }
+    public Guid LanguageId { get; set; }
+    public string? LanguageName { get; set; }
+    public Guid SubjectId { get; set; }
+    public string? SubjectName { get; set; }
+    
+    public Guid GradeId { get; set; }
+    public string? GradeName { get; set; }
     
     public class QuestionDto
     {
