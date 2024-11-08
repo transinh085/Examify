@@ -5,7 +5,13 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
-
+    
+    <ItemGroup>
+        <Protobuf Include="Protos\grade.proto" GrpcServices="Server"/>
+        <Protobuf Include="Protos\language.proto" GrpcServices="Server"/>
+        <Protobuf Include="Protos\subject.proto" GrpcServices="Server"/>
+    </ItemGroup>
+    
     <!--  Start Copy-->
     <ItemGroup>
         <Compile Include="..\Shared\ActivityExtensions.cs" Link="Extensions\ActivityExtensions.cs"/>
@@ -36,7 +42,6 @@
       <Folder Include="Features\Grades\Command\" />
       <Folder Include="Features\Grades\Query\" />
       <Folder Include="Features\Subject\Query\" />
-      <Folder Include="Grpc\" />
     </ItemGroup>
 
 </Project>

@@ -8,7 +8,7 @@ public class UpdateSubjectHandler(ISubjectRepository subjectRepository) : IReque
 {
     public async Task<IResult> Handle(UpdateSubjectCommand request, CancellationToken cancellationToken)
     {
-        var existingSubject = await subjectRepository.FindById(request.Id);
+        var existingSubject = await subjectRepository.FindById(request.Id, cancellationToken);
         Guard.Against.NotFound(request.Id, existingSubject);
         existingSubject.Name = request.Name;
         var updatedSubject = await subjectRepository.Update(existingSubject);

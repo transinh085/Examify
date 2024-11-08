@@ -4,7 +4,7 @@ import { ClockCircleOutlined, HomeOutlined, PlusCircleOutlined, QuestionCircleOu
 import { Link, useNavigate } from 'react-router-dom';
 import { useCreateQuiz } from '~/features/quiz/api/quizzes/create-quiz';
 import useAuthStore from '~/stores/auth-store';
-import UserDropdown from './user-dropdown';
+import UserDropdown from '~/components/layouts/share/user-dropdown';
 const { Header: AntHeader } = Layout;
 
 const items = [

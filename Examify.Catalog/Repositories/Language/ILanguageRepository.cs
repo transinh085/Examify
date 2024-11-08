@@ -13,4 +13,6 @@ public interface ILanguageRepository
     Task<bool> DeleteLanguageAsync(Entities.Language languageId);
     
     Task<Entities.Language> UpdateLanguageAsync(Entities.Language language);
+    
+    Task<bool> IsLanguageExists(Guid languageId, CancellationToken cancellationToken);
 }
