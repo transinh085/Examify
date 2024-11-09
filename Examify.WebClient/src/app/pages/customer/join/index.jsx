@@ -1,11 +1,10 @@
 import { Button, Flex, Input, Layout, Space } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '~/assets/examify-logo.png';
 
 const { Header, Footer, Content } = Layout;
 
 const JoinPage = () => {
-
   const navigate = useNavigate();
 
   return (
@@ -14,7 +13,13 @@ const JoinPage = () => {
         <Flex className="items-center" justify="space-between">
           <img src={logo} alt="logo" className="w-[100px]" />
           <Space size="middle">
-            <Button onClick={() => navigate("/")} type="primary" className='cursor-pointer font-bold text-white px-4 py-2 hover:scale-110'>My dashboard</Button>
+            <Button
+              onClick={() => navigate('/')}
+              type="primary"
+              className="cursor-pointer font-bold text-white px-4 py-2 hover:scale-110"
+            >
+              My dashboard
+            </Button>
           </Space>
         </Flex>
       </Header>
@@ -24,7 +29,11 @@ const JoinPage = () => {
           <Input
             className="max-w-2xl"
             placeholder="Enter your code"
-            suffix={<Button type="primary">Join</Button>}
+            suffix={
+              <Link to="/join/game/1">
+                <Button type="primary">Join</Button>
+              </Link>
+            }
           />
         </div>
       </Content>
