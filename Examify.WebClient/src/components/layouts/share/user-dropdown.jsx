@@ -10,14 +10,20 @@ const UserDropdown = () => {
   const navigate = useNavigate();
   const { user, resetUser } = useAuthStore();
 
-  console.log(user);
-
   const handleLogout = () => {
     Cookies.remove('token');
     resetUser();
     console.log('Logout');
     navigate('/auth/login');
   };
+
+  const moveProfile = () => {
+    navigate('/admin/profile');
+  }
+
+  const moveSetting = () => {
+    navigate('/admin/settings');
+  }
 
   const { token } = useToken();
   const contentStyle = {
@@ -34,11 +40,13 @@ const UserDropdown = () => {
       key: '1',
       label: 'Account info',
       icon: <UserOutlined />,
+      onClick: moveProfile,
     },
     {
       key: '2',
       label: 'Settings',
       icon: <SettingOutlined />,
+      onClick: moveSetting,
     },
     {
       key: '3',
