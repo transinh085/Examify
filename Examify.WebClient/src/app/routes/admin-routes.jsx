@@ -1,12 +1,12 @@
 import AdminLayout from '~/components/layouts/admin-layout';
-// import PrivateGuard from '../guards/private-guard';
+import PrivateGuard from '../guards/private-guard';
 
 const AdminRoutes = {
   path: '/admin',
   element: (
-    // <PrivateGuard>
+    <PrivateGuard>
       <AdminLayout />
-    // </PrivateGuard>
+    </PrivateGuard>
   ),
   children: [
     {
