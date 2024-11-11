@@ -3,13 +3,14 @@ using AutoMapper;
 using Examify.Quiz.Entities;
 using Examify.Quiz.Enums;
 
-namespace Examify.Quiz.Dtos;
+namespace Examify.Quiz.Features.Quiz.Dtos;
 
 public class QuizDto
 {
     public Guid Id { get; set; }
     public string Title { get; set; }
     public string Description { get; set; }
+    public string Cover { get; set; }
     public int Duration { get; set; }
     public List<QuestionDto> Questions { get; set; }
     public bool IsPublished { get; set; }
@@ -17,9 +18,19 @@ public class QuizDto
     public string? LanguageName { get; set; }
     public Guid SubjectId { get; set; }
     public string? SubjectName { get; set; }
-    
     public Guid GradeId { get; set; }
     public string? GradeName { get; set; }
+    public Guid OwnerId { get; set; }
+    public OwnerDto Owner { get; set; }
+    
+    public DateTime CreatedDate { get; set; }
+    
+    public class OwnerDto
+    {
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string Image { get; set; }
+    }
     
     public class QuestionDto
     {

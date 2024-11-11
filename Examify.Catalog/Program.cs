@@ -23,6 +23,7 @@ var app = builder.Build();
 
 app.MapGrpcService<LanguageService>();
 app.MapGrpcService<SubjectService>();
+app.MapGrpcService<GradeService>();
 app.UseInfrastructure(app.Environment, useAuthentication: true);
 
 app.Run();

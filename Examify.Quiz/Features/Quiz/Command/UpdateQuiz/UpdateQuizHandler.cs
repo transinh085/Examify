@@ -9,8 +9,19 @@ public class UpdateQuizHandler(IQuizRepository quizRepository, IMapper mapper) :
 {
     public async Task<IResult> Handle(UpdateQuizCommand request, CancellationToken cancellationToken)
     {
-        var quiz = mapper.Map<Entities.Quiz>(request);
-        quizRepository.UpdateQuiz(quiz, cancellationToken);
-        return TypedResults.Ok(quiz);
+        var findQuiz = await quizRepository.FindQuizById(request.Id, cancellationToken);
+        if (findQuiz == null)
+        {
+            return TypedResults.NotFound("Quiz not found");
+        }
+        findQuiz.Title = request.Title;
+        findQuiz.Description = request.Description;
+        findQuiz.Cover = request.Cover;
+        findQuiz.SubjectId = request.SubjectId;
+        findQuiz.GradeId = request.GradeId;
+        findQuiz.LanguageId = request.LanguageId;
+        findQuiz.Visibility = request.Visibility;
+        quizRepository.UpdateQuiz(findQuiz, cancellationToken);
+        return TypedResults.Ok(findQuiz);
     }
 }

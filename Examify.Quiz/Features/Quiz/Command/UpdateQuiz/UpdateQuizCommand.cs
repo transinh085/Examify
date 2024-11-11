@@ -16,7 +16,6 @@ public record UpdateQuizCommand : IRequest<IResult>
     public Guid? SubjectId { get; set; }
     public Guid? GradeId { get; set; }
     public Guid? LanguageId { get; set; }
-    public Guid? OwnerId { get; set; }
     public Visibility Visibility { get; set; }
 }
 

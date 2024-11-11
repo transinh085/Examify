@@ -1,8 +1,5 @@
-﻿using AutoMapper;
-using Examify.Quiz.Dtos;
-using Examify.Quiz.Infrastructure.Data;
+﻿using Examify.Quiz.Infrastructure.Data;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace Examify.Quiz.Features.Quiz.Query.GetQuizQuery;
 

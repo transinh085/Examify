@@ -1,5 +1,5 @@
 ﻿using MediatR;
 
-namespace Examify.Identity.Features.DeleteUser;
+namespace Examify.Identity.Features.Command.DeleteUser;
 
 public record DeleteUserCommand(string Id) : IRequest<IResult>;

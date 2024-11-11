@@ -10,6 +10,8 @@ const UserDropdown = () => {
   const navigate = useNavigate();
   const { user, resetUser } = useAuthStore();
 
+  console.log(user);
+
   const handleLogout = () => {
     Cookies.remove('token');
     resetUser();

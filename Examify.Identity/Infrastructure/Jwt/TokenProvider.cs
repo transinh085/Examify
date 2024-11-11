@@ -36,6 +36,7 @@ public class TokenProvider(UserManager<AppUser> userManager, IdentityContext con
             Id = user.Id,
             FullName = user.FullName,
             Email = user.Email,
+            Image = user.Image,
             Token = accessToken,
             RefreshToken = refreshToken.Token,
             ExpiresIn = _jwtOptions.DurationInMinutes * 60

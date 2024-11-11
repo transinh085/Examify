@@ -1,11 +1,8 @@
 import { Button, Flex, Layout, QRCode, Space } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { CopyOutlined } from '@ant-design/icons';
-import bgContent from '~/assets/images/bg-hallowen.png';
-import ghostImg3 from '~/assets/images/ghost3.png';
-import ghostImg4 from '~/assets/images/ghost4.png';
 
-const { Header, Footer, Content } = Layout;
+const { Header, Content } = Layout;
 
 const ManagerQuizPage = () => {
   const navigate = useNavigate();
@@ -41,7 +38,7 @@ const ManagerQuizPage = () => {
       <Content
         className="relative"
         style={{
-          backgroundImage: `url(${bgContent})`,
+          backgroundImage: `url(https://cf.quizizz.com/themes/v2/classic/lobby_550.svg)`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           minHeight: 'calc(100vh - 64px - 69px)',
@@ -78,23 +75,7 @@ const ManagerQuizPage = () => {
             </div>
           </Flex>
         </Flex>
-        <img
-          src={ghostImg3}
-          alt="Decorative ghost"
-          className="absolute top-[20%] left-[10%] w-[120px] h-[180px] object-contain animate-bounce-up pointer-events-none
-            lg:top-[30%] lg:left-[15%] lg:w-[140px] lg:h-[200px]"
-        />
-        <img
-          src={ghostImg4}
-          alt="Decorative ghost"
-          className="absolute bottom-[20%] right-[10%] w-[120px] h-[180px] object-contain animate-bounce-down pointer-events-none
-            lg:bottom-[30%] lg:right-[15%] lg:w-[140px] lg:h-[200px]"
-        />
       </Content>
-
-      <Footer className="flex justify-center items-center bg-black text-white/80 border-t border-gray-800">
-        Ant Design ©{new Date().getFullYear()} Created by hgbaodev
-      </Footer>
     </Layout>
   );
 };
