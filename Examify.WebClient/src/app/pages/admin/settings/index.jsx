@@ -1,8 +1,6 @@
 import { Button, Card, Flex, Form, Input, Tabs } from 'antd';
 
 const SettingPage = () => {
-
-  
   return (
     <Flex className='justify-center'>
       <Card
