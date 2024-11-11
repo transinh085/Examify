@@ -37,6 +37,10 @@ public static class Extensions
         {
             options.Address = new Uri("https://localhost:7085");
         });
+        services.AddGrpcClient<Identity.IdentityClient>(options =>
+        {
+            options.Address = new Uri("https://localhost:7036");
+        });
         return services;
     }
 }

@@ -1,6 +1,8 @@
-import { Alert, Button, Card, Flex, Form, Space, Watermark, Input, Divider, Select, Tabs } from 'antd';
+import { Button, Card, Flex, Form, Input, Tabs } from 'antd';
 
 const SettingPage = () => {
+
+  
   return (
     <Flex className='justify-center'>
       <Card

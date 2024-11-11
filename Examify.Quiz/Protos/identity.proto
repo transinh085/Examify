@@ -1,6 +1,6 @@
 ﻿syntax = "proto3";
 
-option csharp_namespace = "Identity";
+option csharp_namespace = "Quiz";
 
 package identity;
 

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Examify.Quiz.Dtos;
 using Examify.Quiz.Entities;
+using Examify.Quiz.Features.Quiz.Dtos;
 using Examify.Quiz.Infrastructure.Data;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

@@ -1,6 +1,4 @@
 ﻿using Examify.Identity.Dtos;
-using Examify.Identity.Entities;
-using Examify.Identity.Features.Login;
 
 namespace Examify.Identity.Infrastructure.Jwt;
 

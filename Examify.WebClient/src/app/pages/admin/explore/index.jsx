@@ -1,5 +1,7 @@
 import { Flex, Typography, Input, Space, Row, Col, Button, Card } from 'antd';
 import { RightOutlined, StarFilled } from '@ant-design/icons';
+import useMenuStore from '~/stores/menu-store';
+import { useEffect } from 'react';
 
 const { Title } = Typography;
 const { Meta } = Card;
@@ -48,6 +50,14 @@ const listSubject = [
 ];
 
 const ExplorePage = () => {
+
+  const { setSiderVisible } = useMenuStore();
+
+  useEffect(() => {
+    setSiderVisible(false);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <Flex vertical justify="center" className="px-6">
       <Title level={2} className="text-center mt-5 lg:py-8">

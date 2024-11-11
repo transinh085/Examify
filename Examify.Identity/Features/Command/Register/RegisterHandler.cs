@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using Examify.Identity.Dtos;
 using Examify.Identity.Entities;
-using Examify.Identity.Interfaces;
+using Examify.Identity.Repositories;
 using MediatR;
 
-namespace Examify.Identity.Features.Register;
+namespace Examify.Identity.Features.Command.Register;
 
 public class RegisterHandler(IUserRepository userRepository, IMapper mapper) : IRequestHandler<RegisterCommand, IResult>
 {

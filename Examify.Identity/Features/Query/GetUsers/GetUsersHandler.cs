@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using Examify.Identity.Dtos;
-using Examify.Identity.Interfaces;
+using Examify.Identity.Repositories;
 using MediatR;
 
-namespace Examify.Identity.Features.GetUsers;
+namespace Examify.Identity.Features.Query.GetUsers;
 
 public class GetUsersHandler(IUserRepository userRepository, IMapper mapper)
     : IRequestHandler<GetUsersQuery, IResult>

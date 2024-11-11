@@ -1,6 +1,4 @@
 ﻿using Examify.Identity.Entities;
-using Examify.Identity.Features.GetUsers;
-using Examify.Identity.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

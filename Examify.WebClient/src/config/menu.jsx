@@ -1,9 +1,8 @@
 import {
   ScheduleOutlined,
-  UserOutlined,
   FileSearchOutlined,
-  SettingOutlined,
   HomeOutlined,
+  OpenAIOutlined,
 } from '@ant-design/icons';
 
 const adminMenu = Object.freeze([
@@ -27,15 +26,9 @@ const adminMenu = Object.freeze([
   },
   {
     key: '4',
-    icon: <SettingOutlined />,
-    label: 'Settings',
-    path: '/admin/settings',
-  },
-  {
-    key: '5',
-    icon: <UserOutlined />,
-    label: 'Profile',
-    path: '/admin/profile',
+    icon: <OpenAIOutlined />,
+    label: 'Examtify AI',
+    path: '/admin/examtify-ai',
   }
 ]);
 
