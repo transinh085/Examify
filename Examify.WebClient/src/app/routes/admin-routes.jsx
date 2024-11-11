@@ -6,7 +6,7 @@ const AdminRoutes = {
   element: (
     <PrivateGuard>
       <AdminLayout />
-    </PrivateGuard>
+   </PrivateGuard> 
   ),
   children: [
     {
@@ -28,6 +28,13 @@ const AdminRoutes = {
       lazy: async () => {
         const ReportPage = await import('../pages/admin/reports');
         return { Component: ReportPage.default };
+      },
+    },
+    {
+      path: 'reports/:id/players',
+      lazy: async () => {
+        const ReportPlayersPage = await import('../pages/admin/reports/[id]/players');
+        return { Component: ReportPlayersPage.default };
       },
     },
     {
