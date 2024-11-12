@@ -2,7 +2,7 @@
 using Examify.Identity.Dtos;
 using MediatR;
 
-namespace Examify.Identity.Features.CreateUser;
+namespace Examify.Identity.Features.Command.CreateUser;
 
 public class CreateUserEndpoint : IEndpoint
 {

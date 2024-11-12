@@ -1,9 +1,8 @@
-﻿using Examify.Identity.Dtos;
-using Examify.Identity.Interfaces;
+﻿using Examify.Identity.Repositories;
 using FluentValidation;
 using MediatR;
 
-namespace Examify.Identity.Features.Register;
+namespace Examify.Identity.Features.Command.Register;
 
 public record RegisterCommand(string FirstName, string LastName, string Email, string Password) : IRequest<IResult>;
 

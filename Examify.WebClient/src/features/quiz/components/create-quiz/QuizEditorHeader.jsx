@@ -4,16 +4,19 @@ import { EyeOutlined, LeftOutlined, SaveOutlined, SettingOutlined } from '@ant-d
 import { useBoolean } from '~/hooks/useBoolean';
 import QuizSettingModal from '~/features/quiz/components/create-quiz/QuizSettingModal';
 import { usePublishQuiz } from '~/features/quiz/api/quizzes/publish-quiz';
+import { useQueryClient } from '@tanstack/react-query';
 const { Header } = Layout;
 
 const QuizEditorHeader = ({ quizData }) => {
   const { message } = App.useApp();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const { value: isSettingModalOpen, setTrue: openSettingModal, setFalse: closeSettingModal } = useBoolean();
 
   const publishQuizMutation = usePublishQuiz({
     mutationConfig: {
       onSuccess: () => {
+        queryClient.invalidateQueries('quiz-user');
         message.success('Quiz published successfully');
       },
       onError: (error) => {

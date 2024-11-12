@@ -1,6 +1,6 @@
 ﻿using Examify.Identity.Dtos;
 using MediatR;
 
-namespace Examify.Identity.Features.GetUsers;
+namespace Examify.Identity.Features.Query.GetUsers;
 
 public record GetUsersQuery : IRequest<IResult>;

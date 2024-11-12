@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using Examify.Identity.Dtos;
 using Examify.Identity.Entities;
-using Examify.Identity.Interfaces;
+using Examify.Identity.Repositories;
 using MediatR;
 
-namespace Examify.Identity.Features.CreateUser;
+namespace Examify.Identity.Features.Command.CreateUser;
 
 public class CreateUserHandler(IUserRepository userRepository, IMapper mapper) : IRequestHandler<CreateUserCommand, IResult>
 {

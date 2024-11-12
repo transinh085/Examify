@@ -3,7 +3,7 @@ using Examify.Quiz.Repositories.Quiz;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Examify.Quiz.Features.Quizs.Query.GetAllQuiz;
+namespace Examify.Quiz.Features.Quiz.Query.GetAllQuiz;
 
 public class GetAllQuizHandler(IQuizRepository quizRepository) : IRequestHandler<GetAllQuizQuery, IResult>
 {

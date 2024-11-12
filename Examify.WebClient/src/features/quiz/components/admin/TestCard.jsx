@@ -10,8 +10,9 @@ import {
   UnorderedListOutlined,
 } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
 
-const TestCard = ({ id, imgSrc, title, author, date, tags, details }) => {
+const TestCard = ({ id, imgSrc, title, author, date, questions, gradeName, languageName }) => {
   const navigate = useNavigate();
 
   const handleCardClick = () => {
@@ -23,11 +24,11 @@ const TestCard = ({ id, imgSrc, title, author, date, tags, details }) => {
         <img
           onClick={handleCardClick}
           className="w-[120px] h-[120px] rounded-sm cursor-pointer"
-          src={imgSrc}
+          src={imgSrc ?? "https://avatars.githubusercontent.com/u/120194990?v=4"}
           alt="imgTest"
         />
         <Space direction="vertical" size="small">
-          <Tag>{tags}</Tag>
+          <Tag className='uppercase'>Assessment</Tag>
           <h1 onClick={handleCardClick} className="font-bold cursor-pointer hover:underline">
             {title}
           </h1>
@@ -35,22 +36,22 @@ const TestCard = ({ id, imgSrc, title, author, date, tags, details }) => {
             {/* Icon info */}
             <Space>
               <UnorderedListOutlined />
-              <span className="text-xs">{details.questions}</span>
+              <span className="text-xs">{questions?.length}</span>
             </Space>
             <Space>
               <HeatMapOutlined />
-              <span className="text-xs">{details.grade}</span>
+              <span className="text-xs">{gradeName ?? ""}</span>
             </Space>
             <Space>
               <RadarChartOutlined />
-              <span className="text-xs">{details.subject}</span>
+              <span className="text-xs">{languageName ?? ""}</span>
             </Space>
           </Space>
           <Space size="small">
-            <Avatar size={20} src="https://avatars.githubusercontent.com/u/120194990?v=4" />
-            <span className="text-xs">{author}</span>
-            <span className="text-xs">.</span>
-            <span className="text-xs">{date}</span>
+            <Avatar size={20} src={author?.image} />
+            <span className="text-xs">{author?.name}</span>
+            <span className="text-xs">-</span>
+            <span className="text-xs">{moment(date).fromNow()}</span>
           </Space>
         </Space>
       </Space>

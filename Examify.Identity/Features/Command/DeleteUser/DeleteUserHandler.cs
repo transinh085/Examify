@@ -1,8 +1,8 @@
 ﻿using Ardalis.GuardClauses;
-using Examify.Identity.Interfaces;
+using Examify.Identity.Repositories;
 using MediatR;
 
-namespace Examify.Identity.Features.DeleteUser;
+namespace Examify.Identity.Features.Command.DeleteUser;
 
 public class DeleteUserHandler(IUserRepository userRepository) : IRequestHandler<DeleteUserCommand, IResult>
 {

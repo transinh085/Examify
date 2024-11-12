@@ -1,9 +1,8 @@
-﻿using Examify.Identity.Dtos;
-using Examify.Identity.Interfaces;
+﻿using Examify.Identity.Repositories;
 using FluentValidation;
 using MediatR;
 
-namespace Examify.Identity.Features.CreateUser;
+namespace Examify.Identity.Features.Command.CreateUser;
 
 public record CreateUserCommand(string FirstName, string LastName, string Email, string Password) : IRequest<IResult>;
 
