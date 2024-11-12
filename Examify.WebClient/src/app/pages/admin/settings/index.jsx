@@ -1,6 +1,30 @@
-import { Alert, Button, Card, Flex, Form, Space, Watermark, Input, Divider, Select, Tabs } from 'antd';
+import { Alert, Button, Card, Flex, Form, Space, Watermark, Input, Divider, Select, Tabs, message } from 'antd';
+import { useUpdatePasswordMutation } from '~/features/auth/api/update-password';
+import useAuthStore from '~/stores/auth-store';
+import Cookies from 'js-cookie';
 
 const SettingPage = () => {
+  const { user, resetUser } = useAuthStore();
+  const [form] = Form.useForm();
+  const mutation = useUpdatePasswordMutation({
+    mutationConfig: {
+      onSuccess: (data) => {
+        Cookies.set('token', data?.token);
+        message.success('Update')
+      },
+      onError: ({ response }) => {
+        message.error(response?.data?.detail || 'Something went wrong!');
+      },
+    },
+  });
+
+  const handleUpdate = (data) => {
+    mutation.mutate({
+      email: user.email,
+      oldPassword: data.passwordLast,
+      newPassword: data.passwordNew,
+    });
+  };
   return (
     <Flex className='justify-center'>
       <Card
@@ -11,7 +35,7 @@ const SettingPage = () => {
         <h1 className='from-neutral-900 font-bold text-2xl'>Cài đặt</h1>
         <Tabs size={'large'} className='px-8'>
           <Tabs.TabPane tab={<span style={{ fontSize: '16px', fontWeight: 'bold' }}>Tài khoản</span>} key="tab 1">
-            <Form name="updateEmail" style={{ maxWidth: 600 }} layout="vertical" autoComplete="off">
+            <Form name="updateEmail" style={{ maxWidth: 600 }} layout="vertical" autoComplete="off" initialValues={{ Email: user.email }}>
               <Form.Item
                 hasFeedback
                 label="Email"
@@ -30,31 +54,13 @@ const SettingPage = () => {
               >
                 <Input placeholder="Validate required onBlur" defaultValue='nbao02031@gmail.com' />
               </Form.Item>
-              <Form.Item
-                hasFeedback
-                label="Tên tài khoản"
-                name="username"
-                validateTrigger="onChange"
-                rules={[
-                  {
-                    required: true,
-                    message: 'Username là bắt buộc!',
-                  },
-                  {
-                    pattern: /^[A-Za-z][A-Za-z0-9]*$/,
-                    message: 'Username phải bắt đầu bằng chữ cái và chỉ chứa chữ cái và số!',
-                  },
-                ]}
-              >
-                <Input placeholder="Nhập username" defaultValue='nbao02031_11225' />
-              </Form.Item>
               <Form.Item>
                 <Button block>Lưu thay đổi</Button>
               </Form.Item>
             </Form>
           </Tabs.TabPane>
           <Tabs.TabPane tab={<span style={{ fontSize: '16px', fontWeight: 'bold' }}>Mật khẩu</span>} key="tab 2">
-            <Form name="updatePassword" style={{ maxWidth: 600 }} layout="vertical" autoComplete="off">
+            <Form form={form} onFinish={handleUpdate} name="updatePassword" style={{ maxWidth: 600 }} layout="vertical" autoComplete="off">
               <Form.Item
                 hasFeedback
                 label="Last password"
@@ -113,7 +119,7 @@ const SettingPage = () => {
               </Form.Item>
 
               <Form.Item>
-                <Button block>Lưu thay đổi</Button>
+                <Button block htmlType="submit">Lưu thay đổi</Button>
               </Form.Item>
             </Form>
           </Tabs.TabPane>

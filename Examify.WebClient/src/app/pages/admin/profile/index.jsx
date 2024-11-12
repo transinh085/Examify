@@ -1,9 +1,11 @@
 import { Avatar, Button, Card, Flex, Modal, Tabs, Tag, Upload, Space, Input, Form, Checkbox, Row, Col } from 'antd';
 import { EditOutlined, BookOutlined } from '@ant-design/icons';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
+import useAuthStore from '~/stores/auth-store';
 
 const ProfilePage = () => {
-  const [imageUrl, setImageUrl] = useState('https://st.download.com.vn/data/image/2019/12/31/Avatar-Star-Online-200.png');
+  const { user, resetUser } = useAuthStore();
+  const [imageUrl, setImageUrl] = useState(user.image);
   useEffect(() => {
     if (imageUrl) {
       console.log('File URL:', imageUrl);
@@ -25,7 +27,7 @@ const ProfilePage = () => {
   const handleCancel = () => {
     setOpen(false);
     form.resetFields();
-    setActiveButtons([]); // Đặt lại tất cả button về false
+    setActiveGrades([]); // Đặt lại tất cả button về false
     setActiveSubjects([]);
   };
   const tailFormItemLayout = {
@@ -46,17 +48,7 @@ const ProfilePage = () => {
       try {
         const response = await fetch('http://localhost:5084/grades?pageNumber=1&pageSize=13');
         const data = await response.json();
-
-        if (Array.isArray(data.items)) {
-          const formattedGrades = data.items.map(item => ({
-            id: item.id,
-            name: item.name
-          }));
-          setGradeList(formattedGrades);
-        } else {
-          console.log(data)
-        }
-
+        setGradeList(data)
       } catch (error) {
         console.error('Error fetching subject list:', error);
       }
@@ -84,16 +76,7 @@ const ProfilePage = () => {
       try {
         const response = await fetch('http://localhost:5084/subjects');
         const data = await response.json();
-
-        if (Array.isArray(data.items)) {
-          const formattedSubjects = data.items.map(item => ({
-            id: item.id,
-            name: item.name
-          }));
-          setSubjectList(formattedSubjects);
-        } else {
-          console.log(data)
-        }
+        setSubjectList(data)
 
       } catch (error) {
         console.error('Error fetching subject list:', error);
@@ -119,13 +102,13 @@ const ProfilePage = () => {
   };
 
   // Limit to 12 subjects unless showing all
-  const displayedSubjects = showAllSubjects ? subjectList : subjectList.slice(0, 11);
+  const displayedSubjects = useMemo(() => showAllSubjects ? subjectList : subjectList.slice(0, 11), [showAllSubjects, subjectList])
 
   const [form] = Form.useForm();
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
     form.resetFields();
-    setActiveButtons([]); // Đặt lại tất cả button về false
+    setActiveGrades([]); // Đặt lại tất cả button về false
     setActiveSubjects([]);
   };
   return (
@@ -155,14 +138,14 @@ const ProfilePage = () => {
               <div >
                 <Flex className="font-semibold text-neutral-800 items-center">
                   <p title="Bảo Nguyễn" className="truncate max-w-52 inline-block">
-                    <span>Bảo Nguyễn</span>
+                    <span>{user.firstName} {user.lastName}</span>
                   </p>
                   <Flex className="inline-flex items-center text-xs font-semibold py-0.5 px-3 uppercase text-white bg-purple-500 ml-1 rounded-full">
                     <span>Học sinh</span>
                   </Flex>
                 </Flex>
                 <Flex align='center'>
-                  <span className="text-fuchsia-800 text-sm">@nbao02031_11225</span>
+                  <span className="text-fuchsia-800 text-sm">{user.email}</span>
                 </Flex>
               </div>
               <div className="text-sm">
@@ -215,10 +198,11 @@ const ProfilePage = () => {
                   maxWidth: 600,
                 }}
                 scrollToFirstError
+                initialValues={{ firstName: user.firstName, lastName: user.lastName }}
               >
                 <Flex gap={16} horizontal>
                   <Form.Item
-                    name="firstname"
+                    name="firstName"
                     label="Tên"
                     rules={[
                       {
@@ -234,7 +218,7 @@ const ProfilePage = () => {
                     <Input />
                   </Form.Item>
                   <Form.Item
-                    name="lastname"
+                    name="lastName"
                     label="Họ"
                     rules={[
                       {
@@ -247,7 +231,7 @@ const ProfilePage = () => {
                       },
                     ]}
                   >
-                    <Input />
+                    <Input defaultValue={user.lastName} />
                   </Form.Item>
                 </Flex>
                 <Flex horizontal>
