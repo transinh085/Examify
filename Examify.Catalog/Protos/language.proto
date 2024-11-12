@@ -1,0 +1,18 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Catalog";
+
+package catalog;
+
+service Language {
+  rpc GetLanguage (LanguageRequest) returns (LanguageReply);
+}
+
+message LanguageRequest {
+  string id = 1;
+}
+
+message LanguageReply {
+  string id = 1;
+  string name = 2;
+}

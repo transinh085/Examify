@@ -1,4 +1,5 @@
 ﻿using Examify.Core.Endpoints;
+using Examify.Identity.Dtos;
 using Examify.Identity.Features.Login;
 using MediatR;
 
@@ -11,7 +12,7 @@ public class RefreshTokenEndpoint : IEndpoint
         app.MapPost("auth/refresh-token", async (RefreshTokenCommand command, ISender sender) =>
                 await sender.Send(command)
             )
-            .Produces<AuthenticationResponse>()
+            .Produces<AuthenticatedDto>()
             .WithTags("Authentication");
     }
 }

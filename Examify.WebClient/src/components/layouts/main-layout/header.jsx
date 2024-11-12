@@ -1,10 +1,9 @@
-import { App, Button, Flex, Input, Layout, Menu } from 'antd';
+import { Button, Flex, Input, Layout, Menu } from 'antd';
 import logo from '~/assets/examify-logo.png';
 import { ClockCircleOutlined, HomeOutlined, PlusCircleOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import { Link, useNavigate } from 'react-router-dom';
-import { useCreateQuiz } from '~/features/quiz/api/quizzes/create-quiz';
 import useAuthStore from '~/stores/auth-store';
-import UserDropdown from './user-dropdown';
+import UserDropdown from '~/components/layouts/share/user-dropdown';
 const { Header: AntHeader } = Layout;
 
 const items = [
@@ -29,27 +28,13 @@ const items = [
 ];
 
 const Header = () => {
-  const { message } = App.useApp();
   const navigate = useNavigate();
 
   const { isAuthenticated } = useAuthStore();
 
-  const createQuizMutation = useCreateQuiz({
-    mutationConfig: {
-      onSuccess: (data) => {
-        console.log('data', data);
-        navigate(`/quiz/${data.id}`);
-      },
-      onError: (error) => {
-        message.error(error.message);
-      },
-    },
-  });
-
-  const createQuizHandler = () => {
-    console.log('createQuizHandler');
-    createQuizMutation.mutate();
-  };
+  const moveAdmin = () => {
+    navigate('/admin');
+  }
 
   return (
     <AntHeader className="sticky top-0 z-50 flex items-center justify-between bg-white border-b px-4">
@@ -63,17 +48,18 @@ const Header = () => {
       </Flex>
 
       <Flex align="center" gap={20}>
-        <Button
-          variant="filled"
-          color="default"
-          icon={<PlusCircleOutlined />}
-          onClick={createQuizHandler}
-          loading={createQuizMutation.isPending}
-        >
-          Create a quiz
-        </Button>
         {isAuthenticated ? (
-          <UserDropdown />
+          <>
+            <Button
+              variant="filled"
+              color="default"
+              icon={<PlusCircleOutlined />}
+              onClick={moveAdmin}
+            >
+              Create a quiz
+            </Button>
+            <UserDropdown />
+          </>
         ) : (
           <Button type="primary" onClick={() => navigate('/auth/login')}>
             Login

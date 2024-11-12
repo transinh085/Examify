@@ -1,30 +1,15 @@
 ﻿using Examify.Quiz.Infrastructure.Data;
+using Examify.Quiz.Repositories.Questions;
 using MediatR;
 
 namespace Examify.Quiz.Features.Questions.Command.PatchQuestionAttributes;
 
-public class PatchQuestionAttributesHandler(QuizContext context)
+public class PatchQuestionAttributesHandler(IQuestionRepository questionRepository)
     : IRequestHandler<PatchQuestionAttributesCommand, IResult>
 {
     public async Task<IResult> Handle(PatchQuestionAttributesCommand request, CancellationToken cancellationToken)
     {
-        var question = await context.Questions
-            .FindAsync(request.Id, cancellationToken);
-
-
-        if (question == null) return TypedResults.NotFound();
-
-        if (request.Duration.HasValue)
-        {
-            question.Duration = request.Duration.Value;
-        }
-
-        if (request.Points.HasValue)
-        {
-            question.Points = request.Points.Value;
-        }
-
-        await context.SaveChangesAsync(cancellationToken);
+        await questionRepository.PatchQuestionAttributes(request, cancellationToken);
         return TypedResults.NoContent();
     }
 }

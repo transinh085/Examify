@@ -1,7 +1,7 @@
 ﻿using Examify.Core.Endpoints;
 using MediatR;
 
-namespace Examify.Quiz.Features.Quizs.Query.GetAllQuiz;
+namespace Examify.Quiz.Features.Quiz.Query.GetAllQuiz;
 
 public class GetAllQuizEndpoint : IEndpoint
 {

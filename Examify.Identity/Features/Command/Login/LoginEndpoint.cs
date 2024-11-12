@@ -1,4 +1,5 @@
 ﻿using Examify.Core.Endpoints;
+using Examify.Identity.Dtos;
 using MediatR;
 
 namespace Examify.Identity.Features.Login;
@@ -12,7 +13,7 @@ public class LoginEndpoint : IEndpoint
                 var result = await sender.Send(command);
                 return result;
             })
-            .Produces<AuthenticationResponse>()
+            .Produces<AuthenticatedDto>()
             .WithTags("Authentication");
     }
 }

@@ -2,6 +2,7 @@
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using Examify.Identity.Dtos;
 using Examify.Identity.Entities;
 using Examify.Identity.Features.Login;
 using Examify.Identity.Infrastructure.Data;
@@ -18,7 +19,7 @@ public class TokenProvider(UserManager<AppUser> userManager, IdentityContext con
 {
     private readonly JwtOptions _jwtOptions = jwtOptions.Value;
 
-    public async Task<AuthenticationResponse> AuthenticateAsync(string email, string password)
+    public async Task<AuthenticatedDto> AuthenticateAsync(string email, string password)
     {
         var user = await userManager.FindByEmailAsync(email);
         if (user == null || !await userManager.CheckPasswordAsync(user, password))
@@ -30,8 +31,12 @@ public class TokenProvider(UserManager<AppUser> userManager, IdentityContext con
         await context.RefreshTokens.AddAsync(refreshToken);
         await context.SaveChangesAsync();
 
-        return new AuthenticationResponse
+        return new AuthenticatedDto
         {
+            Id = user.Id,
+            FullName = user.FullName,
+            Email = user.Email,
+            Image = user.Image,
             Token = accessToken,
             RefreshToken = refreshToken.Token,
             ExpiresIn = _jwtOptions.DurationInMinutes * 60
@@ -60,7 +65,7 @@ public class TokenProvider(UserManager<AppUser> userManager, IdentityContext con
         return tokenHandler.WriteToken(token);
     }
 
-    public async Task<AuthenticationResponse> RefreshTokenAsync(string token)
+    public async Task<AuthenticatedDto> RefreshTokenAsync(string token)
     {
         var user = await context.Users.Include(u => u.RefreshTokens)
             .SingleOrDefaultAsync(u => u.RefreshTokens
@@ -76,8 +81,11 @@ public class TokenProvider(UserManager<AppUser> userManager, IdentityContext con
 
         await context.SaveChangesAsync();
 
-        return new AuthenticationResponse
+        return new AuthenticatedDto
         {
+            Id = user.Id,
+            FullName = user.FullName,
+            Email = user.Email,
             Token = CreateToken(user),
             RefreshToken = newRefreshToken.Token,
             ExpiresIn = _jwtOptions.DurationInMinutes * 60

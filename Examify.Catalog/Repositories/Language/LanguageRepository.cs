@@ -37,4 +37,9 @@ public class LanguageRepository(CatalogContext catalogContext) : ILanguageReposi
         return language;
     }
     
+    public async Task<bool> IsLanguageExists(Guid languageId, CancellationToken cancellationToken)
+    {
+        return await catalogContext.Languages.AnyAsync(x => x.Id == languageId, cancellationToken);
+    }
+    
 }

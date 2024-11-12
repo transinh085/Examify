@@ -8,7 +8,7 @@ public class DeleteSubjectEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapDelete("/subjects/{id}", (ISender sender, int id) => sender.Send(new DeleteSubjectCommand(id)))
+        app.MapDelete("/subjects/{id}", (ISender sender, Guid id) => sender.Send(new DeleteSubjectCommand(id)))
             .Produces<NoContent>();
     }
 }

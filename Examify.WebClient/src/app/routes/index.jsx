@@ -6,8 +6,19 @@ import ErrorRoutes from './error-routes';
 import QuizRoutes from '~/app/routes/quiz-routes';
 import JoinRoutes from '~/app/routes/join-routes';
 import ManagaerQuizRoutes from '~/app/routes/manager-routes';
+import DoQuizRoutes from './do-quiz-routes';
 
-const createAppRouter = () => createBrowserRouter([AuthRoutes, CustomerRoutes, AdminRoutes, ErrorRoutes, QuizRoutes, JoinRoutes, ManagaerQuizRoutes]);
+const createAppRouter = () =>
+  createBrowserRouter([
+    AuthRoutes,
+    CustomerRoutes,
+    AdminRoutes,
+    ErrorRoutes,
+    QuizRoutes,
+    JoinRoutes,
+    ManagaerQuizRoutes,
+    DoQuizRoutes,
+  ]);
 
 export const AppRouter = () => {
   const router = createAppRouter();

@@ -1,5 +1,6 @@
 ﻿using Examify.Catalog.Infrastructure.Data;
 using Examify.Core.Pagination;
+using Microsoft.EntityFrameworkCore;
 
 namespace Examify.Catalog.Repositories.Subjects;
 
@@ -20,9 +21,9 @@ public class SubjectRepository(CatalogContext catalogContext):ISubjectRepository
         );
     }
     
-    public async Task<Entities.Subject?> FindById(Guid id)
+    public async Task<Entities.Subject?> FindById(Guid id, CancellationToken cancellationToken)
     {
-        return await catalogContext.Subjects.FindAsync(id);
+        return await catalogContext.Subjects.FindAsync(id, cancellationToken);
     }
     
     public async Task<Entities.Subject> Update(Entities.Subject subject)
@@ -32,10 +33,14 @@ public class SubjectRepository(CatalogContext catalogContext):ISubjectRepository
         return subject;
     }
     
-    public async Task<bool> Delete(Entities.Subject subject)
+    public async Task Delete(Entities.Subject subject)
     {
         catalogContext.Subjects.Remove(subject);
         await catalogContext.SaveChangesAsync();
-        return true;
+    }
+    
+    public async Task<bool> IsSubjectExists(Guid id)
+    {
+        return await catalogContext.Subjects.AnyAsync(x => x.Id == id);
     }
 }

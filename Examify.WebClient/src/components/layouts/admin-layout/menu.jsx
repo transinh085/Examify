@@ -1,13 +1,30 @@
-import { ConfigProvider, Menu } from 'antd';
+import { Button, ConfigProvider, Flex, Menu, message } from 'antd';
 import SimpleBar from 'simplebar-react';
 import 'simplebar-react/dist/simplebar.min.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useCallback, useMemo } from 'react';
 import { adminMenu } from '~/config/menu';
+import { PlusOutlined } from '@ant-design/icons';
+import { useCreateQuiz } from '~/features/quiz/api/quizzes/create-quiz';
 
-const MenuCustom = ({ isMobile, onClose, theme = 'light', ...props }) => {
+const MenuCustom = ({ isMobile, onClose, theme = 'light', siderVisible, ...props }) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const createQuizMutation = useCreateQuiz({
+    mutationConfig: {
+      onSuccess: (data) => {
+        console.log('data', data);
+        navigate(`/admin/quiz/${data.id}`);
+      },
+      onError: (error) => {
+        message.error(error.message);
+      },
+    },
+  });
+
+  const createQuizHandler = () => {
+    createQuizMutation.mutate();
+  };
 
   const findItemByPath = useCallback((items, path) => {
     for (const item of items) {
@@ -45,15 +62,28 @@ const MenuCustom = ({ isMobile, onClose, theme = 'light', ...props }) => {
       }}
     >
       <SimpleBar style={{ maxHeight: 'calc(100vh - 80px)' }}>
+        <Flex justify="center" className={`h-[50px] w-full p-1`}>
+          <Button
+            onClick={createQuizHandler}
+            icon={<PlusOutlined />}
+            style={{ minWidth: '100%' }}
+            className="w-full h-full px-4 py-2 text-base"
+            type="primary"
+            iconPosition={!siderVisible ? 'start' : undefined}
+            loading={createQuizMutation.isPending}
+          >
+            {!siderVisible && 'Create'}
+          </Button>
+        </Flex>
         <Menu
           mode="vertical"
           theme={theme}
           selectedKeys={selectedKeys}
           items={adminMenu}
-          rootClassName="!border-none"
+          rootClassName="!border-none w-full"
           onClick={handleMenuClick}
           {...props}
-        ></Menu>
+        />
       </SimpleBar>
     </ConfigProvider>
   );

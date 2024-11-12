@@ -2,4 +2,4 @@
 
 namespace Examify.Quiz.Features.Quiz.Command.CreateQuiz;
 
-public record CreateQuizCommand : IRequest<IResult>;
+public record CreateQuizCommand(String UserId) : IRequest<IResult>;

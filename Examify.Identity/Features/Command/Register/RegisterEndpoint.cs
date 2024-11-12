@@ -2,7 +2,7 @@
 using Examify.Identity.Dtos;
 using MediatR;
 
-namespace Examify.Identity.Features.Register;
+namespace Examify.Identity.Features.Command.Register;
 
 public class RegisterEndpoint : IEndpoint
 {

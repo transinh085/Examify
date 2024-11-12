@@ -21,9 +21,9 @@ const SiderResponsive = () => {
           styles={{ header: { display: 'none' }, body: { padding: '10px' } }}
           width={300}
         >
-            <Link to="/">
-              <img src={logo} alt="logo" className="h-[40px] mx-auto my-3 object-contain" />
-            </Link>
+          <Link to="/">
+            <img src={logo} alt="logo" className="h-[40px] mx-auto my-3 object-contain" />
+          </Link>
           <MenuCustom mode="inline" isMobile={isMobile} theme="light" onClose={() => setSiderVisible(false)} />
         </Drawer>
       ) : (
@@ -38,7 +38,13 @@ const SiderResponsive = () => {
             <Link to="/">
               <img src={logo} alt="logo" className="h-[40px] mx-auto my-3 object-contain" />
             </Link>
-            <MenuCustom mode="inline" theme="light" isMobile={isMobile} onClose={() => setSiderVisible(false)} />
+            <MenuCustom
+              mode="inline"
+              theme="light"
+              isMobile={isMobile}
+              siderVisible={siderVisible}
+              onClose={() => setSiderVisible(false)}
+            />
           </>
         </Sider>
       )}

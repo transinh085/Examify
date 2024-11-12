@@ -1,6 +1,7 @@
 import { Avatar, Button, Card, Divider, Flex, Modal, Progress, Tag } from 'antd';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const QuizItem = ({ title, description, image, percent, questions }) => {
   const [open, setOpen] = useState(false);
@@ -67,7 +68,7 @@ const QuizItem = ({ title, description, image, percent, questions }) => {
           <h1 className="text-lg font-semibold line-clamp-2 overflow-hidden text-ellipsis">{title}</h1>
           <p className="line-clamp-2 overflow-hidden text-ellipsis text-base mt-2 text-[#444]">{description}</p>
           <Flex justify="space-between">
-            <Flex align="center" gap={10} className='pt-3'>
+            <Flex align="center" gap={10} className="pt-3">
               <Avatar src={'https://avatars.githubusercontent.com/u/93178609?v=4'} />
               <h1 className="text-base font-semibold">Quan Phat</h1>
             </Flex>
@@ -84,10 +85,12 @@ const QuizItem = ({ title, description, image, percent, questions }) => {
           </p>
           <p>Câu hỏi mẫu: ...</p>
           <Flex align="center" gap={10} className="pt-4">
-            <Button type="primary" className="flex-1">
-              Làm ngay
-            </Button>
-            <Button className="flex-1">Chia sẽ</Button>
+            <Link to="/join/game/1" className="flex-1">
+              <Button type="primary" className="w-full">
+                START NOW
+              </Button>
+            </Link>
+            <Button className="flex-1">SHARE</Button>
           </Flex>
         </div>
       </Modal>

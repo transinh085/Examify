@@ -2,7 +2,7 @@ using System.Security.Claims;
 using Examify.Core.Endpoints;
 using MediatR;
 
-namespace Examify.Identity.Features.GetSelf;
+namespace Examify.Identity.Features.Query.GetSelf;
 
 public class GetSelfEndpoint : IEndpoint
 {

@@ -2,7 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
 
-namespace Examify.Identity.Features.DeleteUser;
+namespace Examify.Identity.Features.Command.DeleteUser;
 
 public class DeleteUserEndpoint : IEndpoint
 {
