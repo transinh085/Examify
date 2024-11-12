@@ -1,4 +1,4 @@
-﻿namespace Examify.Result.Interfaces;
+﻿namespace Examify.Notification.Hubs;
 
 public interface IResultHub
 {

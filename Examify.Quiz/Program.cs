@@ -5,7 +5,6 @@ using Examify.Quiz.Infrastructure.Cloudinary;
 using Examify.Quiz.Infrastructure.Data;
 using Examify.Quiz.Repositories.Questions;
 using Examify.Quiz.Repositories.Quiz;
-using Quiz;
 
 var builder = WebApplication.CreateBuilder(args);
 var assembly = Assembly.GetExecutingAssembly();

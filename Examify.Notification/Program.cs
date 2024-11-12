@@ -1,30 +1,18 @@
-using Examify.Notification.Configs;
-using Examify.Notification.Services;
-using Notification;
+using System.Reflection;
+using Examify.Infrastructure;
+using Examify.Infrastructure.Jwt;
+using Examify.Notification.Hubs;
+using Examify.Notification.Infrastructure.Messaging;
+using Examify.Result.Infrastructure.SignalR;
 
 var builder = WebApplication.CreateBuilder(args);
+var assembly = Assembly.GetExecutingAssembly();
 
-// Add services to the container.
+builder.AddInfrashtructure(assembly, enableSwagger: false);
+builder.AddSignalRService();
+builder.AddMessaging();
 
-builder.Services.AddControllers();
-
-builder.Services.AddGrpc();
-builder.Services.AddGrpcClient<Classroom.ClassroomClient>(
-    o => o.Address = new("https://localhost:7118"));
-
-var emailSettings = builder.Configuration.GetSection("EmailSettings").Get<EmailSettings>();
-builder.Services.AddSingleton(emailSettings);
-builder.Services.AddTransient<EmailService>();
-
-
-var app  = builder.Build();
-
-// Configure the HTTP request pipeline.
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
-
+var app = builder.Build();
+app.UseInfrastructure(app.Environment, useAuthentication: true, enableSwagger: false);
+app.UseSignalR();
 app.Run();

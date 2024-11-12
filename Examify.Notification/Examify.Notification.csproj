@@ -14,23 +14,23 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Grpc\"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <Protobuf Include="Protos\classroom.proto" GrpcServices="Client"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <PackageReference Include="Grpc.AspNetCore.Server.ClientFactory" Version="2.66.0"/>
-        <PackageReference Include="Grpc.Net.Client" Version="2.66.0"/>
-        <PackageReference Include="Grpc.Tools" Version="2.66.0">
-            <PrivateAssets>all</PrivateAssets>
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
-        <PackageReference Include="Google.Protobuf" Version="3.28.2"/>
         <PackageReference Include="MailKit" Version="4.8.0" />
+    </ItemGroup>
 
+    <ItemGroup>
+        <PackageReference Include="Aspire.RabbitMQ.Client" Version="8.2.2" />
+        <PackageReference Include="MassTransit" Version="8.3.0" />
+        <PackageReference Include="MassTransit.RabbitMQ" Version="8.3.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Infrastructure\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Examify.Core\Examify.Core.csproj" />
+      <ProjectReference Include="..\Examify.Events\Examify.Events.csproj" />
+      <ProjectReference Include="..\Examify.Infrastructure\Examify.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>
