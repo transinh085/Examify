@@ -1,5 +1,5 @@
 ﻿using Examify.Identity.Infrastructure.Jwt;
-using Examify.Identity.Interfaces;
+using Examify.Identity.Repositories;
 using MediatR;
 
 namespace Examify.Identity.Features.Command.UpdatePassword;

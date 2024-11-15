@@ -7,21 +7,23 @@ const { Content } = Layout;
 
 const AdminLayout = () => {
   return (
-    <Layout hasSider>
-      <SiderResponsive />
-      <Layout>
-        <HeaderAdmin/>
-        <Content
-          style={{
-            margin: '24px 16px 0',
-            overflow: 'initial',
-          }}
-        >
-          <Outlet />
-        </Content>
-        <FooterAdmin />
+    <>
+      <Layout hasSider className='h-full'>
+        <SiderResponsive />
+        <Layout>
+          <HeaderAdmin />
+          <Content
+            style={{
+              margin: '24px 16px 0',
+              overflow: 'initial',
+            }}
+          >
+            <Outlet />
+          </Content>
+          <FooterAdmin />
+        </Layout>
       </Layout>
-    </Layout>
+    </>
   );
 };
 

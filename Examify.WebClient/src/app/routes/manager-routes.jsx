@@ -1,7 +1,7 @@
 const ManagaerQuizRoutes = {
-  path: '/manager-quiz', 
+  path: '/admin/activity/classic/:id', 
   lazy: async () => {
-    const ManagerQuizPage = await import('../pages/admin/manager-quiz');
+    const ManagerQuizPage = await import('../pages/admin/activity/classic/[id]');
     return { Component: ManagerQuizPage.default };
   }
 }
