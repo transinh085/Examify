@@ -8,7 +8,18 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Examify.Core\Examify.Core.csproj" />
+      <ProjectReference Include="..\Examify.Events\Examify.Events.csproj" />
       <ProjectReference Include="..\Examify.Infrastructure\Examify.Infrastructure.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Aspire.RabbitMQ.Client" Version="8.2.2" />
+      <PackageReference Include="MassTransit" Version="8.3.0" />
+      <PackageReference Include="MassTransit.RabbitMQ" Version="8.3.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Infrastructure\Data\" />
     </ItemGroup>
 
 </Project>
