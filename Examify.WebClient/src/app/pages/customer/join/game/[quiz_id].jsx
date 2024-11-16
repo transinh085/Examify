@@ -1,32 +1,115 @@
 import { SettingOutlined } from '@ant-design/icons';
-import { Avatar, Button, Col, Divider, Flex, Row, Space } from 'antd';
-import { useEffect, useMemo, useState } from 'react';
+import { Button, Col, Flex, Row, Space } from 'antd';
+import { useEffect, useState } from 'react';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
-import { MOCK_QUESTIONS } from '~/features/do-quiz/__mock__/data';
 import FullScreenButton from '~/features/do-quiz/components/FullScreenButton';
 import Option from '~/features/do-quiz/components/Option';
 import SettingDrawer from '~/features/do-quiz/components/SettingDrawer';
 import { triggerConfetti } from '~/features/do-quiz/utils/helpers';
 
+import lodash from 'lodash';
+import { useParams } from 'react-router-dom';
+import { MOCK_QUIZ } from '~/__mock__/__quiz__';
+import { QUESTION_TYPE } from '~/config/enums';
+import BackgroundAudio from '~/features/do-quiz/components/BackgroundAudio';
+import CountUpSection from '~/features/do-quiz/components/CountUpSection';
+import GameFooter from '~/features/do-quiz/components/GameFooter';
+import useNumberKeyPress from '~/hooks/useNumberKeyPress';
+import useDoQuizStore from '~/stores/do-quiz-store';
+import MyQuizResult from '~/features/do-quiz/components/MyQuizResult';
+
 const DoQuizPage = () => {
+  const { quiz_id } = useParams();
+
+  const {
+    isFinished,
+    useTimer,
+    questions,
+    waitingDuration,
+    setIsFinished,
+    setWaitingDuration,
+    currentQuestion,
+    initDoQuizStore,
+    selectedOptions,
+    setSelectedOptions,
+    nextQuestion,
+    addSelectedOption,
+    removeSelectedOption,
+  } = useDoQuizStore();
+
   const [isOpenSettings, setIsOpenSettings] = useState(false);
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [countdown, setCountdown] = useState(null);
+  const [questionDuration, setQuestionDuration] = useState(0);
 
-  const questions = useMemo(() => MOCK_QUESTIONS, []);
+  useEffect(() => {
+    initDoQuizStore({ useTimer: MOCK_QUIZ.use_timer, questions: MOCK_QUIZ.questions });
+    setQuestionDuration(MOCK_QUIZ.questions?.[0]?.duration);
+  }, [initDoQuizStore, setQuestionDuration]);
 
-  const handleChooseOption = (isCorrect) => {
-    if (isCorrect) {
+  useNumberKeyPress((key) => {
+    const option = questions?.[currentQuestion]?.options?.[key - 1];
+    if (!option) return;
+
+    handleChooseOption(option.id);
+  });
+
+  const handleSubmitAnswer = (yourAnswers) => {
+    const correctOptionsIds = questions[currentQuestion]?.options
+      .filter((option) => option.isCorrect)
+      .map((option) => option.id);
+    1;
+
+    if (lodash.isEqual(correctOptionsIds.sort(), yourAnswers.sort())) {
       triggerConfetti();
     }
-    setCountdown(5);
+    setWaitingDuration(3);
+    setQuestionDuration(0);
+    // call api here
+    console.log('call api with data', {
+      question_id: questions[currentQuestion]?.id,
+      yourAnswers,
+    });
   };
+
+  const handleChooseOption = (optionId) => {
+    if (waitingDuration) return;
+
+    if (selectedOptions?.includes(optionId)) {
+      removeSelectedOption(optionId);
+      return;
+    }
+    addSelectedOption(optionId);
+    if (questions?.[currentQuestion]?.type === QUESTION_TYPE.SINGLE_CHOICE) {
+      handleSubmitAnswer([...selectedOptions, optionId]);
+    }
+  };
+
+  const handleSubmitMultipleChoice = () => {
+    handleSubmitAnswer(selectedOptions);
+  };
+
+  const handleNextQuestion = () => {
+    if (currentQuestion === questions.length - 1) {
+      // trigger completed game
+      setIsFinished(true);
+      return;
+    }
+    setQuestionDuration(questions[currentQuestion + 1]?.duration);
+    nextQuestion();
+    setSelectedOptions([]);
+    setWaitingDuration(0);
+  };
+
+  if (isFinished) {
+    return <MyQuizResult />;
+  }
 
   return (
     <Flex vertical justify="space-between" className="w-full h-full text-white">
       <Flex justify="space-between" align="start" className="p-4">
-        <CountDownSection />
-        <div className="bg-[#3e084a] text-lg font-semibold py-2 px-4 rounded-lg">TypeScript Basic Test 1</div>
+        <CountUpSection />
+        <div className="bg-[#3e084a] md:text-base lg:text-lg font-semibold py-2 px-4 rounded-lg text-center">
+          TypeScript Basic Test {quiz_id} {questionDuration}
+        </div>
         <Space size={20}>
           <Button
             type="primary"
@@ -45,22 +128,32 @@ const DoQuizPage = () => {
           align="center"
           justify="center"
           gap={20}
-          className="bg-[#2a0830] rounded-full py-10 px-12 min-w-[800px] relative"
+          className="bg-[#2a0830] rounded-full py-4 px-12 lg:py-10 lg:px-12 lg:min-w-[800px] relative"
         >
           <div className="bg-[#2a0830] absolute top-0 left-[50%] border border-[#333] rounded-full px-8 py-1 translate-x-[-50%] translate-y-[-50%]">
             {currentQuestion + 1}/{questions.length}
           </div>
-          <h1 className="text-2xl font-semibold text-center">{questions[currentQuestion].question}</h1>
-          {countdown > 0 && (
+          <h1 className="text-lg lg:text-2xl font-semibold text-center">{questions?.[currentQuestion]?.question}</h1>
+          {waitingDuration > 0 && (
             <CountdownCircleTimer
               isPlaying
-              duration={countdown}
+              duration={waitingDuration}
               colors="#00a2ae"
               trailColor="#d9d9d9"
-              onComplete={() => {
-                setCurrentQuestion((prev) => (prev + 1 >= questions.length ? 0 : prev + 1));
-                setCountdown(0);
-              }}
+              onComplete={handleNextQuestion}
+              size={50}
+              strokeWidth={6}
+            >
+              {({ remainingTime }) => <p>{remainingTime}s</p>}
+            </CountdownCircleTimer>
+          )}
+          {useTimer && questionDuration > 0 && (
+            <CountdownCircleTimer
+              isPlaying
+              duration={questionDuration}
+              colors="#00a2ae"
+              trailColor="#d9d9d9"
+              onComplete={handleNextQuestion}
               size={50}
               strokeWidth={6}
             >
@@ -68,68 +161,26 @@ const DoQuizPage = () => {
             </CountdownCircleTimer>
           )}
         </Flex>
-        <Row gutter={[24, 24]} className="w-full p-4 ">
-          {questions[currentQuestion].options.map((option, index) => (
-            <Col key={option.id} span={6}>
-              <Option number={index + 1} content={option.content} {...option} handleSelect={handleChooseOption} />
+        <Row gutter={[24, 24]} className="w-full p-2 lg:p-4">
+          {questions?.[currentQuestion]?.options?.map((option, index) => (
+            <Col key={option.id} xs={24} sm={12} lg={6}>
+              <Option
+                type={questions?.[currentQuestion]?.type}
+                number={index + 1}
+                {...option}
+                handleSelect={() => {
+                  handleChooseOption(option?.id);
+                }}
+              />
             </Col>
           ))}
         </Row>
       </Flex>
-      <Flex justify="space-between" className="bg-[#3e084a] px-4 py-3">
-        <Space>
-          <Avatar size="large" src="https://avatars.githubusercontent.com/u/93178609?v=4" />
-          <Space direction="vertical" size={0}>
-            <h1 className="font-semibold">Phat Le</h1>
-            <p className="opacity-80">lequanphat@gmail.com</p>
-          </Space>
-        </Space>
-
-        <Space size={12}>
-          <img
-            src="https://cf.quizizz.com/game/img/powerups/icons/double-jeopardy.svg"
-            alt=""
-            className="w-[38px] h-[38px] border-2 border-green-400 rounded-full cursor-pointer"
-          />
-          <img
-            src="https://cf.quizizz.com/game/img/powerups/icons/streak-booster.svg"
-            alt=""
-            className="w-[38px] h-[38px] border-2 border-orange-400 rounded-full cursor-pointer"
-          />
-          <img
-            src="https://cf.quizizz.com/game/img/powerups/icons/2x.svg"
-            alt=""
-            className="w-[38px] h-[38px] border-2 border-purple-500 rounded-full cursor-pointer"
-          />
-          <Divider type="vertical" className="bg-gray-400 h-[34px]" />
-          <Button>Submit</Button>
-        </Space>
-      </Flex>
-
+      <GameFooter handleSubmit={handleSubmitMultipleChoice} />
       <SettingDrawer open={isOpenSettings} setOpen={setIsOpenSettings} />
+      <BackgroundAudio />
     </Flex>
   );
 };
 
-const CountDownSection = () => {
-  const [timeLeft, setTimeLeft] = useState(600);
-
-  useEffect(() => {
-    if (timeLeft === 0) return;
-
-    const timer = setInterval(() => {
-      setTimeLeft((prevTime) => prevTime - 1);
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [timeLeft]);
-
-  const minutes = Math.floor(timeLeft / 60);
-  const seconds = timeLeft % 60;
-  return (
-    <div className="bg-[#3e084a] p-4 rounded-lg">
-      <h1 className="text-3xl">{`${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`}</h1>
-    </div>
-  );
-};
 export default DoQuizPage;

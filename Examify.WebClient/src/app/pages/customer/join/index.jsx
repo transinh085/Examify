@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 const { Content } = Layout;
 
 const JoinPage = () => {
-
   return (
     <Layout className="relative bg-black min-h-screen overflow-hidden">
       <Content
