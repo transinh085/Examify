@@ -30,22 +30,22 @@ const HeaderAdmin = () => {
         />
         <Input placeholder="Tìm kiếm..." variant="filled" suffix={<SearchOutlined />} />
       </Space>
-      <Space>
+      <Flex gap={10}>
         {isMobile ? (
           <UserDropdown />
         ) : (
           <>
             <NotificationButton />
-            <Button className="font-bold cursor-pointer" onClick={moveJoin}>
+            <Button className="font-bold" onClick={moveJoin}>
               Enter code
             </Button>
-            <Button className="font-bold cursor-pointer" icon={<QuestionOutlined />}>
+            <Button className="font-bold" icon={<QuestionOutlined />}>
               Help
             </Button>
             <UserDropdown />
           </>
         )}
-      </Space>
+      </Flex>
     </Header>
   );
 };

@@ -11,7 +11,8 @@ public static class Extensions
         {
             x.SetKebabCaseEndpointNameFormatter();
             x.AddConsumer<UserJoinedExamConsumer>();
-
+            x.AddConsumer<UserPasswordResetConsumer>();
+            x.AddConsumer<UserVerificationEmailConsumer>();
 
             x.UsingRabbitMq(
                 (context, cfg) =>

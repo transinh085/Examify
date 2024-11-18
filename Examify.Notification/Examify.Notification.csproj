@@ -24,10 +24,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Infrastructure\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\Examify.Core\Examify.Core.csproj" />
       <ProjectReference Include="..\Examify.Events\Examify.Events.csproj" />
       <ProjectReference Include="..\Examify.Infrastructure\Examify.Infrastructure.csproj" />

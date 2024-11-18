@@ -21,7 +21,6 @@
 
     <ItemGroup>
         <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.2.1"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.8">
             <PrivateAssets>all</PrivateAssets>
@@ -34,7 +33,7 @@
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Google.Protobuf" Version="3.28.2"/>
+        <PackageReference Include="Google.Protobuf" Version="3.28.3" />
     </ItemGroup>
 
     <ItemGroup>
