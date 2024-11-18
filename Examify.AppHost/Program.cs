@@ -8,7 +8,6 @@ var rabbitMq = builder.AddRabbitMQ("rabbitmq")
     .WithManagementPlugin()
     .WithLifetime(ContainerLifetime.Persistent);
 
-var classDb = postgreSql.AddDatabase("classDb");
 var indentityDb = postgreSql.AddDatabase("identityDb");
 var catalogDb = postgreSql.AddDatabase("catalogDb");
 var quizDb = postgreSql.AddDatabase("quizDb");
@@ -16,10 +15,6 @@ var quizDb = postgreSql.AddDatabase("quizDb");
 var identityService = builder.AddProject<Projects.Examify_Identity>("identity-api")
     .WithReference(indentityDb)
     .WaitFor(indentityDb);
-
-var classService = builder.AddProject<Projects.Examify_Classroom>("class-api")
-    .WithReference(classDb)
-    .WaitFor(classDb);
 
 var catalogService = builder.AddProject<Projects.Examify_Catalog>("catalog-api")
     .WithReference(catalogDb)
@@ -39,7 +34,6 @@ var notificationService = builder.AddProject<Projects.Examify_Notification>("not
 
 builder.AddProject<Projects.Examify_Gateway>("gateway")
     .WithReference(identityService)
-    .WithReference(classService)
     .WithReference(catalogService)
     .WithReference(resultService)
     .WithReference(quizService)
