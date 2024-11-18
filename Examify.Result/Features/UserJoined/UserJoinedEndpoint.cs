@@ -11,9 +11,11 @@ public class UserJoinedEndpoint : IEndpoint
     {
         app.MapGet("joined", async ([FromServices] IPublishEndpoint publishEndpoint, string UserId) =>
         {
-            publishEndpoint.Publish<UserJoinedExamEvent>(new
+            publishEndpoint.Publish<UserPasswordResetEvent>(new
             {
-                UserId = UserId
+                UserId = UserId,
+                Email = "transinh085@gmail.com",
+                ResetLink = "https://examify.com/reset"
             });
             return TypedResults.Ok("ok");
         });

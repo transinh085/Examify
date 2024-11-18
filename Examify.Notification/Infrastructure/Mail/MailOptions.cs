@@ -1,6 +1,6 @@
-﻿namespace Examify.Notification.Infrastructure.Email;
+﻿namespace Examify.Notification.Infrastructure.Mail;
 
-public class EmailOptions
+public class MailOptions
 {
     public string SmtpServer { get; set; }
     public int SmtpPort { get; set; }
