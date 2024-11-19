@@ -8,7 +8,7 @@ const AccountVerification = () => {
   const email = queryParams.get('email');
   return (
     <div
-      className="p-8 rounded-[8px] w-[90%] md:w-[460px]"
+      className="p-8 rounded-[8px] w-[90%] md:w-[460px] bg-white "
       style={{
         boxShadow: 'rgba(0, 0, 0, 0.15) 0px 2px 8px',
       }}
@@ -16,9 +16,9 @@ const AccountVerification = () => {
       <Flex vertical gap={20}>
         <img src={emailImage} alt="email" className="w-[100px] h-auto mx-auto" />
         <h1 className="text-center text-[15px]">
-          Chúng tôi đã gửi email xác nhận đến địa chỉ <p className="text-primary">{email}</p>
+          We have sent a confirmation email to <p className="text-primary">{email}</p>
         </h1>
-        <h1 className="text-center text-[15px]">Vui lòng kiểm tra email của bạn để xác nhận tài khoản</h1>
+        <h1 className="text-center text-[15px]">Please check your email to verify your account</h1>
         <Button type="primary" href="https://mail.google.com/">
           Open Mail
         </Button>

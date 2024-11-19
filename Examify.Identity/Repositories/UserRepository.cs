@@ -28,7 +28,7 @@ public class UserRepository(UserManager<AppUser> userManager) : IUserRepository
         return await userManager.Users.ToListAsync();
     }
 
-    public async Task<AppUser> GetByIdAsync(string id)
+    public async Task<AppUser?> GetByIdAsync(string id)
     {
         return await userManager.FindByIdAsync(id);
     }
@@ -56,4 +56,10 @@ public class UserRepository(UserManager<AppUser> userManager) : IUserRepository
         var result = await userManager.ChangePasswordAsync(user, oldPassword, newPassword);
         return user;
     }
+    
+    public async Task<AppUser> UpdateUserAsync(AppUser user)
+    {
+        await userManager.UpdateAsync(user);
+        return user;
+    }   
 }

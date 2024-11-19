@@ -8,7 +8,7 @@ public class UserVerificationEmailConsumer(ILogger<UserVerificationEmailConsumer
 {
     public async Task Consume(ConsumeContext<UserVerificationEmailEvent> context)
     {
-        logger.LogInformation("UserVerificationEmailConsumer received: {UserId}", context.Message.UserId);
+        logger.LogInformation("UserVerificationEmailConsumer received: {Email}", context.Message.Email);
         var templatePath = Path.Combine(Directory.GetCurrentDirectory(), "Infrastructure", "Templates", "VerificationEmailTemplate.html");
         var templateContent = await File.ReadAllTextAsync(templatePath);
         var message = templateContent.Replace("{{VerificationLink}}", context.Message.VerificationLink);

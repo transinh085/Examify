@@ -31,10 +31,24 @@ const AuthRoutes = {
       },
     },
     {
+      path: 'verify-account/success',
+      lazy: async () => {
+        let AccountVerificationSuccess = await import('../pages/auth/verify-account-success');
+        return { Component: AccountVerificationSuccess.default };
+      },
+    },
+    {
+      path: 'verify-account/failed',
+      lazy: async () => {
+        let AccountVerificationFailed = await import('../pages/auth/verify-account-failed');
+        return { Component: AccountVerificationFailed.default };
+      },
+    },
+    {
       path: 'verify-account/:token',
       lazy: async () => {
-        let AccountVerificationResult = await import('../pages/auth/verify-account-result');
-        return { Component: AccountVerificationResult.default };
+        let AccountVerificationProcessing = await import('../pages/auth/verify-account-processing');
+        return { Component: AccountVerificationProcessing.default };
       },
     },
   ],

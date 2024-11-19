@@ -28,7 +28,7 @@ const RegisterRoute = () => {
 
   return (
     <div
-      className="p-8 rounded-[8px] w-[90%] md:w-[460px]"
+      className="p-8 rounded-[8px] w-[90%] md:w-[460px] bg-white "
       style={{
         boxShadow: 'rgba(0, 0, 0, 0.15) 0px 2px 8px',
       }}

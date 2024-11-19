@@ -15,6 +15,8 @@ public class IdentityContext(DbContextOptions options) : IdentityDbContext<AppUs
     
     public DbSet<RefreshToken> RefreshTokens { get; set; }
     
+    public DbSet<UserVerification> UserVerifications { get; set; }
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
