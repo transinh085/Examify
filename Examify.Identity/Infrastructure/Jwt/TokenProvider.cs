@@ -22,6 +22,10 @@ public class TokenProvider(UserManager<AppUser> userManager, IdentityContext con
     public async Task<AuthenticatedDto> AuthenticateAsync(string email, string password)
     {
         var user = await userManager.FindByEmailAsync(email);
+        if (user.EmailConfirmed == false)
+        {
+            throw new UnauthorizedAccessException("This account has not been verified.");
+        }
         if (user == null || !await userManager.CheckPasswordAsync(user, password))
             throw new UnauthorizedAccessException();
 
