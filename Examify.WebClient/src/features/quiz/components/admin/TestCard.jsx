@@ -18,6 +18,11 @@ const TestCard = ({ id, imgSrc, title, author, date, questions, gradeName, langu
   const handleCardClick = () => {
     navigate(`/admin/quiz/${id}`);
   };
+
+  const movePlayQuiz = () => {
+    navigate(`/admin/activity/classic/${id}`)
+  }
+
   return (
     <Flex className="bg-white px-2 py-2 rounded-lg border" justify="space-between">
       <Space size="middle">
@@ -58,7 +63,7 @@ const TestCard = ({ id, imgSrc, title, author, date, questions, gradeName, langu
       <Flex justify="space-between" vertical align="end">
         <DropdownMenu />
         <Space>
-          <Button icon={<PlayCircleOutlined />}>Play</Button>
+          <Button onClick={movePlayQuiz} icon={<PlayCircleOutlined />}>Play</Button>
           <Button icon={<ShareAltOutlined />}>Share</Button>
         </Space>
       </Flex>

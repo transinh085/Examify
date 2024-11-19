@@ -9,19 +9,19 @@
     <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Examify.AppHost" />
     <option name="TRACK_ENVS" value="1" />
     <envs>
-      <env name="ASPNETCORE_ENVIRONMENT" value="Development" />
       <env name="DOTNET_ENVIRONMENT" value="Development" />
+      <env name="ASPNETCORE_ENVIRONMENT" value="Development" />
       <env name="DOTNET_DASHBOARD_OTLP_ENDPOINT_URL" value="http://localhost:19256" />
       <env name="DOTNET_RESOURCE_SERVICE_ENDPOINT_URL" value="http://localhost:20108" />
+      <env name="ASPNETCORE_URLS" value="http://localhost:15173" />
       <env name="ASPIRE_ALLOW_UNSECURED_TRANSPORT" value="true" />
       <env name="DOTNET_LAUNCH_PROFILE" value="http" />
-      <env name="ASPNETCORE_URLS" value="http://localhost:15173" />
     </envs>
     <option name="USE_PODMAN_RUNTIME" value="0" />
     <option name="TRACK_URL" value="1" />
     <browser url="http://localhost:15173" start="true" />
     <method v="2">
-      <option name="Build Solution" enabled="true" />
+      <option name="Build" />
     </method>
   </configuration>
 </component>

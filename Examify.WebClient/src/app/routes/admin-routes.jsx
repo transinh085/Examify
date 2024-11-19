@@ -6,7 +6,8 @@ const AdminRoutes = {
   element: (
     <PrivateGuard>
       <AdminLayout />
-    </PrivateGuard>
+   </PrivateGuard>
+
   ),
   children: [
     {

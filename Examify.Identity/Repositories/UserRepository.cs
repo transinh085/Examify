@@ -28,7 +28,7 @@ public class UserRepository(UserManager<AppUser> userManager) : IUserRepository
         return await userManager.Users.ToListAsync();
     }
 
-    public async Task<AppUser> GetByIdAsync(string id)
+    public async Task<AppUser?> GetByIdAsync(string id)
     {
         return await userManager.FindByIdAsync(id);
     }
@@ -64,4 +64,10 @@ public class UserRepository(UserManager<AppUser> userManager) : IUserRepository
         
         return result.Succeeded;
     }
+    
+    public async Task<AppUser> UpdateUserAsync(AppUser user)
+    {
+        await userManager.UpdateAsync(user);
+        return user;
+    }   
 }

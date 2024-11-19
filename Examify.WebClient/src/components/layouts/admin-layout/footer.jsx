@@ -46,8 +46,11 @@ const FooterAdmin = () => {
               mode="horizontal"
               theme={'light'}
               selectedKeys={selectedKeys}
-              items={adminMenu}
-              rootClassName="!border-none flex"
+              items={adminMenu.map((item) => ({
+                ...item,
+              }))}
+              rootClassName="!border-none"
+              style={{ minWidth: 0, flex: 'auto' }}
               onClick={handleMenuClick}
             />
           </ConfigProvider>

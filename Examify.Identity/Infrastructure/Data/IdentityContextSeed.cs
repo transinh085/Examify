@@ -25,7 +25,8 @@ public class IdentityContextSeed(UserManager<AppUser> userManager) : IDbSeeder<I
             Email = "transinh085@gmail.com",
             FirstName = "Sinh",
             LastName = "Tran",
-            Image = "https://avatars.githubusercontent.com/u/45101901?v=4"
+            Image = "https://avatars.githubusercontent.com/u/45101901?v=4",
+            EmailConfirmed = true
         };
         userManager.CreateAsync(user2, "12345678").Wait();
         userManager.AddToRoleAsync(user2, "User").Wait();
@@ -36,7 +37,8 @@ public class IdentityContextSeed(UserManager<AppUser> userManager) : IDbSeeder<I
             Email = "musicanime2501@gmail.com",
             FirstName = "Gia",
             LastName = "Bảo",
-            Image = "https://avatars.githubusercontent.com/u/120194990?v=4"
+            Image = "https://avatars.githubusercontent.com/u/120194990?v=4",
+            EmailConfirmed = true
         };
         userManager.CreateAsync(user3, "12345678").Wait();
         userManager.AddToRoleAsync(user3, "User").Wait();
@@ -47,7 +49,8 @@ public class IdentityContextSeed(UserManager<AppUser> userManager) : IDbSeeder<I
             Email = "quanphat@gmail.com",
             FirstName = "Quan",
             LastName = "Phat",
-            Image = "https://avatars.githubusercontent.com/u/93178609?v=4"
+            Image = "https://avatars.githubusercontent.com/u/93178609?v=4",
+            EmailConfirmed = true
         };
         userManager.CreateAsync(user4, "12345678").Wait();
         userManager.AddToRoleAsync(user4, "User").Wait();
@@ -58,7 +61,9 @@ public class IdentityContextSeed(UserManager<AppUser> userManager) : IDbSeeder<I
             Email = "tungbao@gmail.com",
             FirstName = "Tung",
             LastName = "Bao",
-            Image = "https://avatars.githubusercontent.com/u/93178609?v=4"  
+
+            Image = "https://avatars.githubusercontent.com/u/93178609?v=4",
+            EmailConfirmed = true
         };
         userManager.CreateAsync(user5, "12345678").Wait();
         userManager.AddToRoleAsync(user5, "User").Wait();

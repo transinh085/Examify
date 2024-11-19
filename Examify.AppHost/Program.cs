@@ -4,20 +4,19 @@ var postgreSql = builder.AddPostgres("postgreSql")
     .WithPgWeb(c => c.WithLifetime(ContainerLifetime.Persistent))
     .WithLifetime(ContainerLifetime.Persistent);
 
-// var redis = builder.AddRedis("redis").WithRedisInsight();
+var rabbitMq = builder.AddRabbitMQ("rabbitmq")
+    .WithManagementPlugin()
+    .WithLifetime(ContainerLifetime.Persistent);
 
-var classDb = postgreSql.AddDatabase("classDb");
 var indentityDb = postgreSql.AddDatabase("identityDb");
 var catalogDb = postgreSql.AddDatabase("catalogDb");
-var quizDb = postgreSql.AddDatabase("quizDb"); 
+var quizDb = postgreSql.AddDatabase("quizDb");
 
 var identityService = builder.AddProject<Projects.Examify_Identity>("identity-api")
     .WithReference(indentityDb)
-    .WaitFor(indentityDb);
-
-var classService = builder.AddProject<Projects.Examify_Classroom>("class-api")
-    .WithReference(classDb)
-    .WaitFor(classDb);
+    .WithReference(rabbitMq)
+    .WaitFor(indentityDb)
+    .WaitFor(rabbitMq);
 
 var catalogService = builder.AddProject<Projects.Examify_Catalog>("catalog-api")
     .WithReference(catalogDb)
@@ -27,14 +26,16 @@ var quizService = builder.AddProject<Projects.Examify_Quiz>("quiz-api")
     .WithReference(quizDb)
     .WaitFor(quizDb);
 
-var resultService = builder.AddProject<Projects.Examify_Result>("result-api");
+var resultService = builder.AddProject<Projects.Examify_Result>("result-api")
+    .WithReference(rabbitMq)
+    .WaitFor(rabbitMq);
 
 var notificationService = builder.AddProject<Projects.Examify_Notification>("notification-api")
-    .WithHttpsEndpoint();
+    .WithReference(rabbitMq)
+    .WaitFor(rabbitMq);
 
 builder.AddProject<Projects.Examify_Gateway>("gateway")
     .WithReference(identityService)
-    .WithReference(classService)
     .WithReference(catalogService)
     .WithReference(resultService)
     .WithReference(quizService)

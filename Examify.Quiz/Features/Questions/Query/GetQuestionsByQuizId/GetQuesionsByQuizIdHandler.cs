@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Examify.Quiz.Features.Questions.Query.GetQuestionsByQuizId;
 
-public class GetQuesionsByQuizIdHandler(QuizContext context, IMapper mapper)
+public class GetQuestionsByQuizIdHandler(QuizContext context, IMapper mapper)
     : IRequestHandler<GetQuesionsByQuizIdQuery, IResult>
 {
     public async Task<IResult> Handle(GetQuesionsByQuizIdQuery request, CancellationToken cancellationToken)
