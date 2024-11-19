@@ -1,16 +1,16 @@
 import { Alert, Button, Card, Flex, Form, Space, Watermark, Input, Divider, Select, Tabs, message } from 'antd';
+import { json } from 'react-router-dom';
 import { useUpdatePasswordMutation } from '~/features/auth/api/update-password';
+import { useUpdateUserMutation } from '~/features/auth/api/update-user';
 import useAuthStore from '~/stores/auth-store';
-import Cookies from 'js-cookie';
 
 const SettingPage = () => {
-  const { user, resetUser } = useAuthStore();
+  const { user, resetUser, setUserProfile } = useAuthStore();
   const [form] = Form.useForm();
-  const mutation = useUpdatePasswordMutation({
+  const mutationPassword = useUpdatePasswordMutation({
     mutationConfig: {
       onSuccess: (data) => {
-        Cookies.set('token', data?.token);
-        message.success('Update')
+        message.success('Update succeed')
       },
       onError: ({ response }) => {
         message.error(response?.data?.detail || 'Something went wrong!');
@@ -18,11 +18,31 @@ const SettingPage = () => {
     },
   });
 
-  const handleUpdate = (data) => {
-    mutation.mutate({
+  const mutationUser = useUpdateUserMutation({
+    mutationConfig: {
+      onSuccess: (data) => {
+        message.success('Update succeed');
+        setUserProfile({ lastName: data.lastName, firstName: data.firstName });
+
+      },
+      onError: ({ response }) => {
+        message.error(response?.data?.detail || 'Sai Sai Sai!');
+      },
+    },
+  });
+
+  const handleUpdatePassword = (data) => {
+    mutationPassword.mutate({
       email: user.email,
       oldPassword: data.passwordLast,
       newPassword: data.passwordNew,
+    });
+  };
+  const handleUpdateUser = (data) => {
+    mutationUser.mutate({
+      id: user.id,
+      firstName: data.firstName,
+      lastName: data.lastName,
     });
   };
   return (
@@ -35,7 +55,9 @@ const SettingPage = () => {
         <h1 className='from-neutral-900 font-bold text-2xl'>Cài đặt</h1>
         <Tabs size={'large'} className='px-8'>
           <Tabs.TabPane tab={<span style={{ fontSize: '16px', fontWeight: 'bold' }}>Tài khoản</span>} key="tab 1">
-            <Form name="updateEmail" style={{ maxWidth: 600 }} layout="vertical" autoComplete="off" initialValues={{ Email: user.email }}>
+            <Form form={form} name="updateEmail" style={{ maxWidth: 600 }} layout="vertical" autoComplete="off"
+              initialValues={{ email: user.email, firstName: user.firstName, lastName: user.lastName }}
+              onFinish={handleUpdateUser}>
               <Form.Item
                 hasFeedback
                 label="Email"
@@ -52,15 +74,47 @@ const SettingPage = () => {
                   },
                 ]}
               >
-                <Input placeholder="Validate required onBlur" defaultValue='nbao02031@gmail.com' />
+                <Input placeholder="Validate required onBlur" defaultValue={user.email} readOnly />
+              </Form.Item>
+              <Form.Item
+                name="firstName"
+                label="Tên"
+                rules={[
+                  {
+                    type: 'firstname',
+                    message: 'The input is not valid Firstname!',
+                  },
+                  {
+                    required: true,
+                    message: 'Please input your Firstname!',
+                  },
+                ]}
+              >
+                <Input defaultValue={user.firstName} />
+              </Form.Item>
+              <Form.Item
+                name="lastName"
+                label="Họ"
+                rules={[
+                  {
+                    type: 'lastname',
+                    message: 'The input is not valid Lastname!',
+                  },
+                  {
+                    required: true,
+                    message: 'Please input your Lastname!',
+                  },
+                ]}
+              >
+                <Input defaultValue={user.lastName} />
               </Form.Item>
               <Form.Item>
-                <Button block>Lưu thay đổi</Button>
+                <Button block htmlType="submit">Lưu thay đổi</Button>
               </Form.Item>
             </Form>
           </Tabs.TabPane>
           <Tabs.TabPane tab={<span style={{ fontSize: '16px', fontWeight: 'bold' }}>Mật khẩu</span>} key="tab 2">
-            <Form form={form} onFinish={handleUpdate} name="updatePassword" style={{ maxWidth: 600 }} layout="vertical" autoComplete="off">
+            <Form form={form} onFinish={handleUpdatePassword} name="updatePassword" style={{ maxWidth: 600 }} layout="vertical" autoComplete="off">
               <Form.Item
                 hasFeedback
                 label="Last password"

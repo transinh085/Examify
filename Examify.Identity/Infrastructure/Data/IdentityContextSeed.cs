@@ -58,7 +58,7 @@ public class IdentityContextSeed(UserManager<AppUser> userManager) : IDbSeeder<I
             Email = "tungbao@gmail.com",
             FirstName = "Tung",
             LastName = "Bao",
-            Image = "https://avatars.githubusercontent.com/u/93178609?v=4"
+            Image = "https://avatars.githubusercontent.com/u/93178609?v=4"  
         };
         userManager.CreateAsync(user5, "12345678").Wait();
         userManager.AddToRoleAsync(user5, "User").Wait();

@@ -130,6 +130,32 @@ namespace Examify.Identity.Infrastructure.Data.Migrations
                     b.ToTable("RefreshTokens");
                 });
 
+            modelBuilder.Entity("Examify.Identity.Entities.UserGrade", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("GradeId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("UserId", "GradeId");
+
+                    b.ToTable("UserGrade");
+                });
+
+            modelBuilder.Entity("Examify.Identity.Entities.UserSubject", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("SubjectId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("UserId", "SubjectId");
+
+                    b.ToTable("UserSubject");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -287,6 +313,28 @@ namespace Examify.Identity.Infrastructure.Data.Migrations
                     b.Navigation("AppUser");
                 });
 
+            modelBuilder.Entity("Examify.Identity.Entities.UserGrade", b =>
+                {
+                    b.HasOne("Examify.Identity.Entities.AppUser", "User")
+                        .WithMany("UserGrades")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Examify.Identity.Entities.UserSubject", b =>
+                {
+                    b.HasOne("Examify.Identity.Entities.AppUser", "User")
+                        .WithMany("UserSubjects")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -341,6 +389,10 @@ namespace Examify.Identity.Infrastructure.Data.Migrations
             modelBuilder.Entity("Examify.Identity.Entities.AppUser", b =>
                 {
                     b.Navigation("RefreshTokens");
+
+                    b.Navigation("UserGrades");
+
+                    b.Navigation("UserSubjects");
                 });
 #pragma warning restore 612, 618
         }

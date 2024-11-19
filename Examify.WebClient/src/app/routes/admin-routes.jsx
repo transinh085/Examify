@@ -6,7 +6,7 @@ const AdminRoutes = {
   element: (
     <PrivateGuard>
       <AdminLayout />
-   </PrivateGuard> 
+    </PrivateGuard>
   ),
   children: [
     {
@@ -40,7 +40,7 @@ const AdminRoutes = {
     {
       path: 'settings',
       lazy: async () => {
-        const SettingsPage = await import('../pages/admin/settings');
+        const SettingsPage = await import('../pages/admin/settings/');
         return { Component: SettingsPage.default };
       },
     },
