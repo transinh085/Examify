@@ -64,10 +64,5 @@ public class UserRepository(UserManager<AppUser> userManager) : IUserRepository
         
         return result.Succeeded;
     }
-    
-    public async Task<AppUser> UpdateUserAsync(AppUser user)
-    {
-        await userManager.UpdateAsync(user);
-        return user;
-    }   
+
 }
