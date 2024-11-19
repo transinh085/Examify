@@ -15,4 +15,6 @@ public class QuizResult : BaseEntity
     public int AttemptedNumber { get; set; }
     
     public DateTime SubmittedAt { get; set; }
+    
+    public List<QuestionResult> QuestionResults { get; set; }   
 }

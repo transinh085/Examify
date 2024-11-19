@@ -1,6 +1,7 @@
 using System.Reflection;
 using Examify.Infrastructure;
 using Examify.Infrastructure.Jwt;
+using Examify.Quiz.Grpc;
 using Examify.Quiz.Infrastructure.Cloudinary;
 using Examify.Quiz.Infrastructure.Data;
 using Examify.Quiz.Repositories.Questions;
@@ -22,4 +23,7 @@ builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
 var app = builder.Build();
 
 app.UseInfrastructure(app.Environment, useAuthentication: true);
+
+// Register gRPC clients
+app.MapGrpcService<QuizService>();
 app.Run();

@@ -11,6 +11,7 @@ var rabbitMq = builder.AddRabbitMQ("rabbitmq")
 var indentityDb = postgreSql.AddDatabase("identityDb");
 var catalogDb = postgreSql.AddDatabase("catalogDb");
 var quizDb = postgreSql.AddDatabase("quizDb");
+var resultDb = postgreSql.AddDatabase("resultDb");
 
 var identityService = builder.AddProject<Projects.Examify_Identity>("identity-api")
     .WithReference(indentityDb)
@@ -27,7 +28,9 @@ var quizService = builder.AddProject<Projects.Examify_Quiz>("quiz-api")
     .WaitFor(quizDb);
 
 var resultService = builder.AddProject<Projects.Examify_Result>("result-api")
+    .WithReference(resultDb)
     .WithReference(rabbitMq)
+    .WaitFor(resultDb)
     .WaitFor(rabbitMq);
 
 var notificationService = builder.AddProject<Projects.Examify_Notification>("notification-api")
