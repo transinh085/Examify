@@ -11,7 +11,8 @@ public interface IUserRepository
     Task<AppUser> GetByEmailAsync(string email);
     Task<bool> DeleteAsync(AppUser user);
     Task<bool> VerifyLoginAsync(string email, string password);
-    Task<AppUser> UpdatePasswordAsync(AppUser user,string oldPassword, string newPassword);
-    
-    Task<AppUser> UpdateUserAsync(AppUser user);
+
+    Task<bool> UpdatePasswordAsync(AppUser user,string oldPassword, string newPassword);
+    Task<bool> UpdateUserAsync(AppUser user);
+
 }
