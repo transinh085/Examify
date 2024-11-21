@@ -15,7 +15,9 @@ var quizDb = postgreSql.AddDatabase("quizDb");
 
 var identityService = builder.AddProject<Projects.Examify_Identity>("identity-api")
     .WithReference(indentityDb)
-    .WaitFor(indentityDb);
+    .WithReference(rabbitMq)
+    .WaitFor(indentityDb)
+    .WaitFor(rabbitMq);
 
 var catalogService = builder.AddProject<Projects.Examify_Catalog>("catalog-api")
     .WithReference(catalogDb)

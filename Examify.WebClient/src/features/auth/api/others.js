@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { api } from '~/lib/api';
 
 export const useAuthentication = (options) => {
@@ -10,11 +10,18 @@ export const useAuthentication = (options) => {
   });
 };
 
-export const useVerifyAccount = (token, options) => {
-  return useQuery({
-    queryKey: ['account-verification'],
-    queryFn: () => api.get(`/auth/verify-account/${token}`),
-    ...options,
-    initialData: {},
+export const useVerifyToken = ({ data }) => {
+  return api.post('/identity-service/api/auth/verify-account', data);
+};
+
+export const useVerifyTokenMutation = ({ mutationConfig }) => {
+  const { onSuccess, ...restConfig } = mutationConfig || {};
+
+  return useMutation({
+    onSuccess: (...args) => {
+      onSuccess?.(...args);
+    },
+    ...restConfig,
+    mutationFn: useVerifyToken,
   });
 };

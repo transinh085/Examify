@@ -45,6 +45,7 @@ const UploadCover = ({ url, setFieldsValue }) => {
       return;
     }
     if (info.file.status === 'done' && info.file.originFileObj) {
+      console.log('info.file.originFileObj', info.file.originFileObj)
       uploadImageMutation.mutate(info.file.originFileObj);
     }
   };

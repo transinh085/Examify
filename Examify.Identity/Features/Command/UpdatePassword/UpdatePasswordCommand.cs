@@ -4,7 +4,8 @@ using MediatR;
 
 namespace Examify.Identity.Features.Command.UpdatePassword;
 
-public record UpdatePasswordCommand(string email,string OldPassword, string NewPassword) : IRequest<IResult>;
+public record UpdatePasswordCommand(string id,string OldPassword, string NewPassword) : IRequest<IResult>;
+public record UpdatePasswordRequest(string OldPassword, string NewPassword);
 
 public class UpdatePasswordValidator : AbstractValidator<UpdatePasswordCommand>
 {
