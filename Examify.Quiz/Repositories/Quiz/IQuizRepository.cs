@@ -1,4 +1,5 @@
 ﻿
+using Examify.Quiz.Dtos;
 using Examify.Quiz.Features.Quiz.Dtos;
 
 namespace Examify.Quiz.Repositories.Quiz;
@@ -19,4 +20,6 @@ public interface IQuizRepository
     Task<List<QuizDto>> GetAllQuizzes(CancellationToken cancellationToken);
     
     Task<QuizUserDto> GetQuizByUserId(Guid userId, CancellationToken cancellationToken);
+    
+    Task<PopulatedQuizDto?> GetQuizById(string quizId);
 }

@@ -17,6 +17,7 @@
         <Protobuf Include="Protos\identity.proto" GrpcServices="Client" />
         <Protobuf Include="Protos\language.proto" GrpcServices="Client" />
         <Protobuf Include="Protos\subject.proto" GrpcServices="Client" />
+        <Protobuf Include="Protos\quiz.proto" GrpcServices="Server" />
     </ItemGroup>
 
     <ItemGroup>

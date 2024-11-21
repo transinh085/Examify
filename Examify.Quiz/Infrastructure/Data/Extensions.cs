@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Grpc.Core;
+using Microsoft.EntityFrameworkCore;
 using Quiz;
 
 namespace Examify.Quiz.Infrastructure.Data;

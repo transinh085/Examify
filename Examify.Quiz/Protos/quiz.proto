@@ -1,0 +1,18 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Quiz";
+
+package quiz;
+
+service Quiz {
+  rpc GetQuiz (QuizRequest) returns (QuizReply);
+}
+
+message QuizRequest {
+  string id = 1;
+}
+
+message QuizReply {
+  string id = 1;
+  string title = 2;
+}
