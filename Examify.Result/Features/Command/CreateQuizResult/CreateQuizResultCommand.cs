@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using MediatR;
 
-namespace Examify.Quiz.Features.Result.Command.CreateQuizResult;
+namespace Examify.Result.Features.Command.CreateQuizResult;
 
 public record CreateQuizResultCommand : IRequest<IResult>
 {

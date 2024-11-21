@@ -4,7 +4,7 @@ import { QUESTION_TYPE } from '~/config/enums';
 import useDoQuizStore from '~/stores/do-quiz-store';
 
 const GameFooter = ({ handleSubmit }) => {
-  const { questions, currentQuestion } = useDoQuizStore();
+  const { questionResults, currentQuestion } = useDoQuizStore();
   return (
     <Flex justify="space-between" className="relative bg-[#3e084a] px-4 py-3">
       <div className="absolute top-0 right-0 translate-y-[-100%] animate-mewmew">
@@ -35,7 +35,8 @@ const GameFooter = ({ handleSubmit }) => {
           className="w-[38px] h-[38px] border-2 border-purple-500 rounded-full cursor-pointer"
         />
         <Divider type="vertical" className="bg-gray-400 h-[34px]" />
-        {questions?.[currentQuestion]?.type === QUESTION_TYPE.MULTIPLE_CHOICE && (
+        {(questionResults?.[currentQuestion]?.question?.type === QUESTION_TYPE.MULTIPLE_CHOICE ||
+          questionResults?.[currentQuestion]?.question?.type === 'MultipleChoice') && (
           <Button onClick={handleSubmit}>Submit</Button>
         )}
       </Space>

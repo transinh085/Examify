@@ -16,7 +16,7 @@ public class QuizResultRepository(QuizResultContext quizResultContext)
             AttemptedNumber = attemptedNumber,
             TotalPoints = 0,
             TimeTaken = 0,
-            currentQuestionIndex = 0,
+            CurrentQuestion = 0,
         };
         
         await quizResultContext.QuizResults.AddAsync(quizResult);

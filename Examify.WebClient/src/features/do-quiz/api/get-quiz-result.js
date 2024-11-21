@@ -12,8 +12,9 @@ export const getQuizResultOptions = (id) => {
   });
 };
 
-export const useGetQuizResult = ({ id }) => {
+export const useGetQuizResult = ({ id }, options = {}) => {
   return useQuery({
     ...getQuizResultOptions(id),
+    ...options,
   });
 };
