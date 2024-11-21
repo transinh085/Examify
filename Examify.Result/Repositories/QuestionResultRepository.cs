@@ -15,11 +15,24 @@ public class QuestionResultRepository(QuizResultContext quizResultContext)
             IsCorrect = false,
             Order = order,
             Points = 0,
+            TimeTaken = 0,
         };
         
         await quizResultContext.QuestionResults.AddAsync(questionResult);
         
         return questionResult;
+    }
+    
+    public async Task<QuestionResult?> FindById(Guid id)
+    {
+        return await quizResultContext.QuestionResults.FindAsync(id);
+    }
+    
+    public async Task<bool> Update(QuestionResult questionResult)
+    {
+        quizResultContext.QuestionResults.Update(questionResult);
+        
+        return await quizResultContext.SaveChangesAsync() > 0;
     }
 }
 

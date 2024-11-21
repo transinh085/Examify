@@ -14,6 +14,8 @@ public class QuestionResult : BaseEntity
     
     public int Points { get; set; }
     
+    public int TimeTaken { get; set; }
+    
     public DateTime SubmittedAt { get; set; }
     
     public List<AnswerResult> AnswerResults { get; set; }  

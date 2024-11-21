@@ -1,0 +1,28 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Quiz";
+
+package quiz;
+
+service QuestionGrpcService {
+  rpc GetQuestion (QuestionRequest) returns (QuestionReply);
+}
+
+message QuestionRequest {
+  string id = 1;
+}
+
+message QuestionReply {
+  string id = 1;
+  string content = 2;
+  int32 duration = 3;
+  int32 points = 4;
+  repeated QuestionOptionMessage options = 5;
+}
+
+
+message QuestionOptionMessage {
+  string id = 1;
+  string content = 2;
+  bool is_correct = 3;
+}

@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Examify.Result.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(QuizResultContext))]
-    [Migration("20241121073719_init_v1")]
-    partial class init_v1
+    [Migration("20241121154415_init_v2")]
+    partial class init_v2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -39,6 +39,9 @@ namespace Examify.Result.Infrastructure.Data.Migrations
 
                     b.Property<Guid>("OptionId")
                         .HasColumnType("uuid");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("QuestionResultId")
                         .HasColumnType("uuid");
@@ -80,6 +83,9 @@ namespace Examify.Result.Infrastructure.Data.Migrations
                     b.Property<DateTime>("SubmittedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<int>("TimeTaken")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
 
@@ -102,6 +108,9 @@ namespace Examify.Result.Infrastructure.Data.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<int>("CurrentQuestion")
+                        .HasColumnType("integer");
+
                     b.Property<Guid>("QuizId")
                         .HasColumnType("uuid");
 
@@ -120,9 +129,6 @@ namespace Examify.Result.Infrastructure.Data.Migrations
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<int>("currentQuestionIndex")
-                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 

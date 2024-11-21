@@ -8,5 +8,7 @@ public class AnswerResult : BaseEntity
     
     public Guid OptionId { get; set; }
     
+    public int Order { get; set; }
+    
     public bool IsSelected { get; set; }
 }

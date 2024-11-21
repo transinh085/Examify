@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Examify.Result.Infrastructure.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class init_v1 : Migration
+    public partial class init_v2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,7 +20,7 @@ namespace Examify.Result.Infrastructure.Data.Migrations
                     UserId = table.Column<string>(type: "text", nullable: false),
                     TotalPoints = table.Column<int>(type: "integer", nullable: false),
                     TimeTaken = table.Column<int>(type: "integer", nullable: false),
-                    currentQuestionIndex = table.Column<int>(type: "integer", nullable: false),
+                    CurrentQuestion = table.Column<int>(type: "integer", nullable: false),
                     AttemptedNumber = table.Column<int>(type: "integer", nullable: false),
                     SubmittedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -41,6 +41,7 @@ namespace Examify.Result.Infrastructure.Data.Migrations
                     Order = table.Column<int>(type: "integer", nullable: false),
                     IsCorrect = table.Column<bool>(type: "boolean", nullable: false),
                     Points = table.Column<int>(type: "integer", nullable: false),
+                    TimeTaken = table.Column<int>(type: "integer", nullable: false),
                     SubmittedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
@@ -63,6 +64,7 @@ namespace Examify.Result.Infrastructure.Data.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     QuestionResultId = table.Column<Guid>(type: "uuid", nullable: false),
                     OptionId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Order = table.Column<int>(type: "integer", nullable: false),
                     IsSelected = table.Column<bool>(type: "boolean", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)

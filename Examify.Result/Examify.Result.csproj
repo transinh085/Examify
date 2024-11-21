@@ -38,6 +38,7 @@
 
     <ItemGroup>
         <Protobuf Include="Protos\quiz.proto" GrpcServices="Client"/>
+        <Protobuf Include="Protos\question.proto" GrpcServices="Client" />
     </ItemGroup>
 
 </Project>
