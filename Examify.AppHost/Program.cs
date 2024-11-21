@@ -2,7 +2,8 @@ var builder = DistributedApplication.CreateBuilder(args);
 
 var postgreSql = builder.AddPostgres("postgreSql")
     .WithPgWeb(c => c.WithLifetime(ContainerLifetime.Persistent))
-    .WithLifetime(ContainerLifetime.Persistent);
+    .WithLifetime(ContainerLifetime.Persistent)
+    .WithDataVolume("examify-postgres-data");
 
 var rabbitMq = builder.AddRabbitMQ("rabbitmq")
     .WithManagementPlugin()
