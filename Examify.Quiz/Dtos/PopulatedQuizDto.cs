@@ -13,6 +13,10 @@ public class PopulatedQuizDto
     public class PopulatedQuestionDto
     {
         public Guid Id { get; set; }
+        
+        public string Content { get; set; }
+    
+        public int Duration { get; set; }
         public QuestionType Type { get; set; }
         public List<OptionDto> Options { get; set; }
         

@@ -12,6 +12,8 @@ public class QuestionResult : BaseEntity
     
     public bool IsCorrect { get; set; }
     
+    public int Points { get; set; }
+    
     public DateTime SubmittedAt { get; set; }
     
     public List<AnswerResult> AnswerResults { get; set; }  

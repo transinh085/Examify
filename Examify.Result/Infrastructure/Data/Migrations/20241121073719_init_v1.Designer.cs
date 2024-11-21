@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Examify.Result.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(QuizResultContext))]
-    [Migration("20241119133942_init_v1")]
+    [Migration("20241121073719_init_v1")]
     partial class init_v1
     {
         /// <inheritdoc />
@@ -68,6 +68,9 @@ namespace Examify.Result.Infrastructure.Data.Migrations
                     b.Property<int>("Order")
                         .HasColumnType("integer");
 
+                    b.Property<int>("Points")
+                        .HasColumnType("integer");
+
                     b.Property<Guid>("QuestionId")
                         .HasColumnType("uuid");
 
@@ -117,6 +120,9 @@ namespace Examify.Result.Infrastructure.Data.Migrations
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<int>("currentQuestionIndex")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 

@@ -5,9 +5,9 @@ const DoQuizRoutes = {
   element: <DoQuizLayout />,
   children: [
     {
-      path: 'game/:quiz_id',
+      path: 'game/:result_id',
       lazy: async () => {
-        const DoQuizPage = await import('../pages/customer/join/game/[quiz_id]');
+        const DoQuizPage = await import('../pages/customer/join/game/[result_id]');
         return { Component: DoQuizPage.default };
       },
     },

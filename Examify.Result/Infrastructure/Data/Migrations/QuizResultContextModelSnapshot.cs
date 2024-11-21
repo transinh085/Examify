@@ -65,6 +65,9 @@ namespace Examify.Result.Infrastructure.Data.Migrations
                     b.Property<int>("Order")
                         .HasColumnType("integer");
 
+                    b.Property<int>("Points")
+                        .HasColumnType("integer");
+
                     b.Property<Guid>("QuestionId")
                         .HasColumnType("uuid");
 
@@ -114,6 +117,9 @@ namespace Examify.Result.Infrastructure.Data.Migrations
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<int>("currentQuestionIndex")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 

@@ -12,6 +12,8 @@ public class QuizResult : BaseEntity
     
     public int TimeTaken { get; set; }
     
+    public int currentQuestionIndex { get; set; }
+    
     public int AttemptedNumber { get; set; }
     
     public DateTime SubmittedAt { get; set; }
