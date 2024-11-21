@@ -6,7 +6,6 @@ import FullScreenButton from '~/features/do-quiz/components/FullScreenButton';
 import Option from '~/features/do-quiz/components/Option';
 import SettingDrawer from '~/features/do-quiz/components/SettingDrawer';
 import { triggerConfetti } from '~/features/do-quiz/utils/helpers';
-
 import lodash from 'lodash';
 import { useParams } from 'react-router-dom';
 import { MOCK_QUIZ } from '~/__mock__/__quiz__';
@@ -17,9 +16,10 @@ import GameFooter from '~/features/do-quiz/components/GameFooter';
 import useNumberKeyPress from '~/hooks/useNumberKeyPress';
 import useDoQuizStore from '~/stores/do-quiz-store';
 import MyQuizResult from '~/features/do-quiz/components/MyQuizResult';
+import { useGetQuizResult } from '~/features/do-quiz/api/get-quiz-result';
 
 const DoQuizPage = () => {
-  const { quiz_id } = useParams();
+  const { result_id } = useParams();
 
   const {
     isFinished,
@@ -36,6 +36,8 @@ const DoQuizPage = () => {
     addSelectedOption,
     removeSelectedOption,
   } = useDoQuizStore();
+
+  const { data } = useGetQuizResult({ id: result_id });
 
   const [isOpenSettings, setIsOpenSettings] = useState(false);
   const [questionDuration, setQuestionDuration] = useState(0);
@@ -108,7 +110,7 @@ const DoQuizPage = () => {
       <Flex justify="space-between" align="start" className="p-4">
         <CountUpSection />
         <div className="bg-[#3e084a] md:text-base lg:text-lg font-semibold py-2 px-4 rounded-lg text-center">
-          TypeScript Basic Test {quiz_id} {questionDuration}
+          TypeScript Basic Test {result_id} {questionDuration}
         </div>
         <Space size={20}>
           <Button

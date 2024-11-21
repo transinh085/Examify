@@ -1,0 +1,33 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Result";
+
+package quiz;
+
+service Quiz {
+  rpc GetQuiz (QuizRequest) returns (QuizReply);
+}
+
+message QuizRequest {
+  string id = 1;
+}
+
+message QuizReply {
+  string id = 1;
+  repeated Question questions = 3;
+}
+
+message Question {
+  string id = 1;
+  string content = 2;
+  string type = 3;
+  int32 duration = 4;
+  int32 points = 5;
+  repeated Option options = 6;
+}
+
+message Option {
+  string id = 1;
+  string content = 2;
+  bool is_correct = 3;
+}

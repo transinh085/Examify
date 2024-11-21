@@ -7,19 +7,37 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Examify.Core\Examify.Core.csproj" />
-      <ProjectReference Include="..\Examify.Events\Examify.Events.csproj" />
-      <ProjectReference Include="..\Examify.Infrastructure\Examify.Infrastructure.csproj" />
+        <ProjectReference Include="..\Examify.Core\Examify.Core.csproj"/>
+        <ProjectReference Include="..\Examify.Events\Examify.Events.csproj"/>
+        <ProjectReference Include="..\Examify.Infrastructure\Examify.Infrastructure.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Aspire.RabbitMQ.Client" Version="9.0.0" />
-      <PackageReference Include="MassTransit" Version="8.3.1" />
-      <PackageReference Include="MassTransit.RabbitMQ" Version="8.3.1" />
+        <PackageReference Include="Aspire.RabbitMQ.Client" Version="9.0.0"/>
+        <PackageReference Include="Grpc.Net.ClientFactory" Version="2.66.0"/>
+        <PackageReference Include="Grpc.Tools" Version="2.67.0">
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
+        <PackageReference Include="MassTransit" Version="8.3.1"/>
+        <PackageReference Include="MassTransit.RabbitMQ" Version="8.3.1"/>
+        <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.2.1"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.8"/>
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Infrastructure\Data\" />
+        <Folder Include="Extensions\"/>
+        <Folder Include="Infrastructure\Data\Migrations\" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Include="..\Shared\ActivityExtensions.cs" Link="Extensions\ActivityExtensions.cs"/>
+        <Compile Include="..\Shared\MigrateDbContextExtensions.cs" Link="Extensions\MigrateDbContextExtensions.cs"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Protobuf Include="Protos\quiz.proto" GrpcServices="Client"/>
     </ItemGroup>
 
 </Project>

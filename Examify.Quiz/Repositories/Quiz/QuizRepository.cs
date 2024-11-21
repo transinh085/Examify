@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Examify.Quiz.Dtos;
 using Examify.Quiz.Features.Quiz.Dtos;
 using Examify.Quiz.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -137,6 +138,17 @@ public class QuizRepository(
             quizPulished = quizPublishedDtos,
             quizUnpublished = quizUnpublishedDtos
         };
+    }
+
+    public async Task<PopulatedQuizDto?> GetQuizById(string quizId)
+    {
+        var quiz =  await quizContext.Quizzes
+            .Include(quiz => quiz.Questions) 
+            .ThenInclude(question => question.Options) 
+            .AsNoTracking() 
+            .FirstOrDefaultAsync(x => x.Id == Guid.Parse(quizId)); 
+        
+        return mapper.Map<PopulatedQuizDto>(quiz);
     }
 
 }
