@@ -1,8 +1,13 @@
-import { Avatar, Button, Card, Flex, Modal, Tabs, Tag, Upload, Space, Input, Form, Checkbox, Row, Col } from 'antd';
+import { Avatar, Button, Card, Flex, Modal, Tabs, Spin, Upload, Space, Input, Checkbox, Row, Col } from 'antd';
 import { EditOutlined, BookOutlined, UploadOutlined } from '@ant-design/icons';
 import React, { useEffect, useMemo, useState } from 'react';
 import useAuthStore from '~/stores/auth-store';
 import { useNavigate } from 'react-router-dom';
+import { useCreateQuiz } from '~/features/quiz/api/quizzes/create-quiz';
+import { useGetQuizUser } from '~/features/quiz/api/quizzes/get-quiz-user';
+import { useQueryClient } from '@tanstack/react-query';
+import TabContent from '~/features/quiz/components/admin/TabContent';
+
 
 const ProfilePage = () => {
   const { user, resetUser } = useAuthStore();
@@ -25,27 +30,24 @@ const ProfilePage = () => {
       console.error("Không thể đọc file");
     }
   };
-  const [open, setOpen] = useState(false);
-  const showModal = () => {
-    setOpen(true);
-  };
-  const handleOk = () => {
-    form.submit();
-  };
-  const handleCancel = () => {
-    setOpen(false);
-    form.resetFields();
-  };
+
   const navigate = useNavigate();
 
   const handleNavigate = () => {
     navigate("/admin/settings"); // Điều hướng tới trang /settings
   };
-  const [form] = Form.useForm();
-  const onFinish = (values) => {
-    console.log('Received values of form: ', values);
-    form.resetFields();
-  };
+  const { data: quizzes, isLoading } = useGetQuizUser();
+  const quizList = [...(quizzes?.quizPulished ?? []), ...(quizzes?.quizUnpublished ?? [])]
+  const tabs = [
+    { key: '1', label: 'Quiz', children: <TabContent data={quizList ?? []} /> },
+    {
+      key: '2', label: 'Collection', children: (<Flex justify="center">
+        <img className="w-[200px] h-[200px]" src="https://img.freepik.com/free-vector/opening-soon-background-grunge-style_23-2147868024.jpg?semt=ais_hybrid" alt="" />
+      </Flex>
+      )
+    },
+  ];
+
   return (
     <div>
       <Card className='grid max-w-screen-xl'>
@@ -109,14 +111,8 @@ const ProfilePage = () => {
         </Flex>
       </Card>
 
-      <Tabs size={'large'} className='px-8'>
-        <Tabs.TabPane tab={<span style={{ fontSize: '16px', fontWeight: 'bold' }}>Thư viện</span>} key="tab 1">
+      <Tabs defaultActiveKey="1" items={tabs} />
 
-        </Tabs.TabPane>
-        <Tabs.TabPane tab={<span style={{ fontSize: '16px', fontWeight: 'bold' }}>Bộ sưu tập</span>} key="tab 2">
-
-        </Tabs.TabPane>
-      </Tabs>
     </div >
 
   );

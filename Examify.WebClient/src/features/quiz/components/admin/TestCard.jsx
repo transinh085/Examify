@@ -1,4 +1,4 @@
-import { Avatar, Button, Dropdown, Flex, Space, Tag } from 'antd';
+import { Avatar, Button, Dropdown, Flex, Modal, Space, Tag } from 'antd';
 import {
   DeleteOutlined,
   HeatMapOutlined,
@@ -8,11 +8,13 @@ import {
   RadarChartOutlined,
   ShareAltOutlined,
   UnorderedListOutlined,
+  SettingOutlined,
 } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
+import { useState } from 'react';
 
-const TestCard = ({ id, imgSrc, title, author, date, questions, gradeName, languageName }) => {
+const TestCard = ({ id, imgSrc, title, author, date, questions, gradeName, languageName, setIsModalVisible, setTitleQuiz }) => {
   const navigate = useNavigate();
 
   const handleCardClick = () => {
@@ -61,7 +63,7 @@ const TestCard = ({ id, imgSrc, title, author, date, questions, gradeName, langu
         </Space>
       </Space>
       <Flex justify="space-between" vertical align="end">
-        <DropdownMenu />
+        <DropdownMenu setIsModalVisible={setIsModalVisible} setTitleQuiz={setTitleQuiz} title={title} />
         <Space>
           <Button onClick={movePlayQuiz} icon={<PlayCircleOutlined />}>Play</Button>
           <Button icon={<ShareAltOutlined />}>Share</Button>
@@ -71,7 +73,13 @@ const TestCard = ({ id, imgSrc, title, author, date, questions, gradeName, langu
   );
 };
 
-const DropdownMenu = () => {
+const DropdownMenu = ({ setIsModalVisible, setTitleQuiz, title }) => {
+  const onClick = ({ key }) => {
+    if (key === '2') {
+      setIsModalVisible(true)
+      setTitleQuiz(title)
+    }
+  };
   const items = [
     {
       label: 'Like',
@@ -84,19 +92,25 @@ const DropdownMenu = () => {
       icon: <ShareAltOutlined />,
     },
     {
-      label: 'Delete',
+      label: 'Settings',
       key: '2',
+      icon: <SettingOutlined />,
+    },
+    {
+      label: 'Delete',
+      key: '3',
       icon: <DeleteOutlined />,
       danger: true,
     },
   ];
   return (
-    <Dropdown menu={{ items }} trigger={['click']}>
-      <a onClick={(e) => e.preventDefault()}>
-        <Button type="text" icon={<MoreOutlined />} size="small" />
-      </a>
-    </Dropdown>
-  );
+    <>
+      <Dropdown menu={{ items, onClick }} trigger={['click']}>
+        <a onClick={(e) => e.preventDefault()}>
+          <Button type="text" icon={<MoreOutlined />} size="small" />
+        </a>
+      </Dropdown>
+    </>);
 };
 
 export default TestCard;
