@@ -65,4 +65,9 @@ public class UserRepository(UserManager<AppUser> userManager) : IUserRepository
         return result.Succeeded;
     }
 
+    public async Task<bool> UpdateUserImageAsync(AppUser user)
+    {
+        var result = await userManager.UpdateAsync(user);
+        return result.Succeeded;    
+    }
 }
