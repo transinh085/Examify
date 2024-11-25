@@ -11,3 +11,16 @@ export const useLoginMutation = ({ mutationConfig }) => {
     mutationFn: useLogin,
   });
 };
+
+
+
+export const useGoogleLogin = ({ data }) => {
+  return api.post(`/identity-service/api/auth/login-google`, data);
+};
+
+export const useGoogleLoginMutation = ({ mutationConfig }) => {
+  return useMutation({
+    ...mutationConfig,
+    mutationFn: useGoogleLogin,
+  });
+};

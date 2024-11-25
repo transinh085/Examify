@@ -1,12 +1,13 @@
 import { Button, Col, Divider, Flex, Form, Input, message, Row, Typography } from 'antd';
-import { useLoginMutation } from '~/features/auth/api/login';
-import fb from '~/assets/svg/fb.svg';
-import gg from '~/assets/svg/gg.svg';
-import wt from '~/assets/svg/wt.svg';
+import { useGoogleLoginMutation, useLoginMutation } from '~/features/auth/api/login';
+// import fb from '~/assets/svg/fb.svg';
+// import gg from '~/assets/svg/gg.svg';
+// import wt from '~/assets/svg/wt.svg';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import RULES from '~/features/auth/rules';
 import useAuthStore from '~/stores/auth-store';
+import { GoogleLogin } from '@react-oauth/google';
 
 const LoginRoute = () => {
   const [searchParams] = useSearchParams();
@@ -33,6 +34,23 @@ const LoginRoute = () => {
       email: data.email,
       password: data.password,
     });
+  };
+
+  const googleLoginMutation = useGoogleLoginMutation({
+    mutationConfig: {
+      onSuccess: (data) => {
+        Cookies.set('token', data?.token);
+        setUser(data);
+        navigate(redirect ? redirect : '/');
+      },
+      onError: ({ response }) => {
+        message.error(response?.data?.detail || 'Something went wrong!');
+      },
+    }
+  });
+
+  const handleGoogleLogin = (credential) => {
+    googleLoginMutation.mutate({ data: credential });
   };
 
   return (
@@ -76,23 +94,16 @@ const LoginRoute = () => {
             <Typography className="text-[#333] mb-2">Or</Typography>
           </Divider>
           <Row gutter={12}>
-            <Col span={8}>
-              <Button className="w-full">
-                <img src={gg} alt="" />
-                Google
-              </Button>
-            </Col>
-            <Col span={8}>
-              <Button className="w-full">
-                <img src={wt} alt="" />
-                Twitter
-              </Button>
-            </Col>
-            <Col span={8}>
-              <Button className="w-full">
-                <img src={fb} alt="" />
-                Facebook
-              </Button>
+            <Col span={24}>
+             <Flex justify='center' align='center'>
+             <GoogleLogin
+                text="Google"
+                onSuccess={handleGoogleLogin}
+                onError={() => {
+                  console.log('Login Failed');
+                }}
+              />
+             </Flex>
             </Col>
           </Row>
           <Typography className="text-center mt-6">
