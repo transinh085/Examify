@@ -3,7 +3,10 @@ using System.Diagnostics;
 EnsureDeveloperControlPaneIsNotRunning();
 var builder = DistributedApplication.CreateBuilder(args);
 
-var postgreSql = builder.AddPostgres("postgreSql")
+var userName = builder.AddParameter("username", "admin");
+var password = builder.AddParameter("password", "JJD7YgCFNHoTcvc");
+
+var postgreSql = builder.AddPostgres("postgreSql", userName, password, 5432)
     .WithLifetime(ContainerLifetime.Persistent)
     .WithDataVolume("examify-postgres-data");
 
@@ -61,7 +64,8 @@ void EnsureDeveloperControlPaneIsNotRunning()
 
     if (process == null) return;
 
-    Console.WriteLine($"Shutting down developer control pane from previous run. Process: {process.ProcessName} (ID: {process.Id})");
+    Console.WriteLine(
+        $"Shutting down developer control pane from previous run. Process: {process.ProcessName} (ID: {process.Id})");
 
     Thread.Sleep(TimeSpan.FromSeconds(5)); // Allow Docker containers to shut down to avoid orphaned containers
 

@@ -61,7 +61,7 @@ public class LoginFacebookHandler(
             if (!result.Succeeded) throw new UnauthorizedAccessException();
         }
 
-        return TypedResults.Ok(await tokenProvider.AuthenticateAsync(user));
+        return TypedResults.Ok(await tokenProvider.  AuthenticateAsync(user));
     }
 }
 
