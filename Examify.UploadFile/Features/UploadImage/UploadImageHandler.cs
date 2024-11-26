@@ -2,7 +2,7 @@
 using CloudinaryDotNet.Actions;
 using MediatR;
 
-namespace Examify.Quiz.Features.UploadImage;
+namespace Examify.UploadFile.Features.UploadImage;
 
 public class UploadImageHandler(Cloudinary cloudinary) : IRequestHandler<UploadImageCommand, IResult>
 {

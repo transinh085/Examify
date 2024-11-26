@@ -20,8 +20,8 @@ const TestCard = ({ id, imgSrc, title, author, date, questions, gradeName, langu
   };
 
   const movePlayQuiz = () => {
-    navigate(`/admin/activity/classic/${id}`)
-  }
+    navigate(`/admin/activity/classic/${id}`);
+  };
 
   return (
     <Flex className="bg-white px-2 py-2 rounded-lg border" justify="space-between">
@@ -29,11 +29,11 @@ const TestCard = ({ id, imgSrc, title, author, date, questions, gradeName, langu
         <img
           onClick={handleCardClick}
           className="w-[120px] h-[120px] rounded-sm cursor-pointer"
-          src={imgSrc ?? "https://avatars.githubusercontent.com/u/120194990?v=4"}
+          src={imgSrc ?? 'https://avatars.githubusercontent.com/u/120194990?v=4'}
           alt="imgTest"
         />
         <Space direction="vertical" size="small">
-          <Tag className='uppercase'>Assessment</Tag>
+          <Tag color='cyan'>Assessment</Tag>
           <h1 onClick={handleCardClick} className="font-bold cursor-pointer hover:underline">
             {title}
           </h1>
@@ -45,11 +45,11 @@ const TestCard = ({ id, imgSrc, title, author, date, questions, gradeName, langu
             </Space>
             <Space>
               <HeatMapOutlined />
-              <span className="text-xs">{gradeName ?? ""}</span>
+              <span className="text-xs">{gradeName ?? ''}</span>
             </Space>
             <Space>
               <RadarChartOutlined />
-              <span className="text-xs">{languageName ?? ""}</span>
+              <span className="text-xs">{languageName ?? ''}</span>
             </Space>
           </Space>
           <Space size="small">
@@ -63,7 +63,9 @@ const TestCard = ({ id, imgSrc, title, author, date, questions, gradeName, langu
       <Flex justify="space-between" vertical align="end">
         <DropdownMenu />
         <Space>
-          <Button onClick={movePlayQuiz} icon={<PlayCircleOutlined />}>Play</Button>
+          <Button onClick={movePlayQuiz} icon={<PlayCircleOutlined />}>
+            Play
+          </Button>
           <Button icon={<ShareAltOutlined />}>Share</Button>
         </Space>
       </Flex>

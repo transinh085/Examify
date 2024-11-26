@@ -1,14 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
+        <TargetFramework>net9.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
     <ItemGroup>
         <Folder Include="Extensions\"/>
-        <Folder Include="Features\Questions\Command\UpdateQuestion\" />
         <Folder Include="Infrastructure\Data\Configurations\"/>
     </ItemGroup>
     
@@ -27,7 +26,6 @@
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="CloudinaryDotNet" Version="1.26.2"/>
         <PackageReference Include="Grpc.AspNetCore.Server.ClientFactory" Version="2.66.0"/>
         <PackageReference Include="Grpc.Net.Client" Version="2.66.0"/>
         <PackageReference Include="Grpc.Tools" Version="2.66.0">

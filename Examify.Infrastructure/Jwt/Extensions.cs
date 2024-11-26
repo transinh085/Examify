@@ -28,7 +28,8 @@ public static class Extensions
                     ValidAudience = jwtOptions.Audience,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.Secret))
                 };
-            });
+            })
+           ;
         
         services.AddAuthorization(options =>
         {

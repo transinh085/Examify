@@ -1,5 +1,4 @@
 ﻿using Catalog;
-using Examify.Catalog.Repositories.Language;
 using Examify.Catalog.Repositories.Subjects;
 using Grpc.Core;
 
@@ -9,7 +8,13 @@ namespace Examify.Catalog.Grpc
     {
         public override async Task<SubjectReply> GetSubject(SubjectRequest request, ServerCallContext context)
         {
-            var subject = await subjectRepository.FindById(new Guid(request.Id), context.CancellationToken);
+            var subject = await subjectRepository.FindById(Guid.Parse(request.Id), context.CancellationToken);
+
+            if (subject is null)
+            {
+                throw new RpcException(new Status(StatusCode.NotFound, "Subject not found"));
+            }
+
             return new SubjectReply
             {
                 Id = subject?.Id.ToString() ?? string.Empty,

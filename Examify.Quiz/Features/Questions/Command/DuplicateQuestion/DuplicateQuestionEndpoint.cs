@@ -7,8 +7,8 @@ public class DuplicateQuestionEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPost("quizzes/{quizId}/questions/{id}/duplicate",
-            async (Guid quizId, Guid id, ISender sender) =>
+        app.MapPost("questions/{id:guid}/duplicate",
+            async (Guid id, ISender sender) =>
                 await sender.Send(new DuplicateQuestionCommand(id))
         ).WithTags("Questions");
     }

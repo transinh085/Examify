@@ -1,7 +1,9 @@
+using System.Diagnostics;
+
+EnsureDeveloperControlPaneIsNotRunning();
 var builder = DistributedApplication.CreateBuilder(args);
 
 var postgreSql = builder.AddPostgres("postgreSql")
-    .WithPgWeb(c => c.WithLifetime(ContainerLifetime.Persistent))
     .WithLifetime(ContainerLifetime.Persistent)
     .WithDataVolume("examify-postgres-data");
 
@@ -38,11 +40,38 @@ var notificationService = builder.AddProject<Projects.Examify_Notification>("not
     .WithReference(rabbitMq)
     .WaitFor(rabbitMq);
 
+var uploadFileService = builder.AddProject<Projects.Examify_UploadFile>("upload-api");
+
 builder.AddProject<Projects.Examify_Gateway>("gateway")
     .WithReference(identityService)
     .WithReference(catalogService)
     .WithReference(resultService)
     .WithReference(quizService)
-    .WithReference(notificationService);
+    .WithReference(notificationService)
+    .WithReference(uploadFileService);
 
 builder.Build().Run();
+
+void EnsureDeveloperControlPaneIsNotRunning()
+{
+    const string processName = "dcpctrl"; // The Aspire Developer Control Pane process name
+
+    var process = Process.GetProcesses()
+        .SingleOrDefault(p => p.ProcessName.Contains(processName, StringComparison.OrdinalIgnoreCase));
+
+    if (process == null) return;
+
+    Console.WriteLine($"Shutting down developer control pane from previous run. Process: {process.ProcessName} (ID: {process.Id})");
+
+    Thread.Sleep(TimeSpan.FromSeconds(5)); // Allow Docker containers to shut down to avoid orphaned containers
+
+    try
+    {
+        process.Kill();
+        Console.WriteLine($"Process {process.Id} killed successfully.");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Failed to kill process {process.Id}: {ex.Message}");
+    }
+}

@@ -39,6 +39,7 @@ public class QuizDto
         public int Duration { get; set; }
         public int Points { get; set; }
         public QuestionType Type { get; set; }
+        public int Order { get; set; }
         public List<OptionDto> Options { get; set; }
         
         public class OptionDto

@@ -1,4 +1,4 @@
-﻿namespace Examify.Quiz.Infrastructure.Cloudinary;
+﻿namespace Examify.UploadFile.Infrastructure.Cloudinary;
 
 public class CloudinaryOptions
 {

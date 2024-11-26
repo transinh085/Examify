@@ -1,11 +1,11 @@
-import { useMutation } from "@tanstack/react-query";
-import { api } from "~/lib/api";
+import { useMutation } from '@tanstack/react-query';
+import { api } from '~/lib/api';
 
 const uploadImage = (file) => {
   const formData = new FormData();
   formData.append('file', file);
 
-  return api.post('/quiz-service/api/upload-image', formData, {
+  return api.post('/upload-service/api/upload-image', formData, {
     headers: { 'Content-Type': 'multipart/form-data' },
   });
 };

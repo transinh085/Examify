@@ -1,7 +1,7 @@
 ﻿using Examify.Core.Endpoints;
 using MediatR;
 
-namespace Examify.Quiz.Features.UploadImage;
+namespace Examify.UploadFile.Features.UploadImage;
 
 public class UploadImageEndpoint : IEndpoint
 {

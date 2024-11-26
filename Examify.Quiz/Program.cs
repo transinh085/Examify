@@ -2,7 +2,6 @@ using System.Reflection;
 using Examify.Infrastructure;
 using Examify.Infrastructure.Jwt;
 using Examify.Quiz.Grpc;
-using Examify.Quiz.Infrastructure.Cloudinary;
 using Examify.Quiz.Infrastructure.Data;
 using Examify.Quiz.Repositories.Questions;
 using Examify.Quiz.Repositories.Quiz;
@@ -14,7 +13,6 @@ builder.AddInfrashtructure(assembly);
 builder.AddPersistence();
 builder.Services.AddGrpcServices();
 builder.Services.AddJwt(builder.Configuration);
-builder.Services.AddCloudinary(builder.Configuration);
 
 // Register repositories
 builder.Services.AddScoped<IQuizRepository, QuizRepository>();

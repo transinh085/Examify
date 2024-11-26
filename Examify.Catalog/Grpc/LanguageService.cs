@@ -8,7 +8,13 @@ namespace Examify.Catalog.Grpc
     {
         public override async Task<LanguageReply> GetLanguage(LanguageRequest request, ServerCallContext context)
         {
-            var language = await languageRepository.FindLanguageByIdAsync(new Guid(request.Id));
+            var language = await languageRepository.FindLanguageByIdAsync(Guid.Parse(request.Id));
+                
+            if (language is null)
+            {
+                throw new RpcException(new Status(StatusCode.NotFound, "Language not found"));
+            }
+            
             return new LanguageReply
             {
                 Id = language?.Id.ToString() ?? string.Empty, 

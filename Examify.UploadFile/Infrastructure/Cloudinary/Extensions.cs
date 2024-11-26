@@ -1,6 +1,6 @@
 ﻿using CloudinaryDotNet;
 
-namespace Examify.Quiz.Infrastructure.Cloudinary;
+namespace Examify.UploadFile.Infrastructure.Cloudinary;
 
 public static class Extensions
 {

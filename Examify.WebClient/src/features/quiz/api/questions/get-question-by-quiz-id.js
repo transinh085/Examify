@@ -2,7 +2,6 @@ import { queryOptions, useQuery } from '@tanstack/react-query';
 import { api } from '~/lib/api';
 
 export const getQuestionByQuizId = ({ quizId }) => {
-  console.log(quizId);
   return api.get(`/quiz-service/api/quizzes/${quizId}/questions`);
 };
 

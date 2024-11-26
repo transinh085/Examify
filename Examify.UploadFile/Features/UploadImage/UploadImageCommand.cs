@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using MediatR;
 
-namespace Examify.Quiz.Features.UploadImage;
+namespace Examify.UploadFile.Features.UploadImage;
 
 public record UploadImageCommand(IFormFile File) : IRequest<IResult>;
 

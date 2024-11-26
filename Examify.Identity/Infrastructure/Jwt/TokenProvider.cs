@@ -47,6 +47,26 @@ public class TokenProvider(UserManager<AppUser> userManager, IdentityContext con
         };
     }
 
+    public async Task<AuthenticatedDto> AuthenticateAsync(AppUser user)
+    {
+        var accessToken = CreateToken(user);
+        var refreshToken = GenerateRefreshToken(user);
+
+        await context.RefreshTokens.AddAsync(refreshToken);
+        await context.SaveChangesAsync();
+
+        return new AuthenticatedDto
+        {
+            Id = user.Id,
+            FullName = user.FullName,
+            Email = user.Email,
+            Image = user.Image,
+            Token = accessToken,
+            RefreshToken = refreshToken.Token,
+            ExpiresIn = _jwtOptions.DurationInMinutes * 60
+        };
+    }
+
     public string CreateToken(AppUser user)
     {
         var tokenHandler = new JwtSecurityTokenHandler();

@@ -16,7 +16,9 @@ const QuizEditorHeader = ({ quizData }) => {
   const publishQuizMutation = usePublishQuiz({
     mutationConfig: {
       onSuccess: () => {
-        queryClient.invalidateQueries('quiz-user');
+        queryClient.invalidateQueries({
+          queryKey: 'quiz-user',
+        });
         message.success('Quiz published successfully');
       },
       onError: (error) => {
@@ -42,9 +44,20 @@ const QuizEditorHeader = ({ quizData }) => {
           Setting
         </Button>
         <Button icon={<EyeOutlined />}>Preview</Button>
-        <Button type="primary" icon={<SaveOutlined />} onClick={handlePublish} loading={publishQuizMutation.isPending}>
-          Publish
-        </Button>
+        {!quizData?.isPublished ? (
+          <Button
+            type="primary"
+            icon={<SaveOutlined />}
+            onClick={handlePublish}
+            loading={publishQuizMutation.isPending}
+          >
+            Publish
+          </Button>
+        ) : (
+          <Button type="primary" icon={<SaveOutlined />} loading={publishQuizMutation.isPending}>
+            Update
+          </Button>
+        )}
       </Space>
       <QuizSettingModal data={quizData} open={isSettingModalOpen} onCancel={closeSettingModal} />
     </Header>

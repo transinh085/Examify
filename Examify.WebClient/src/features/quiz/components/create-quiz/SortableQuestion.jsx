@@ -1,5 +1,6 @@
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import { memo } from 'react';
 import QuestionItem from '~/features/quiz/components/create-quiz/QuestionItem';
 
 const SortableQuestion = ({ id, ...props }) => {
@@ -25,4 +26,4 @@ const SortableQuestion = ({ id, ...props }) => {
   );
 };
 
-export default SortableQuestion;
+export default memo(SortableQuestion);
