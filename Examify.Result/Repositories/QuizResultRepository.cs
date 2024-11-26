@@ -44,6 +44,6 @@ public class QuizResultRepository(QuizResultContext quizResultContext)
 
     public async Task<int> CountQuizAttempts(Guid Id, CancellationToken cancellationToken)
     {
-        return await context.QuizResults.Where(x => x.QuizId == Id).CountAsync();
+        return await quizResultContext.QuizResults.Where(x => x.QuizId == Id).CountAsync();
     }
 }

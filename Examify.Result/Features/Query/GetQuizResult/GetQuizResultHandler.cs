@@ -1,5 +1,4 @@
 ﻿using Examify.Quiz.Dtos;
-using Examify.Result.Entities;
 using Examify.Result.Repositories;
 using MediatR;
 using Result;
@@ -13,9 +12,9 @@ public class GetQuizResultHandler(
 {
     public async Task<IResult> Handle(GetQuizResultQuery request, CancellationToken cancellationToken)
     {
-        QuizResult? quizResult = await quizResultRepository.FindById(request.Id);
+        var quizResult = await quizResultRepository.FindById(request.Id);
 
-        if (quizResult == null)
+        if (quizResult is null)
         {
             return TypedResults.NotFound("Result not found.");
         }

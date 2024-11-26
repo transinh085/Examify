@@ -1,4 +1,5 @@
-﻿using Examify.Identity.Entities;
+﻿using Ardalis.GuardClauses;
+using Examify.Identity.Entities;
 using Examify.Identity.Infrastructure.Jwt;
 using Examify.Identity.Repositories;
 using Examify.Identity.Utilities;
@@ -10,7 +11,8 @@ namespace Examify.Identity.Features.Command.LoginGoogle;
 public class LoginGoogleHandler(
     IConfiguration configuration,
     IUserRepository userRepository,
-    ITokenProvider tokenProvider)
+    ITokenProvider tokenProvider
+)
     : IRequestHandler<LoginGoogleCommand, IResult>
 {
     public async Task<IResult> Handle(LoginGoogleCommand request, CancellationToken cancellationToken)
@@ -29,11 +31,11 @@ public class LoginGoogleHandler(
                 return Results.BadRequest(new { message = "Email is required" });
             }
 
-            var existingUser = await userRepository.GetByEmailAsync(email);
-            
-            if (existingUser == null)
+            var user = await userRepository.GetByEmailAsync(email);
+
+            if (user is null)
             {
-                var newUser = new AppUser
+                user = new AppUser
                 {
                     Email = email,
                     FirstName = payload.GivenName ?? payload.Name,
@@ -44,14 +46,11 @@ public class LoginGoogleHandler(
                 };
 
                 var password = PasswordGenerator.GenerateSecurePassword();
-                await userRepository.CreateUserAsync(newUser, password);
-                
-                var tokenForNewUser = await tokenProvider.AuthenticateAsync(email);
-                return Results.Ok(tokenForNewUser);
+                await userRepository.CreateUserAsync(user, password);
             }
-            
-            var token = await tokenProvider.AuthenticateAsync(email);
-            return Results.Ok(token);
+
+            var tokenForNewUser = await tokenProvider.AuthenticateAsync(user);
+            return Results.Ok(tokenForNewUser);
         }
         catch (InvalidJwtException)
         {
