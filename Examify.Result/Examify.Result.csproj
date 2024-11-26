@@ -39,14 +39,11 @@
     <ItemGroup>
         <Protobuf Include="Protos\quiz.proto" GrpcServices="Client"/>
         <Protobuf Include="Protos\quiz-result.proto" GrpcServices="Server"/>
+        <Protobuf Include="Protos\question.proto" GrpcServices="Client" />
     </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="Grpc.AspNetCore" Version="2.57.0"/>
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Infrastructure\Data\" />
     </ItemGroup>
 
 </Project>

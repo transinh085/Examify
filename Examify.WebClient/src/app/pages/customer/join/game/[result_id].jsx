@@ -6,10 +6,7 @@ import FullScreenButton from '~/features/do-quiz/components/FullScreenButton';
 import Option from '~/features/do-quiz/components/Option';
 import SettingDrawer from '~/features/do-quiz/components/SettingDrawer';
 import { triggerConfetti } from '~/features/do-quiz/utils/helpers';
-
-import lodash from 'lodash';
 import { useParams } from 'react-router-dom';
-import { MOCK_QUIZ } from '~/__mock__/__quiz__';
 import { QUESTION_TYPE } from '~/config/enums';
 import BackgroundAudio from '~/features/do-quiz/components/BackgroundAudio';
 import CountUpSection from '~/features/do-quiz/components/CountUpSection';
@@ -17,18 +14,22 @@ import GameFooter from '~/features/do-quiz/components/GameFooter';
 import useNumberKeyPress from '~/hooks/useNumberKeyPress';
 import useDoQuizStore from '~/stores/do-quiz-store';
 import MyQuizResult from '~/features/do-quiz/components/MyQuizResult';
+import { useGetQuizResult } from '~/features/do-quiz/api/get-quiz-result';
+import { useSubmitAnswersMutation } from '~/features/do-quiz/api/submit-answer';
 
 const DoQuizPage = () => {
-  const { quiz_id } = useParams();
+  const { result_id } = useParams();
 
   const {
+    quiz,
     isFinished,
-    useTimer,
-    questions,
+    quizSetting,
+    questionResults,
     waitingDuration,
     setIsFinished,
     setWaitingDuration,
     currentQuestion,
+    setCorrectOptions,
     initDoQuizStore,
     selectedOptions,
     setSelectedOptions,
@@ -37,37 +38,62 @@ const DoQuizPage = () => {
     removeSelectedOption,
   } = useDoQuizStore();
 
+  const { data: quizResult } = useGetQuizResult(
+    { id: result_id },
+    {
+      enabled: !!result_id,
+      initialData: {
+        quizSetting: {},
+        quiz: {},
+        questionResults: [],
+      },
+    },
+  );
+
+  const submitAnswersMutation = useSubmitAnswersMutation({
+    mutationConfig: {},
+  });
+
   const [isOpenSettings, setIsOpenSettings] = useState(false);
   const [questionDuration, setQuestionDuration] = useState(0);
 
   useEffect(() => {
-    initDoQuizStore({ useTimer: MOCK_QUIZ.use_timer, questions: MOCK_QUIZ.questions });
-    setQuestionDuration(MOCK_QUIZ.questions?.[0]?.duration);
-  }, [initDoQuizStore, setQuestionDuration]);
+    initDoQuizStore({
+      useTimer: quizResult?.quizSetting?.useTimer,
+      quiz: quizResult?.quiz,
+      questionResults: quizResult?.questionResults,
+      currentQuestion: 0,
+    });
+    setQuestionDuration(60);
+  }, [initDoQuizStore, setQuestionDuration, quizResult]);
 
   useNumberKeyPress((key) => {
-    const option = questions?.[currentQuestion]?.options?.[key - 1];
+    const option = questionResults?.[currentQuestion]?.options?.[key - 1];
     if (!option) return;
 
     handleChooseOption(option.id);
   });
 
-  const handleSubmitAnswer = (yourAnswers) => {
-    const correctOptionsIds = questions[currentQuestion]?.options
-      .filter((option) => option.isCorrect)
-      .map((option) => option.id);
-    1;
+  const handleSubmitAnswer = async (yourAnswers) => {
+    // call api to submit your answers
+    console.log('__submit_your_answers', {
+      options: yourAnswers,
+      questionDuration,
+      question_id: questionResults[currentQuestion]?.id,
+    });
 
-    if (lodash.isEqual(correctOptionsIds.sort(), yourAnswers.sort())) {
-      triggerConfetti();
-    }
+    const mutationResponse = await submitAnswersMutation.mutateAsync({
+      Answers: yourAnswers,
+      TimeTaken: questionDuration,
+      TimeSpent: 100,
+      questionResultId: questionResults[currentQuestion]?.id,
+    });
+
+    if (mutationResponse?.isCorrect) triggerConfetti();
+    setCorrectOptions(mutationResponse?.correctOptions);
+
     setWaitingDuration(3);
     setQuestionDuration(0);
-    // call api here
-    console.log('call api with data', {
-      question_id: questions[currentQuestion]?.id,
-      yourAnswers,
-    });
   };
 
   const handleChooseOption = (optionId) => {
@@ -78,7 +104,7 @@ const DoQuizPage = () => {
       return;
     }
     addSelectedOption(optionId);
-    if (questions?.[currentQuestion]?.type === QUESTION_TYPE.SINGLE_CHOICE) {
+    if (questionResults?.[currentQuestion]?.type === QUESTION_TYPE.SINGLE_CHOICE) {
       handleSubmitAnswer([...selectedOptions, optionId]);
     }
   };
@@ -88,12 +114,12 @@ const DoQuizPage = () => {
   };
 
   const handleNextQuestion = () => {
-    if (currentQuestion === questions.length - 1) {
+    if (currentQuestion === questionResults.length - 1) {
       // trigger completed game
       setIsFinished(true);
       return;
     }
-    setQuestionDuration(questions[currentQuestion + 1]?.duration);
+    setQuestionDuration(questionResults[currentQuestion + 1]?.question?.duration);
     nextQuestion();
     setSelectedOptions([]);
     setWaitingDuration(0);
@@ -108,7 +134,7 @@ const DoQuizPage = () => {
       <Flex justify="space-between" align="start" className="p-4">
         <CountUpSection />
         <div className="bg-[#3e084a] md:text-base lg:text-lg font-semibold py-2 px-4 rounded-lg text-center">
-          TypeScript Basic Test {quiz_id} {questionDuration}
+          {quiz?.title}
         </div>
         <Space size={20}>
           <Button
@@ -131,9 +157,11 @@ const DoQuizPage = () => {
           className="bg-[#2a0830] rounded-full py-4 px-12 lg:py-10 lg:px-12 lg:min-w-[800px] relative"
         >
           <div className="bg-[#2a0830] absolute top-0 left-[50%] border border-[#333] rounded-full px-8 py-1 translate-x-[-50%] translate-y-[-50%]">
-            {currentQuestion + 1}/{questions.length}
+            {currentQuestion + 1}/{questionResults.length}
           </div>
-          <h1 className="text-lg lg:text-2xl font-semibold text-center">{questions?.[currentQuestion]?.question}</h1>
+          <h1 className="text-lg lg:text-2xl font-semibold text-center">
+            {questionResults?.[currentQuestion]?.question?.content}
+          </h1>
           {waitingDuration > 0 && (
             <CountdownCircleTimer
               isPlaying
@@ -147,7 +175,7 @@ const DoQuizPage = () => {
               {({ remainingTime }) => <p>{remainingTime}s</p>}
             </CountdownCircleTimer>
           )}
-          {useTimer && questionDuration > 0 && (
+          {quizSetting?.useTimer && questionDuration > 0 && (
             <CountdownCircleTimer
               isPlaying
               duration={questionDuration}
@@ -162,14 +190,14 @@ const DoQuizPage = () => {
           )}
         </Flex>
         <Row gutter={[24, 24]} className="w-full p-2 lg:p-4">
-          {questions?.[currentQuestion]?.options?.map((option, index) => (
-            <Col key={option.id} xs={24} sm={12} lg={6}>
+          {questionResults?.[currentQuestion]?.answerResults?.map((answerResult, index) => (
+            <Col key={answerResult.id} xs={24} sm={12} lg={6}>
               <Option
-                type={questions?.[currentQuestion]?.type}
+                type={questionResults?.[currentQuestion]?.type}
                 number={index + 1}
-                {...option}
+                {...answerResult}
                 handleSelect={() => {
-                  handleChooseOption(option?.id);
+                  handleChooseOption(answerResult?.option?.id);
                 }}
               />
             </Col>

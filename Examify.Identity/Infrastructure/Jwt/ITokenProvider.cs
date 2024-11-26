@@ -7,5 +7,6 @@ public interface ITokenProvider
 {
     Task<AuthenticatedDto> AuthenticateAsync(string email, string password);
     Task<AuthenticatedDto> AuthenticateAsync(AppUser user);
+    Task<AuthenticatedDto> AuthenticateAsync(string email);
     Task<AuthenticatedDto> RefreshTokenAsync(string token);
 }

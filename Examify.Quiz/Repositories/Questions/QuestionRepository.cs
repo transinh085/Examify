@@ -1,4 +1,3 @@
-﻿using Ardalis.GuardClauses;
 using Examify.Quiz.Features.Questions.Command.BulkUpdateQuestion;
 using Examify.Quiz.Features.Questions.Command.PatchQuestionAttributes;
 using Examify.Quiz.Infrastructure.Data;
@@ -6,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Examify.Quiz.Repositories.Questions;
 
-public class QuestionRepository(QuizContext quizContext) : IQuestionRepository
+public class QuestionRepository(QuizContext quizContext): IQuestionRepository
 {
     public async Task BulkUpdateQuestion(BulkUpdateQuestionCommand request, CancellationToken cancellationToken)
     {
@@ -90,42 +89,5 @@ public class QuestionRepository(QuizContext quizContext) : IQuestionRepository
         return await quizContext.Questions
             .AnyAsync(q => q.QuizId == quizId, cancellationToken);
     }
-
-    public async Task UpdateOrder(Guid questionId, int newOrder, CancellationToken cancellationToken)
-    {
-        var question = await quizContext.Questions
-            .FirstOrDefaultAsync(q => q.Id == questionId, cancellationToken);
-
-        Guard.Against.NotFound(questionId, question);
-
-        if (question.Order == newOrder)
-        {
-            return;
-        }
-
-        var quizId = question.QuizId;
-        var currentOrder = question.Order;
-
-        var questions = await quizContext.Questions
-            .Where(q => q.QuizId == quizId)
-            .ToListAsync(cancellationToken);
-
-        if (newOrder < currentOrder)
-        {
-            foreach (var q in questions.Where(q => q.Order >= newOrder && q.Order < currentOrder))
-            {
-                q.Order += 1;
-            }
-        }
-        else if (newOrder > currentOrder)
-        {
-            foreach (var q in questions.Where(q => q.Order > currentOrder && q.Order <= newOrder))
-            {
-                q.Order -= 1;
-            }
-        }
-
-        question.Order = newOrder;
-        await quizContext.SaveChangesAsync(cancellationToken);
-    }
 }
+

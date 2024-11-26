@@ -23,5 +23,6 @@ var app = builder.Build();
 app.UseInfrastructure(app.Environment, useAuthentication: true);
 
 // Register gRPC clients
-app.MapGrpcService<QuizService>();
+app.MapGrpcService<QuizGrpcService>();
+app.MapGrpcService<QuestionGrpcService>();
 app.Run();

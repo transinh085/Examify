@@ -14,5 +14,7 @@ public interface IUserRepository
 
     Task<bool> UpdatePasswordAsync(AppUser user,string oldPassword, string newPassword);
     Task<bool> UpdateUserAsync(AppUser user);
+    Task<bool> UpdateUserImageAsync(AppUser user);
+
 
 }

@@ -5,11 +5,11 @@ import { IGNORED_OPTION_OPACITY, OPTION_COLOR_ARRAY, SELECTED_OPTION_COLOR_CONFI
 import { QUESTION_TYPE } from '~/config/enums';
 import useDoQuizStore from '~/stores/do-quiz-store';
 
-const Option = ({ type, number, id, content, isCorrect, handleSelect }) => {
-  const { waitingDuration, selectedOptions } = useDoQuizStore();
+const Option = ({ type, number, option, handleSelect }) => {
+  const { waitingDuration, selectedOptions, correctOptions } = useDoQuizStore();
 
   const optionStyles = useMemo(() => {
-    const isSelected = selectedOptions.includes(id);
+    const isSelected = selectedOptions.includes(option?.id);
 
     let backgroundColor = OPTION_COLOR_ARRAY[(number - 1) % OPTION_COLOR_ARRAY.length];
     let opacity = 1;
@@ -17,7 +17,7 @@ const Option = ({ type, number, id, content, isCorrect, handleSelect }) => {
 
     if (waitingDuration) {
       if (isSelected) {
-        if (isCorrect) {
+        if (correctOptions.includes(option?.id)) {
           backgroundColor = SELECTED_OPTION_COLOR_CONFIG.CORRECT;
         } else {
           backgroundColor = SELECTED_OPTION_COLOR_CONFIG.INCORRECT;
@@ -25,7 +25,7 @@ const Option = ({ type, number, id, content, isCorrect, handleSelect }) => {
         }
         opacity = 1;
       } else {
-        if (isCorrect && type === QUESTION_TYPE.MULTIPLE_CHOICE) {
+        if (correctOptions.includes(option?.id) && type === QUESTION_TYPE.MULTIPLE_CHOICE) {
           backgroundColor = SELECTED_OPTION_COLOR_CONFIG.INCORRECT;
           animate = 'animate-shake';
         } else {
@@ -35,7 +35,7 @@ const Option = ({ type, number, id, content, isCorrect, handleSelect }) => {
     }
 
     return { backgroundColor, opacity, animate };
-  }, [waitingDuration, isCorrect, selectedOptions, id, number, type]);
+  }, [waitingDuration, correctOptions, selectedOptions, number, type, option]);
 
   return (
     <Card
@@ -50,12 +50,12 @@ const Option = ({ type, number, id, content, isCorrect, handleSelect }) => {
           justify="center"
           className="absolute top-2 right-2 w-[34px] h-[34px] border border-[#ccc] rounded-md"
           style={{
-            backgroundColor: selectedOptions.includes(id) ? 'white' : 'transparent',
+            backgroundColor: selectedOptions.includes(option?.id) ? 'white' : 'transparent',
           }}
         >
           <p
             style={{
-              color: selectedOptions.includes(id) ? optionStyles.backgroundColor : 'white',
+              color: selectedOptions.includes(option?.id) ? optionStyles.backgroundColor : 'white',
             }}
           >
             {number}
@@ -63,7 +63,7 @@ const Option = ({ type, number, id, content, isCorrect, handleSelect }) => {
         </Flex>
       </Tooltip>
       <Flex align="center" justify="center" className="flex-grow w-full lg:min-h-[240px]">
-        <h1 className="text-white text-base lg:text-2xl font-medium text-center">{content}</h1>
+        <h1 className="text-white text-base lg:text-2xl font-medium text-center">{option?.content}</h1>
       </Flex>
     </Card>
   );

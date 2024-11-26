@@ -4,7 +4,7 @@ option csharp_namespace = "Quiz";
 
 package quiz;
 
-service Quiz {
+service QuizGrpcService {
   rpc GetQuiz (QuizRequest) returns (QuizReply);
 }
 
@@ -15,4 +15,22 @@ message QuizRequest {
 message QuizReply {
   string id = 1;
   string title = 2;
+  string description = 3;
+  repeated QuizQuestionMessage questions = 4;
+}
+
+
+message QuizQuestionMessage {
+  string id = 1;
+  string content = 2;
+  string type = 3;
+  int32 duration = 4;
+  int32 points = 5;
+  repeated QuizOptionMessage options = 6;
+}
+
+message QuizOptionMessage {
+  string id = 1;
+  string content = 2;
+  bool is_correct = 3;
 }

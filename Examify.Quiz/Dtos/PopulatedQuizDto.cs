@@ -8,11 +8,17 @@ namespace Examify.Quiz.Dtos;
 public class PopulatedQuizDto
 {
     public Guid Id { get; set; }
+    public string Title { get; set; }
+    public string Description { get; set; }
     public List<PopulatedQuestionDto> Questions { get; set; }
     
     public class PopulatedQuestionDto
     {
         public Guid Id { get; set; }
+        
+        public string Content { get; set; }
+    
+        public int Duration { get; set; }
         public QuestionType Type { get; set; }
         public List<OptionDto> Options { get; set; }
         

@@ -19,6 +19,8 @@ builder.AddMessaging();
 
 // Register repositories
 builder.Services.AddScoped<IQuizResultRepository, QuizResultRepository>();
+builder.Services.AddScoped<IQuestionResultRepository, QuestionResultRepository>();
+builder.Services.AddScoped<IAnswerResultRepository, AnswerResultRepository>();
 
 var app = builder.Build();
 app.UseInfrastructure(app.Environment, useAuthentication: true);

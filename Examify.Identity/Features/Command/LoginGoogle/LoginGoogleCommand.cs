@@ -3,12 +3,14 @@ using MediatR;
 
 namespace Examify.Identity.Features.Command.LoginGoogle;
 
-public record LoginGoogleCommand(string AccessToken) : IRequest<IResult>;
+public record LoginGoogleCommand(string clientId, string credential, string select_by) : IRequest<IResult>;
 
-public class LoginFacebookValidator : AbstractValidator<LoginGoogleCommand>
+public class LoginGoogleValidator : AbstractValidator<LoginGoogleCommand>
 {
-    public LoginFacebookValidator()
+    public LoginGoogleValidator()
     {
-        RuleFor(x => x.AccessToken).NotEmpty();
+        RuleFor(x => x.clientId).NotEmpty();
+        RuleFor(x => x.credential).NotEmpty();
+        RuleFor(x => x.select_by).NotEmpty();
     }
 }

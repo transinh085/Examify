@@ -46,6 +46,12 @@ public class TokenProvider(UserManager<AppUser> userManager, IdentityContext con
             ExpiresIn = _jwtOptions.DurationInMinutes * 60
         };
     }
+    
+    public async Task<AuthenticatedDto> AuthenticateAsync(string email)
+    {
+        var user = await userManager.FindByEmailAsync(email);
+        if (user == null )
+            throw new UnauthorizedAccessException();
 
     public async Task<AuthenticatedDto> AuthenticateAsync(AppUser user)
     {
@@ -66,7 +72,6 @@ public class TokenProvider(UserManager<AppUser> userManager, IdentityContext con
             ExpiresIn = _jwtOptions.DurationInMinutes * 60
         };
     }
-
     public string CreateToken(AppUser user)
     {
         var tokenHandler = new JwtSecurityTokenHandler();

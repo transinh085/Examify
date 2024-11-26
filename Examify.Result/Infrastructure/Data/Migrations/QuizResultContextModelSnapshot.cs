@@ -37,6 +37,9 @@ namespace Examify.Result.Infrastructure.Data.Migrations
                     b.Property<Guid>("OptionId")
                         .HasColumnType("uuid");
 
+                    b.Property<int>("Order")
+                        .HasColumnType("integer");
+
                     b.Property<Guid>("QuestionResultId")
                         .HasColumnType("uuid");
 
@@ -65,6 +68,9 @@ namespace Examify.Result.Infrastructure.Data.Migrations
                     b.Property<int>("Order")
                         .HasColumnType("integer");
 
+                    b.Property<int>("Points")
+                        .HasColumnType("integer");
+
                     b.Property<Guid>("QuestionId")
                         .HasColumnType("uuid");
 
@@ -73,6 +79,9 @@ namespace Examify.Result.Infrastructure.Data.Migrations
 
                     b.Property<DateTime>("SubmittedAt")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("TimeTaken")
+                        .HasColumnType("integer");
 
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
@@ -95,6 +104,9 @@ namespace Examify.Result.Infrastructure.Data.Migrations
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("CurrentQuestion")
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("QuizId")
                         .HasColumnType("uuid");

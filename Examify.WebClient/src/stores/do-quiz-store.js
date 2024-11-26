@@ -1,24 +1,39 @@
 import { create } from 'zustand';
 
 const useDoQuizStore = create((set) => ({
-  questions: [],
+  quiz: {
+    id: '1-1-1',
+    title: 'Quiz 1',
+    description: 'This is quiz 1',
+  },
+  quizSetting: {
+    useTimer: false,
+    code: '',
+  },
+  questionResults: [],
   currentQuestion: 0,
   selectedOptions: [],
+  correctOptions: [],
   waitingDuration: 0,
-  useTimer: false,
   isPlayMusic: false,
   isFinished: false,
-  initDoQuizStore: ({ useTimer, questions }) => {
+  initDoQuizStore: ({ useTimer, currentQuestion, questionResults, quiz }) => {
     set({
-      questions,
-      useTimer,
+      quiz,
+      questionResults,
+      currentQuestion,
+      quizSetting: {
+        useTimer,
+        code: '',
+      },
     });
   },
   setIsPlayMusic: (isPlayMusic) => set({ isPlayMusic }),
-  setQuestions: (questions) => set({ questions }),
+  setQuestionResults: (questionResults) => set({ questionResults }),
   nextQuestion: () => set((state) => ({ currentQuestion: state.currentQuestion + 1 })),
   setCurrentQuestion: (currentQuestion) => set({ currentQuestion }),
   setSelectedOptions: (selectedOptions) => set({ selectedOptions }),
+  setCorrectOptions: (correctOptions) => set({ correctOptions }),
   addSelectedOption: (option) => set((state) => ({ selectedOptions: [...state.selectedOptions, option] })),
   removeSelectedOption: (option) =>
     set((state) => ({ selectedOptions: state.selectedOptions.filter((id) => id !== option) })),

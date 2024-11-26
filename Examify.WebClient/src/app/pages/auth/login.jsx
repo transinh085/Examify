@@ -1,6 +1,6 @@
 import { Button, Divider, Flex, Form, Input, message, Space, Typography } from 'antd';
-import { useLoginMutation } from '~/features/auth/api/login';
-import gg from '~/assets/svg/gg.svg';
+import { useGoogleLoginMutation, useLoginMutation } from '~/features/auth/api/login';
+// import gg from '~/assets/svg/gg.svg';
 import fb from '~/assets/svg/fb.svg';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import Cookies from 'js-cookie';
@@ -8,8 +8,7 @@ import RULES from '~/features/auth/rules';
 import useAuthStore from '~/stores/auth-store';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import { useLoginFacebookMutation } from '~/features/auth/api/login-facebook';
-import { useGoogleLogin } from '@react-oauth/google';
-import { useLoginGoogleMutation } from '~/features/auth/api/login-google';
+import { GoogleLogin } from '@react-oauth/google';
 
 const LoginRoute = () => {
   const [searchParams] = useSearchParams();
@@ -44,20 +43,6 @@ const LoginRoute = () => {
     },
   });
 
-  const loginGoogleMutation = useLoginGoogleMutation({
-    mutationConfig: {
-      onSuccess: (data) => {
-        Cookies.set('token', data?.token);
-        setUser(data);
-
-        navigate(redirect ? redirect : '/');
-      },
-      onError: ({ response }) => {
-        message.error(response?.data?.detail || 'Something went wrong!');
-      },
-    },
-  });
-
   const handleLogin = (data) => {
     mutation.mutate({
       email: data.email,
@@ -75,12 +60,22 @@ const LoginRoute = () => {
     });
   };
 
-  const googleLogin = useGoogleLogin({
-    onSuccess: (tokenResponse) => {
-      console.log('tokenResponse', tokenResponse);
-      loginGoogleMutation.mutate({ accessToken: tokenResponse.access_token });
+  const googleLoginMutation = useGoogleLoginMutation({
+    mutationConfig: {
+      onSuccess: (data) => {
+        Cookies.set('token', data?.token);
+        setUser(data);
+        navigate(redirect ? redirect : '/');
+      },
+      onError: ({ response }) => {
+        message.error(response?.data?.detail || 'Something went wrong!');
+      },
     },
   });
+
+  const handleGoogleLogin = (credential) => {
+    googleLoginMutation.mutate({ data: credential });
+  };
 
   return (
     <Space
@@ -91,18 +86,13 @@ const LoginRoute = () => {
       <Typography className="text-[22px] font-semibold">Login</Typography>
 
       <Flex gap={10}>
-        <Button
-          icon={<img src={gg} />}
-          styles={{
-            icon: {
-              marginRight: '10px',
-            },
+        <GoogleLogin
+          text="Google"
+          onSuccess={handleGoogleLogin}
+          onError={() => {
+            console.log('Login Failed');
           }}
-          onClick={() => googleLogin()}
-          block
-        >
-          Google
-        </Button>
+        />
         <FacebookLogin
           buttonStyle={{ padding: '6px' }}
           appId="423573474136909"

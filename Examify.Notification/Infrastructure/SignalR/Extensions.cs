@@ -1,7 +1,7 @@
 ﻿using Examify.Infrastructure.Jwt;
 using Examify.Notification.Hubs;
 
-namespace Examify.Result.Infrastructure.SignalR;
+namespace Examify.Notification.Infrastructure.SignalR;
 
 public static class Extensions
 {
