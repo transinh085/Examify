@@ -11,6 +11,13 @@ const DoQuizRoutes = {
         return { Component: DoQuizPage.default };
       },
     },
+    {
+      path: 'game/:result_id/result',
+      lazy: async () => {
+        const ResultPage = await import('../pages/customer/join/game/[result_id]/result');
+        return { Component: ResultPage.default };
+      },
+    },
   ],
 };
 

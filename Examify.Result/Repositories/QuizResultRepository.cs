@@ -24,12 +24,52 @@ public class QuizResultRepository(QuizResultContext quizResultContext)
         return quizResult;
     }
     
+    // get quizResult sorted by question order and answer order
+    public async Task<QuizResult?> FindByIdWithQuestionsWithOptions(Guid id)
+    {
+        return await quizResultContext.QuizResults
+            .AsNoTracking()
+            .Include(r => r.QuestionResults)
+            .ThenInclude(q => q.AnswerResults)
+            .Where(r => r.Id == id)
+            .Select(r => new QuizResult
+            {
+                Id = r.Id,
+                UserId = r.UserId,
+                QuizId = r.QuizId,
+                AttemptedNumber = r.AttemptedNumber,
+                TotalPoints = r.TotalPoints,
+                TimeTaken = r.TimeTaken,
+                CurrentQuestion = r.CurrentQuestion,
+                QuestionResults = r.QuestionResults
+                    .OrderBy(q => q.Order)
+                    .Select(q => new QuestionResult
+                    {
+                        Id = q.Id,
+                        Order = q.Order,
+                        IsCorrect = q.IsCorrect,
+                        Points = q.Points,
+                        TimeTaken = q.TimeTaken,
+                        SubmittedAt = q.SubmittedAt,
+                        QuestionId = q.QuestionId,
+                        AnswerResults = q.AnswerResults
+                            .OrderBy(a => a.Order)
+                            .ToList()
+                    })
+                    .ToList()
+            })
+            .FirstOrDefaultAsync();
+    }
+
     public async Task<QuizResult?> FindById(Guid id)
     {
         return await quizResultContext.QuizResults
-            .Include(r => r.QuestionResults) 
-            .ThenInclude(q => q.AnswerResults) 
-            .FirstOrDefaultAsync(r => r.Id == id); 
+            .AsNoTracking().FirstOrDefaultAsync(r => r.Id == id);
+    }
+    public async Task<bool> Update(QuizResult quizResult)
+    {
+        quizResultContext.QuizResults.Update(quizResult);
+        return true;
     }
     
     public async Task<bool> Exists(Guid quizResultId)

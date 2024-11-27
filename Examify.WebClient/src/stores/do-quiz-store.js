@@ -11,21 +11,25 @@ const useDoQuizStore = create((set) => ({
     code: '',
   },
   questionResults: [],
-  currentQuestion: 0,
+  currentQuestion: -1,
+  timeTaken: 0,
   selectedOptions: [],
   correctOptions: [],
   waitingDuration: 0,
   isPlayMusic: false,
   isFinished: false,
-  initDoQuizStore: ({ useTimer, currentQuestion, questionResults, quiz }) => {
+  initDoQuizStore: ({ useTimer, currentQuestion, timeTaken, questionResults, quiz }) => {
+    const isFinished = currentQuestion >= questionResults.length;
     set({
       quiz,
       questionResults,
       currentQuestion,
+      timeTaken,
       quizSetting: {
         useTimer,
         code: '',
       },
+      isFinished
     });
   },
   setIsPlayMusic: (isPlayMusic) => set({ isPlayMusic }),
@@ -39,6 +43,7 @@ const useDoQuizStore = create((set) => ({
     set((state) => ({ selectedOptions: state.selectedOptions.filter((id) => id !== option) })),
   setWaitingDuration: (waitingDuration) => set({ waitingDuration }),
   setIsFinished: (isFinished) => set({ isFinished }),
+  setTimeTaken: (timeTaken) => set({ timeTaken }),
 }));
 
 export default useDoQuizStore;

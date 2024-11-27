@@ -12,7 +12,7 @@ public class GetQuizResultHandler(
 {
     public async Task<IResult> Handle(GetQuizResultQuery request, CancellationToken cancellationToken)
     {
-        var quizResult = await quizResultRepository.FindById(request.Id);
+        var quizResult = await quizResultRepository.FindByIdWithQuestionsWithOptions(request.Id);
 
         if (quizResult is null)
         {

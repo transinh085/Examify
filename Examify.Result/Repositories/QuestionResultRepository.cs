@@ -1,5 +1,6 @@
 ﻿using Examify.Result.Entities;
 using Examify.Result.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Examify.Result.Repositories;
 
@@ -17,22 +18,21 @@ public class QuestionResultRepository(QuizResultContext quizResultContext)
             Points = 0,
             TimeTaken = 0,
         };
-        
+
         await quizResultContext.QuestionResults.AddAsync(questionResult);
-        
+
         return questionResult;
     }
-    
+
     public async Task<QuestionResult?> FindById(Guid id)
     {
-        return await quizResultContext.QuestionResults.FindAsync(id);
+        return await quizResultContext.QuestionResults.AsTracking(QueryTrackingBehavior.NoTracking)
+            .FirstOrDefaultAsync(r => r.Id == id);
     }
-    
+
     public async Task<bool> Update(QuestionResult questionResult)
     {
         quizResultContext.QuestionResults.Update(questionResult);
-        
-        return await quizResultContext.SaveChangesAsync() > 0;
+        return true;
     }
 }
-
