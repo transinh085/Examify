@@ -1,11 +1,17 @@
-import { Avatar, Button, Card, Col, Flex, Row, Skeleton, Space } from 'antd';
+import { Avatar, Button, Card, Col, Flex, Row, Space } from 'antd';
 import { Link } from 'react-router-dom';
+import CorrectIcon from '~/components/icons/CorrectIcon';
+import IncorrectIcon from '~/components/icons/IncorrectIcon';
 import SoundIcon from '~/components/icons/SoundIcon';
+import useDoQuizStore from '~/stores/do-quiz-store';
+
+const OPTION_LETTERS = ['A', 'B', 'C', 'D'];
 
 const MyQuizResult = () => {
+  const { questionResults } = useDoQuizStore();
   return (
-    <Flex justify="space-between" className="py-8">
-      <Space direction="vertical" size={24} className="w-[540px] mx-auto">
+    <Flex justify="space-between" className="py-8 h-full">
+      <Space direction="vertical" size={24} className="w-[640px] mx-auto h-full overflow-y-auto px-4 custom-scrollbar">
         <Link to={'/'}>
           <Button type="primary" shape="default" className="!bg-[#6d387d] !hover:bg-[red] float-end" onClick={null}>
             Back to home
@@ -56,10 +62,34 @@ const MyQuizResult = () => {
             </Button>
           </Space>
         </Card>
-
         <Card className="bg-[#2a0830] border-none">
           <h1 className="text-lg font-semibold text-white mb-4">Your results</h1>
-          <Skeleton active />
+          <Space direction="vertical" size={20} className="w-full">
+            {questionResults?.map((questionResult, index) => (
+              <Card key={index}>
+                <Space direction="vertical" className="bg-white w-full">
+                  <Space direction="horizontal" size={4}>
+                    <h1 key={index} className='font-semibold'>
+                      Question: {questionResult?.order + 1}: {questionResult?.question?.content}
+                    </h1>
+                    {questionResult?.isCorrect ? <CorrectIcon /> : <IncorrectIcon />}
+                  </Space>
+                  {questionResult?.answerResults?.map((answerResult, index) => (
+                    <div
+                      key={index}
+                      className={`${
+                        answerResult?.isSelected && (questionResult?.isCorrect ? 'bg-green-400 text-white' : 'bg-red-500 text-white')
+                      } p-2 rounded-md`}
+                    >
+                      <h1 className=''>
+                       {OPTION_LETTERS?.[index]}. {answerResult?.option?.content}
+                      </h1>
+                    </div>
+                  ))}
+                </Space>
+              </Card>
+            ))}
+          </Space>
         </Card>
       </Space>
     </Flex>

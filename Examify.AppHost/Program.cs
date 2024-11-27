@@ -6,7 +6,7 @@ var builder = DistributedApplication.CreateBuilder(args);
 var userName = builder.AddParameter("username", "admin");
 var password = builder.AddParameter("password", "JJD7YgCFNHoTcvc");
 
-var postgreSql = builder.AddPostgres("postgreSql", userName, password, 5432)
+var postgreSql = builder.AddPostgres("postgreSql", userName, password, 5433)
     .WithLifetime(ContainerLifetime.Persistent)
     .WithDataVolume("examify-postgres-data");
 
