@@ -12,15 +12,15 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Examify.Quiz.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(QuizContext))]
-    [Migration("20241121234116_AddOrderColumn")]
-    partial class AddOrderColumn
+    [Migration("20241129115215_altercolumn")]
+    partial class altercolumn
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.11")
+                .HasAnnotation("ProductVersion", "9.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -116,8 +116,8 @@ namespace Examify.Quiz.Infrastructure.Data.Migrations
                     b.Property<Guid?>("LanguageId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("OwnerId")
-                        .HasColumnType("uuid");
+                    b.Property<string>("OwnerId")
+                        .HasColumnType("text");
 
                     b.Property<Guid?>("SubjectId")
                         .HasColumnType("uuid");

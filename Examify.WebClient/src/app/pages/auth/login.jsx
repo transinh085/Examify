@@ -85,9 +85,8 @@ const LoginRoute = () => {
     >
       <Typography className="text-[22px] font-semibold">Login</Typography>
 
-      <Flex gap={10}>
+      <Space gap={10} direction="vertical" className="w-full">
         <GoogleLogin
-          text="Google"
           onSuccess={handleGoogleLogin}
           onError={() => {
             console.log('Login Failed');
@@ -101,21 +100,13 @@ const LoginRoute = () => {
           callback={handleFacebookCallback}
           returnScopes={false}
           render={(renderProps) => (
-            <Button
-              onClick={renderProps.onClick}
-              styles={{
-                icon: {
-                  marginRight: '10px',
-                },
-              }}
-              icon={<img src={fb} />}
-              block
-            >
-              Facebook
+            <Button onClick={renderProps.onClick} className="flex justify-start items-center h-[38px] rounded" block>
+              <img src={fb} />
+              <p className="flex-1">Đăng nhập bằng Facebook</p>
             </Button>
           )}
         />
-      </Flex>
+      </Space>
 
       <Divider>
         <Typography className="text-[#333] mb-2">Or</Typography>
@@ -145,10 +136,7 @@ const LoginRoute = () => {
             <Input.Password placeholder="Enter your password..." />
           </Form.Item>
         </Flex>
-        <Form.Item className="pt-2 m-0">
-          <a href="forgot-password" className="block mb-3">
-            Forgot password
-          </a>
+        <Form.Item className="mb-0">
           <Button loading={mutation.isPending} type="primary" htmlType="submit" className="w-full">
             Login
           </Button>
@@ -156,7 +144,10 @@ const LoginRoute = () => {
       </Form>
       <Typography className="text-center">
         <Link to={'/auth/register'}>
-          Do you have an account yet? <span className="cursor-pointer underline">Register</span>
+          <a href="forgot-password" className="block mb-3">
+            Forgot password
+          </a>
+          Do you have an account yet? <span className="cursor-pointer  font-bold">Register</span>
         </Link>
       </Typography>
     </Space>

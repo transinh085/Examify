@@ -16,6 +16,7 @@ const AppProvider = ({ children }) => {
             controlHeight: 34,
             colorPrimary: '#027f91',
             colorLinkHover: '#027f91',
+            colorLink: '#027f91',
           },
           components: {
             Table: {

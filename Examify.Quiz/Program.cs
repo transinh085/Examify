@@ -17,6 +17,7 @@ builder.Services.AddJwt(builder.Configuration);
 // Register repositories
 builder.Services.AddScoped<IQuizRepository, QuizRepository>();
 builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
+builder.Services.AddScoped<IQuizMetaService, QuizMetaService>();
 
 var app = builder.Build();
 
