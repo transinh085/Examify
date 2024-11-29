@@ -4,8 +4,10 @@ option csharp_namespace = "Catalog";
 
 package catalog;
 
+import "google/protobuf/empty.proto";
+
 service Grade {
-  rpc GetGrade (GradeRequest) returns (GradeReply);
+  rpc GetGrade (GradeRequest) returns (GetGradeResponse);
 }
 
 message GradeRequest {
@@ -15,4 +17,11 @@ message GradeRequest {
 message GradeReply {
   string id = 1;
   string name = 2;
+}
+
+message GetGradeResponse {
+  oneof response {
+    GradeReply grade = 1;
+    google.protobuf.Empty empty = 2;
+  }
 }

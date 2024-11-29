@@ -7,7 +7,7 @@ public class GetAllQuizEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapGet("/quizzes", async (ISender sender) => await sender.Send(new GetAllQuizQuery()))
+        app.MapGet("/quizzes", async (int pageSize, int pageNumber,ISender sender) => await sender.Send(new GetAllQuizQuery(pageSize, pageNumber)))
             .Produces<List<Entities.Quiz>>();
     }
 }

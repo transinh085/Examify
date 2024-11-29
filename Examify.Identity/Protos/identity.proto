@@ -4,8 +4,10 @@ option csharp_namespace = "Identity";
 
 package identity;
 
+import "google/protobuf/empty.proto";
+
 service Identity {
-  rpc GetIdentity (IdentityRequest) returns (IdentityReply);
+  rpc GetIdentity (IdentityRequest) returns (GetIdentityResponse);
 }
 
 message IdentityRequest {
@@ -16,4 +18,11 @@ message IdentityReply {
   string id = 1;
   string name = 2;
   string image = 3;
+}
+
+message GetIdentityResponse {
+  oneof response {
+    IdentityReply identity = 1;
+    google.protobuf.Empty empty = 2;
+  }
 }

@@ -1,4 +1,5 @@
 ﻿
+using Examify.Core.Pagination;
 using Examify.Quiz.Dtos;
 using Examify.Quiz.Features.Quiz.Dtos;
 
@@ -17,11 +18,12 @@ public interface IQuizRepository
     
     Task UpdateQuiz(Entities.Quiz quiz, CancellationToken cancellationToken);
     
-    Task<List<QuizDto>> GetAllQuizzes(CancellationToken cancellationToken);
+    Task<PagedList<QuizUserDto>> GetAllQuizzes(int pageNumber, int pageSize, CancellationToken cancellationToken);
     
-    Task<QuizUserDto> GetQuizByUserId(Guid userId, CancellationToken cancellationToken);
+    Task<PagedList<QuizUserDto>> GetQuizPublishedByUserId(Guid userId, int pageNumber, int pageSize, CancellationToken cancellationToken);
     
     Task<PopulatedQuizDto?> GetQuizById(string quizId);
     
     Task<List<PopulatedQuizDto>> GetQuizzesBySubject(Guid subjectId, CancellationToken cancellationToken);
+    
 }

@@ -8,7 +8,7 @@ public interface ILanguageRepository
     
     Task<List<Entities.Language>> GetLanguagesAsync();
     
-    Task<Entities.Language> FindLanguageByIdAsync(Guid languageId);
+    Task<Entities.Language?> FindLanguageByIdAsync(Guid languageId);
     
     Task<bool> DeleteLanguageAsync(Entities.Language languageId);
     
