@@ -4,8 +4,10 @@ option csharp_namespace = "Quiz";
 
 package catalog;
 
+import "google/protobuf/empty.proto";
+
 service Language {
-  rpc GetLanguage (LanguageRequest) returns (LanguageReply);
+  rpc GetLanguage (LanguageRequest) returns (GetLanguageResponse);
 }
 
 message LanguageRequest {
@@ -15,4 +17,11 @@ message LanguageRequest {
 message LanguageReply {
   string id = 1;
   string name = 2;
+}
+
+message GetLanguageResponse {
+  oneof response {
+    LanguageReply language = 1;
+    google.protobuf.Empty empty = 2; 
+  }
 }

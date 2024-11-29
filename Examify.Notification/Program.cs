@@ -7,12 +7,12 @@ using Examify.Notification.Infrastructure.SignalR;
 var builder = WebApplication.CreateBuilder(args);
 var assembly = Assembly.GetExecutingAssembly();
 
-builder.AddInfrashtructure(assembly, enableSwagger: false);
+builder.AddInfrashtructure(assembly);
 builder.AddSignalRService();
 builder.AddMessaging();
 builder.Services.AddEmailService(builder.Configuration);
 
 var app = builder.Build();
-app.UseInfrastructure(app.Environment, useAuthentication: true, enableSwagger: false);
+app.UseInfrastructure(app.Environment, useAuthentication: true);
 app.UseSignalR();
 app.Run();
