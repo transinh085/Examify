@@ -1,4 +1,4 @@
-import { Avatar, Button, Dropdown, Flex, Modal, Space, Tag } from 'antd';
+import { Avatar, Button, Dropdown, Flex, Space, Tag } from 'antd';
 import {
   DeleteOutlined,
   HeatMapOutlined,
@@ -12,9 +12,19 @@ import {
 } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
-import { useState } from 'react';
 
-const TestCard = ({ id, imgSrc, title, author, date, questions, gradeName, languageName, setIsModalVisible, setTitleQuiz }) => {
+const TestCard = ({
+  id,
+  imgSrc,
+  title,
+  author,
+  date,
+  questions,
+  gradeName,
+  languageName,
+  setIsModalVisible,
+  setTitleQuiz,
+}) => {
   const navigate = useNavigate();
 
   const handleCardClick = () => {
@@ -30,12 +40,12 @@ const TestCard = ({ id, imgSrc, title, author, date, questions, gradeName, langu
       <Space size="middle">
         <img
           onClick={handleCardClick}
-          className="w-[120px] h-[120px] rounded-sm cursor-pointer"
+          className="w-[240px] h-[120px] rounded-sm cursor-pointer object-cover"
           src={imgSrc ?? 'https://avatars.githubusercontent.com/u/120194990?v=4'}
           alt="imgTest"
         />
         <Space direction="vertical" size="small">
-          <Tag color='cyan'>Assessment</Tag>
+          <Tag color="cyan">Assessment</Tag>
           <h1 onClick={handleCardClick} className="font-bold cursor-pointer hover:underline">
             {title}
           </h1>
@@ -78,8 +88,8 @@ const TestCard = ({ id, imgSrc, title, author, date, questions, gradeName, langu
 const DropdownMenu = ({ setIsModalVisible, setTitleQuiz, title }) => {
   const onClick = ({ key }) => {
     if (key === '2') {
-      setIsModalVisible(true)
-      setTitleQuiz(title)
+      setIsModalVisible(true);
+      setTitleQuiz(title);
     }
   };
   const items = [
@@ -112,7 +122,8 @@ const DropdownMenu = ({ setIsModalVisible, setTitleQuiz, title }) => {
           <Button type="text" icon={<MoreOutlined />} size="small" />
         </a>
       </Dropdown>
-    </>);
+    </>
+  );
 };
 
 export default TestCard;

@@ -2,6 +2,7 @@ import { Avatar, Button, Card, Divider, Flex, Modal, Progress, Tag } from 'antd'
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { PlayCircleOutlined } from '@ant-design/icons';
 
 const QuizItem = ({ title, description, image, percent, questions }) => {
   const [open, setOpen] = useState(false);
@@ -86,11 +87,10 @@ const QuizItem = ({ title, description, image, percent, questions }) => {
           <p>Câu hỏi mẫu: ...</p>
           <Flex align="center" gap={10} className="pt-4">
             <Link to="/join/game/1" className="flex-1">
-              <Button type="primary" className="w-full">
-                START NOW
+              <Button type="primary" size="large" icon={<PlayCircleOutlined />} block>
+                Start now
               </Button>
             </Link>
-            <Button className="flex-1">SHARE</Button>
           </Flex>
         </div>
       </Modal>

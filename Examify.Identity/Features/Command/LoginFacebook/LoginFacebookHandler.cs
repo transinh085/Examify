@@ -36,7 +36,6 @@ public class LoginFacebookHandler(
         if (!fbResponse.IsSuccessStatusCode) throw new UnauthorizedAccessException();
 
         var fbContent = await fbResponse.Content.ReadAsStringAsync(cancellationToken);
-        logger.LogInformation(fbContent);
         var fbUser = JsonSerializer.Deserialize<FacebookUser>(fbContent,
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
         var user = await userManager.FindByEmailAsync(fbUser.Email);
@@ -61,7 +60,7 @@ public class LoginFacebookHandler(
             if (!result.Succeeded) throw new UnauthorizedAccessException();
         }
 
-        return TypedResults.Ok(await tokenProvider.  AuthenticateAsync(user));
+        return TypedResults.Ok(await tokenProvider.AuthenticateAsync(user));
     }
 }
 

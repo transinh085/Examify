@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Examify.Quiz.Dtos;
 using Examify.Quiz.Features.Quiz.Dtos;
+using Examify.Quiz.Grpc;
 using Examify.Quiz.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Quiz;
@@ -9,10 +11,7 @@ namespace Examify.Quiz.Repositories.Quiz;
 
 public class QuizRepository(
     QuizContext quizContext,
-    Language.LanguageClient languageClient,
-    Subject.SubjectClient subjectClient,
-    Grade.GradeClient gradeClient,
-    Identity.IdentityClient identityClient,
+    IQuizMetaService quizMetaService,
     IMapper mapper)
     : IQuizRepository
 {
@@ -62,14 +61,10 @@ public class QuizRepository(
         var quizDtos = mapper.Map<List<QuizDto>>(quizzes);
         foreach (var quiz in quizDtos)
         {
-            var languageRequest = new LanguageRequest { Id = quiz.LanguageId.ToString() };
-            var languageReply = languageClient.GetLanguage(languageRequest);
-            var subjectRequest = new SubjectRequest { Id = quiz.SubjectId.ToString() };
-            var subjectReply = subjectClient.GetSubject(subjectRequest);
-            var gradeRequest = new GradeRequest { Id = quiz.GradeId.ToString() };
-            var gradeReply = gradeClient.GetGrade(gradeRequest);
-            var indentityRequest = new IdentityRequest { Id = quiz.OwnerId.ToString() };
-            var identityReply = identityClient.GetIdentity(indentityRequest);
+            var languageReply = await quizMetaService.GetLanguageAsync(quiz.LanguageId);
+            var subjectReply = await quizMetaService.GetSubjectAsync(quiz.SubjectId);
+            var gradeReply = await quizMetaService.GetGradeAsync(quiz.GradeId);
+            var identityReply = await quizMetaService.GetOwnerAsync(quiz.OwnerId);
 
             quiz.LanguageName = languageReply.Name;
             quiz.SubjectName = subjectReply.Name;
@@ -78,7 +73,7 @@ public class QuizRepository(
             quiz.Owner = new QuizDto.OwnerDto
             {
                 Id = identityReply.Id,
-                Name = identityReply.Name,
+                Name = identityReply.FullName,
                 Image = identityReply.Image
             };
         }
@@ -105,14 +100,10 @@ public class QuizRepository(
         {
             var tasks = quizDtos.Select(async quiz =>
             {
-                var languageTask = languageClient
-                    .GetLanguageAsync(new LanguageRequest { Id = quiz.LanguageId.ToString() }).ResponseAsync;
-                var subjectTask = subjectClient.GetSubjectAsync(new SubjectRequest { Id = quiz.SubjectId.ToString() })
-                    .ResponseAsync;
-                var gradeTask = gradeClient.GetGradeAsync(new GradeRequest { Id = quiz.GradeId.ToString() })
-                    .ResponseAsync;
-                var identityTask = identityClient.GetIdentityAsync(new IdentityRequest { Id = quiz.OwnerId.ToString() })
-                    .ResponseAsync;
+                var languageTask = quizMetaService.GetLanguageAsync(quiz.LanguageId);
+                var subjectTask = quizMetaService.GetSubjectAsync(quiz.SubjectId);
+                var gradeTask = quizMetaService.GetGradeAsync(quiz.GradeId);
+                var identityTask = quizMetaService.GetOwnerAsync(quiz.OwnerId);
 
                 await Task.WhenAll(languageTask, subjectTask, gradeTask, identityTask);
 
@@ -123,7 +114,7 @@ public class QuizRepository(
                 quiz.Owner = new QuizDto.OwnerDto
                 {
                     Id = identityReply.Id,
-                    Name = identityReply.Name,
+                    Name = identityReply.FullName,
                     Image = identityReply.Image
                 };
             });
@@ -154,8 +145,27 @@ public class QuizRepository(
         return mapper.Map<PopulatedQuizDto>(quiz);
     }
 
-    public Task<List<PopulatedQuizDto>> GetQuizzesBySubject(Guid subjectId, CancellationToken cancellationToken)
+    public async Task<List<QuizItemResponseDto>> GetQuizzesBySubject(Guid SubjectId,
+        CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var quizzes = await quizContext.Quizzes
+            .Include(q => q.Questions)
+            .Where(q => q.SubjectId == SubjectId)
+            .AsNoTracking()
+            .ToListAsync(cancellationToken);
+
+        var result = new List<QuizItemResponseDto>();
+
+        foreach (var quiz in quizzes)
+        {
+            var quizDto = mapper.Map<QuizItemResponseDto>(quiz);
+            quizDto.Language = await quizMetaService.GetLanguageAsync(quiz.LanguageId);
+            quizDto.Subject = await quizMetaService.GetSubjectAsync(quiz.SubjectId);
+            quizDto.Grade = await quizMetaService.GetGradeAsync(quiz.GradeId);
+            quizDto.Owner = await quizMetaService.GetOwnerAsync(quiz.OwnerId);
+            result.Add(quizDto);
+        }
+
+        return result;
     }
 }

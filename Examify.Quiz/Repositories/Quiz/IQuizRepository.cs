@@ -23,5 +23,5 @@ public interface IQuizRepository
     
     Task<PopulatedQuizDto?> GetQuizById(string quizId);
     
-    Task<List<PopulatedQuizDto>> GetQuizzesBySubject(Guid subjectId, CancellationToken cancellationToken);
+    Task<List<QuizItemResponseDto>> GetQuizzesBySubject(Guid SubjectId, CancellationToken cancellationToken);
 }
