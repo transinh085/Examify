@@ -3,17 +3,20 @@ import QuizItem from '../../../components/ui/quizzes/QuizItem';
 import PropTypes from 'prop-types';
 import StartIcon from '~/components/icons/StartIcon';
 import { Link } from 'react-router-dom';
+import { RightOutlined } from '@ant-design/icons';
+import { useGetQuizBySubject } from '~/features/dashboard/api/get-quizzes-by-subject';
 
-const QuizListBySubject = ({ subjectName, quizzes = [] }) => {
+const QuizListBySubject = ({ id, name, quizzes = [] }) => {
+  const { data = [], isLoading } = useGetQuizBySubject({ subjectId: id, pageNumber: 1, pageSize: 4 });
   return (
     <Flex vertical gap={16}>
       <Flex align="center" justify="space-between" className="w-full">
         <Flex align="center" gap={8}>
-          <StartIcon /> <h1 className="text-lg font-semibold">{subjectName}</h1>
+          <StartIcon /> <h1 className="text-lg font-semibold">{name}</h1>
         </Flex>
-        <Link to="/topics/1" className="text-blue-500">
-          <Button variant="outlined" color="primary">
-            Xem thêm
+        <Link to={`/topics/${id}`} className="text-blue-500">
+          <Button variant="outlined" color="primary" icon={<RightOutlined />} iconPosition="end">
+            See more
           </Button>
         </Link>
       </Flex>

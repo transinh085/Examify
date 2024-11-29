@@ -100,7 +100,7 @@ const LoginRoute = () => {
           callback={handleFacebookCallback}
           returnScopes={false}
           render={(renderProps) => (
-            <Button onClick={renderProps.onClick} className="flex justify-start items-center h-[38px]" block>
+            <Button onClick={renderProps.onClick} className="flex justify-start items-center h-[38px] rounded" block>
               <img src={fb} />
               <p className="flex-1">Đăng nhập bằng Facebook</p>
             </Button>

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Examify.Core.Pagination;
 using Examify.Quiz.Dtos;
 using Examify.Quiz.Features.Quiz.Dtos;
 using Examify.Quiz.Grpc;
@@ -17,8 +18,10 @@ public class QuizRepository(
 {
     public async Task<Entities.Quiz> CreateQuizEmpty(string userId, CancellationToken cancellationToken)
     {
-        var quiz = new Entities.Quiz();
-        quiz.OwnerId = Guid.Parse(userId);
+        var quiz = new Entities.Quiz
+        {
+            OwnerId = userId
+        };
         await quizContext.Quizzes.AddAsync(quiz, cancellationToken);
         await quizContext.SaveChangesAsync(cancellationToken);
         return quiz;
@@ -81,7 +84,7 @@ public class QuizRepository(
         return quizDtos;
     }
 
-    public async Task<QuizUserDto> GetQuizByUserId(Guid userId, CancellationToken cancellationToken)
+    public async Task<QuizUserDto> GetQuizByUserId(string userId, CancellationToken cancellationToken)
     {
         var quizzes = await quizContext.Quizzes
             .Where(quiz => quiz.OwnerId == userId)
@@ -145,27 +148,24 @@ public class QuizRepository(
         return mapper.Map<PopulatedQuizDto>(quiz);
     }
 
-    public async Task<List<QuizItemResponseDto>> GetQuizzesBySubject(Guid SubjectId,
+    public async Task<PagedList<QuizItemResponseDto>> GetQuizzesBySubject(Guid subjectId, int pageNumber, int pageSize,
         CancellationToken cancellationToken)
     {
         var quizzes = await quizContext.Quizzes
             .Include(q => q.Questions)
-            .Where(q => q.SubjectId == SubjectId)
+            .Where(q => q.SubjectId == subjectId && q.IsPublished)
             .AsNoTracking()
-            .ToListAsync(cancellationToken);
+            .ProjectTo<QuizItemResponseDto>(mapper.ConfigurationProvider)
+            .PaginatedListAsync(pageNumber, pageSize);
 
-        var result = new List<QuizItemResponseDto>();
-
-        foreach (var quiz in quizzes)
+        foreach (var quiz in quizzes.Items)
         {
-            var quizDto = mapper.Map<QuizItemResponseDto>(quiz);
-            quizDto.Language = await quizMetaService.GetLanguageAsync(quiz.LanguageId);
-            quizDto.Subject = await quizMetaService.GetSubjectAsync(quiz.SubjectId);
-            quizDto.Grade = await quizMetaService.GetGradeAsync(quiz.GradeId);
-            quizDto.Owner = await quizMetaService.GetOwnerAsync(quiz.OwnerId);
-            result.Add(quizDto);
+            quiz.Language = await quizMetaService.GetLanguageAsync(quiz.Language.Id);
+            quiz.Subject = await quizMetaService.GetSubjectAsync(quiz.Subject.Id);
+            quiz.Grade = await quizMetaService.GetGradeAsync(quiz.Grade.Id);
+            quiz.Owner = await quizMetaService.GetOwnerAsync(Guid.Parse(quiz.Owner.Id));
         }
 
-        return result;
+        return quizzes;
     }
 }

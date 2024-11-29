@@ -11,9 +11,9 @@ public class Quiz : BaseEntity
     public Guid? SubjectId { get; set; }
     public Guid? GradeId { get; set; }
     public Guid? LanguageId { get; set; }
-    public Guid? OwnerId { get; set; }
+    public string? OwnerId { get; set; }
     public Visibility Visibility { get; set; } = Visibility.Private;
-    
+
     public List<Question> Questions { get; set; }
 
     public bool IsPublished { get; set; } = false;

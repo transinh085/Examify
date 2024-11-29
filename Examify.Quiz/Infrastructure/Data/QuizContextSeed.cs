@@ -18,7 +18,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                 SubjectId = Guid.Parse("2f921f98-5b80-4916-943c-31c6a88ca70e"),
                 GradeId = Guid.Parse("45304ba8-da09-46b9-8400-d5b7a7bb718e"),
                 LanguageId = Guid.Parse("d9789c96-e0c8-4826-81b3-0eccd22d3508"),
-                OwnerId = Guid.Parse("ea616dc0-e621-474e-a247-b823b9fe6004"),
+                OwnerId = "ea616dc0-e621-474e-a247-b823b9fe6004",
                 Visibility = Visibility.Private,
                 IsPublished = true,
                 Questions =
@@ -185,7 +185,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                 SubjectId = Guid.Parse("2f921f98-5b80-4916-943c-31c6a88ca70e"),
                 GradeId = Guid.Parse("45304ba8-da09-46b9-8400-d5b7a7bb718e"),
                 LanguageId = Guid.Parse("d9789c96-e0c8-4826-81b3-0eccd22d3508"),
-                OwnerId = Guid.Parse("ea616dc0-e621-474e-a247-b823b9fe6004"),
+                OwnerId = "ea616dc0-e621-474e-a247-b823b9fe6004",
                 Visibility = Visibility.Private,
                 IsPublished = true,
                 Questions =
@@ -356,6 +356,337 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         ],
                     }
                 ]
+            },
+            new Entities.Quiz
+            {
+                Title = "Basic Math Quiz",
+                Cover = "https://t4.ftcdn.net/jpg/04/61/65/03/360_F_461650383_vOTkFxYQ2T2kvuymieHDHbIWjghyL3DY.jpg",
+                Description = "Test your basic math skills",
+                SubjectId = Guid.Parse("59820f61-ada9-44e8-9a45-790981fe05f0"),
+                GradeId = Guid.Parse("45304ba8-da09-46b9-8400-d5b7a7bb718e"),
+                LanguageId = Guid.Parse("d9789c96-e0c8-4826-81b3-0eccd22d3508"),
+                OwnerId = "ea616dc0-e621-474e-a247-b823b9fe6004",
+                Visibility = Visibility.Private,
+                IsPublished = true,
+                Questions = new List<Question>
+                {
+                    new Question
+                    {
+                        Content = "What is 5 + 3?",
+                        Duration = 30,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 1,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "7", IsCorrect = false },
+                            new Option { Content = "8", IsCorrect = true },
+                            new Option { Content = "9", IsCorrect = false },
+                            new Option { Content = "10", IsCorrect = false }
+                        },
+                    },
+                    new Question
+                    {
+                        Content = "What is the square root of 16?",
+                        Duration = 30,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 2,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "3", IsCorrect = false },
+                            new Option { Content = "4", IsCorrect = true },
+                            new Option { Content = "5", IsCorrect = false },
+                            new Option { Content = "6", IsCorrect = false }
+                        },
+                    },
+                    new Question
+                    {
+                        Content = "What is 9 x 9?",
+                        Duration = 30,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 3,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "81", IsCorrect = true },
+                            new Option { Content = "72", IsCorrect = false },
+                            new Option { Content = "90", IsCorrect = false },
+                            new Option { Content = "99", IsCorrect = false }
+                        },
+                    },
+                    new Question
+                    {
+                        Content = "What is 15 - 7?",
+                        Duration = 30,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 4,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "7", IsCorrect = false },
+                            new Option { Content = "8", IsCorrect = true },
+                            new Option { Content = "9", IsCorrect = false },
+                            new Option { Content = "6", IsCorrect = false }
+                        },
+                    },
+                    new Question
+                    {
+                        Content = "What is the value of π (pi) approximately?",
+                        Duration = 30,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 5,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "3.14", IsCorrect = true },
+                            new Option { Content = "3.15", IsCorrect = false },
+                            new Option { Content = "3.13", IsCorrect = false },
+                            new Option { Content = "3.16", IsCorrect = false }
+                        },
+                    },
+                    new Question
+                    {
+                        Content = "What is 12 ÷ 4?",
+                        Duration = 30,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 6,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "2", IsCorrect = false },
+                            new Option { Content = "3", IsCorrect = true },
+                            new Option { Content = "4", IsCorrect = false },
+                            new Option { Content = "5", IsCorrect = false }
+                        },
+                    },
+                    new Question
+                    {
+                        Content = "What is 7 x 6?",
+                        Duration = 30,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 7,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "42", IsCorrect = true },
+                            new Option { Content = "36", IsCorrect = false },
+                            new Option { Content = "48", IsCorrect = false },
+                            new Option { Content = "40", IsCorrect = false }
+                        },
+                    },
+                    new Question
+                    {
+                        Content = "What is the next prime number after 7?",
+                        Duration = 30,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 8,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "9", IsCorrect = false },
+                            new Option { Content = "11", IsCorrect = false },
+                            new Option { Content = "13", IsCorrect = true },
+                            new Option { Content = "10", IsCorrect = false }
+                        },
+                    },
+                    new Question
+                    {
+                        Content = "What is 100 ÷ 10?",
+                        Duration = 30,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 9,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "5", IsCorrect = false },
+                            new Option { Content = "10", IsCorrect = true },
+                            new Option { Content = "20", IsCorrect = false },
+                            new Option { Content = "15", IsCorrect = false }
+                        },
+                    },
+                    new Question
+                    {
+                        Content = "What is 3²?",
+                        Duration = 30,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 10,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "6", IsCorrect = false },
+                            new Option { Content = "9", IsCorrect = true },
+                            new Option { Content = "12", IsCorrect = false },
+                            new Option { Content = "8", IsCorrect = false }
+                        },
+                    }
+                }
+            },
+            new Entities.Quiz
+            {
+                Title = "Intermediate Math Quiz",
+                Cover =
+                    "https://media.istockphoto.com/id/1219382595/vector/math-equations-written-on-a-blackboard.jpg?s=612x612&w=0&k=20&c=ShVWsMm2SNCNcIjuWGtpft0kYh5iokCzu0aHPC2fV4A=",
+                Description = "Challenge your intermediate math skills",
+                SubjectId = Guid.Parse("59820f61-ada9-44e8-9a45-790981fe05f0"),
+                GradeId = Guid.Parse("45304ba8-da09-46b9-8400-d5b7a7bb718e"),
+                LanguageId = Guid.Parse("d9789c96-e0c8-4826-81b3-0eccd22d3508"),
+                OwnerId = "ea616dc0-e621-474e-a247-b823b9fe6004",
+                Visibility = Visibility.Private,
+                IsPublished = true,
+                Questions = new List<Question>
+                {
+                    new Question
+                    {
+                        Content = "What is the value of 2³ + 3²?",
+                        Duration = 40,
+                        Points = 2,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 1,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "17", IsCorrect = false },
+                            new Option { Content = "13", IsCorrect = true },
+                            new Option { Content = "15", IsCorrect = false },
+                            new Option { Content = "19", IsCorrect = false }
+                        },
+                    },
+                    new Question
+                    {
+                        Content = "What is the greatest common divisor (GCD) of 48 and 180?",
+                        Duration = 40,
+                        Points = 2,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 2,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "6", IsCorrect = false },
+                            new Option { Content = "12", IsCorrect = true },
+                            new Option { Content = "18", IsCorrect = false },
+                            new Option { Content = "24", IsCorrect = false }
+                        },
+                    },
+                    new Question
+                    {
+                        Content = "Solve for x: 5x - 7 = 18",
+                        Duration = 45,
+                        Points = 2,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 3,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "5", IsCorrect = true },
+                            new Option { Content = "6", IsCorrect = false },
+                            new Option { Content = "4", IsCorrect = false },
+                            new Option { Content = "7", IsCorrect = false }
+                        },
+                    },
+                    new Question
+                    {
+                        Content = "What is the next number in the sequence: 2, 6, 12, 20, 30, ?",
+                        Duration = 45,
+                        Points = 2,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 4,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "40", IsCorrect = true },
+                            new Option { Content = "42", IsCorrect = false },
+                            new Option { Content = "38", IsCorrect = false },
+                            new Option { Content = "44", IsCorrect = false }
+                        },
+                    },
+                    new Question
+                    {
+                        Content = "What is the value of 7! (7 factorial)?",
+                        Duration = 60,
+                        Points = 2,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 5,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "5040", IsCorrect = true },
+                            new Option { Content = "720", IsCorrect = false },
+                            new Option { Content = "4032", IsCorrect = false },
+                            new Option { Content = "362880", IsCorrect = false }
+                        },
+                    },
+                    new Question
+                    {
+                        Content = "What is the sum of the interior angles of a hexagon?",
+                        Duration = 40,
+                        Points = 2,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 6,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "720°", IsCorrect = true },
+                            new Option { Content = "540°", IsCorrect = false },
+                            new Option { Content = "600°", IsCorrect = false },
+                            new Option { Content = "480°", IsCorrect = false }
+                        },
+                    },
+                    new Question
+                    {
+                        Content = "Solve for y: 3y + 4 = 25",
+                        Duration = 40,
+                        Points = 2,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 7,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "7", IsCorrect = true },
+                            new Option { Content = "6", IsCorrect = false },
+                            new Option { Content = "8", IsCorrect = false },
+                            new Option { Content = "5", IsCorrect = false }
+                        },
+                    },
+                    new Question
+                    {
+                        Content = "Which is the largest prime number less than 50?",
+                        Duration = 40,
+                        Points = 2,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 8,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "43", IsCorrect = false },
+                            new Option { Content = "47", IsCorrect = true },
+                            new Option { Content = "41", IsCorrect = false },
+                            new Option { Content = "37", IsCorrect = false }
+                        },
+                    },
+                    new Question
+                    {
+                        Content = "What is the equation of a line with slope 3 and y-intercept 5?",
+                        Duration = 50,
+                        Points = 2,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 9,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "y = 3x + 5", IsCorrect = true },
+                            new Option { Content = "y = 5x + 3", IsCorrect = false },
+                            new Option { Content = "y = 3x - 5", IsCorrect = false },
+                            new Option { Content = "y = 5x - 3", IsCorrect = false }
+                        },
+                    },
+                    new Question
+                    {
+                        Content = "What is the discriminant of the quadratic equation x² - 4x + 4 = 0?",
+                        Duration = 40,
+                        Points = 2,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 10,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "0", IsCorrect = true },
+                            new Option { Content = "4", IsCorrect = false },
+                            new Option { Content = "16", IsCorrect = false },
+                            new Option { Content = "8", IsCorrect = false }
+                        },
+                    }
+                }
             }
         };
 

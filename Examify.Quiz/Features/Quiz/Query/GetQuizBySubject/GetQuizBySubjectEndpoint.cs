@@ -8,7 +8,8 @@ public class GetQuizBySubjectEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapGet("/quiz/subject/{subjectId:guid}",
-            async (Guid subjectId, ISender sender) => await sender.Send(new GetQuizBySubjectQuery(subjectId)));
+        app.MapGet("/quizzes/subjects",
+            async ([AsParameters] GetQuizBySubjectQuery query, ISender sender) =>
+            await sender.Send(query));
     }
 }

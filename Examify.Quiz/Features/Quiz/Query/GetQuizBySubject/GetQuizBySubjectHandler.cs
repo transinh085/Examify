@@ -9,7 +9,8 @@ public class GetQuizBySubjectHandler(IQuizRepository quizRepository) : IRequestH
 {
     public async Task<IResult> Handle(GetQuizBySubjectQuery request, CancellationToken cancellationToken)
     {
-        var quizzes = await quizRepository.GetQuizzesBySubject(request.SubjectId, cancellationToken);
+        var quizzes = await quizRepository.GetQuizzesBySubject(request.SubjectId, request.PageNumber, request.PageSize,
+            cancellationToken);
         return TypedResults.Ok(quizzes);
     }
 }
