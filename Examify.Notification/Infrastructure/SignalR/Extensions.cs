@@ -1,6 +1,5 @@
 ﻿using Examify.Infrastructure.Jwt;
 using Examify.Notification.Hubs;
-using Microsoft.AspNetCore.Http.Connections;
 
 namespace Examify.Notification.Infrastructure.SignalR;
 

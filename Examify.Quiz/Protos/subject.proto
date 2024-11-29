@@ -4,10 +4,8 @@ option csharp_namespace = "Quiz";
 
 package catalog;
 
-import "google/protobuf/empty.proto";
-
 service Subject {
-  rpc GetSubject (SubjectRequest) returns (GetSubjectResponse);
+  rpc GetSubject (SubjectRequest) returns (SubjectReply);
 }
 
 message SubjectRequest {
@@ -17,11 +15,4 @@ message SubjectRequest {
 message SubjectReply {
   string id = 1;
   string name = 2;
-}
-
-message GetSubjectResponse {
-  oneof response {
-    SubjectReply subject = 1;
-    google.protobuf.Empty empty = 2; 
-  }
 }
