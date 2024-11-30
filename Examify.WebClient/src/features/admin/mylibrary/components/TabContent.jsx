@@ -2,8 +2,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { Button, Flex, message, Typography } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useCreateQuiz } from '~/features/quiz/api/quizzes/create-quiz';
-import TestCard from '~/features/quiz/components/admin/TestCard';
-
+import TestCard from '~/features/admin/mylibrary/components/TestCard';
 
 const TabContent = ({ data }) => {
   const navigate = useNavigate();

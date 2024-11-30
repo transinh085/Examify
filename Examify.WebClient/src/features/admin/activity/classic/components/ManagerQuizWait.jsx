@@ -1,7 +1,6 @@
 import { Avatar, Button, Col, Flex, Layout, QRCode, Row, Space } from 'antd';
 import {
   ClockCircleOutlined,
-  CloseCircleFilled,
   FireOutlined,
   PlaySquareOutlined,
   SoundFilled,
@@ -27,7 +26,7 @@ const ManagerQuizWait = () => {
             <Button
               type="primary"
               icon={
-                isPlayingSound ? <SoundFilled className="text-white" /> : <CloseCircleFilled className="text-white" />
+                isPlayingSound ? <SoundFilled className="text-white" /> : <SoundFilled className="text-white" />
               }
               className="bg-ds-light-500-20"
               onClick={toggleSound}

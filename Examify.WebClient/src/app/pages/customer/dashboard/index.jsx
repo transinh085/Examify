@@ -2,7 +2,9 @@ import { Button, Card, Col, Flex, Form, Input, Row } from 'antd';
 import SubjectQuizSection from '~/features/dashboard/components/SubjectQuizSection';
 const { Search } = Input;
 import useAuthStore from '~/stores/auth-store';
+
 // import leftGif from '~/assets/gif/a.gif';
+// import rightGif from '~/assets/gif/d.gif';
 
 const DashboardPage = () => {
   const { user } = useAuthStore();
@@ -13,8 +15,8 @@ const DashboardPage = () => {
           <Card>
             <Flex vertical align="center" justify="center" className="pb-4" gap={2}>
               <Flex gap={20}>
-                {/* <img src={leftGif} alt="" className="w-[220px] h-auto" /> */}
-                {/* <img src={rightGif} alt="" className="w-[210px] h-auto" /> */}
+                {/* <img src={leftGif} alt="" className="w-[220px] h-auto" />
+                <img src={rightGif} alt="" className="w-[210px] h-auto" /> */}
               </Flex>
 
               <div className="py-4">

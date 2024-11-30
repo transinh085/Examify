@@ -1,7 +1,8 @@
 import { Flex, Spin, Tabs } from 'antd';
+import TabContent from '~/features/admin/mylibrary/components/TabContent';
+import TabHeaderLeft from '~/features/admin/mylibrary/components/TabHeaderLeft';
 import { useGetQuizUser } from '~/features/quiz/api/quizzes/get-quiz-user';
-import TabContent from '~/features/quiz/components/admin/TabContent';
-import TabHeaderLeft from '~/features/quiz/components/admin/TabHeaderLeft';
+
 
 const MyLibraryPage = () => {
   const { data: quizzes, isLoading } = useGetQuizUser();

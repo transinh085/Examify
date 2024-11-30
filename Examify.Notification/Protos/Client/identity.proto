@@ -1,0 +1,19 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Notification";
+
+package identity;
+
+service Identity {
+  rpc GetIdentity (IdentityRequest) returns (IdentityReply);
+}
+
+message IdentityRequest {
+  string id = 1;
+}
+
+message IdentityReply {
+  string id = 1;
+  string name = 2;
+  string image = 3;
+}

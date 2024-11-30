@@ -14,7 +14,18 @@ import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import { useBoolean } from '~/hooks/useBoolean';
 import SettingModal from './SettingModal';
+import { usePlayQuiz } from '~/features/admin/mylibrary/api/play-quiz';
 const TestCard = ({ id, imgSrc, title, author, date, questions, gradeName, languageName }) => {
+
+  const mutePlayQuiz = usePlayQuiz({
+    mutationConfig: {
+      onSuccess: () => {
+        navigate(`/admin/activity/classic/${id}`);
+      },
+      onError: (error) => {
+        console.log('error', error);
+    }}
+  });
 
   const navigate = useNavigate();
 
@@ -22,9 +33,9 @@ const TestCard = ({ id, imgSrc, title, author, date, questions, gradeName, langu
     navigate(`/admin/quiz/${id}`);
   };
 
-  const movePlayQuiz = () => {
-    navigate(`/admin/activity/classic/${id}`);
-  };
+  const handlePlayQuiz = () => {
+    mutePlayQuiz.mutate({ id });
+  }
 
   return (
     <Flex className="bg-white px-2 py-2 rounded-lg border" justify="space-between">
@@ -69,7 +80,7 @@ const TestCard = ({ id, imgSrc, title, author, date, questions, gradeName, langu
       <Flex justify="space-between" vertical align="end">
         <DropdownMenu title={title} />
         <Space>
-          <Button onClick={movePlayQuiz} icon={<PlayCircleOutlined />}>
+          <Button onClick={handlePlayQuiz} loading={mutePlayQuiz.isPending} icon={<PlayCircleOutlined />}>
             Play
           </Button>
           <Button icon={<ShareAltOutlined />}>Share</Button>
@@ -83,9 +94,7 @@ const DropdownMenu = ({ title }) => {
   const { value: isSettingModalOpen, setTrue: openSettingModal, setFalse: closeSettingModal } = useBoolean();
   const handleMenuClick = ({ key }) => {
     if (key === '2') {
-
       openSettingModal();
-
     }
   };
   const items = [
