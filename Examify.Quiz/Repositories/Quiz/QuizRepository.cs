@@ -148,22 +148,6 @@ public class QuizRepository(
         return mapper.Map<PopulatedQuizDto>(quiz);
     }
 
-    public async Task<PagedList<QuizItemResponseDto>> GetQuizzesBySubject(Guid subjectId, int pageNumber,
-        int pageSize,
-        CancellationToken cancellationToken)
-    {
-        var quizzes = await quizContext.Quizzes
-            .Include(q => q.Questions)
-            .Where(q => q.SubjectId == subjectId && q.IsPublished && q.Visibility == Visibility.Public)
-            .AsNoTracking()
-            .ProjectTo<QuizItemResponseDto>(mapper.ConfigurationProvider)
-            .PaginatedListAsync(pageNumber, pageSize);
-
-        await PopulateQuizDetailsAsync(quizzes);
-
-        return quizzes;
-    }
-
     public async Task<PagedList<QuizItemResponseDto>> SearchQuizzes(string? keyword, Guid? subjectId, int pageNumber,
         int pageSize,
         CancellationToken cancellationToken)
