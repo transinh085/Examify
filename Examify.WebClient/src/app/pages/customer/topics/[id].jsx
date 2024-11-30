@@ -47,7 +47,7 @@ const TopicDetailsPage = () => {
   return (
     <div className="py-4">
       <h1 className="text-lg mb-4">
-        Bài kiểm tra phổ biến cho <strong>Toán</strong>
+        Popular quizzes for <strong>Math</strong>
       </h1>
       <Row gutter={[20, 20]}>
         {quizzes.map((quiz) => (

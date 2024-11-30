@@ -3,12 +3,13 @@ import { Outlet } from 'react-router-dom';
 import FooterAdmin from '~/components/layouts/admin-layout/footer';
 import HeaderAdmin from '~/components/layouts/admin-layout/header';
 import SiderResponsive from '~/components/layouts/admin-layout/sider-responsive';
+import ScrollToTop from '~/components/ScrollToTop';
 const { Content } = Layout;
 
 const AdminLayout = () => {
   return (
     <>
-      <Layout hasSider className='h-full'>
+      <Layout hasSider className="h-full">
         <SiderResponsive />
         <Layout>
           <HeaderAdmin />
@@ -19,6 +20,7 @@ const AdminLayout = () => {
             }}
           >
             <Outlet />
+            <ScrollToTop />
           </Content>
           <FooterAdmin />
         </Layout>

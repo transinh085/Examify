@@ -5,7 +5,19 @@ import { useNavigate } from 'react-router-dom';
 import { PlayCircleOutlined } from '@ant-design/icons';
 import { useCreateQuizResultMutation } from '~/features/do-quiz/api/create-quiz-result';
 
-const QuizItem = ({ id, title, description, code, cover, questionCount, attemptCount, owner, grade, percent = 20 }) => {
+const QuizItem = ({
+  id,
+  title,
+  description,
+  code,
+  cover,
+  questionCount,
+  attemptCount,
+  owner,
+  grade,
+  isAttempt,
+  percent = 20,
+}) => {
   const [open, setOpen] = useState(false);
   const twoColors = {
     '0%': '#108ee9',
@@ -36,13 +48,12 @@ const QuizItem = ({ id, title, description, code, cover, questionCount, attemptC
             {attemptCount} lượt thi
           </Tag>
         </div>
-        <Flex vertical justify="space-between" className="p-3 h-[150px]" gap={2}>
+        <Flex vertical justify="space-between" className="p-3 h-[130px]" gap={2}>
           <div>
             <h1 className="text-base font-semibold line-clamp-2 overflow-hidden text-ellipsis">{title}</h1>
             <p className="line-clamp-2 overflow-hidden text-ellipsis text-xs mt-2 text-[#444]">{description}</p>
           </div>
-
-          <Progress percent={percent} size={[null, 12]} strokeColor={twoColors} />
+          {isAttempt && <Progress percent={percent} size={[null, 12]} strokeColor={twoColors} />}
         </Flex>
       </Card>
       <QuizDetailModal

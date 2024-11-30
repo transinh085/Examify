@@ -2,7 +2,7 @@ import { queryOptions, useQuery } from '@tanstack/react-query';
 import { api } from '~/lib/api';
 
 const getQuizBySubject = (subjectId, pageNumber, pageSize) => {
-  return api.get(`/quiz-service/api/quizzes/subjects`, {
+  return api.get(`/quiz-service/api/quizzes/search`, {
     params: {
       subjectId,
       pageNumber,

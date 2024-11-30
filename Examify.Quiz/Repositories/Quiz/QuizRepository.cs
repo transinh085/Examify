@@ -159,17 +159,37 @@ public class QuizRepository(
         return mapper.Map<PopulatedQuizDto>(quiz);
     }
 
-    public async Task<PagedList<QuizItemResponseDto>> GetQuizzesBySubject(Guid subjectId, int pageNumber, int pageSize,
+    public async Task<PagedList<QuizItemResponseDto>> SearchQuizzes(string? keyword, Guid? subjectId, int pageNumber,
+        int pageSize,
         CancellationToken cancellationToken)
     {
-        var quizzes = await quizContext.Quizzes
-            .Include(q => q.Questions)
-            .Where(q => q.SubjectId == subjectId && q.IsPublished && q.Visibility == Visibility.Public)
-            .AsNoTracking()
+        var query = quizContext.Quizzes.AsQueryable();
+
+        if (!string.IsNullOrEmpty(keyword))
+        {
+            query = query.Where(q => q.Title.ToLower().Contains(keyword.ToLower()));
+        }
+
+        if (subjectId.HasValue)
+        {
+            query = query.Where(q => q.SubjectId == subjectId.Value);
+        }
+
+        query = query.Where(q => q.IsPublished && q.Visibility == Visibility.Public)
+            .AsNoTracking();
+
+        var quizzes = await query
             .ProjectTo<QuizItemResponseDto>(mapper.ConfigurationProvider)
             .PaginatedListAsync(pageNumber, pageSize);
 
-        foreach (var quiz in quizzes.Items)
+        await PopulateQuizDetailsAsync(quizzes);
+
+        return quizzes;
+    }
+
+    private async Task PopulateQuizDetailsAsync(PagedList<QuizItemResponseDto> quizDtos)
+    {
+        foreach (var quiz in quizDtos.Items)
         {
             quiz.Language = await quizMetaService.GetLanguageAsync(quiz.Language.Id);
             quiz.Subject = await quizMetaService.GetSubjectAsync(quiz.Subject.Id);
@@ -177,7 +197,22 @@ public class QuizRepository(
             quiz.Owner = await quizMetaService.GetOwnerAsync(Guid.Parse(quiz.Owner.Id));
             quiz.AttemptCount = await quizMetaService.CountQuizAttemptsAsync(quiz.Id);
         }
+    }
 
-        return quizzes;
+    public async Task PlayQuiz(Guid id, CancellationToken cancellationToken)
+    {
+        var quiz = await quizContext.Quizzes.FindAsync(id, cancellationToken);
+        Random random = new();
+        quiz.Code = random.Next(100000, 999999).ToString();
+        quizContext.Quizzes.Update(quiz);
+        await quizContext.SaveChangesAsync(cancellationToken);
+    }
+    
+    public async Task EndQuiz(Guid id, CancellationToken cancellationToken)
+    {
+        var quiz = await quizContext.Quizzes.FindAsync(id, cancellationToken);
+        quiz.Code = null;
+        quizContext.Quizzes.Update(quiz);
+        await quizContext.SaveChangesAsync(cancellationToken);
     }
 }

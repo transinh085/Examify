@@ -26,9 +26,10 @@ public static class Extensions
             builder =>
             {
                 builder
+                    .WithOrigins("http://localhost:3000")
                     .AllowAnyHeader()
                     .AllowAnyMethod()
-                    .AllowAnyOrigin();
+                    .AllowCredentials();
             }));
 
         builder.Services.AddEndpoints(applicationAssembly);

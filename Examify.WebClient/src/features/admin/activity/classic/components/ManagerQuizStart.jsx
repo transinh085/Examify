@@ -1,6 +1,5 @@
 import { Avatar, Button, Checkbox, Flex, Layout, Progress, Radio, Space } from 'antd';
 import {
-  CloseCircleFilled,
   CloseCircleOutlined,
   FireOutlined,
   SoundFilled,
@@ -18,7 +17,7 @@ const { Header, Content } = Layout;
 
 const ManagerQuizStart = () => {
 
-  const { tab, setTab, isPlayingSound, toggleSound } = useManagerQuizStore();
+  const { tab, setTab, isPlayingSound, toggleSound, setIsStart } = useManagerQuizStore();
 
   return (
     <Layout
@@ -33,14 +32,16 @@ const ManagerQuizStart = () => {
               <Button
                 type="primary"
                 icon={
-                  isPlayingSound ? <SoundFilled className="text-white" /> : <CloseCircleFilled className="text-white" />
+                  isPlayingSound ? <SoundFilled className="text-white" /> : <SoundFilled className="text-white" />
                 }
                 className="bg-ds-light-500-20"
                 onClick={toggleSound}
               />
               <FullScreenButton />
               <div className="w-[1px] bg-white h-6 mx-2" />
-              <Button color="danger" variant="solid" className="text-lg rounded-sm">
+              <Button color="danger" variant="solid" className="text-lg rounded-sm"
+                onClick={() => setIsStart(false)}
+              >
                 End
               </Button>
             </Space>
