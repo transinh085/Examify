@@ -1,27 +1,32 @@
 import { Button, Card, Col, Flex, Form, Input, Row } from 'antd';
 import SubjectQuizSection from '~/features/dashboard/components/SubjectQuizSection';
 const { Search } = Input;
-import giphy from '~/assets/images/giphy.webp';
+import useAuthStore from '~/stores/auth-store';
+
+import leftGif from '~/assets/gif/a.gif';
+import rightGif from '~/assets/gif/d.gif';
 
 const DashboardPage = () => {
+  const { user } = useAuthStore();
   return (
     <div className="py-4">
       <Row gutter={[24, 24]}>
         <Col span={24}>
           <Card>
-            <Flex vertical align="center" justify="center" className="px-4 pt-0 pb-4" gap={2}>
-              <div className="w-max h-max pb-4">
-                <img src={giphy} alt="" className="w-[280px] h-auto" />
+            <Flex vertical align="center" justify="center" className="pb-4" gap={2}>
+              <Flex gap={20}>
+                <img src={leftGif} alt="" className="w-[220px] h-auto" />
+                <img src={rightGif} alt="" className="w-[210px] h-auto" />
+              </Flex>
+
+              <div className="py-4">
+                <h1 className="text-[20px] text-center">
+                  Welcome back, <strong className="text-primary text-[24px]">{user?.firstName || 'Chill Guy'}</strong>!
+                </h1>
+                <p className="text-center text-lg text-gray-600">
+                  Let us help you to improve your knowledge and skills
+                </p>
               </div>
-              <h1 className="text-[24px]">
-                Xin chào, <strong>Quan Phat</strong>!
-              </h1>
-              <p className="text-lg text-gray-600">
-                Hãy khám phá các bài kiểm tra thú vị và thử thách bản thân ngay hôm nay!
-              </p>
-              <p className="text-base  text-gray-500">
-                Bạn đã sẵn sàng để bắt đầu chưa? Chọn một bài kiểm tra để tiếp tục hành trình học hỏi của mình.
-              </p>
             </Flex>
             <Form onFinish={null} layout="inline">
               <Form.Item style={{ flex: 1 }}>
