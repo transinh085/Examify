@@ -1,4 +1,5 @@
-﻿using Examify.Result.Entities;
+﻿using Examify.Quiz.Dtos;
+using Examify.Result.Entities;
 
 namespace Examify.Result.Repositories;
 
@@ -17,4 +18,8 @@ public interface IQuizResultRepository
     Task<bool> SaveChangesAsync();
 
     Task<int> CountQuizAttempts(Guid Id, CancellationToken cancellationToken);
+    
+    Task<int> GetLatestAttemptNumber(Guid quizId, string userId, CancellationToken cancellationToken);
+    
+    Task<List<GetQuizResultsDto>> GetResultsOfQuiz(string quizId);
 }

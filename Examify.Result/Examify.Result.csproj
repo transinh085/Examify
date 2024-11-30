@@ -44,8 +44,9 @@
 
     <ItemGroup>
         <Protobuf Include="Protos\quiz.proto" GrpcServices="Client"/>
-        <Protobuf Include="Protos\quiz-result.proto" GrpcServices="Server"/>
         <Protobuf Include="Protos\question.proto" GrpcServices="Client" />
+        <Protobuf Include="Protos\identity.proto" GrpcServices="Client" />
+        <Protobuf Include="Protos\quiz-result.proto" GrpcServices="Server"/>
     </ItemGroup>
 
     <ItemGroup>

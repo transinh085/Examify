@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using Microsoft.Extensions.DependencyInjection;
 
 EnsureDeveloperControlPaneIsNotRunning();
 var builder = DistributedApplication.CreateBuilder(args);
@@ -52,7 +53,6 @@ builder.AddProject<Projects.Examify_Gateway>("gateway")
     .WithReference(quizService)
     .WithReference(notificationService)
     .WithReference(uploadFileService);
-
 builder.Build().Run();
 
 void EnsureDeveloperControlPaneIsNotRunning()

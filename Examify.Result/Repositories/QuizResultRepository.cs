@@ -1,10 +1,16 @@
-﻿using Examify.Result.Entities;
+﻿using Examify.Quiz.Dtos;
+using Examify.Result.Entities;
 using Examify.Result.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using Result;
+using QuizResult = Examify.Result.Entities.QuizResult;
 
 namespace Examify.Result.Repositories;
 
-public class QuizResultRepository(QuizResultContext quizResultContext)
+public class QuizResultRepository(
+    QuizResultContext quizResultContext,
+    Identity.IdentityClient identityClient
+)
     : IQuizResultRepository
 {
     public async Task<QuizResult> Create(string userId, string quizId, int attemptedNumber)
@@ -18,12 +24,12 @@ public class QuizResultRepository(QuizResultContext quizResultContext)
             TimeTaken = 0,
             CurrentQuestion = 0,
         };
-        
+
         await quizResultContext.QuizResults.AddAsync(quizResult);
-        
+
         return quizResult;
     }
-    
+
     // get quizResult sorted by question order and answer order
     public async Task<QuizResult?> FindByIdWithQuestionsWithOptions(Guid id)
     {
@@ -66,17 +72,18 @@ public class QuizResultRepository(QuizResultContext quizResultContext)
         return await quizResultContext.QuizResults
             .AsNoTracking().FirstOrDefaultAsync(r => r.Id == id);
     }
+
     public async Task<bool> Update(QuizResult quizResult)
     {
         quizResultContext.QuizResults.Update(quizResult);
         return true;
     }
-    
+
     public async Task<bool> Exists(Guid quizResultId)
     {
         return await quizResultContext.QuizResults.AnyAsync(q => q.Id == quizResultId);
     }
-    
+
     public async Task<bool> SaveChangesAsync()
     {
         return await quizResultContext.SaveChangesAsync() > 0;
@@ -85,5 +92,53 @@ public class QuizResultRepository(QuizResultContext quizResultContext)
     public async Task<int> CountQuizAttempts(Guid Id, CancellationToken cancellationToken)
     {
         return await quizResultContext.QuizResults.Where(x => x.QuizId == Id).CountAsync();
+    }
+
+    public async Task<int> GetLatestAttemptNumber(Guid quizId, string userId, CancellationToken cancellationToken)
+    {
+        return await quizResultContext.QuizResults
+            .Where(x => x.QuizId == quizId && x.UserId == userId)
+            .Select(x => x.AttemptedNumber)
+            .OrderByDescending(x => x)
+            .FirstOrDefaultAsync(cancellationToken);
+    }
+
+    public async Task<List<GetQuizResultsDto>> GetResultsOfQuiz(string quizId)
+    {
+        List<QuizResult> quizResults = await quizResultContext.QuizResults
+            .AsNoTracking()
+            .Include(r => r.QuestionResults)
+            .ThenInclude(q => q.AnswerResults)
+            .Where(r => r.QuizId.ToString() == quizId)
+            .ToListAsync();
+
+        List<GetQuizResultsDto> quizResultsDto = new();
+
+        foreach (var quizResult in quizResults)
+        {
+            var user = identityClient.GetIdentity(new IdentityRequest { Id = quizResult.UserId });
+
+            double correctRate = quizResult.QuestionResults.Count(q => q.IsCorrect)*1.0 / quizResult.QuestionResults.Count;
+
+            var quizResultDto = new GetQuizResultsDto
+            {
+                Id = quizResult.Id,
+                TotalPoints = quizResult.TotalPoints,
+                TimeTaken = quizResult.TimeTaken,
+                AttemptedNumber = quizResult.AttemptedNumber,
+                SubmittedAt = quizResult.SubmittedAt,
+                CorrectRate = correctRate,
+                User = new UserDto
+                {
+                    Id = user.Id,
+                    Name = user.Name,
+                    Avatar = user.Image
+                }
+            };
+
+            quizResultsDto.Add(quizResultDto);
+        }
+
+        return quizResultsDto;
     }
 }

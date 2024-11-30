@@ -6,8 +6,7 @@ const AdminRoutes = {
   element: (
     <PrivateGuard>
       <AdminLayout />
-   </PrivateGuard>
-
+    </PrivateGuard>
   ),
   children: [
     {
@@ -32,9 +31,16 @@ const AdminRoutes = {
       },
     },
     {
+      path: 'reports/:quizId',
+      lazy: async () => {
+        const QuizReportDetailPage = await import('../pages/admin/reports/[quiz_id]');
+        return { Component: QuizReportDetailPage.default };
+      },
+    },
+    {
       path: 'reports/:id/players',
       lazy: async () => {
-        const ReportPlayersPage = await import('../pages/admin/reports/[id]/players');
+        const ReportPlayersPage = await import('../pages/admin/reports/[quiz_id]/players');
         return { Component: ReportPlayersPage.default };
       },
     },

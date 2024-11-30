@@ -14,6 +14,6 @@ export const getQuizQueryOptions = () => {
 
 export const useGetQuizUser = () => {
   return useQuery({
-    ...getQuizQueryOptions()
+    ...getQuizQueryOptions(),
   });
 };

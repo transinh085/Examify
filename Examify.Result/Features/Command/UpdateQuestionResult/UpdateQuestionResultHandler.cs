@@ -57,6 +57,7 @@ public class UpdateQuestionResultHandler(
         if (quizResult is not null)
         {
             quizResult.CurrentQuestion++;
+            quizResult.TotalPoints += questionResult.Points;
             quizResult.TimeTaken = request.TimeSpent;
             quizResult.SubmittedAt = DateTime.UtcNow;
             await quizResultRepository.Update(quizResult);
