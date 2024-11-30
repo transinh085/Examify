@@ -1,12 +1,14 @@
-import { Button, Col, Divider, Flex, Form, Input, message, Row, Typography } from 'antd';
-import { useLoginMutation } from '~/features/auth/api/login';
+import { Button, Divider, Flex, Form, Input, message, Space, Typography } from 'antd';
+import { useGoogleLoginMutation, useLoginMutation } from '~/features/auth/api/login';
+// import gg from '~/assets/svg/gg.svg';
 import fb from '~/assets/svg/fb.svg';
-import gg from '~/assets/svg/gg.svg';
-import wt from '~/assets/svg/wt.svg';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import RULES from '~/features/auth/rules';
 import useAuthStore from '~/stores/auth-store';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import { useLoginFacebookMutation } from '~/features/auth/api/login-facebook';
+import { GoogleLogin } from '@react-oauth/google';
 
 const LoginRoute = () => {
   const [searchParams] = useSearchParams();
@@ -28,6 +30,19 @@ const LoginRoute = () => {
     },
   });
 
+  const loginFacebookMutation = useLoginFacebookMutation({
+    mutationConfig: {
+      onSuccess: (data) => {
+        Cookies.set('token', data?.token);
+        setUser(data);
+        navigate(redirect ? redirect : '/');
+      },
+      onError: ({ response }) => {
+        message.error(response?.data?.detail || 'Something went wrong!');
+      },
+    },
+  });
+
   const handleLogin = (data) => {
     mutation.mutate({
       email: data.email,
@@ -35,12 +50,70 @@ const LoginRoute = () => {
     });
   };
 
+  const handleFacebookCallback = (response) => {
+    if (response?.status === 'unknown') {
+      console.error('Sorry!', 'Something went wrong with facebook Login.');
+      return;
+    }
+    loginFacebookMutation.mutate({
+      accessToken: response.accessToken,
+    });
+  };
+
+  const googleLoginMutation = useGoogleLoginMutation({
+    mutationConfig: {
+      onSuccess: (data) => {
+        Cookies.set('token', data?.token);
+        setUser(data);
+        navigate(redirect ? redirect : '/');
+      },
+      onError: ({ response }) => {
+        message.error(response?.data?.detail || 'Something went wrong!');
+      },
+    },
+  });
+
+  const handleGoogleLogin = (credential) => {
+    googleLoginMutation.mutate({ data: credential });
+  };
+
   return (
-    <div className="p-8 rounded-[8px] w-[90%] md:w-[460px] bg-white border shadow-sm">
+    <Space
+      size="middle"
+      direction="vertical"
+      className="p-8 rounded-[8px] w-[90%] md:w-[460px] bg-white border shadow-sm"
+    >
       <Typography className="text-[22px] font-semibold">Login</Typography>
+
+      <Space gap={10} direction="vertical" className="w-full">
+        <GoogleLogin
+          onSuccess={handleGoogleLogin}
+          onError={() => {
+            console.log('Login Failed');
+          }}
+        />
+        <FacebookLogin
+          buttonStyle={{ padding: '6px' }}
+          appId="423573474136909"
+          autoLoad={false}
+          fields="name,email,picture"
+          callback={handleFacebookCallback}
+          returnScopes={false}
+          render={(renderProps) => (
+            <Button onClick={renderProps.onClick} className="flex justify-start items-center h-[38px] rounded" block>
+              <img src={fb} />
+              <p className="flex-1">Đăng nhập bằng Facebook</p>
+            </Button>
+          )}
+        />
+      </Space>
+
+      <Divider>
+        <Typography className="text-[#333] mb-2">Or</Typography>
+      </Divider>
+
       <Form
         form={form}
-        className="pt-4"
         onFinish={handleLogin}
         layout="vertical"
         variant="filled"
@@ -63,46 +136,21 @@ const LoginRoute = () => {
             <Input.Password placeholder="Enter your password..." />
           </Form.Item>
         </Flex>
-        <Form.Item className="pt-2 m-0">
-          <a href="forgot-password" className="block mb-3">
-            Forgot password
-          </a>
+        <Form.Item className="mb-0">
           <Button loading={mutation.isPending} type="primary" htmlType="submit" className="w-full">
             Login
           </Button>
         </Form.Item>
-        <Form.Item className="pt-4 m-0">
-          <Divider>
-            <Typography className="text-[#333] mb-2">Or</Typography>
-          </Divider>
-          <Row gutter={12}>
-            <Col span={8}>
-              <Button className="w-full">
-                <img src={gg} alt="" />
-                Google
-              </Button>
-            </Col>
-            <Col span={8}>
-              <Button className="w-full">
-                <img src={wt} alt="" />
-                Twitter
-              </Button>
-            </Col>
-            <Col span={8}>
-              <Button className="w-full">
-                <img src={fb} alt="" />
-                Facebook
-              </Button>
-            </Col>
-          </Row>
-          <Typography className="text-center mt-6">
-            <Link to={'/auth/register'}>
-              Do you have an account yet? <span className="cursor-pointer underline text-blue-400">Register</span>
-            </Link>
-          </Typography>
-        </Form.Item>
       </Form>
-    </div>
+      <Typography className="text-center">
+        <Link to={'/auth/register'}>
+          <a href="forgot-password" className="block mb-3">
+            Forgot password
+          </a>
+          Do you have an account yet? <span className="cursor-pointer  font-bold">Register</span>
+        </Link>
+      </Typography>
+    </Space>
   );
 };
 

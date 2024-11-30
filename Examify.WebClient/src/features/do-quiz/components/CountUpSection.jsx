@@ -1,18 +1,19 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import useDoQuizStore from '~/stores/do-quiz-store';
 
 const CountUpSection = () => {
-  const [timeElapsed, setTimeElapsed] = useState(0);
+  const { timeTaken, setTimeTaken } = useDoQuizStore();
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setTimeElapsed((prevTime) => prevTime + 1);
+      setTimeTaken(timeTaken + 1);
     }, 1000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [setTimeTaken, timeTaken]);
 
-  const minutes = Math.floor(timeElapsed / 60);
-  const seconds = timeElapsed % 60;
+  const minutes = Math.floor(timeTaken / 60);
+  const seconds = timeTaken % 60;
 
   return (
     <div className="bg-[#3e084a] p-4 rounded-lg">

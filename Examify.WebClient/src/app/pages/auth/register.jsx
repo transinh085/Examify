@@ -55,8 +55,8 @@ const RegisterRoute = () => {
           </Button>
           <Typography className="text-center mt-6">
             <Link to={'/auth/login'}>
-              Do your have an account yet?
-              <span onClick={moveToLogin} className="underline text-blue-400 cursor-pointer">
+              Do your have an account yet? {''}
+              <span onClick={moveToLogin} className="underline cursor-pointer">
                 Login
               </span>
             </Link>

@@ -1,4 +1,5 @@
 ﻿using Examify.Quiz.Infrastructure.Data;
+using Examify.Quiz.Repositories.Questions;
 using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -9,13 +10,11 @@ public record DuplicateQuestionCommand(Guid Id) : IRequest<IResult>;
 
 public class DuplicateQuestionValidator : AbstractValidator<DuplicateQuestionCommand>
 {
-    public DuplicateQuestionValidator(QuizContext context)
+    public DuplicateQuestionValidator(IQuestionRepository repository)
     {
         RuleFor(x => x.Id)
             .NotEmpty().WithMessage("Id is required")
-            .MustAsync(async (id, cancellationToken) =>
-            {
-                return await context.Questions.AnyAsync(x => x.Id == id, cancellationToken);
-            }).WithMessage("Question not found");
+            .MustAsync(async (id, cancellationToken) => await repository.IsQuestionExists(id, cancellationToken))
+            .WithMessage("Question not found");
     }
 }

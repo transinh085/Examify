@@ -9,13 +9,17 @@ public class IdentityService(IUserRepository userRepository) : global::Identity.
     public override async Task<IdentityReply> GetIdentity(IdentityRequest request, ServerCallContext context)
     {
         var user = await userRepository.GetByIdAsync(request.Id);
-        
+
+        if (user == null)
+        {
+            throw new RpcException(new Status(StatusCode.NotFound, "User not found"));
+        }
+
         return await Task.FromResult(new IdentityReply
         {
-            Id = user?.Id ?? string.Empty,
-            Name = user?.FullName ?? string.Empty,
-            Image = user?.Image ?? string.Empty
+            Id = user.Id,
+            Name = user.FullName,
+            Image = user.Image
         });
     }
-    
 }

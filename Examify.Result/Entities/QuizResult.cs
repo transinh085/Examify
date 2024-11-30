@@ -12,7 +12,11 @@ public class QuizResult : BaseEntity
     
     public int TimeTaken { get; set; }
     
+    public int CurrentQuestion { get; set; }
+    
     public int AttemptedNumber { get; set; }
     
     public DateTime SubmittedAt { get; set; }
+    
+    public List<QuestionResult> QuestionResults { get; set; }   
 }

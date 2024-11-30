@@ -22,6 +22,17 @@ const AddQuestionModal = ({ quizId, open, onCancel }) => {
   });
 
   const onFinish = (values) => {
+    if (!values.options) {
+      return message.error('Please add answers');
+    }
+
+    if (values.options.length < 2) {
+      return message.error('Please add at least 2 answers');
+    }
+
+    if (!values.options.some((option) => option.is_correct)) {
+      return message.error('Please select the correct answer');
+    }
     createQuestionMutation.mutate({
       quizId,
       data: values,
@@ -38,6 +49,7 @@ const AddQuestionModal = ({ quizId, open, onCancel }) => {
       onOk={form.submit}
       maskClosable={false}
       confirmLoading={createQuestionMutation.isLoading}
+      destroyOnClose
       centered
     >
       <Form

@@ -15,7 +15,8 @@ public class GetQuestionsByQuizIdHandler(QuizContext context, IMapper mapper)
         var questions = await context.Questions.Include(e => e.Options)
             .AsNoTracking()
             .Where(e => e.QuizId == request.Id)
-            .ToListAsync<Question>(cancellationToken);
+            .OrderBy(e => e.Order)
+            .ToListAsync(cancellationToken);
         var questionsDto = mapper.Map<List<QuizDto.QuestionDto>>(questions);
         return TypedResults.Ok(questionsDto);
     }

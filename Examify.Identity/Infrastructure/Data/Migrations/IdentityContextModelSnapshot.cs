@@ -17,7 +17,7 @@ namespace Examify.Identity.Infrastructure.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.11")
+                .HasAnnotation("ProductVersion", "9.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -46,7 +46,6 @@ namespace Examify.Identity.Infrastructure.Data.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Image")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("LastName")
@@ -129,7 +128,6 @@ namespace Examify.Identity.Infrastructure.Data.Migrations
 
                     b.ToTable("RefreshTokens");
                 });
-
 
             modelBuilder.Entity("Examify.Identity.Entities.UserVerification", b =>
                 {
@@ -314,7 +312,6 @@ namespace Examify.Identity.Infrastructure.Data.Migrations
                     b.Navigation("AppUser");
                 });
 
-
             modelBuilder.Entity("Examify.Identity.Entities.UserVerification", b =>
                 {
                     b.HasOne("Examify.Identity.Entities.AppUser", "AppUser")
@@ -324,7 +321,6 @@ namespace Examify.Identity.Infrastructure.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("AppUser");
-
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -381,10 +377,6 @@ namespace Examify.Identity.Infrastructure.Data.Migrations
             modelBuilder.Entity("Examify.Identity.Entities.AppUser", b =>
                 {
                     b.Navigation("RefreshTokens");
-
-                    b.Navigation("UserGrades");
-
-                    b.Navigation("UserSubjects");
                 });
 #pragma warning restore 612, 618
         }

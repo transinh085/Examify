@@ -1,0 +1,18 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Result";
+
+package quiz_result;
+
+service QuizResult {
+  rpc CountQuizAttempts (QuizAttemptsRequest) returns (QuizAttemptsReply);
+}
+
+message QuizAttemptsRequest {
+  string id = 1;
+}
+
+message QuizAttemptsReply {
+  string id = 1;
+  int32 attempts = 2;
+}

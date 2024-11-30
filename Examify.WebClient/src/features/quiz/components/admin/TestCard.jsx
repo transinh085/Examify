@@ -15,6 +15,7 @@ import moment from 'moment';
 import { useBoolean } from '~/hooks/useBoolean';
 import SettingModal from './SettingModal';
 const TestCard = ({ id, imgSrc, title, author, date, questions, gradeName, languageName }) => {
+
   const navigate = useNavigate();
 
   const handleCardClick = () => {
@@ -30,12 +31,15 @@ const TestCard = ({ id, imgSrc, title, author, date, questions, gradeName, langu
       <Space size="middle">
         <img
           onClick={handleCardClick}
-          className="w-[120px] h-[120px] rounded-sm cursor-pointer"
+
+          className="w-[240px] h-[120px] rounded-sm cursor-pointer object-cover"
+
           src={imgSrc ?? 'https://avatars.githubusercontent.com/u/120194990?v=4'}
           alt="imgTest"
         />
         <Space direction="vertical" size="small">
-          <Tag className="uppercase">Assessment</Tag>
+
+          <Tag color="cyan">Assessment</Tag>
           <h1 onClick={handleCardClick} className="font-bold cursor-pointer hover:underline">
             {title}
           </h1>
@@ -79,7 +83,9 @@ const DropdownMenu = ({ title }) => {
   const { value: isSettingModalOpen, setTrue: openSettingModal, setFalse: closeSettingModal } = useBoolean();
   const handleMenuClick = ({ key }) => {
     if (key === '2') {
+
       openSettingModal();
+
     }
   };
   const items = [
@@ -114,6 +120,7 @@ const DropdownMenu = ({ title }) => {
         </a>
       </Dropdown>
       <SettingModal data={title} open={isSettingModalOpen} onCancel={closeSettingModal} />
+
     </>
   );
 };

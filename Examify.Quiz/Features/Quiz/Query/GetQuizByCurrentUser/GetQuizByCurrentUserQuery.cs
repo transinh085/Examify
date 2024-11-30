@@ -4,4 +4,4 @@ using MediatR;
 
 namespace Examify.Quiz.Features.Quiz.Query.GetQuizByCurrentUser;
 
-public record GetQuizByCurrentUserQuery(Guid UserId): IRequest<IResult>;
+public record GetQuizByCurrentUserQuery(string UserId): IRequest<IResult>;

@@ -8,6 +8,7 @@ public class GetSubjectEndpoint : IEndpoint
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
         app.MapGet("/subjects/{id}", (ISender sender, int id) => sender.Send(new GetSubjectQuery(id)))
-            .Produces<Entities.Subject>();
+            .Produces<Entities.Subject>()
+            .WithTags("Subjects");
     }
 }

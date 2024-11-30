@@ -12,14 +12,16 @@ var builder = WebApplication.CreateBuilder(args);
 var assembly = Assembly.GetExecutingAssembly();
 
 builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection(nameof(JwtOptions)));
+builder.Services.Configure<FacebookOptions>(builder.Configuration.GetSection(nameof(FacebookOptions)));
+builder.Services.Configure<GoogleOptions>(builder.Configuration.GetSection(nameof(GoogleOptions)));
+
+
 builder.Services.AddGrpc();
 builder.AddIdentityInfrastructure();
 builder.AddPersistence();
 builder.AddInfrashtructure(assembly);
-
-builder.Services.AddJwt(builder.Configuration);
-
 builder.AddMessaging();
+builder.Services.AddHttpClient();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserVerificationRepository, UserVerificationRepository>();

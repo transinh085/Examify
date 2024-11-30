@@ -1,34 +1,47 @@
 import { closestCenter, DndContext } from '@dnd-kit/core';
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
 import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import { useQueryClient } from '@tanstack/react-query';
 import { Space } from 'antd';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { getQuestionByQuizIdQueryOptions } from '~/features/quiz/api/questions/get-question-by-quiz-id';
+import { useOrderQuestion } from '~/features/quiz/api/questions/order-question';
 import SortableQuestion from '~/features/quiz/components/create-quiz/SortableQuestion';
 
 const QuestionList = ({ quizId, questions }) => {
-  const [items, setItems] = useState(questions);
+  const [questionList, setQuestionList] = useState(questions);
+  const queryClient = useQueryClient();
+  const orderQuestionMutation = useOrderQuestion();
 
   useEffect(() => {
-    console.log('questions', questions);
-    setItems(questions);
+    setQuestionList(questions);
   }, [questions]);
 
-  const handleDragEnd = (event) => {
-    const { active, over } = event;
+  const handleDragEnd = useCallback(
+    (event) => {
+      const { active, over } = event;
 
-    if (active.id !== over.id) {
-      const oldIndex = items.findIndex((item) => item.id === active.id);
-      const newIndex = items.findIndex((item) => item.id === over.id);
-      setItems(arrayMove(items, oldIndex, newIndex));
-    }
-  };
+      if (active.id !== over.id) {
+        const oldIndex = questionList.findIndex((item) => item.id === active.id);
+        const newIndex = questionList.findIndex((item) => item.id === over.id);
+
+        orderQuestionMutation.mutate({ questionId: active.id, order: newIndex });
+        setQuestionList(arrayMove(questionList, oldIndex, newIndex));
+        queryClient.setQueryData(getQuestionByQuizIdQueryOptions(quizId).queryKey, (oldData) => {
+          const newData = [...oldData];
+          return arrayMove(newData, oldIndex, newIndex);
+        });
+      }
+    },
+    [questionList, orderQuestionMutation, queryClient, quizId],
+  );
 
   return (
     <div className="draggable-container">
       <DndContext modifiers={[restrictToVerticalAxis]} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-        <SortableContext items={items} strategy={verticalListSortingStrategy}>
+        <SortableContext items={questionList} strategy={verticalListSortingStrategy}>
           <Space direction="vertical" size={16} className="w-full mb-7">
-            {items.map((question, index) => (
+            {questionList.map((question, index) => (
               <SortableQuestion
                 key={question.id}
                 order={index + 1}

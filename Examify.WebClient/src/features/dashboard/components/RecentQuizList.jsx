@@ -2,6 +2,7 @@ import { Button, Col, Flex, Row } from 'antd';
 import QuizItem from '../../../components/ui/quizzes/QuizItem';
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
+import { RightOutlined } from '@ant-design/icons';
 
 const RecentQuizList = () => {
   const recentQuizzes = useMemo(
@@ -47,10 +48,10 @@ const RecentQuizList = () => {
   return (
     <>
       <Flex align="center" justify="space-between" className="w-full">
-        <h1 className="text-lg font-semibold">Hoạt động gần đây</h1>
+        <h1 className="text-lg font-semibold">Recent Activity</h1>
         <Link to="/topics/1" className="text-blue-500">
-          <Button variant="outlined" color="primary">
-            Xem thêm
+          <Button variant="outlined" color="primary" icon={<RightOutlined />} iconPosition="end">
+            See more
           </Button>
         </Link>
       </Flex>

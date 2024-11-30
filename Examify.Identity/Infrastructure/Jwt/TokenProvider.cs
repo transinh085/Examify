@@ -26,9 +26,31 @@ public class TokenProvider(UserManager<AppUser> userManager, IdentityContext con
         {
             throw new UnauthorizedAccessException("This account has not been verified.");
         }
+
         if (user == null || !await userManager.CheckPasswordAsync(user, password))
             throw new UnauthorizedAccessException();
 
+        var accessToken = CreateToken(user);
+        var refreshToken = GenerateRefreshToken(user);
+
+        await context.RefreshTokens.AddAsync(refreshToken);
+        await context.SaveChangesAsync();
+
+        return new AuthenticatedDto
+        {
+            Id = user.Id,
+            FullName = user.FullName,
+            Email = user.Email,
+            Image = user.Image,
+            Token = accessToken,
+            RefreshToken = refreshToken.Token,
+            ExpiresIn = _jwtOptions.DurationInMinutes * 60
+        };
+    }
+
+
+    public async Task<AuthenticatedDto> AuthenticateAsync(AppUser user)
+    {
         var accessToken = CreateToken(user);
         var refreshToken = GenerateRefreshToken(user);
 

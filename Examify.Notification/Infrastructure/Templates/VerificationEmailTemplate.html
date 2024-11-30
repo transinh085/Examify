@@ -53,11 +53,14 @@
         <p>Hello,</p>
         <p>Please verify your email by clicking the link below:</p>
         <p><a href="{{VerificationLink}}">Verify Email</a></p>
-        <p>Best regards,<br>Your Company</p>
+        <p>Best regards,<br>Your Examify</p>
     </div>
     <div class="footer">
-        <p>&copy; 2023 Your Company. All rights reserved.</p>
+        <p>&copy; <span id="currentYear"></span> Your Examify. All rights reserved.</p>
     </div>
 </div>
+<script>
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
