@@ -12,11 +12,17 @@ public class Quiz : BaseEntity
     public Guid? GradeId { get; set; }
     public Guid? LanguageId { get; set; }
     public string? OwnerId { get; set; }
-    public Visibility Visibility { get; set; } = Visibility.Private;
 
     public List<Question> Questions { get; set; }
+    public Visibility Visibility { get; set; } = Visibility.Private;
 
     public bool IsPublished { get; set; } = false;
 
-    public QuizSetting Settings { get; set; }
+    public string? Code { get; set; }
+
+    public DateTime StartTime { get; set; }
+    public DateTime EndTime { get; set; }
+
+    public bool RandomQuestions { get; set; } = false;
+    public bool RandomOptions { get; set; } = false;
 }

@@ -1,6 +1,5 @@
-﻿namespace Examify.Quiz.Features.Quiz.Query.SearchQuiz;
+﻿using MediatR;
 
-public class SearchQuizCommand
-{
-    
-}
+namespace Examify.Quiz.Features.Quiz.Query.SearchQuiz;
+
+public record SearchQuizCommand : IRequest<IResult>;
