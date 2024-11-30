@@ -6,7 +6,7 @@ import FullScreenButton from '~/features/do-quiz/components/FullScreenButton';
 import Option from '~/features/do-quiz/components/Option';
 import SettingDrawer from '~/features/do-quiz/components/SettingDrawer';
 import { triggerConfetti } from '~/features/do-quiz/utils/helpers';
-import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { QUESTION_TYPE } from '~/config/enums';
 import BackgroundAudio from '~/features/do-quiz/components/BackgroundAudio';
 import CountUpSection from '~/features/do-quiz/components/CountUpSection';
@@ -18,7 +18,6 @@ import { useGetQuizResult } from '~/features/do-quiz/api/get-quiz-result';
 import { useSubmitAnswersMutation } from '~/features/do-quiz/api/submit-answer';
 
 const DoQuizPage = () => {
-  const navigate = useNavigate();
   const { result_id } = useParams();
 
   const {
@@ -40,7 +39,7 @@ const DoQuizPage = () => {
     removeSelectedOption,
   } = useDoQuizStore();
 
-  const { data: quizResult, isLoading } = useGetQuizResult(
+  const { data: quizResult, refetch } = useGetQuizResult(
     { id: result_id },
     {
       enabled: !!result_id,
@@ -68,7 +67,7 @@ const DoQuizPage = () => {
       timeTaken: quizResult?.timeTaken,
     });
     setQuestionDuration(60);
-  }, [initDoQuizStore, setQuestionDuration, quizResult, currentQuestion, navigate, result_id, isLoading]);
+  }, [initDoQuizStore, setQuestionDuration, quizResult]);
 
   useNumberKeyPress((key) => {
     const option = questionResults?.[currentQuestion]?.options?.[key - 1];
@@ -117,8 +116,10 @@ const DoQuizPage = () => {
   };
 
   const handleNextQuestion = () => {
+    console.log('__handle_next_question', currentQuestion, questionResults.length);
     if (currentQuestion === questionResults.length - 1) {
       // trigger completed game
+      refetch();
       setIsFinished(true);
       return;
     }
