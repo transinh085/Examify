@@ -12,19 +12,10 @@ import {
 } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
+import { useBoolean } from '~/hooks/useBoolean';
+import SettingModal from './SettingModal';
+const TestCard = ({ id, imgSrc, title, author, date, questions, gradeName, languageName }) => {
 
-const TestCard = ({
-  id,
-  imgSrc,
-  title,
-  author,
-  date,
-  questions,
-  gradeName,
-  languageName,
-  setIsModalVisible,
-  setTitleQuiz,
-}) => {
   const navigate = useNavigate();
 
   const handleCardClick = () => {
@@ -40,11 +31,14 @@ const TestCard = ({
       <Space size="middle">
         <img
           onClick={handleCardClick}
+
           className="w-[240px] h-[120px] rounded-sm cursor-pointer object-cover"
+
           src={imgSrc ?? 'https://avatars.githubusercontent.com/u/120194990?v=4'}
           alt="imgTest"
         />
         <Space direction="vertical" size="small">
+
           <Tag color="cyan">Assessment</Tag>
           <h1 onClick={handleCardClick} className="font-bold cursor-pointer hover:underline">
             {title}
@@ -73,7 +67,7 @@ const TestCard = ({
         </Space>
       </Space>
       <Flex justify="space-between" vertical align="end">
-        <DropdownMenu setIsModalVisible={setIsModalVisible} setTitleQuiz={setTitleQuiz} title={title} />
+        <DropdownMenu title={title} />
         <Space>
           <Button onClick={movePlayQuiz} icon={<PlayCircleOutlined />}>
             Play
@@ -85,11 +79,13 @@ const TestCard = ({
   );
 };
 
-const DropdownMenu = ({ setIsModalVisible, setTitleQuiz, title }) => {
-  const onClick = ({ key }) => {
+const DropdownMenu = ({ title }) => {
+  const { value: isSettingModalOpen, setTrue: openSettingModal, setFalse: closeSettingModal } = useBoolean();
+  const handleMenuClick = ({ key }) => {
     if (key === '2') {
-      setIsModalVisible(true);
-      setTitleQuiz(title);
+
+      openSettingModal();
+
     }
   };
   const items = [
@@ -107,6 +103,7 @@ const DropdownMenu = ({ setIsModalVisible, setTitleQuiz, title }) => {
       label: 'Settings',
       key: '2',
       icon: <SettingOutlined />,
+      onclick: openSettingModal,
     },
     {
       label: 'Delete',
@@ -117,11 +114,13 @@ const DropdownMenu = ({ setIsModalVisible, setTitleQuiz, title }) => {
   ];
   return (
     <>
-      <Dropdown menu={{ items, onClick }} trigger={['click']}>
+      <Dropdown menu={{ items, onClick: handleMenuClick }} trigger={['click']}>
         <a onClick={(e) => e.preventDefault()}>
           <Button type="text" icon={<MoreOutlined />} size="small" />
         </a>
       </Dropdown>
+      <SettingModal data={title} open={isSettingModalOpen} onCancel={closeSettingModal} />
+
     </>
   );
 };
