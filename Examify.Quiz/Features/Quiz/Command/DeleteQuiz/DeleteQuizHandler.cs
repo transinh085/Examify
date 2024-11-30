@@ -4,11 +4,11 @@ using MediatR;
 
 namespace Examify.Quiz.Features.Quiz.Command.DeleteQuiz;
 
-public class DeleteQuizHandler(IQuizRepository _quizRepository) : IRequestHandler<DeleteQuizCommand, IResult>
+public class DeleteQuizHandler(IQuizRepository quizRepository) : IRequestHandler<DeleteQuizCommand, IResult>
 {
     public async Task<IResult> Handle(DeleteQuizCommand request, CancellationToken cancellationToken)
     {
-        _quizRepository.DeleteQuizById(request.QuizId, cancellationToken);
+        await quizRepository.DeleteQuizById(request.QuizId, cancellationToken);
         return TypedResults.NoContent();
     }
 }

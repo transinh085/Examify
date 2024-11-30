@@ -4,7 +4,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import useAuthStore from '~/stores/auth-store';
 import { useNavigate } from 'react-router-dom';
 import { useGetQuizUser } from '~/features/quiz/api/quizzes/get-quiz-user';
-import TabContent from '~/features/quiz/components/admin/TabContent';
+import TabContent from '~/features/admin/mylibrary/components/TabContent';
 import { useUploadImageMutation } from '~/features/quiz/api/upload-images/upload-image';
 import { useUpdateUserImageMutation } from '~/features/auth/api/update-user-image'
 

@@ -6,6 +6,7 @@ import SubjectItem from '~/features/admin/explore/components/SubjectItem';
 import SectionHeader from '~/features/admin/explore/components/SectionHeader';
 import QuizCard from '~/features/admin/explore/components/QuizCard';
 import { subjects } from '~/features/admin/explore/data';
+import SignalR from '~/components/SignalR';
 
 const { Title } = Typography;
 
@@ -48,6 +49,7 @@ const ExplorePage = () => {
 
   return (
     <Flex vertical className="px-4 sm:px-6 w-full">
+      <SignalR/>
       <Title level={2} className="text-center mt-4 sm:mt-5 lg:py-8 text-xl sm:text-2xl">
         What will you teach today?
       </Title>

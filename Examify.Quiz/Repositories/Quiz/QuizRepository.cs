@@ -189,4 +189,21 @@ public class QuizRepository(
             quiz.AttemptCount = await quizMetaService.CountQuizAttemptsAsync(quiz.Id);
         }
     }
+
+    public async Task PlayQuiz(Guid id, CancellationToken cancellationToken)
+    {
+        var quiz = await quizContext.Quizzes.FindAsync(id, cancellationToken);
+        Random random = new();
+        quiz.Code = random.Next(100000, 999999).ToString();
+        quizContext.Quizzes.Update(quiz);
+        await quizContext.SaveChangesAsync(cancellationToken);
+    }
+    
+    public async Task EndQuiz(Guid id, CancellationToken cancellationToken)
+    {
+        var quiz = await quizContext.Quizzes.FindAsync(id, cancellationToken);
+        quiz.Code = null;
+        quizContext.Quizzes.Update(quiz);
+        await quizContext.SaveChangesAsync(cancellationToken);
+    }
 }

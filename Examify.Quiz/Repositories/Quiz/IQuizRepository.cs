@@ -25,7 +25,9 @@ public interface IQuizRepository
 
     Task<PagedList<QuizItemResponseDto>> GetQuizzesBySubject(Guid subjectId, int pageNumber, int pageSize,
         CancellationToken cancellationToken);
-
+    Task PlayQuiz(Guid id, CancellationToken cancellationToken);
+    Task EndQuiz(Guid id, CancellationToken cancellationToken);
+    
     Task<PagedList<QuizItemResponseDto>> SearchQuizzes(string keyword, int pageNumber, int pageSize,
         CancellationToken cancellationToken);
 }
