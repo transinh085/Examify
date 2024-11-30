@@ -2,6 +2,7 @@
 using AutoMapper.QueryableExtensions;
 using Examify.Core.Pagination;
 using Examify.Quiz.Dtos;
+using Examify.Quiz.Enums;
 using Examify.Quiz.Features.Quiz.Dtos;
 using Examify.Quiz.Grpc;
 using Examify.Quiz.Infrastructure.Data;
@@ -152,7 +153,7 @@ public class QuizRepository(
     {
         var quizzes = await quizContext.Quizzes
             .Include(q => q.Questions)
-            .Where(q => q.SubjectId == subjectId && q.IsPublished)
+            .Where(q => q.SubjectId == subjectId && q.IsPublished && q.Visibility == Visibility.Public)
             .AsNoTracking()
             .ProjectTo<QuizItemResponseDto>(mapper.ConfigurationProvider)
             .PaginatedListAsync(pageNumber, pageSize);

@@ -19,8 +19,16 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                 GradeId = Guid.Parse("45304ba8-da09-46b9-8400-d5b7a7bb718e"),
                 LanguageId = Guid.Parse("d9789c96-e0c8-4826-81b3-0eccd22d3508"),
                 OwnerId = "ea616dc0-e621-474e-a247-b823b9fe6004",
-                Visibility = Visibility.Private,
+                Visibility = Visibility.Public,
                 IsPublished = true,
+                Settings = new QuizSetting
+                {
+                    Code = "JSBASIC",
+                    StartTime = DateTime.UtcNow,
+                    EndTime = DateTime.UtcNow.AddDays(7),
+                    RandomQuestions = true,
+                    RandomOptions = true
+                },
                 Questions =
                 [
                     new Question
@@ -186,8 +194,16 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                 GradeId = Guid.Parse("45304ba8-da09-46b9-8400-d5b7a7bb718e"),
                 LanguageId = Guid.Parse("d9789c96-e0c8-4826-81b3-0eccd22d3508"),
                 OwnerId = "ea616dc0-e621-474e-a247-b823b9fe6004",
-                Visibility = Visibility.Private,
+                Visibility = Visibility.Public,
                 IsPublished = true,
+                Settings = new QuizSetting
+                {
+                    Code = "CSHARPBASIC",
+                    StartTime = DateTime.UtcNow,
+                    EndTime = DateTime.UtcNow.AddDays(7),
+                    RandomQuestions = true,
+                    RandomOptions = true
+                },
                 Questions =
                 [
                     new Question
@@ -366,8 +382,16 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                 GradeId = Guid.Parse("45304ba8-da09-46b9-8400-d5b7a7bb718e"),
                 LanguageId = Guid.Parse("d9789c96-e0c8-4826-81b3-0eccd22d3508"),
                 OwnerId = "ea616dc0-e621-474e-a247-b823b9fe6004",
-                Visibility = Visibility.Private,
+                Visibility = Visibility.Public,
                 IsPublished = true,
+                Settings = new QuizSetting
+                {
+                    Code = "AABD",
+                    StartTime = DateTime.UtcNow,
+                    EndTime = DateTime.UtcNow.AddDays(7),
+                    RandomQuestions = true,
+                    RandomOptions = true
+                },
                 Questions = new List<Question>
                 {
                     new Question
@@ -534,6 +558,14 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                 OwnerId = "ea616dc0-e621-474e-a247-b823b9fe6004",
                 Visibility = Visibility.Private,
                 IsPublished = true,
+                Settings = new QuizSetting
+                {
+                    Code = "ADBD",
+                    StartTime = DateTime.UtcNow,
+                    EndTime = DateTime.UtcNow.AddDays(7),
+                    RandomQuestions = true,
+                    RandomOptions = true
+                },
                 Questions = new List<Question>
                 {
                     new Question

@@ -15,6 +15,4 @@ public class QuizSetting : BaseEntity
 
     public bool RandomQuestions { get; set; }
     public bool RandomOptions { get; set; }
-    
-    public Visibility Visibility { get; set; } = Visibility.Private;
 }

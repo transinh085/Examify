@@ -17,4 +17,6 @@ public class Quiz : BaseEntity
     public List<Question> Questions { get; set; }
 
     public bool IsPublished { get; set; } = false;
+
+    public QuizSetting Settings { get; set; }
 }
