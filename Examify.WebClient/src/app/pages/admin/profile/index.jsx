@@ -3,11 +3,10 @@ import { EditOutlined, BookOutlined, UploadOutlined } from '@ant-design/icons';
 import React, { useEffect, useMemo, useState } from 'react';
 import useAuthStore from '~/stores/auth-store';
 import { useNavigate } from 'react-router-dom';
-import { useCreateQuiz } from '~/features/quiz/api/quizzes/create-quiz';
 import { useGetQuizUser } from '~/features/quiz/api/quizzes/get-quiz-user';
-import { useQueryClient } from '@tanstack/react-query';
 import TabContent from '~/features/quiz/components/admin/TabContent';
-
+import { useUploadImageMutation } from '~/features/quiz/api/upload-images/upload-image';
+import { useUpdateUserImageMutation } from '~/features/auth/api/update-user-image'
 
 const ProfilePage = () => {
   const { user, resetUser } = useAuthStore();
@@ -17,19 +16,6 @@ const ProfilePage = () => {
       console.log('File URL:', imageUrl);
     }
   }, [imageUrl]);
-
-  const handleUpload = (info) => {
-    const file = info.file.originFileObj || info.file; // Sử dụng originFileObj hoặc fallback về file
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setImageUrl(reader.result);
-      };
-      reader.readAsDataURL(file); // Đọc file
-    } else {
-      console.error("Không thể đọc file");
-    }
-  };
 
   const navigate = useNavigate();
 
@@ -56,8 +42,6 @@ const ProfilePage = () => {
             <div className="relative inline-block">
               <Upload
                 showUploadList={false} // Ẩn danh sách file tải lên
-                beforeUpload={() => false} // Ngăn việc tải lên ngay lập tức (tải lên phía client)
-                onChange={handleUpload} // Xử lý sự kiện khi người dùng chọn file
               >
                 <Avatar
                   size={{

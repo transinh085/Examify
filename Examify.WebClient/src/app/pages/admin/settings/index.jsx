@@ -3,6 +3,7 @@ import { json } from 'react-router-dom';
 import { useUpdatePasswordMutation } from '~/features/auth/api/update-password';
 import { useUpdateUserMutation } from '~/features/auth/api/update-user';
 import useAuthStore from '~/stores/auth-store';
+import UploadCover from '~/features/quiz/components/question/UploadCover';
 
 const SettingPage = () => {
   const { user, resetUser, setUserProfile } = useAuthStore();
@@ -56,7 +57,7 @@ const SettingPage = () => {
         <Tabs size={'large'} className='px-8'>
           <Tabs.TabPane tab={<span style={{ fontSize: '16px', fontWeight: 'bold' }}>Tài khoản</span>} key="tab 1">
             <Form form={form} name="updateEmail" style={{ maxWidth: 600 }} layout="vertical" autoComplete="off"
-              initialValues={{ email: user.email, firstName: user.firstName, lastName: user.lastName }}
+              initialValues={{ email: user.email, firstName: user.firstName, lastName: user.lastName, image: user.image }}
               onFinish={handleUpdateUser}>
               <Form.Item
                 hasFeedback
@@ -107,6 +108,9 @@ const SettingPage = () => {
                 ]}
               >
                 <Input defaultValue={user.lastName} />
+              </Form.Item>
+              <Form.Item label="Image" name="image">
+                {/* <UploadCover url={user.image} setFieldsValue={(value) => form.setFieldsValue({ image: value })} /> */}
               </Form.Item>
               <Form.Item>
                 <Button block htmlType="submit">Lưu thay đổi</Button>
@@ -171,7 +175,6 @@ const SettingPage = () => {
               >
                 <Input.Password placeholder="Nhập lại mật khẩu mới" />
               </Form.Item>
-
               <Form.Item>
                 <Button block htmlType="submit">Lưu thay đổi</Button>
               </Form.Item>
