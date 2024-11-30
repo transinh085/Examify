@@ -1,10 +1,11 @@
 import { Avatar, Button, Card, Divider, Flex, Modal, Progress, Tag } from 'antd';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { PlayCircleOutlined } from '@ant-design/icons';
+import { useCreateQuizResultMutation } from '~/features/do-quiz/api/create-quiz-result';
 
-const QuizItem = ({ id, title, description, image, percent, questions }) => {
+const QuizItem = ({ id, title, description, cover, questionCount, attemptCount, owner, grade, percent = 20 }) => {
   const [open, setOpen] = useState(false);
   const twoColors = {
     '0%': '#108ee9',
@@ -19,17 +20,20 @@ const QuizItem = ({ id, title, description, image, percent, questions }) => {
             padding: 0,
           },
         }}
-        className='shadow-sm overflow-hidden'
+        className="shadow-sm overflow-hidden cursor-pointer"
         onClick={() => setOpen(true)}
       >
         <div
           className="h-[120px] bg-cover bg-center relative"
           style={{
-            backgroundImage: `url(${image})`,
+            backgroundImage: `url(${cover})`,
           }}
         >
-          <Tag color="green" className="absolute bottom-1 left-2">
-            {questions} câu hỏi
+          <Tag color="green" className="absolute bottom-1 left-1">
+            {questionCount} câu hỏi
+          </Tag>
+          <Tag color="cyan" className="absolute bottom-1 right-1">
+            {attemptCount} lượt thi
           </Tag>
         </div>
         <Flex vertical justify="space-between" className="p-3 h-[150px]" gap={2}>
@@ -41,56 +45,86 @@ const QuizItem = ({ id, title, description, image, percent, questions }) => {
           <Progress percent={percent} size={[null, 12]} strokeColor={twoColors} />
         </Flex>
       </Card>
-      <Modal
-        title={null}
-        footer={null}
-        open={open}
-        onCancel={() => setOpen(false)}
-        styles={{
-          content: {
-            padding: 0,
-            overflow: 'hidden',
-          },
+      <QuizDetailModal
+        {...{ id, title, description, cover, questionCount, attemptCount, owner, grade, open, setOpen }}
+      />
+    </>
+  );
+};
+
+const QuizDetailModal = ({
+  id,
+  title,
+  description,
+  cover,
+  questionCount,
+  attemptCount,
+  owner,
+  grade,
+  open,
+  setOpen,
+}) => {
+  const navigate = useNavigate();
+
+  const createQuizResultMutation = useCreateQuizResultMutation({
+    mutationConfig: {
+      onSuccess: (data) => {
+        navigate(`/join/game/${data.quizResultId}`);
+      },
+    },
+  });
+
+  const handleStartQuiz = () => {
+    createQuizResultMutation.mutate({ quizId: id });
+  };
+
+  return (
+    <Modal
+      title={null}
+      footer={null}
+      open={open}
+      onCancel={() => setOpen(false)}
+      styles={{
+        content: {
+          padding: 0,
+          overflow: 'hidden',
+        },
+      }}
+      rootClassName="quiz-modal"
+    >
+      <div
+        className="w-full h-[220px] bg-cover bg-center relative"
+        style={{
+          backgroundImage: `url(${cover})`,
         }}
       >
-        <div
-          className="w-full h-[220px] bg-cover bg-center relative"
-          style={{
-            backgroundImage: `url(${image})`,
-          }}
-        >
-          <Tag color="green" className="absolute bottom-2 left-2">
-            {questions} câu hỏi
-          </Tag>
-          <Tag color="cyan" className="absolute bottom-2 right-2">
-            120 lượt thi
-          </Tag>
-        </div>
-        <div className="p-4">
-          <h1 className="text-lg font-semibold line-clamp-2 overflow-hidden text-ellipsis">{title}</h1>
-          <p className="line-clamp-2 overflow-hidden text-ellipsis text-sm mt-2 text-[#444]">{description}</p>
-          <Flex justify="space-between" align="center" className='pt-4'>
-            <Flex align="center" gap={10}>
-              <Avatar src={'https://avatars.githubusercontent.com/u/93178609?v=4'} />
-              <h1 className="text-base font-semibold">Quan Phat</h1>
-            </Flex>
-            <Flex align="center" gap={4}>
-              <Tag color="green">Grade 8</Tag>
-              <Tag color="green">Grade 9</Tag>
-              <Tag color="green">Grade 10</Tag>
-            </Flex>
+        <Tag color="green" className="absolute bottom-2 left-2">
+          {questionCount} câu hỏi
+        </Tag>
+        <Tag color="cyan" className="absolute bottom-2 right-2">
+          {attemptCount} lượt thi
+        </Tag>
+      </div>
+      <div className="p-4">
+        <h1 className="text-lg font-semibold line-clamp-2 overflow-hidden text-ellipsis">{title}</h1>
+        <p className="line-clamp-2 overflow-hidden text-ellipsis text-sm mt-2 text-[#444]">{description}</p>
+        <Flex justify="space-between" align="center" className="pt-4">
+          <Flex align="center" gap={10}>
+            <Avatar src={owner?.image} />
+            <h1 className="text-base font-semibold">{owner?.fullName}</h1>
           </Flex>
-          <Divider className="m-3" />
-          <Flex align="center" gap={10} className="pt-4">
-            <Link to={`/join/game/${id}`} className="flex-1">
-              <Button type="primary" size="large" icon={<PlayCircleOutlined />} block>
-                Start now
-              </Button>
-            </Link>
+          <Flex align="center" gap={4}>
+            <Tag color="green">{grade?.name}</Tag>
           </Flex>
-        </div>
-      </Modal>
-    </>
+        </Flex>
+        <Divider className="m-3" />
+        <Flex align="center" gap={10} className="pt-4">
+          <Button type="primary" size="large" icon={<PlayCircleOutlined />} onClick={handleStartQuiz} block>
+            Start now
+          </Button>
+        </Flex>
+      </div>
+    </Modal>
   );
 };
 

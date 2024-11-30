@@ -1,5 +1,6 @@
 ﻿using Examify.Quiz.Features.Quiz.Dtos;
 using Quiz;
+using Result;
 
 namespace Examify.Quiz.Grpc;
 
@@ -7,7 +8,8 @@ public class QuizMetaService(
     Subject.SubjectClient subjectClient,
     Language.LanguageClient languageClient,
     Identity.IdentityClient identityClient,
-    Grade.GradeClient gradeClient
+    Grade.GradeClient gradeClient,
+    QuizResult.QuizResultClient quizResultClient
 ) : IQuizMetaService
 {
     public Task<SubjectDto> GetSubjectAsync(Guid? Id)
@@ -53,5 +55,15 @@ public class QuizMetaService(
             Id = Guid.Parse(grade.Id),
             Name = grade.Name
         });
+    }
+
+    public async Task<int> CountQuizAttemptsAsync(Guid? quizId)
+    {
+        if (quizId == Guid.Empty) return 0;
+        var quizResult = await quizResultClient.CountQuizAttemptsAsync(new QuizAttemptsRequest
+        {
+            Id = quizId.ToString()
+        });
+        return quizResult.Attempts;
     }
 }

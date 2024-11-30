@@ -17,6 +17,7 @@ public class QuizItemResponseDto
     public Visibility Visibility { get; set; }
     public int Duration { get; set; }
     public int QuestionCount { get; set; }
+    public int AttemptCount { get; set; }
 }
 
 public class QuizProfile : Profile

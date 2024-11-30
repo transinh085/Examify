@@ -43,7 +43,7 @@ const Option = ({ type, number, option, handleSelect }) => {
       className={`border-none  cursor-pointer relative  ${optionStyles.animate}`}
       onClick={handleSelect}
     >
-      <Tooltip title="Use your keyboard to choose" placement="top">
+      <Tooltip title="Use your keyboard to choose" placement="topRight">
         <Flex
           flex={1}
           align="center"

@@ -1,6 +1,7 @@
 using System.Reflection;
 using Examify.Infrastructure;
 using Examify.Infrastructure.Jwt;
+using Examify.Result.Grpc;
 using Examify.Result.Infrastructure.Data;
 using Examify.Result.Infrastructure.Messaging;
 using Examify.Result.Repositories;
@@ -12,6 +13,7 @@ var assembly = Assembly.GetExecutingAssembly();
 builder.AddInfrashtructure(assembly);
 builder.AddPersistence();
 builder.Services.AddJwt(builder.Configuration);
+builder.Services.AddGrpc();
 builder.Services.AddGrpcServices();
 
 builder.AddMessaging();
@@ -24,6 +26,5 @@ builder.Services.AddScoped<IAnswerResultRepository, AnswerResultRepository>();
 
 var app = builder.Build();
 app.UseInfrastructure(app.Environment, useAuthentication: true);
-
-
+app.MapGrpcService<QuizResultService>();
 app.Run();

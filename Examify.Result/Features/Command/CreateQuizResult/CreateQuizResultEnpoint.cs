@@ -8,9 +8,9 @@ public class CreateQuizResultEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPost("/quizzes/{quizId}/quiz-results",
-                async (ClaimsPrincipal user, ISender sender, CreateQuizResultCommand command, string quizId) => 
-                    await sender.Send(command with { QuizId = quizId, UserId = user.Identity.Name }))
+        app.MapPost("/quizzes/{quizId:guid}/quiz-results",
+                async (Guid quizId, ClaimsPrincipal user, ISender sender) =>
+                    await sender.Send(new CreateQuizResultCommand { QuizId = quizId, UserId = user.Identity.Name }))
             .Produces<CreateQuizResultResponse>()
             .WithTags("Quiz Results")
             .RequireAuthorization();

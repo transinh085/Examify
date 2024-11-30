@@ -3,6 +3,7 @@ using Examify.Infrastructure;
 using Examify.Infrastructure.Jwt;
 using Examify.Quiz.Grpc;
 using Examify.Quiz.Infrastructure.Data;
+using Examify.Quiz.Infrastructure.GrpcClient;
 using Examify.Quiz.Repositories.Questions;
 using Examify.Quiz.Repositories.Quiz;
 

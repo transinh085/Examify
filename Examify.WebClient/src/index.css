@@ -26,17 +26,23 @@
   .custom-scrollbar::-webkit-scrollbar {
     width: 8px;
   }
-  
+
   .custom-scrollbar::-webkit-scrollbar-track {
     background: #4b0858;
   }
-  
+
   .custom-scrollbar::-webkit-scrollbar-thumb {
     background: #2a0830;
     border-radius: 4px;
   }
-  
+
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     background: #4b0858;
+  }
+
+  .quiz-modal .ant-modal .ant-modal-close {
+    border-radius: 50%;
+    background-color: #0009;
+    color: #fff;
   }
 }

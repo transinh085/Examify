@@ -6,7 +6,6 @@ using Examify.Quiz.Features.Quiz.Dtos;
 using Examify.Quiz.Grpc;
 using Examify.Quiz.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
-using Quiz;
 
 namespace Examify.Quiz.Repositories.Quiz;
 
@@ -164,6 +163,7 @@ public class QuizRepository(
             quiz.Subject = await quizMetaService.GetSubjectAsync(quiz.Subject.Id);
             quiz.Grade = await quizMetaService.GetGradeAsync(quiz.Grade.Id);
             quiz.Owner = await quizMetaService.GetOwnerAsync(Guid.Parse(quiz.Owner.Id));
+            quiz.AttemptCount = await quizMetaService.CountQuizAttemptsAsync(quiz.Id);
         }
 
         return quizzes;

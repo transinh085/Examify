@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { RightOutlined } from '@ant-design/icons';
 import { useGetQuizBySubject } from '~/features/dashboard/api/get-quizzes-by-subject';
 
-const QuizListBySubject = ({ id, name, quizzes = [] }) => {
+const QuizListBySubject = ({ id, name }) => {
   const { data = [], isLoading } = useGetQuizBySubject({ subjectId: id, pageNumber: 1, pageSize: 4 });
   return (
     <Flex vertical gap={16}>
@@ -21,11 +21,12 @@ const QuizListBySubject = ({ id, name, quizzes = [] }) => {
         </Link>
       </Flex>
       <Row gutter={[16, 16]}>
-        {quizzes.map((quiz) => (
-          <Col xs={24} sm={12} md={8} lg={6} key={quiz.id}>
-            <QuizItem {...quiz} />
-          </Col>
-        ))}
+        {data?.items &&
+          data?.items.map((quiz) => (
+            <Col xs={24} sm={12} md={8} lg={6} key={quiz.id}>
+              <QuizItem {...quiz} />
+            </Col>
+          ))}
       </Row>
     </Flex>
   );

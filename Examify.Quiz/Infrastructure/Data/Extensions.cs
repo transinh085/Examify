@@ -1,5 +1,4 @@
-﻿using Grpc.Core;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Quiz;
 
 namespace Examify.Quiz.Infrastructure.Data;
@@ -21,27 +20,5 @@ public static class Extensions
 
         builder.Services.AddMigration<QuizContext, QuizContextSeed>();
         return builder;
-    }
-    
-    public static IServiceCollection AddGrpcServices(this IServiceCollection services)
-    {
-        services.AddGrpc();
-        services.AddGrpcClient<Language.LanguageClient>(options =>
-        {
-            options.Address = new Uri("https://localhost:7085");
-        });
-        services.AddGrpcClient<Subject.SubjectClient>(options =>
-        {
-            options.Address = new Uri("https://localhost:7085");
-        });
-        services.AddGrpcClient<Grade.GradeClient>(options =>
-        {
-            options.Address = new Uri("https://localhost:7085");
-        });
-        services.AddGrpcClient<Identity.IdentityClient>(options =>
-        {
-            options.Address = new Uri("https://localhost:7036");
-        });
-        return services;
     }
 }

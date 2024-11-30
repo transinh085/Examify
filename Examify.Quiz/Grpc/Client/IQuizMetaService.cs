@@ -8,4 +8,5 @@ public interface IQuizMetaService
     Task<LanguageDto> GetLanguageAsync(Guid? Id);
     Task<OwnerDto> GetOwnerAsync(Guid? Id);
     Task<GradeDto> GetGradeAsync(Guid? Id);
+    Task<int> CountQuizAttemptsAsync(Guid? quizId);
 }

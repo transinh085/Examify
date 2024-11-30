@@ -14,11 +14,11 @@ public class CreateQuizResultHandler (
     {
         var populatedQuiz = quizClient.GetQuiz(new QuizRequest
         {
-            Id = request.QuizId,
+            Id = request.QuizId.ToString(),
         });
         
         var createdQuizResult = await quizResultRepository.Create(
-            request.UserId, request.QuizId, 1);
+            request.UserId, request.QuizId.ToString(), 1);
 
         bool randomQuestion = true; // get from quiz setting
         bool randomOption = true; // get from quiz setting
