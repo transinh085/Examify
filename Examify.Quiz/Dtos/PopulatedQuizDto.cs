@@ -10,6 +10,19 @@ public class PopulatedQuizDto
     public Guid Id { get; set; }
     public string Title { get; set; }
     public string Description { get; set; }
+    
+    public string? Code { get; set; }
+
+    public DateTime StartTime { get; set; }
+    
+    public DateTime EndTime { get; set; }
+
+    public bool RandomQuestions { get; set; }
+    
+    public bool RandomOptions { get; set; }
+    
+    public Visibility Visibility { get; set; }
+    
     public List<PopulatedQuestionDto> Questions { get; set; }
     
     public class PopulatedQuestionDto

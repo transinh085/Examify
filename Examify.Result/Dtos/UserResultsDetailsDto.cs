@@ -1,6 +1,6 @@
 ﻿namespace Examify.Quiz.Dtos;
 
-public class GetQuizResultDto
+public class UserResultsDetailsDto
 {
     public Guid Id { get; set; }
     
@@ -10,21 +10,29 @@ public class GetQuizResultDto
     
     public int CurrentQuestion { get; set; }
     
+    public int AttemptedNumber { get; set; }
+    
     public QuizDto Quiz { get; set; }
-
+    
+    public UserDataDto User { get; set; }
+    
     public List<QuestionResultDto> QuestionResults { get; set; }
 }
 
-public class QuizDto
+public class UserDataDto
 {
-    public Guid Id { get; set; }
+    public string Id { get; set; }
+    public string Name { get; set; }
+    public string Avatar { get; set; }
+}
+public class QuizDataDto
+{
+    public string Id { get; set; }
     public string Title { get; set; }
     public string Description { get; set; }
-    
-    public string Code { get; set; }
 }
 
-public class QuestionResultDto
+public class QuestionResultDataDto
 {
     public Guid Id { get; set; }
     
@@ -32,12 +40,16 @@ public class QuestionResultDto
     
     public bool IsCorrect { get; set; }
     
-    public QuestionDto Question { get; set; }
+    public int Points { get; set; }
     
-    public List<AnswerResultDto> AnswerResults { get; set; }
+    public int TimeTaken { get; set; }
+    
+    public QuestionDataDto Question { get; set; }
+    
+    public List<AnswerResultDataDto> AnswerResults { get; set; }
 }
 
-public class QuestionDto
+public class QuestionDataDto
 {
     public string Id { get; set; }
     
@@ -50,18 +62,20 @@ public class QuestionDto
     public int Points { get; set; }
 }
 
-public class AnswerResultDto
+public class AnswerResultDataDto
 {
     public Guid Id { get; set; }
     
     public int Order { get; set; }
+    
     public bool IsSelected { get; set; }
     
-    public OptionDto Option { get; set; }
+    public OptionDataDto Option { get; set; }
 }
 
-public class OptionDto
+public class OptionDataDto
 {
     public string Id { get; set; }
     public string Content { get; set; }
+    public bool IsCorrect { get; set; }
 }

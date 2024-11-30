@@ -9,6 +9,7 @@ const QuizItem = ({
   id,
   title,
   description,
+  code,
   cover,
   questionCount,
   attemptCount,
@@ -56,16 +57,16 @@ const QuizItem = ({
         </Flex>
       </Card>
       <QuizDetailModal
-        {...{ id, title, description, cover, questionCount, attemptCount, owner, grade, open, setOpen }}
+        {...{ id, title, description, code, cover, questionCount, attemptCount, owner, grade, open, setOpen }}
       />
     </>
   );
 };
 
 const QuizDetailModal = ({
-  id,
   title,
   description,
+  code,
   cover,
   questionCount,
   attemptCount,
@@ -85,7 +86,8 @@ const QuizDetailModal = ({
   });
 
   const handleStartQuiz = () => {
-    createQuizResultMutation.mutate({ quizId: id });
+    console.log({ code });
+    createQuizResultMutation.mutate({ code });
   };
 
   return (

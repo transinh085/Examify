@@ -13,23 +13,25 @@ const useDoQuizStore = create((set) => ({
   questionResults: [],
   currentQuestion: -1,
   timeTaken: 0,
+  totalPoints: 0,
   selectedOptions: [],
   correctOptions: [],
   waitingDuration: 0,
   isPlayMusic: false,
   isFinished: false,
-  initDoQuizStore: ({ useTimer, currentQuestion, timeTaken, questionResults, quiz }) => {
+  initDoQuizStore: ({ useTimer, currentQuestion, timeTaken, totalPoints, questionResults, quiz }) => {
     const isFinished = currentQuestion >= questionResults.length;
     set({
       quiz,
       questionResults,
       currentQuestion,
       timeTaken,
+      totalPoints,
       quizSetting: {
         useTimer,
         code: '',
       },
-      isFinished
+      isFinished,
     });
   },
   setIsPlayMusic: (isPlayMusic) => set({ isPlayMusic }),

@@ -8,25 +8,34 @@ public class CreateQuizResultHandler (
     IQuizResultRepository quizResultRepository, 
     IQuestionResultRepository questionResultRepository,
     IAnswerResultRepository answerResultRepository,
-    QuizGrpcService.QuizGrpcServiceClient quizClient) : IRequestHandler<CreateQuizResultCommand, IResult>
+    QuizGrpcService.QuizGrpcServiceClient quizClient,
+    ILogger<CreateQuizResultHandler> logger
+    ) : IRequestHandler<CreateQuizResultCommand, IResult>
 {
     public async Task<IResult> Handle(CreateQuizResultCommand request, CancellationToken cancellationToken)
     {
+        logger.LogInformation("Creating quiz result of quiz {QuizCode} for user {UserId}", request.Code, request.UserId);
         var populatedQuiz = quizClient.GetQuiz(new QuizRequest
         {
-            Id = request.QuizId.ToString(),
+            Id = "",
+            Code = request.Code
         });
+
+        logger.LogInformation("Received quiz from quizService {quizId}", populatedQuiz.Id);
+        
+        int latestAttemptNumber = await quizResultRepository.GetLatestAttemptNumber(
+            Guid.Parse(populatedQuiz.Id), request.UserId, cancellationToken);
         
         var createdQuizResult = await quizResultRepository.Create(
-            request.UserId, request.QuizId.ToString(), 1);
-
-        bool randomQuestion = true; // get from quiz setting
-        bool randomOption = true; // get from quiz setting
-
+            request.UserId, populatedQuiz.Id, latestAttemptNumber + 1);
+        
+        bool randomQuestion = populatedQuiz?.RandomQuestions ?? false; 
+        bool randomOption = populatedQuiz?.RandomOptions ?? false;
+        
         var questions = randomQuestion
             ? populatedQuiz.Questions.OrderBy(_ => Guid.NewGuid()).ToList()
             : populatedQuiz.Questions.ToList();
-
+        
         foreach (var (populatedQuizQuestion, questionIndex) in questions.Select((q, i) => (q, i)))
         {
             var createdQuestionResult = await questionResultRepository.Create(
@@ -37,7 +46,7 @@ public class CreateQuizResultHandler (
             var options = randomOption
                 ? populatedQuizQuestion.Options.OrderBy(_ => Guid.NewGuid()).ToList()
                 : populatedQuizQuestion.Options.ToList();
-
+        
             foreach (var (option, optionIndex) in options.Select((o, i) => (o, i)))
             {
                 await answerResultRepository.Create(
@@ -46,7 +55,7 @@ public class CreateQuizResultHandler (
                     optionIndex); 
             }
         }
-
+        
         await quizResultRepository.SaveChangesAsync();
         
         return Results.Ok(new

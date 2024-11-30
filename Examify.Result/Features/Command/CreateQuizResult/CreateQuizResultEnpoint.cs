@@ -1,6 +1,7 @@
 ﻿using System.Security.Claims;
 using Examify.Core.Endpoints;
 using MediatR;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace Examify.Result.Features.Command.CreateQuizResult;
 
@@ -8,9 +9,9 @@ public class CreateQuizResultEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPost("/quizzes/{quizId:guid}/quiz-results",
-                async (Guid quizId, ClaimsPrincipal user, ISender sender) =>
-                    await sender.Send(new CreateQuizResultCommand { QuizId = quizId, UserId = user.Identity.Name }))
+        app.MapPost("/quiz-results",
+                async (ClaimsPrincipal user, CreateQuizResultCommand command,  ISender sender) =>
+                    await sender.Send(command with { UserId = user.Identity.Name }))
             .Produces<CreateQuizResultResponse>()
             .WithTags("Quiz Results")
             .RequireAuthorization();

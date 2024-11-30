@@ -22,6 +22,8 @@ public interface IQuizRepository
     Task<QuizUserDto> GetQuizByUserId(string userId, CancellationToken cancellationToken);
 
     Task<PopulatedQuizDto?> GetQuizById(string quizId);
+    
+    Task<PopulatedQuizDto?> GetQuizByCode(string code);
 
     Task PlayQuiz(Guid id, CancellationToken cancellationToken);
     Task EndQuiz(Guid id, CancellationToken cancellationToken);

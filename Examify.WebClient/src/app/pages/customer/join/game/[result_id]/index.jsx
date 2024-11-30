@@ -65,6 +65,7 @@ const DoQuizPage = () => {
       questionResults: quizResult?.questionResults,
       currentQuestion: quizResult?.currentQuestion,
       timeTaken: quizResult?.timeTaken,
+      totalPoints: quizResult?.totalPoints,
     });
     setQuestionDuration(60);
   }, [initDoQuizStore, setQuestionDuration, quizResult]);

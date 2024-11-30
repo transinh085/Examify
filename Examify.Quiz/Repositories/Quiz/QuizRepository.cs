@@ -147,6 +147,17 @@ public class QuizRepository(
 
         return mapper.Map<PopulatedQuizDto>(quiz);
     }
+    
+    public async Task<PopulatedQuizDto?> GetQuizByCode(string code)
+    {
+        var quiz = await quizContext.Quizzes
+            .Include(quiz => quiz.Questions)
+            .ThenInclude(question => question.Options)
+            .AsNoTracking()
+            .FirstOrDefaultAsync(x => x.Code == code);
+
+        return mapper.Map<PopulatedQuizDto>(quiz);
+    }
 
     public async Task<PagedList<QuizItemResponseDto>> SearchQuizzes(string? keyword, Guid? subjectId, int pageNumber,
         int pageSize,

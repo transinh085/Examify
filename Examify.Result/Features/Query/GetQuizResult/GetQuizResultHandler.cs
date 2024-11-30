@@ -23,24 +23,22 @@ public class GetQuizResultHandler(
         {
             Id = quizResult.QuizId.ToString(),
         });
-
+      
         var quizResultDto = new GetQuizResultDto
         {
             Id = quizResult.Id,
             CurrentQuestion = quizResult.CurrentQuestion,
             TotalPoints = quizResult.TotalPoints,
             TimeTaken = quizResult.TimeTaken,
+            
             Quiz = new QuizDto
             {
                 Id = Guid.Parse(populatedQuiz.Id),
                 Title = populatedQuiz.Title,
                 Description = populatedQuiz.Description,
+                Code = populatedQuiz.Code
             },
-            QuizSetting = new QuizSettingDto
-            {
-                UseTimer = false,
-                Code = "FAKECODE",
-            },
+            
             QuestionResults = quizResult.QuestionResults.Select(qr => new QuestionResultDto
             {
                 Id = qr.Id,
