@@ -158,7 +158,29 @@ public class QuizRepository(
             .ProjectTo<QuizItemResponseDto>(mapper.ConfigurationProvider)
             .PaginatedListAsync(pageNumber, pageSize);
 
-        foreach (var quiz in quizzes.Items)
+        await PopulateQuizDetailsAsync(quizzes);
+
+        return quizzes;
+    }
+
+    public async Task<PagedList<QuizItemResponseDto>> SearchQuizzes(string keyword, int pageNumber, int pageSize,
+        CancellationToken cancellationToken)
+    {
+        var quizzes = await quizContext.Quizzes
+            .Where(q => q.Title.ToLower().Contains(keyword.ToLower()) && q.IsPublished &&
+                        q.Visibility == Visibility.Public)
+            .AsNoTracking()
+            .ProjectTo<QuizItemResponseDto>(mapper.ConfigurationProvider)
+            .PaginatedListAsync(pageNumber, pageSize);
+
+        await PopulateQuizDetailsAsync(quizzes);
+
+        return quizzes;
+    }
+
+    private async Task PopulateQuizDetailsAsync(PagedList<QuizItemResponseDto> quizDtos)
+    {
+        foreach (var quiz in quizDtos.Items)
         {
             quiz.Language = await quizMetaService.GetLanguageAsync(quiz.Language.Id);
             quiz.Subject = await quizMetaService.GetSubjectAsync(quiz.Subject.Id);
@@ -166,7 +188,5 @@ public class QuizRepository(
             quiz.Owner = await quizMetaService.GetOwnerAsync(Guid.Parse(quiz.Owner.Id));
             quiz.AttemptCount = await quizMetaService.CountQuizAttemptsAsync(quiz.Id);
         }
-
-        return quizzes;
     }
 }
