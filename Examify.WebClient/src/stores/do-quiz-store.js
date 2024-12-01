@@ -2,13 +2,11 @@ import { create } from 'zustand';
 
 const useDoQuizStore = create((set) => ({
   quiz: {
-    id: '1-1-1',
-    title: 'Quiz 1',
-    description: 'This is quiz 1',
-  },
-  quizSetting: {
-    useTimer: false,
+    id: '',
+    title: '',
+    description: '',
     code: '',
+    useTimer: false,
   },
   questionResults: [],
   currentQuestion: -1,
@@ -19,7 +17,7 @@ const useDoQuizStore = create((set) => ({
   waitingDuration: 0,
   isPlayMusic: false,
   isFinished: false,
-  initDoQuizStore: ({ useTimer, currentQuestion, timeTaken, totalPoints, questionResults, quiz }) => {
+  initDoQuizStore: ({ currentQuestion, timeTaken, totalPoints, questionResults, quiz }) => {
     const isFinished = currentQuestion >= questionResults.length;
     set({
       quiz,
@@ -27,11 +25,10 @@ const useDoQuizStore = create((set) => ({
       currentQuestion,
       timeTaken,
       totalPoints,
-      quizSetting: {
-        useTimer,
-        code: '',
-      },
       isFinished,
+      waitingDuration: 0,
+      selectedOptions: [],
+      correctOptions: [],
     });
   },
   setIsPlayMusic: (isPlayMusic) => set({ isPlayMusic }),

@@ -24,7 +24,6 @@ const DoQuizPage = () => {
     timeTaken,
     quiz,
     isFinished,
-    quizSetting,
     questionResults,
     waitingDuration,
     setIsFinished,
@@ -57,18 +56,31 @@ const DoQuizPage = () => {
 
   const [isOpenSettings, setIsOpenSettings] = useState(false);
   const [questionDuration, setQuestionDuration] = useState(0);
+  const [timeTakenOfCurrentQuestion, setTimeTakenOfCurrentQuestion] = useState(0);
 
   useEffect(() => {
     initDoQuizStore({
-      useTimer: quizResult?.quizSetting?.useTimer,
       quiz: quizResult?.quiz,
       questionResults: quizResult?.questionResults,
       currentQuestion: quizResult?.currentQuestion,
       timeTaken: quizResult?.timeTaken,
       totalPoints: quizResult?.totalPoints,
     });
-    setQuestionDuration(60);
+    setQuestionDuration(quizResult?.questionResults?.[0]?.question?.duration);
   }, [initDoQuizStore, setQuestionDuration, quizResult]);
+
+  // Count up time taken of the current question
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeTakenOfCurrentQuestion(timeTakenOfCurrentQuestion + 1);
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [setTimeTakenOfCurrentQuestion, timeTakenOfCurrentQuestion]);
+
+  useEffect(() => {
+    setQuestionDuration(questionResults[currentQuestion]?.question?.duration);
+  }, [setQuestionDuration, questionResults, currentQuestion]);
 
   useNumberKeyPress((key) => {
     const option = questionResults?.[currentQuestion]?.options?.[key - 1];
@@ -79,24 +91,15 @@ const DoQuizPage = () => {
 
   const handleSubmitAnswer = async (yourAnswers) => {
     // call api to submit your answers
-    console.log('__submit_your_answers', {
-      options: yourAnswers,
-      questionDuration,
-      question_id: questionResults[currentQuestion]?.id,
-    });
 
     const mutationResponse = await submitAnswersMutation.mutateAsync({
       Answers: yourAnswers,
-      TimeTaken: questionDuration,
-      TimeSpent: timeTaken,
+      TimeTaken: timeTakenOfCurrentQuestion, // timeTaken of the current question
+      TimeSpent: timeTaken, // timeTaken of the whole quiz
       questionResultId: questionResults[currentQuestion]?.id,
     });
-
     if (mutationResponse?.isCorrect) triggerConfetti();
     setCorrectOptions(mutationResponse?.correctOptions);
-
-    setWaitingDuration(3);
-    setQuestionDuration(0);
   };
 
   const handleChooseOption = (optionId) => {
@@ -109,26 +112,31 @@ const DoQuizPage = () => {
     addSelectedOption(optionId);
     if (questionResults?.[currentQuestion]?.type === QUESTION_TYPE.SINGLE_CHOICE) {
       handleSubmitAnswer([...selectedOptions, optionId]);
+      setWaitingDuration(3);
+      setQuestionDuration(0);
     }
   };
 
   const handleSubmitMultipleChoice = () => {
     handleSubmitAnswer(selectedOptions);
+    setWaitingDuration(3);
+    setQuestionDuration(0);
   };
 
   const handleNextQuestion = () => {
-    console.log('__handle_next_question', currentQuestion, questionResults.length);
     if (currentQuestion === questionResults.length - 1) {
       // trigger completed game
       refetch();
       setIsFinished(true);
       return;
     }
-    setQuestionDuration(questionResults[currentQuestion + 1]?.question?.duration);
     nextQuestion();
     setSelectedOptions([]);
     setWaitingDuration(0);
+    setTimeTakenOfCurrentQuestion(0);
   };
+
+  console.log('timer', { questionDuration, timeTakenOfCurrentQuestion });
 
   if (isFinished) {
     return <MyQuizResult />;
@@ -180,13 +188,16 @@ const DoQuizPage = () => {
               {({ remainingTime }) => <p>{remainingTime}s</p>}
             </CountdownCircleTimer>
           )}
-          {quizSetting?.useTimer && questionDuration > 0 && (
+          {quiz?.useTimer && questionDuration > 0 && (
             <CountdownCircleTimer
               isPlaying
               duration={questionDuration}
               colors="#00a2ae"
               trailColor="#d9d9d9"
-              onComplete={handleNextQuestion}
+              onComplete={() => {
+                handleSubmitAnswer(selectedOptions);
+                handleNextQuestion();
+              }}
               size={50}
               strokeWidth={6}
             >
@@ -198,12 +209,12 @@ const DoQuizPage = () => {
           {questionResults?.[currentQuestion]?.answerResults?.map((answerResult, index) => (
             <Col key={answerResult.id} xs={24} sm={12} lg={6}>
               <Option
-                type={questionResults?.[currentQuestion]?.type}
                 number={index + 1}
                 {...answerResult}
                 handleSelect={() => {
                   handleChooseOption(answerResult?.option?.id);
                 }}
+                pending={submitAnswersMutation.isPending}
               />
             </Col>
           ))}
