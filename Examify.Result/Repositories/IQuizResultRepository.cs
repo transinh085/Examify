@@ -22,4 +22,6 @@ public interface IQuizResultRepository
     Task<int> GetLatestAttemptNumber(Guid quizId, string userId, CancellationToken cancellationToken);
     
     Task<List<GetQuizResultsDto>> GetResultsOfQuiz(string quizId);
+    
+    Task<List<UserResultsDetailsDto>> GetQuizResultsByQuizAndUser(string quizId, string userId);
 }

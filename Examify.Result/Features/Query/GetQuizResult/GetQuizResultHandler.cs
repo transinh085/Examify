@@ -44,6 +44,8 @@ public class GetQuizResultHandler(
                 Id = qr.Id,
                 Order = qr.Order,
                 IsCorrect = qr.IsCorrect,
+                TimeTaken = qr.TimeTaken,
+                Points = qr.Points,
                 Question = populatedQuiz.Questions
                         .FirstOrDefault(q => Guid.Parse(q.Id) == qr.QuestionId)
                     is QuizQuestionMessage question
@@ -53,7 +55,7 @@ public class GetQuizResultHandler(
                         Content = question.Content,
                         Type = question.Type,
                         Duration = question.Duration,
-                        Points = question.Points
+                        Points = question.Points,
                     }
                     : new QuestionDto
                     {
@@ -76,6 +78,7 @@ public class GetQuizResultHandler(
                         {
                             Id = option.Id,
                             Content = option.Content,
+                            IsCorrect = quizResult.CurrentQuestion > qr.Order ? option.IsCorrect : false
                         }
                         : new OptionDto
                         {

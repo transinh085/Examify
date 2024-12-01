@@ -21,6 +21,17 @@ const UserResultsModal = ({ open, handleClose, userId, quizId }) => {
       })),
     [userResults],
   );
+
+  const correctQuestionRate = useMemo(() => {
+    if (userResults) {
+      const totalQuestions = userResults?.[selectedAttempt]?.questionResults?.length;
+      const correctQuestions = userResults?.[selectedAttempt]?.questionResults?.filter(
+        (questionResult) => questionResult.isCorrect,
+      ).length;
+      return (correctQuestions / totalQuestions) * 100;
+    }
+  }, [userResults, selectedAttempt]);
+
   return (
     <Modal title="User Results" centered open={open} onOk={handleClose} onCancel={handleClose} width={740}>
       <Space direction="vertical" size={10} className="w-full">
@@ -59,7 +70,7 @@ const UserResultsModal = ({ open, handleClose, userId, quizId }) => {
             <Col span={8}>
               <Card>
                 <h2>Correct question</h2>
-                <Progress type="circle" strokeColor="#00c985" percent={90} size={42} />
+                <Progress type="circle" strokeColor="#00c985" percent={correctQuestionRate} size={42} />
               </Card>
             </Col>
           </Row>

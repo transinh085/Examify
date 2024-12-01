@@ -32,6 +32,10 @@ public class QuestionResultDto
     
     public bool IsCorrect { get; set; }
     
+    public int TimeTaken { get; set; }
+    
+    public int Points { get; set; }
+    
     public QuestionDto Question { get; set; }
     
     public List<AnswerResultDto> AnswerResults { get; set; }
@@ -48,6 +52,7 @@ public class QuestionDto
     public int Duration { get; set; }
     
     public int Points { get; set; }
+    
 }
 
 public class AnswerResultDto
@@ -64,4 +69,6 @@ public class OptionDto
 {
     public string Id { get; set; }
     public string Content { get; set; }
+    
+    public bool IsCorrect { get; set; }
 }
