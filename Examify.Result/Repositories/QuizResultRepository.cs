@@ -9,7 +9,8 @@ namespace Examify.Result.Repositories;
 
 public class QuizResultRepository(
     QuizResultContext quizResultContext,
-    Identity.IdentityClient identityClient
+    Identity.IdentityClient identityClient,
+    QuizGrpcService.QuizGrpcServiceClient quizClient
 )
     : IQuizResultRepository
 {
@@ -140,5 +141,131 @@ public class QuizResultRepository(
         }
 
         return quizResultsDto;
+    }
+    
+    public async Task<List<UserResultsDetailsDto>> GetQuizResultsByQuizAndUser(string quizId, string userId)
+    {
+        List<QuizResult> quizResults = await quizResultContext.QuizResults
+            .AsNoTracking()
+            .Include(r => r.QuestionResults)
+            .ThenInclude(q => q.AnswerResults)
+            .Where(r => r.QuizId == Guid.Parse(quizId) && r.UserId == userId)
+            .Select(r => new QuizResult
+            {
+                Id = r.Id,
+                UserId = r.UserId,
+                QuizId = r.QuizId,
+                AttemptedNumber = r.AttemptedNumber,
+                TotalPoints = r.TotalPoints,
+                TimeTaken = r.TimeTaken,
+                CurrentQuestion = r.CurrentQuestion,
+                QuestionResults = r.QuestionResults
+                    .OrderBy(q => q.Order)
+                    .Select(q => new QuestionResult
+                    {
+                        Id = q.Id,
+                        Order = q.Order,
+                        IsCorrect = q.IsCorrect,
+                        Points = q.Points,
+                        TimeTaken = q.TimeTaken,
+                        SubmittedAt = q.SubmittedAt,
+                        QuestionId = q.QuestionId,
+                        AnswerResults = q.AnswerResults
+                            .OrderBy(a => a.Order)
+                            .ToList()
+                    })
+                    .ToList()
+            })
+            .ToListAsync();
+
+        List<UserResultsDetailsDto> userResultsDetailsDtos = new();
+        
+        if(quizResults.Count == 0)
+        {
+            return userResultsDetailsDtos;
+        }
+        
+        var populatedQuiz = quizClient.GetQuiz(new QuizRequest
+        {
+            Id = quizId
+        });
+
+        foreach (var quizResult in quizResults)
+        {
+            var user = identityClient.GetIdentity(new IdentityRequest { Id = quizResult.UserId });
+
+            var userResultsDetailsDto = new UserResultsDetailsDto
+            {
+                Id = quizResult.Id,
+                TotalPoints = quizResult.TotalPoints,
+                TimeTaken = quizResult.TimeTaken,
+                AttemptedNumber = quizResult.AttemptedNumber,
+                SubmittedAt = quizResult.SubmittedAt,
+                Quiz = new QuizDataDto
+                {
+                    Id = quizId,
+                    Title = populatedQuiz.Title,
+                    Description = populatedQuiz.Description
+                },
+                User = new UserDataDto
+                {
+                    Id = user.Id,
+                    Name = user.Name,
+                    Avatar = user.Image
+                },
+                QuestionResults = quizResult.QuestionResults.Select(qr => new QuestionResultDataDto()
+                {
+                    Id = qr.Id,
+                    Order = qr.Order,
+                    IsCorrect = qr.IsCorrect,
+                    Points = qr.Points,
+                    TimeTaken = qr.TimeTaken,
+                    Question = populatedQuiz.Questions
+                            .FirstOrDefault(q => Guid.Parse(q.Id) == qr.QuestionId)
+                        is QuizQuestionMessage question
+                        ? new QuestionDataDto
+                        {
+                            Id = question.Id,
+                            Content = question.Content,
+                            Type = question.Type,
+                            Duration = question.Duration,
+                            Points = question.Points
+                        }
+                        : new QuestionDataDto
+                        {
+                            Id = string.Empty,
+                            Content = string.Empty,
+                            Type = string.Empty,
+                            Duration = 0,
+                            Points = 0
+                        },
+                    AnswerResults = qr.AnswerResults.Select(ar => new AnswerResultDataDto
+                    {
+                        Id = ar.Id,
+                        Order = ar.Order,
+                        IsSelected = ar.IsSelected,
+                        Option = populatedQuiz.Questions
+                                .SelectMany(q => q.Options)
+                                .FirstOrDefault(o => Guid.Parse(o.Id) == ar.OptionId)
+                            is QuizOptionMessage option
+                            ? new OptionDataDto
+                            {
+                                Id = option.Id,
+                                Content = option.Content,
+                                IsCorrect = option.IsCorrect,
+                            }
+                            : new OptionDataDto
+                            {
+                                Id = string.Empty,
+                                Content = string.Empty,
+                            }
+                    }).ToList()
+                }).ToList()
+            };
+
+            userResultsDetailsDtos.Add(userResultsDetailsDto);
+        }
+
+        return userResultsDetailsDtos;
     }
 }

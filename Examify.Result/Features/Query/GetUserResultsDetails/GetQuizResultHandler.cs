@@ -3,16 +3,15 @@ using Examify.Result.Repositories;
 using MediatR;
 using Result;
 
-namespace Examify.Result.Features.Query.GetResultsOfQuiz;
+namespace Examify.Result.Features.Query.GetUsersResultsDetails;
 
-public class GetResultsOfQuizHandler(
-    IQuizResultRepository quizResultRepository,
-    QuizGrpcService.QuizGrpcServiceClient quizClient
-) : IRequestHandler<GetResultsOfQuizQuery, IResult>
+public class GetUsersResultsDetailsHandler(
+    IQuizResultRepository quizResultRepository
+) : IRequestHandler<GetUsersResultsDetailsQuery, IResult>
 {
-    public async Task<IResult> Handle(GetResultsOfQuizQuery request, CancellationToken cancellationToken)
+    public async Task<IResult> Handle(GetUsersResultsDetailsQuery request, CancellationToken cancellationToken)
     {
-        var quizResults = await quizResultRepository.GetResultsOfQuiz(request.quizId);
+        var quizResults = await quizResultRepository.GetQuizResultsByQuizAndUser(request.quizId, request.userId);
         return TypedResults.Ok(quizResults);
     }
 }

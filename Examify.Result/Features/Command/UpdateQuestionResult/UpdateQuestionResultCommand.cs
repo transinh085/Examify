@@ -18,9 +18,6 @@ public class CreateQuizResultValidator : AbstractValidator<UpdateQuestionResultC
 {
     public CreateQuizResultValidator()
     {
-        RuleFor(x => x.Answers)
-            .NotEmpty().WithMessage("Answers is required");
-
         RuleFor(x => x.TimeTaken)
             .GreaterThan(0).WithMessage("TimeTaken must be greater than 0");
 

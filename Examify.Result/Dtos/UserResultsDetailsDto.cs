@@ -8,15 +8,15 @@ public class UserResultsDetailsDto
     
     public int TimeTaken { get; set; }
     
-    public int CurrentQuestion { get; set; }
-    
     public int AttemptedNumber { get; set; }
     
-    public QuizDto Quiz { get; set; }
+    public DateTime SubmittedAt { get; set; }
+    
+    public QuizDataDto Quiz { get; set; }
     
     public UserDataDto User { get; set; }
     
-    public List<QuestionResultDto> QuestionResults { get; set; }
+    public List<QuestionResultDataDto> QuestionResults { get; set; }
 }
 
 public class UserDataDto
