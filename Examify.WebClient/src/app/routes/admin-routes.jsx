@@ -37,13 +37,7 @@ const AdminRoutes = {
         return { Component: QuizReportDetailPage.default };
       },
     },
-    {
-      path: 'reports/:id/players',
-      lazy: async () => {
-        const ReportPlayersPage = await import('../pages/admin/reports/[quiz_id]/players');
-        return { Component: ReportPlayersPage.default };
-      },
-    },
+
     {
       path: 'settings',
       lazy: async () => {

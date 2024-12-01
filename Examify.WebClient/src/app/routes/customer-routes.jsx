@@ -1,9 +1,14 @@
 import MainLayout from '~/components/layouts/main-layout';
+import PrivateGuard from '../guards/private-guard';
 
 // can access as an guest or authenticated user
 const CustomerRoutes = {
   path: '/',
-  element: <MainLayout />,
+  element: (
+    <PrivateGuard>
+      <MainLayout />
+    </PrivateGuard>
+  ),
   errorElement: async () => {
     let NotFoundRoute = await import('../pages/not-found');
     return { Component: NotFoundRoute.default };

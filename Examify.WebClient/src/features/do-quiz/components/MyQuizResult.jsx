@@ -1,4 +1,4 @@
-import { Avatar, Button, Card, Col, Flex, Row, Space } from 'antd';
+import { Avatar, Button, Card, Checkbox, Col, Divider, Flex, Row, Space, Tag } from 'antd';
 import { Link } from 'react-router-dom';
 import CorrectIcon from '~/components/icons/CorrectIcon';
 import IncorrectIcon from '~/components/icons/IncorrectIcon';
@@ -7,8 +7,6 @@ import useDoQuizStore from '~/stores/do-quiz-store';
 import pointGif from '~/assets/gif/a.gif';
 import timeGif from '~/assets/gif/d.gif';
 import useAuthStore from '~/stores/auth-store';
-
-const OPTION_LETTERS = ['A', 'B', 'C', 'D'];
 
 const MyQuizResult = () => {
   const { user } = useAuthStore();
@@ -70,28 +68,34 @@ const MyQuizResult = () => {
         </Card>
         <Card className="bg-[#2a0830] border-none">
           <h1 className="text-lg font-semibold text-white mb-4">Your results</h1>
-          <Space direction="vertical" size={20} className="w-full">
-            {questionResults?.map((questionResult, index) => (
-              <Card key={index}>
-                <Space direction="vertical" className="bg-white w-full">
-                  <Space direction="horizontal" size={4}>
-                    <h1 key={index} className="font-semibold">
-                      Question: {questionResult?.order + 1}: {questionResult?.question?.content}
-                    </h1>
-                    {questionResult?.isCorrect ? <CorrectIcon /> : <IncorrectIcon />}
+          <Space direction="vertical" className="w-full" size={20}>
+            {questionResults?.map((questionResults) => (
+              <Card key={questionResults.id}>
+                <Flex align="center" justify="space-between">
+                  <Tag color="cyan">{questionResults?.question?.type}</Tag>
+                  <Space>
+                    <p>
+                      <strong className="font-medium">{questionResults?.timeTaken}</strong>s
+                    </p>
+                    <Divider type="vertical" />
+                    <p>
+                      <strong className="font-medium">{questionResults?.points}</strong> points
+                    </p>
                   </Space>
-                  {questionResult?.answerResults?.map((answerResult, index) => (
-                    <div
-                      key={index}
-                      className={`${
-                        answerResult?.isSelected &&
-                        (questionResult?.isCorrect ? 'bg-green-400 text-white' : 'bg-red-500 text-white')
-                      } p-2 rounded-md`}
-                    >
-                      <h1 className="">
-                        {OPTION_LETTERS?.[index]}. {answerResult?.option?.content}
-                      </h1>
-                    </div>
+                </Flex>
+                <Space>
+                  <h1 className="font-semibold my-2">
+                    Question {questionResults?.order + 1}: {questionResults?.question?.content}
+                  </h1>{' '}
+                  {questionResults?.isCorrect ? <CorrectIcon /> : <IncorrectIcon />}
+                </Space>
+                <Space direction="vertical" size={14} className="w-full">
+                  {questionResults?.answerResults?.map((answerResult) => (
+                    <Space key={answerResult?.id} size={16} className="w-full">
+                      {answerResult?.option?.isCorrect ? <CorrectIcon /> : <IncorrectIcon />}
+                      <Checkbox checked={answerResult?.isSelected} />
+                      <p>{answerResult?.option?.content}</p>
+                    </Space>
                   ))}
                 </Space>
               </Card>

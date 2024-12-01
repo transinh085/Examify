@@ -2,10 +2,9 @@ import { Card, Flex, Tooltip } from 'antd';
 import PropTypes from 'prop-types';
 import { useMemo } from 'react';
 import { IGNORED_OPTION_OPACITY, OPTION_COLOR_ARRAY, SELECTED_OPTION_COLOR_CONFIG } from '~/config/constants';
-import { QUESTION_TYPE } from '~/config/enums';
 import useDoQuizStore from '~/stores/do-quiz-store';
 
-const Option = ({ type, number, option, handleSelect }) => {
+const Option = ({ number, option, handleSelect, pending }) => {
   const { waitingDuration, selectedOptions, correctOptions } = useDoQuizStore();
 
   const optionStyles = useMemo(() => {
@@ -15,7 +14,7 @@ const Option = ({ type, number, option, handleSelect }) => {
     let opacity = 1;
     let animate = '';
 
-    if (waitingDuration) {
+    if (waitingDuration && !pending) {
       if (isSelected) {
         if (correctOptions.includes(option?.id)) {
           backgroundColor = SELECTED_OPTION_COLOR_CONFIG.CORRECT;
@@ -25,9 +24,8 @@ const Option = ({ type, number, option, handleSelect }) => {
         }
         opacity = 1;
       } else {
-        if (correctOptions.includes(option?.id) && type === QUESTION_TYPE.MULTIPLE_CHOICE) {
-          backgroundColor = SELECTED_OPTION_COLOR_CONFIG.INCORRECT;
-          animate = 'animate-shake';
+        if (correctOptions.includes(option?.id)) {
+          backgroundColor = SELECTED_OPTION_COLOR_CONFIG.CORRECT;
         } else {
           opacity = IGNORED_OPTION_OPACITY;
         }
@@ -35,7 +33,7 @@ const Option = ({ type, number, option, handleSelect }) => {
     }
 
     return { backgroundColor, opacity, animate };
-  }, [waitingDuration, correctOptions, selectedOptions, number, type, option]);
+  }, [waitingDuration, correctOptions, selectedOptions, number, option, pending]);
 
   return (
     <Card

@@ -1,8 +1,13 @@
 import DoQuizLayout from '~/components/layouts/do-quiz-layout';
+import PrivateGuard from '../guards/private-guard';
 
 const DoQuizRoutes = {
   path: '/join',
-  element: <DoQuizLayout />,
+  element: (
+    <PrivateGuard>
+      <DoQuizLayout />
+    </PrivateGuard>
+  ),
   children: [
     {
       path: 'game/:result_id',
