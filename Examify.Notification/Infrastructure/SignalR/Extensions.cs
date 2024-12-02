@@ -8,13 +8,13 @@ public static class Extensions
     public static IHostApplicationBuilder AddSignalRService(this IHostApplicationBuilder builder)
     {
         builder.Services.AddSignalR();
-        builder.Services.AddJwtWithSignalR(builder.Configuration, hubPath: "/result-hub");
+        builder.Services.AddJwtWithSignalR(builder.Configuration, hubPath: "/notification-hub");
         return builder;
     }
     
     public static IApplicationBuilder UseSignalR(this WebApplication app)
     {
-        app.MapHub<ResultHub>("result-hub");
+        app.MapHub<NotificationHub>("notification-hub");
         return app;
     }
 }

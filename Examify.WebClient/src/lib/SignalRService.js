@@ -65,10 +65,6 @@ class SignalRService {
     }
   }
 
-  isConnected() {
-    return this.isConnected;
-  }
-
   onError(callback) {
     this.connection.onclose(callback);
   }

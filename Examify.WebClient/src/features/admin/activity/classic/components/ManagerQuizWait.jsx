@@ -11,11 +11,36 @@ import CopyButton from '~/components/share/Button/CopyButton';
 import backgroundURL from '~/assets/svg/lobby_550.svg';
 import { users } from '~/features/admin/activity/classic/data';
 import useManagerQuizStore from '~/stores/admin/manager-quiz-store';
+import { useEffect } from 'react';
+import { useSignalRStore } from '~/stores/signalR-store';
 
 const { Header, Content } = Layout;
 
 const ManagerQuizWait = () => {
-  const { isPlayingSound, toggleSound, setIsStart } = useManagerQuizStore();
+  const { isPlayingSound, toggleSound, setIsStart, quiz } = useManagerQuizStore();
+
+  const { initializeSignalR, addSignalRHandler, removeSignalRHandler, sendSignalRMessage, checkConnection } = useSignalRStore();
+
+  useEffect(() => {
+    initializeSignalR('https://localhost:8386/notification-service/api/notification-hub');
+  
+    addSignalRHandler('JoinQuiz', (message) => {
+      console.log('Received message:', message);
+    });
+  
+    const interval = setInterval(() => {
+      if (checkConnection()) {
+        sendSignalRMessage('JoinQuizAdmin', quiz?.id);
+        clearInterval(interval); 
+      }
+    }, 5000);
+  
+    return () => {
+      removeSignalRHandler('JoinQuiz');
+      clearInterval(interval);
+    };
+  }, [initializeSignalR, addSignalRHandler, removeSignalRHandler, sendSignalRMessage, checkConnection, quiz]);
+
   return (
     <Layout className="min-h-screen bg-cover bg-center relative" style={{ backgroundImage: `url(${backgroundURL})` }}>
       <Header className="sticky top-0 z-10 bg-ds-dark-500 bg-opacity-50 px-4 border-b border-white/30">
@@ -25,9 +50,7 @@ const ManagerQuizWait = () => {
             <Button type="primary" icon={<FireOutlined />} className="bg-ds-light-500-20" />
             <Button
               type="primary"
-              icon={
-                isPlayingSound ? <SoundFilled className="text-white" /> : <SoundFilled className="text-white" />
-              }
+              icon={isPlayingSound ? <SoundFilled className="text-white" /> : <SoundFilled className="text-white" />}
               className="bg-ds-light-500-20"
               onClick={toggleSound}
             />
@@ -62,13 +85,13 @@ const ManagerQuizWait = () => {
                 </div>
                 <div className="text-base w-[98px] font-medium break-words">Join using any device</div>
                 <Space size="middle" className="w-[400px]">
-                  <div className="flex justify-center items-center space-x-2">
+                  <div className="flex justify-center items-center space-x-2 underline cursor-pointer">
                     <span className="text-4xl font-bold">join</span>
                     <span className="text-4xl font-bold">my</span>
                     <span className="text-4xl font-bold">examify.com</span>
                   </div>
                 </Space>
-                <CopyButton text="https://github.com/hgbaodev" />
+                <CopyButton text={`http://localhost:3000/join?code=${quiz?.code}`} />
               </Space>
               <div className="h-[0.5px] my-2 bg-white w-full" />
               <Space size="small" className="text-white justify-center items-center">
@@ -81,20 +104,19 @@ const ManagerQuizWait = () => {
                 <div className="text-base w-[98px] font-medium break-words">Enter the join code</div>
                 <Space size="middle" className="w-[400px] justify-between">
                   <div className="flex justify-center items-center space-x-4">
-                    <span className="text-6xl font-bold">6</span>
-                    <span className="text-6xl font-bold">6</span>
-                    <span className="text-6xl font-bold">6</span>
-                    <span className="text-6xl font-bold">6</span>
-                    <span className="text-6xl font-bold">6</span>
-                    <span className="text-6xl font-bold">6</span>
+                    {quiz?.code.split('').map((item, index) => (
+                      <span key={index} className="text-6xl font-bold">
+                        {item}
+                      </span>
+                    ))}
                   </div>
                 </Space>
-                <CopyButton text="https://github.com/hgbaodev" />
+                <CopyButton text={quiz?.code} />
               </Space>
             </Flex>
             <Flex gap={2} className="p-4 bg-ds-light-500-20" style={{ borderRadius: '0 0 24px 24px' }} vertical>
               <Flex className="bg-white" vertical gap={4}>
-                <QRCode errorLevel="H" value="https://hgbaodev.id.vn/" size={130} />
+                <QRCode errorLevel="H" value={`http://localhost:3000/join?code=${quiz?.code}`} size={130} />
               </Flex>
             </Flex>
           </Flex>

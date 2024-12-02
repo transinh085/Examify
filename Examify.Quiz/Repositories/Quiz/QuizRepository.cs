@@ -204,6 +204,7 @@ public class QuizRepository(
         var quiz = await quizContext.Quizzes.FindAsync(id, cancellationToken);
         Random random = new();
         quiz.Code = random.Next(100000, 999999).ToString();
+        quiz.PlayTime = DateTime.UtcNow;
         quizContext.Quizzes.Update(quiz);
         await quizContext.SaveChangesAsync(cancellationToken);
     }
@@ -212,6 +213,16 @@ public class QuizRepository(
     {
         var quiz = await quizContext.Quizzes.FindAsync(id, cancellationToken);
         quiz.Code = null;
+        quiz.IsStart = false;
+        quiz.PlayTime = null;
+        quizContext.Quizzes.Update(quiz);
+        await quizContext.SaveChangesAsync(cancellationToken);
+    }
+
+    public async Task StartQuiz(Guid id, CancellationToken cancellationToken)
+    {
+        var quiz = await quizContext.Quizzes.FindAsync(id, cancellationToken);
+        quiz.IsStart = true;
         quizContext.Quizzes.Update(quiz);
         await quizContext.SaveChangesAsync(cancellationToken);
     }

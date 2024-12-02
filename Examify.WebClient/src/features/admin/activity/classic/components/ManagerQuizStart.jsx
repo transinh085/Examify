@@ -17,7 +17,7 @@ const { Header, Content } = Layout;
 
 const ManagerQuizStart = () => {
 
-  const { tab, setTab, isPlayingSound, toggleSound, setIsStart } = useManagerQuizStore();
+  const { tab, setTab, isPlayingSound, toggleSound, setIsStart, quiz } = useManagerQuizStore();
 
   return (
     <Layout
@@ -52,9 +52,9 @@ const ManagerQuizStart = () => {
             <Flex className="max-w-sm w-full rounded-lg text-white justify-between px-3 items-center bg-ds-dark-500-30 bg-opacity-50 border border-white/30 h-[80px]">
               <Space direction="vertical">
                 <span className="text-xs font-medium">Join code</span>
-                <span className="text-lg font-extrabold">469127</span>
+                <span className="text-lg font-extrabold">{quiz?.code}</span>
               </Space>
-              <CopyButton text="https://github.com/hgbaodev" />
+              <CopyButton text={quiz?.code} />
             </Flex>
           </Flex>
           <AccuracyProgressBar number_correct={0} number_wrong={0} />

@@ -18,7 +18,10 @@ public class Quiz : BaseEntity
 
     public bool IsPublished { get; set; } = false;
 
+    public DateTime? PlayTime { get; set; }
     public string? Code { get; set; }
+    
+    public bool IsStart { get; set; } = false;
 
     public DateTime StartTime { get; set; }
     public DateTime EndTime { get; set; }
