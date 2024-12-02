@@ -1,7 +1,5 @@
-﻿using Examify.Quiz.Infrastructure.Data;
-using Examify.Quiz.Repositories.Quiz;
+﻿using Examify.Quiz.Repositories.Quiz;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace Examify.Quiz.Features.Quiz.Query.GetAllQuiz;
 

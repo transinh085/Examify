@@ -28,4 +28,6 @@ public class Quiz : BaseEntity
 
     public bool RandomQuestions { get; set; } = false;
     public bool RandomOptions { get; set; } = false;
+    
+    public bool UserTimer { get; set; } = false;
 }

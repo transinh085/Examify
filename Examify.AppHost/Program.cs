@@ -1,7 +1,6 @@
 using System.Diagnostics;
 using Microsoft.Extensions.DependencyInjection;
 
-EnsureDeveloperControlPaneIsNotRunning();
 var builder = DistributedApplication.CreateBuilder(args);
 
 var userName = builder.AddParameter("username", "admin");
@@ -9,6 +8,10 @@ var password = builder.AddParameter("password", "JJD7YgCFNHoTcvc");
 
 var postgreSql = builder.AddPostgres("postgreSql", userName, password, 5433)
     .WithLifetime(ContainerLifetime.Persistent)
+    .WithPgAdmin(config =>
+    {
+        config.WithLifetime(ContainerLifetime.Persistent);
+    })
     .WithDataVolume("examify-postgres-data");
 
 var rabbitMq = builder.AddRabbitMQ("rabbitmq")
@@ -54,28 +57,3 @@ builder.AddProject<Projects.Examify_Gateway>("gateway")
     .WithReference(notificationService)
     .WithReference(uploadFileService);
 builder.Build().Run();
-
-void EnsureDeveloperControlPaneIsNotRunning()
-{
-    const string processName = "dcpctrl"; // The Aspire Developer Control Pane process name
-
-    var process = Process.GetProcesses()
-        .SingleOrDefault(p => p.ProcessName.Contains(processName, StringComparison.OrdinalIgnoreCase));
-
-    if (process == null) return;
-
-    Console.WriteLine(
-        $"Shutting down developer control pane from previous run. Process: {process.ProcessName} (ID: {process.Id})");
-
-    Thread.Sleep(TimeSpan.FromSeconds(5)); // Allow Docker containers to shut down to avoid orphaned containers
-
-    try
-    {
-        process.Kill();
-        Console.WriteLine($"Process {process.Id} killed successfully.");
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine($"Failed to kill process {process.Id}: {ex.Message}");
-    }
-}

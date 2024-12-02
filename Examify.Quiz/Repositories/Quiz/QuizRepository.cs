@@ -84,57 +84,22 @@ public class QuizRepository(
         return quizDtos;
     }
 
-    public async Task<QuizUserDto> GetQuizByUserId(string userId, CancellationToken cancellationToken)
+    public async Task<PagedList<QuizItemResponseDto>> GetQuizByUserId(string userId, bool isPublish, int pageNumber,
+        int pageSize,
+        CancellationToken cancellationToken)
     {
         var quizzes = await quizContext.Quizzes
-            .Where(quiz => quiz.OwnerId == userId)
+            .Where(quiz => quiz.OwnerId == userId && quiz.IsPublished == isPublish)
             .Include(quiz => quiz.Questions)
             .ThenInclude(question => question.Options)
             .AsNoTracking()
-            .ToListAsync(cancellationToken);
+            .OrderByDescending(q => q.CreatedDate)
+            .ProjectTo<QuizItemResponseDto>(mapper.ConfigurationProvider)
+            .PaginatedListAsync(pageNumber, pageSize);
 
-        var publishedQuizzes = quizzes.Where(q => q.IsPublished).ToList();
-        var unpublishedQuizzes = quizzes.Where(q => !q.IsPublished).ToList();
+        await PopulateQuizDetailsAsync(quizzes);
 
-        var quizPublishedDtos = mapper.Map<List<QuizDto>>(publishedQuizzes);
-        var quizUnpublishedDtos = mapper.Map<List<QuizDto>>(unpublishedQuizzes);
-
-        async Task PopulateQuizDetailsAsync(List<QuizDto> quizDtos)
-        {
-            var tasks = quizDtos.Select(async quiz =>
-            {
-                var languageTask = quizMetaService.GetLanguageAsync(quiz.LanguageId);
-                var subjectTask = quizMetaService.GetSubjectAsync(quiz.SubjectId);
-                var gradeTask = quizMetaService.GetGradeAsync(quiz.GradeId);
-                var identityTask = quizMetaService.GetOwnerAsync(quiz.OwnerId);
-
-                await Task.WhenAll(languageTask, subjectTask, gradeTask, identityTask);
-
-                quiz.LanguageName = (await languageTask).Name;
-                quiz.SubjectName = (await subjectTask).Name;
-                quiz.GradeName = (await gradeTask).Name;
-                var identityReply = await identityTask;
-                quiz.Owner = new QuizDto.OwnerDto
-                {
-                    Id = identityReply.Id,
-                    Name = identityReply.FullName,
-                    Image = identityReply.Image
-                };
-            });
-
-            await Task.WhenAll(tasks);
-        }
-
-        await Task.WhenAll(
-            PopulateQuizDetailsAsync(quizPublishedDtos),
-            PopulateQuizDetailsAsync(quizUnpublishedDtos)
-        );
-
-        return new QuizUserDto
-        {
-            quizPulished = quizPublishedDtos,
-            quizUnpublished = quizUnpublishedDtos
-        };
+        return quizzes;
     }
 
     public async Task<PopulatedQuizDto?> GetQuizById(string quizId)
@@ -147,7 +112,7 @@ public class QuizRepository(
 
         return mapper.Map<PopulatedQuizDto>(quiz);
     }
-    
+
     public async Task<PopulatedQuizDto?> GetQuizByCode(string code)
     {
         var quiz = await quizContext.Quizzes
@@ -187,16 +152,17 @@ public class QuizRepository(
         return quizzes;
     }
 
-    private async Task PopulateQuizDetailsAsync(PagedList<QuizItemResponseDto> quizDtos)
+    private async Task PopulateQuizDetailsAsync(PagedList<QuizItemResponseDto> quizDtos, bool fetchLanguage = true,
+        bool fetchSubject = true, bool fetchGrade = true, bool fetchOwner = true, bool fetchAttemptCount = true)
     {
-        foreach (var quiz in quizDtos.Items)
+        await Parallel.ForEachAsync(quizDtos.Items, async (quiz, _) =>
         {
-            quiz.Language = await quizMetaService.GetLanguageAsync(quiz.Language.Id);
-            quiz.Subject = await quizMetaService.GetSubjectAsync(quiz.Subject.Id);
-            quiz.Grade = await quizMetaService.GetGradeAsync(quiz.Grade.Id);
-            quiz.Owner = await quizMetaService.GetOwnerAsync(Guid.Parse(quiz.Owner.Id));
-            quiz.AttemptCount = await quizMetaService.CountQuizAttemptsAsync(quiz.Id);
-        }
+            if (fetchLanguage) quiz.Language = await quizMetaService.GetLanguageAsync(quiz.Language.Id) ?? new LanguageDto();
+            if (fetchSubject) quiz.Subject = await quizMetaService.GetSubjectAsync(quiz.Subject.Id) ?? new SubjectDto();
+            if (fetchGrade) quiz.Grade = await quizMetaService.GetGradeAsync(quiz.Grade.Id) ?? new GradeDto();
+            if (fetchOwner) quiz.Owner = await quizMetaService.GetOwnerAsync(Guid.Parse(quiz.Owner.Id)) ?? new OwnerDto();
+            if (fetchAttemptCount) quiz.AttemptCount = await quizMetaService.CountQuizAttemptsAsync(quiz.Id);
+        });
     }
 
     public async Task PlayQuiz(Guid id, CancellationToken cancellationToken)
@@ -208,7 +174,7 @@ public class QuizRepository(
         quizContext.Quizzes.Update(quiz);
         await quizContext.SaveChangesAsync(cancellationToken);
     }
-    
+
     public async Task EndQuiz(Guid id, CancellationToken cancellationToken)
     {
         var quiz = await quizContext.Quizzes.FindAsync(id, cancellationToken);

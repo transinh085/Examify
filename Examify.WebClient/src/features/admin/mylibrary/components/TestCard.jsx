@@ -10,12 +10,17 @@ import {
   UnorderedListOutlined,
   SettingOutlined,
 } from '@ant-design/icons';
-import { useNavigate } from 'react-router-dom';
-import moment from 'moment';
+import { Link, useNavigate } from 'react-router-dom';
 import { useBoolean } from '~/hooks/useBoolean';
 import SettingModal from './SettingModal';
 import { usePlayQuiz } from '~/features/admin/mylibrary/api/play-quiz';
-const TestCard = ({ id, imgSrc, title, author, date, questions, gradeName, languageName }) => {
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import blankImage from '~/assets/images/blank-thumbnail.jpg';
+dayjs.extend(relativeTime);
+
+const TestCard = ({ id, title, cover, subject, grade, owner, questionCount, createDate }) => {
+  const navigate = useNavigate();
 
   const mutePlayQuiz = usePlayQuiz({
     mutationConfig: {
@@ -24,56 +29,49 @@ const TestCard = ({ id, imgSrc, title, author, date, questions, gradeName, langu
       },
       onError: (error) => {
         console.log('error', error);
-    }}
+      },
+    },
   });
-
-  const navigate = useNavigate();
-
-  const handleCardClick = () => {
-    navigate(`/admin/quiz/${id}`);
-  };
 
   const handlePlayQuiz = () => {
     mutePlayQuiz.mutate({ id });
-  }
+  };
 
   return (
     <Flex className="bg-white px-2 py-2 rounded-lg border" justify="space-between">
       <Space size="middle">
-        <img
-          onClick={handleCardClick}
-
-          className="w-[240px] h-[120px] rounded-sm cursor-pointer object-cover"
-
-          src={imgSrc ?? 'https://avatars.githubusercontent.com/u/120194990?v=4'}
-          alt="imgTest"
-        />
+        <Link to={`/admin/quiz/${id}`}>
+          <img
+            className="w-[240px] h-[120px] rounded-sm cursor-pointer object-cover "
+            src={cover ?? blankImage}
+            alt="imgTest"
+          />
+        </Link>
         <Space direction="vertical" size="small">
-
           <Tag color="cyan">Assessment</Tag>
-          <h1 onClick={handleCardClick} className="font-bold cursor-pointer hover:underline">
-            {title}
-          </h1>
+          <Link to={`/admin/quiz/${id}`}>
+            <h1 className="font-bold cursor-pointer hover:underline">{title}</h1>
+          </Link>
           <Space size="small">
             {/* Icon info */}
             <Space>
               <UnorderedListOutlined />
-              <span className="text-xs">{questions?.length}</span>
+              <span className="text-xs">{questionCount}</span>
             </Space>
             <Space>
               <HeatMapOutlined />
-              <span className="text-xs">{gradeName ?? ''}</span>
+              <span className="text-xs">{grade.name ?? 'N/A'}</span>
             </Space>
             <Space>
               <RadarChartOutlined />
-              <span className="text-xs">{languageName ?? ''}</span>
+              <span className="text-xs">{subject.name ?? 'N/A'}</span>
             </Space>
           </Space>
           <Space size="small">
-            <Avatar size={20} src={author?.image} />
-            <span className="text-xs">{author?.name}</span>
+            <Avatar size={20} src={owner?.image} />
+            <span className="text-xs">{owner?.fullName}</span>
             <span className="text-xs">-</span>
-            <span className="text-xs">{moment(date).fromNow()}</span>
+            <span className="text-xs">{dayjs(createDate).fromNow()}</span>
           </Space>
         </Space>
       </Space>
@@ -129,7 +127,6 @@ const DropdownMenu = ({ title }) => {
         </a>
       </Dropdown>
       <SettingModal data={title} open={isSettingModalOpen} onCancel={closeSettingModal} />
-
     </>
   );
 };

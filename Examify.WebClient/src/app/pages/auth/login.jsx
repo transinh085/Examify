@@ -17,12 +17,18 @@ const LoginRoute = () => {
   const { setUser } = useAuthStore();
 
   const [form] = Form.useForm();
+
+  const handleSetUser = (data) => {
+    Cookies.set('token', data?.token);
+    Cookies.set('refreshToken', data?.refreshToken);
+    setUser(data);
+    navigate(redirect ? redirect : '/');
+  };
+
   const mutation = useLoginMutation({
     mutationConfig: {
       onSuccess: (data) => {
-        Cookies.set('token', data?.token);
-        setUser(data);
-        navigate(redirect ? redirect : '/');
+        handleSetUser(data);
       },
       onError: ({ response }) => {
         message.error(response?.data?.detail || 'Something went wrong!');
@@ -33,9 +39,7 @@ const LoginRoute = () => {
   const loginFacebookMutation = useLoginFacebookMutation({
     mutationConfig: {
       onSuccess: (data) => {
-        Cookies.set('token', data?.token);
-        setUser(data);
-        navigate(redirect ? redirect : '/');
+        handleSetUser(data);
       },
       onError: ({ response }) => {
         message.error(response?.data?.detail || 'Something went wrong!');
@@ -63,9 +67,7 @@ const LoginRoute = () => {
   const googleLoginMutation = useGoogleLoginMutation({
     mutationConfig: {
       onSuccess: (data) => {
-        Cookies.set('token', data?.token);
-        setUser(data);
-        navigate(redirect ? redirect : '/');
+        handleSetUser(data);
       },
       onError: ({ response }) => {
         message.error(response?.data?.detail || 'Something went wrong!');

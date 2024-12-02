@@ -1,7 +1,7 @@
 ﻿using Examify.Quiz.Dtos;
 using Examify.Quiz.Repositories.Questions;
-using Quiz;
 using Grpc.Core;
+using Quiz;
 
 namespace Examify.Quiz.Grpc
 {

@@ -1,4 +1,4 @@
-import { Avatar, Button, Card, Progress, Space, Table } from 'antd';
+import { Avatar, Button, Progress, Space, Table } from 'antd';
 import { useGetResultsOfQuiz } from '../api/get-results-of-quiz';
 import { useMemo } from 'react';
 import { MoreOutlined } from '@ant-design/icons';
@@ -6,7 +6,10 @@ import { MoreOutlined } from '@ant-design/icons';
 import PropTypes from 'prop-types';
 
 const ResultsListSection = ({ quizId, handleViewDetails }) => {
-  const { data: quizResults } = useGetResultsOfQuiz({ quizId, queryOptions: { initialData: [], enabled: !!quizId } });
+  const { data: quizResults, isLoading } = useGetResultsOfQuiz({
+    quizId,
+    queryOptions: { initialData: [], enabled: !!quizId },
+  });
 
   const formattedQuizResults = useMemo(() => {
     if (quizResults) {
@@ -78,11 +81,7 @@ const ResultsListSection = ({ quizId, handleViewDetails }) => {
     [handleViewDetails],
   );
 
-  return (
-    <Card title="Results of players">
-      <Table columns={columns} dataSource={formattedQuizResults} />
-    </Card>
-  );
+  return <Table columns={columns} dataSource={formattedQuizResults} loading={isLoading} />;
 };
 
 ResultsListSection.propTypes = {

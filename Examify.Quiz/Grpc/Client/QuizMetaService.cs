@@ -14,7 +14,7 @@ public class QuizMetaService(
 {
     public Task<SubjectDto> GetSubjectAsync(Guid? Id)
     {
-        if (Id == Guid.Empty) return null;
+        if (Id == Guid.Empty || Id is null) return Task.FromResult(new SubjectDto { Id = Id});
         var subject = subjectClient.GetSubject(new SubjectRequest { Id = Id.ToString() });
         return Task.FromResult(new SubjectDto
         {
@@ -25,7 +25,7 @@ public class QuizMetaService(
 
     public Task<LanguageDto> GetLanguageAsync(Guid? Id)
     {
-        if (Id == Guid.Empty) return null;
+        if (Id == Guid.Empty || Id is null) return Task.FromResult(new LanguageDto { Id = Id });
         var language = languageClient.GetLanguage(new LanguageRequest { Id = Id.ToString() });
         return Task.FromResult(new LanguageDto
         {
@@ -36,7 +36,7 @@ public class QuizMetaService(
 
     public Task<OwnerDto> GetOwnerAsync(Guid? Id)
     {
-        if (Id == Guid.Empty) return null;
+        if (Id == Guid.Empty || Id is null) return Task.FromResult(new OwnerDto { Id = Id.ToString() });
         var owner = identityClient.GetIdentity(new IdentityRequest { Id = Id.ToString() });
         return Task.FromResult(new OwnerDto
         {
@@ -48,7 +48,7 @@ public class QuizMetaService(
 
     public Task<GradeDto> GetGradeAsync(Guid? Id)
     {
-        if (Id == Guid.Empty) return null;
+        if (Id == Guid.Empty || Id is null) return Task.FromResult(new GradeDto { Id = Id});
         var grade = gradeClient.GetGrade(new GradeRequest { Id = Id.ToString() });
         return Task.FromResult(new GradeDto
         {
@@ -59,7 +59,7 @@ public class QuizMetaService(
 
     public async Task<int> CountQuizAttemptsAsync(Guid? quizId)
     {
-        if (quizId == Guid.Empty) return 0;
+        if (quizId == Guid.Empty || quizId is null) return 0;
         var quizResult = await quizResultClient.CountQuizAttemptsAsync(new QuizAttemptsRequest
         {
             Id = quizId.ToString()

@@ -9,7 +9,7 @@ public class PublishQuizHandler(IQuizRepository quizRepository) : IRequestHandle
 {
     public async Task<IResult> Handle(PublishQuizCommand request, CancellationToken cancellationToken)
     {
-        quizRepository.PublishQuiz(request.QuizId, cancellationToken);
+        await quizRepository.PublishQuiz(request.QuizId, cancellationToken);
         return TypedResults.NoContent();
     }
 }

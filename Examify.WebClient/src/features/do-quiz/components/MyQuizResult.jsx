@@ -4,8 +4,8 @@ import CorrectIcon from '~/components/icons/CorrectIcon';
 import IncorrectIcon from '~/components/icons/IncorrectIcon';
 import useDoQuizStore from '~/stores/do-quiz-store';
 
-import pointGif from '~/assets/gif/a.gif';
-import timeGif from '~/assets/gif/d.gif';
+// import pointGif from '~/assets/gif/a.gif';
+// import timeGif from '~/assets/gif/d.gif';
 import useAuthStore from '~/stores/auth-store';
 
 const MyQuizResult = () => {
@@ -41,7 +41,7 @@ const MyQuizResult = () => {
                     <h1 className="text-lg opacity-70">Your point</h1>
                     <h1 className="text-[32px] font-semibold text-primary">{totalPoints}</h1>
                   </Space>
-                  <img src={pointGif} alt="gif" className="w-[100px]" />
+                  {/* <img src={pointGif} alt="gif" className="w-[100px]" /> */}
                 </Flex>
               </Card>
             </Col>
@@ -52,7 +52,7 @@ const MyQuizResult = () => {
                     <h1 className="text-lg opacity-70">Your time</h1>
                     <h1 className="text-[32px] font-semibold text-primary">{timeTaken}s</h1>
                   </Space>
-                  <img src={timeGif} alt="gif" className="w-[100px]" />
+                  {/* <img src={timeGif} alt="gif" className="w-[100px]" /> */}
                 </Flex>
               </Card>
             </Col>
