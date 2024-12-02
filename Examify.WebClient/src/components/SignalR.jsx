@@ -2,15 +2,16 @@ import { useEffect } from 'react';
 import useAuthStore from '~/stores/auth-store';
 import { useSignalRStore } from '~/stores/signalR-store';
 const SignalR = () => {
-  const { initializeSignalR, addSignalRHandler, removeSignalRHandler, sendSignalRMessage } = useSignalRStore();
   const { user } = useAuthStore();
+  const { initializeSignalR, addSignalRHandler, removeSignalRHandler, sendSignalRMessage } = useSignalRStore();
 
   useEffect(() => {
-    initializeSignalR('https://localhost:8386/notification-service/api/result-hub');
+    initializeSignalR('https://localhost:8386/notification-service/api/notification-hub');
 
     addSignalRHandler('JoinQuiz', (message) => {
       console.log('Received message:', message);
     });
+
 
     return () => {
       removeSignalRHandler('JoinQuiz');
@@ -19,7 +20,7 @@ const SignalR = () => {
   }, [initializeSignalR, addSignalRHandler, removeSignalRHandler]);
 
   const handleSendMessage = () => {
-    sendSignalRMessage('JoinQuiz', "6a6b4473-4c45-4d58-9ed1-3fd85bfad462", user?.id);
+    sendSignalRMessage('JoinQuizUser', "01937bf1-1ee0-7ea1-91db-12e61b1f40f0", user?.id);
   };
 
   return (

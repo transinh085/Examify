@@ -30,4 +30,6 @@ public interface IQuizRepository
     
     Task<PagedList<QuizItemResponseDto>> SearchQuizzes(string keyword, int pageNumber, int pageSize,
         CancellationToken cancellationToken);
+    
+    Task StartQuiz(Guid id, CancellationToken cancellationToken);
 }

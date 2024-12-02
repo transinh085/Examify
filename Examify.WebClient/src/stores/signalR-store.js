@@ -41,6 +41,6 @@ export const useSignalRStore = create((set, get) => ({
 
   checkConnection: () => {
     const { signalRService } = get();
-    return signalRService?.isConnected() || false;
+    return signalRService?.isConnected;
   },
 }));
