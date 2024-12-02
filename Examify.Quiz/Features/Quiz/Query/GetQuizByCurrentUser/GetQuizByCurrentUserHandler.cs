@@ -3,12 +3,14 @@ using MediatR;
 
 namespace Examify.Quiz.Features.Quiz.Query.GetQuizByCurrentUser;
 
-public class GetQuizByCurrentUserHandler(IQuizRepository quizRepository) : IRequestHandler<GetQuizByCurrentUserQuery, IResult>
+public class GetQuizByCurrentUserHandler(IQuizRepository quizRepository)
+    : IRequestHandler<GetQuizByCurrentUserQuery, IResult>
 {
     public async Task<IResult> Handle(GetQuizByCurrentUserQuery request, CancellationToken cancellationToken)
     {
-        var userId = request.UserId;
-        var quizzes = await quizRepository.GetQuizByUserId(userId, cancellationToken);
+        var quizzes = await quizRepository.GetQuizByUserId(request.UserId, request.IsPublished,
+            request.PageNumber.Value,
+            request.PageSize.Value, cancellationToken);
         return TypedResults.Ok(quizzes);
     }
 }

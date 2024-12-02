@@ -1,10 +1,22 @@
 import { useQueryClient } from '@tanstack/react-query';
-import { Button, Flex, message, Typography } from 'antd';
+import { Button, Flex, message, Pagination, Spin, Typography } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useCreateQuiz } from '~/features/quiz/api/quizzes/create-quiz';
 import TestCard from '~/features/admin/mylibrary/components/TestCard';
+import { useGetQuizUser } from '~/features/quiz/api/quizzes/get-quiz-user';
 
-const TabContent = ({ data }) => {
+const TabContent = ({ params, setParams, isPublished = false }) => {
+  const {
+    data = {
+      items: [],
+    },
+    isLoading,
+  } = useGetQuizUser({
+    isPublished,
+    pageNumber: params.get('pageNumber') || 1,
+    pageSize: params.get('pageSize') || 4,
+  });
+
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const createQuizMutation = useCreateQuiz({
@@ -23,7 +35,15 @@ const TabContent = ({ data }) => {
   const createQuizHandler = () => {
     createQuizMutation.mutate();
   };
-  if (data.length === 0)
+
+  if (isLoading)
+    return (
+      <Flex justify="center">
+        <Spin />
+      </Flex>
+    );
+
+  if (data.items.length === 0)
     return (
       <Flex className="space-y-3" vertical>
         <Flex justify="center">
@@ -49,20 +69,33 @@ const TabContent = ({ data }) => {
 
   return (
     <Flex className="space-y-2" vertical>
-      {data.map((item, index) => (
+      {data.items.map((item, index) => (
         <TestCard
           key={index}
           id={item.id}
-          imgSrc={item.cover}
           title={item.title}
-          author={item.owner}
-          questions={item.questions}
-          date={item.createdDate}
-          tags={item.gradeName}
-          gradeName={item.gradeName}
-          languageName={item.languageName}
+          cover={item.cover}
+          subject={item.subject}
+          grade={item.grade}
+          owner={item.owner}
+          questionCount={item.questionCount}
+          createDate={item.createdDate}
         />
       ))}
+      <Pagination
+        align="center"
+        style={{
+          marginTop: '20px',
+        }}
+        total={data.meta.totalCount}
+        current={data.meta.currentPage}
+        pageSize={data.meta.pageSize}
+        onChange={(page, pageSize) => {
+          params.set('pageNumber', page);
+          params.set('pageSize', pageSize);
+          setParams(params);
+        }}
+      />
     </Flex>
   );
 };

@@ -21,6 +21,8 @@ public class QuizItemResponseDto
     public int AttemptCount { get; set; }
     
     public string Code { get; set; }
+
+    public DateTime CreatedDate { get; set; }
 }
 
 public class QuizProfile : Profile

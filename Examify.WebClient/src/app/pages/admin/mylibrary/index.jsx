@@ -1,22 +1,27 @@
-import { Flex, Spin, Tabs } from 'antd';
+import { Tabs } from 'antd';
+import { useSearchParams } from 'react-router-dom';
 import TabContent from '~/features/admin/mylibrary/components/TabContent';
-import TabHeaderLeft from '~/features/admin/mylibrary/components/TabHeaderLeft';
-import { useGetQuizUser } from '~/features/quiz/api/quizzes/get-quiz-user';
-
 
 const MyLibraryPage = () => {
-  const { data: quizzes, isLoading } = useGetQuizUser();
-
-  if (isLoading) return <Flex justify='center'>
-    <Spin />
-  </Flex>;
+  const [params, setParams] = useSearchParams();
 
   const tabs = [
-    { key: '1', label: 'Published', children: <TabContent data={quizzes?.quizPulished} /> },
-    { key: '2', label: 'Drafts', children: <TabContent data={quizzes?.quizUnpublished} /> },
+    { key: '1', label: 'Published', children: <TabContent params={params} setParams={setParams} isPublished /> },
+    { key: '2', label: 'Drafts', children: <TabContent params={params} setParams={setParams} /> },
   ];
 
-  return <Tabs defaultActiveKey="1" items={tabs} tabBarExtraContent={<TabHeaderLeft />} />;
+  return (
+    <Tabs
+      defaultActiveKey={params.get('isPublished') == 'false' ? '2' : '1'}
+      items={tabs}
+      onChange={(key) => {
+        params.set('isPublished', key == '1');
+        params.set('pageNumber', 1);
+        params.set('pageSize', 4);
+        setParams(params);
+      }}
+    />
+  );
 };
 
 export default MyLibraryPage;

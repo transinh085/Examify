@@ -1,6 +1,6 @@
 import { Button, Flex, Input, Layout, Menu } from 'antd';
 import logo from '~/assets/examify-logo.png';
-import { ClockCircleOutlined, HomeOutlined, PlusCircleOutlined, QuestionCircleOutlined } from '@ant-design/icons';
+import { ClockCircleOutlined, HomeOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import { Link, useNavigate } from 'react-router-dom';
 import useAuthStore from '~/stores/auth-store';
 import UserDropdown from '~/components/layouts/share/user-dropdown';
@@ -12,12 +12,6 @@ const items = [
     label: 'Home',
     icon: <HomeOutlined />,
     url: '/',
-  },
-  {
-    key: '2',
-    label: 'Quiz',
-    icon: <QuestionCircleOutlined />,
-    url: '/quiz',
   },
   {
     key: '3',
@@ -34,7 +28,7 @@ const Header = () => {
 
   const moveAdmin = () => {
     navigate('/admin');
-  }
+  };
 
   return (
     <AntHeader className="sticky top-0 z-50 flex items-center justify-between bg-white border-b px-4">
@@ -50,12 +44,7 @@ const Header = () => {
       <Flex align="center" gap={20}>
         {isAuthenticated ? (
           <>
-            <Button
-              variant="filled"
-              color="default"
-              icon={<PlusCircleOutlined />}
-              onClick={moveAdmin}
-            >
+            <Button variant="filled" color="default" icon={<PlusCircleOutlined />} onClick={moveAdmin}>
               Create a quiz
             </Button>
             <UserDropdown />

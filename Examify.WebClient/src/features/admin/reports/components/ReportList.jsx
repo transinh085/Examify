@@ -1,27 +1,58 @@
-import { Space } from 'antd';
+import { Col, Flex, Pagination, Row, Space, Spin } from 'antd';
 
 import { useGetQuizUser } from '~/features/quiz/api/quizzes/get-quiz-user';
 import QuizItem from './QuizItem';
+import { useSearchParams } from 'react-router-dom';
 
 const ReportList = () => {
-  const { data: quizzes } = useGetQuizUser();
+  const [params, setParams] = useSearchParams();
+  const {
+    data: quizzes = {
+      items: [],
+    },
+    isLoading,
+  } = useGetQuizUser({
+    isPublished: true,
+    pageNumber: params.get('pageNumber') || 1,
+    pageSize: params.get('pageSize') || 6,
+  });
+
+  if (isLoading)
+    return (
+      <Flex align="center" justify="center" className="h-[120px]">
+        <Spin />
+      </Flex>
+    );
 
   return (
     <Space direction="vertical" size={20} className="w-full">
-      {quizzes?.quizPulished?.map((item, index) => (
-        <QuizItem
-          key={index}
-          id={item.id}
-          imgSrc={item.cover}
-          title={item.title}
-          author={item.owner}
-          questions={item.questions}
-          date={item.createdDate}
-          tags={item.gradeName}
-          gradeName={item.gradeName}
-          languageName={item.languageName}
-        />
-      ))}
+      <Row gutter={[16, 16]}>
+        {quizzes?.items?.map((item, index) => (
+          <Col key={index} span={12}>
+            <QuizItem
+              id={item.id}
+              title={item.title}
+              cover={item.cover}
+              subject={item.subject}
+              grade={item.grade}
+              owner={item.owner}
+              questionCount={item.questionCount}
+              createDate={item.createdDate}
+            />
+          </Col>
+        ))}
+      </Row>
+      <Pagination
+        align="center"
+        total={quizzes.meta.totalCount}
+        current={quizzes.meta.currentPage}
+        pageSize={quizzes.meta.pageSize}
+        onChange={(page, pageSize) => {
+          params.set('pageNumber', page);
+          params.set('pageSize', pageSize);
+          setParams(params);
+        }}
+      />
     </Space>
   );
 };

@@ -19,10 +19,11 @@ public interface IQuizRepository
 
     Task<List<QuizDto>> GetAllQuizzes(CancellationToken cancellationToken);
 
-    Task<QuizUserDto> GetQuizByUserId(string userId, CancellationToken cancellationToken);
+    Task<PagedList<QuizItemResponseDto>> GetQuizByUserId(string userId, bool isPublish, int pageNumber, int pageSize,
+        CancellationToken cancellationToken);
 
     Task<PopulatedQuizDto?> GetQuizById(string quizId);
-    
+
     Task<PopulatedQuizDto?> GetQuizByCode(string code);
 
     Task PlayQuiz(Guid id, CancellationToken cancellationToken);
@@ -30,6 +31,6 @@ public interface IQuizRepository
 
     Task<PagedList<QuizItemResponseDto>> SearchQuizzes(string? keyword, Guid? subjectId, int pageNumber, int pageSize,
         CancellationToken cancellationToken);
-    
+
     Task StartQuiz(Guid id, CancellationToken cancellationToken);
 }

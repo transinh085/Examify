@@ -3,7 +3,7 @@ import { getQuestionByQuizIdQueryOptions } from '~/features/quiz/api/questions/g
 import { api } from '~/lib/api';
 
 export const duplicateQuestion = ({ quizId, questionId }) => {
-  return api.post(`/quiz-service/api/quizzes/${quizId}/questions/${questionId}/duplicate`);
+  return api.post(`/quiz-service/api/questions/${questionId}/duplicate`);
 };
 
 export const useDuplicateQuestion = ({ mutationConfig }) => {

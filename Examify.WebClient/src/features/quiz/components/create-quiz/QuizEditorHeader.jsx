@@ -1,6 +1,6 @@
 import { App, Button, Layout, Space } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import { EyeOutlined, LeftOutlined, SaveOutlined, SettingOutlined } from '@ant-design/icons';
+import { LeftOutlined, SaveOutlined, SettingOutlined } from '@ant-design/icons';
 import { useBoolean } from '~/hooks/useBoolean';
 import QuizSettingModal from '~/features/quiz/components/create-quiz/QuizSettingModal';
 import { usePublishQuiz } from '~/features/quiz/api/quizzes/publish-quiz';
@@ -29,7 +29,7 @@ const QuizEditorHeader = ({ quizData }) => {
   return (
     <Header className="sticky top-0 z-50 flex items-center justify-between bg-white border-b border-1 px-4 shadow-sm">
       <Space>
-        <Button icon={<LeftOutlined />} onClick={() => navigate("/admin/my-library")} />
+        <Button icon={<LeftOutlined />} onClick={() => navigate('/admin/my-library')} />
         <Button type="text" onClick={openSettingModal}>
           {quizData?.title}
         </Button>
@@ -38,7 +38,6 @@ const QuizEditorHeader = ({ quizData }) => {
         <Button icon={<SettingOutlined />} onClick={openSettingModal}>
           Setting
         </Button>
-        <Button icon={<EyeOutlined />}>Preview</Button>
         {!quizData?.isPublished ? (
           <Button
             type="primary"

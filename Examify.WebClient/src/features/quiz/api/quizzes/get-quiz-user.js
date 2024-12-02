@@ -1,19 +1,19 @@
-import { queryOptions, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { api } from '~/lib/api';
 
-export const getQuizUser = () => {
-  return api.get(`/quiz-service/api/quizzes/current`);
-};
-
-export const getQuizQueryOptions = () => {
-  return queryOptions({
-    queryKey: ['quiz-user'],
-    queryFn: () => getQuizUser(),
+export const getQuizUser = ({ isPublished, pageNumber, pageSize }) => {
+  return api.get(`/quiz-service/api/quizzes/current`, {
+    params: {
+      isPublished,
+      pageNumber,
+      pageSize,
+    },
   });
 };
 
-export const useGetQuizUser = () => {
+export const useGetQuizUser = ({ isPublished, pageNumber, pageSize }) => {
   return useQuery({
-    ...getQuizQueryOptions(),
+    queryKey: ['quiz-user', isPublished, pageNumber, pageSize],
+    queryFn: () => getQuizUser({ isPublished, pageNumber, pageSize }),
   });
 };

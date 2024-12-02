@@ -10,7 +10,8 @@ public class PublishQuizEndpoint : IEndpoint
     {
         app.MapPatch("quizzes/{quizId}/publish", async (Guid quizId, ISender sender) =>
             await sender.Send(new PublishQuizCommand(quizId))
-        ).Produces<NoContent>()
-        .WithTags("Quiz");
+        )
+            .Produces<NoContent>()
+            .WithTags("Quiz");
     }
 }

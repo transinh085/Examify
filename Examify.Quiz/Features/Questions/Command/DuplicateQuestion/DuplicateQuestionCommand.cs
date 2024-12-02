@@ -14,7 +14,7 @@ public class DuplicateQuestionValidator : AbstractValidator<DuplicateQuestionCom
     {
         RuleFor(x => x.Id)
             .NotEmpty().WithMessage("Id is required")
-            .MustAsync(async (id, cancellationToken) => await repository.IsQuestionExists(id, cancellationToken))
+            .MustAsync(async (id, cancellationToken) => !(await repository.IsQuestionExists(id, cancellationToken)))
             .WithMessage("Question not found");
     }
 }
