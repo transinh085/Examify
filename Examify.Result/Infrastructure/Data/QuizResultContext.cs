@@ -14,8 +14,9 @@ public class QuizResultContext(DbContextOptions options) : BaseDbContext(options
     public DbSet<QuizResult> QuizResults { get; init; }
     public DbSet<QuestionResult> QuestionResults { get; init; }
     public DbSet<AnswerResult> AnswerResults { get; init; }
-    
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    public DbSet<JoinQuiz> JoinQuizzes { get; init; }
+
+	protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(QuizResultContext).Assembly);

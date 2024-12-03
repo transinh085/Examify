@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 
 const ManagerQuizPage = () => {
   const quizId = useParams().id;
-  const { isStart, setQuiz } = useManagerQuizStore();
+  const { setQuiz } = useManagerQuizStore();
 
   const { data: quiz } = useGetQuiz({ id: quizId });
 
@@ -19,15 +19,13 @@ const ManagerQuizPage = () => {
 
   if (!quiz){
     return (
-      <Flex justify="center" align="center">
+      <Flex justify="center" align="center" className='h-screen'>
         <Spin />
       </Flex>
     );
   }
 
- 
-
-  return isStart ? <ManagerQuizStart /> : <ManagerQuizWait />;
+  return quiz?.isStart ? <ManagerQuizStart /> : <ManagerQuizWait />;
 };
 
 export default ManagerQuizPage;

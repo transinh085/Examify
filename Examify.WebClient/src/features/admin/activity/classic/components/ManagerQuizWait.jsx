@@ -9,7 +9,6 @@ import {
 import FullScreenButton from '~/features/admin/activity/classic/components/FullScreenButton';
 import CopyButton from '~/components/share/Button/CopyButton';
 import backgroundURL from '~/assets/svg/lobby_550.svg';
-import { users } from '~/features/admin/activity/classic/data';
 import useManagerQuizStore from '~/stores/admin/manager-quiz-store';
 import { useEffect } from 'react';
 import { useSignalRStore } from '~/stores/signalR-store';
@@ -17,15 +16,15 @@ import { useSignalRStore } from '~/stores/signalR-store';
 const { Header, Content } = Layout;
 
 const ManagerQuizWait = () => {
-  const { isPlayingSound, toggleSound, setIsStart, quiz } = useManagerQuizStore();
+  const { isPlayingSound, toggleSound, setIsStart, quiz, users, addUser } = useManagerQuizStore();
 
   const { initializeSignalR, addSignalRHandler, removeSignalRHandler, sendSignalRMessage, checkConnection } = useSignalRStore();
 
   useEffect(() => {
     initializeSignalR('https://localhost:8386/notification-service/api/notification-hub');
   
-    addSignalRHandler('JoinQuiz', (message) => {
-      console.log('Received message:', message);
+    addSignalRHandler('JoinQuiz', (user) => {
+      addUser(user);
     });
   
     const interval = setInterval(() => {
@@ -163,8 +162,8 @@ const ManagerQuizWait = () => {
                 className="bg-ds-dark-500 p-2 rounded-full justify-center items-center bg-opacity-50"
                 gap={3}
               >
-                <Avatar src={user.image} alt={user.name} size={30} />
-                <span className="text-white text-lg">{user.name}</span>
+                <Avatar src={user.image} alt={user.fullName} size={30} />
+                <span className="text-white text-lg">{user.fullName}</span>
               </Space>
             ))}
         </Flex>

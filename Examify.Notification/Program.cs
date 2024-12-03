@@ -1,6 +1,5 @@
 using System.Reflection;
 using Examify.Infrastructure;
-using Examify.Infrastructure.Jwt;
 using Examify.Notification.Grpc.Clients;
 using Examify.Notification.Infrastructure.GrpcClient;
 using Examify.Notification.Infrastructure.Mail;

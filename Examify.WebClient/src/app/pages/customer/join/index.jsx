@@ -1,5 +1,4 @@
 import { Button, Flex, Input, Layout } from 'antd';
-import { Link } from 'react-router-dom';
 
 const { Content } = Layout;
 
@@ -14,18 +13,10 @@ const JoinPage = () => {
           backgroundPosition: 'center',
         }}
       >
-        <Flex justify='center' align='center'>
+        <Flex justify="center" align="center">
           <h1 className="text-3xl font-bold text-white mb-6">Examify</h1>
         </Flex>
-        <Input
-          className="max-w-2xl"
-          placeholder="Enter your code"
-          suffix={
-            <Link to="/join/game/1">
-              <Button type="primary">Join</Button>
-            </Link>
-          }
-        />
+        <Input className="max-w-2xl" placeholder="Enter your code" suffix={<Button type="primary">Join</Button>} />
       </Content>
     </Layout>
   );

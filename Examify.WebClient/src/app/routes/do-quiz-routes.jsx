@@ -10,6 +10,13 @@ const DoQuizRoutes = {
   ),
   children: [
     {
+      path: "",
+      lazy: async () => {
+        const JoinWait = await import('../pages/customer/join');
+        return { Component: JoinWait.default };
+      }
+    },
+    {
       path: 'game/:result_id',
       lazy: async () => {
         const DoQuizPage = await import('../pages/customer/join/game/[result_id]');
@@ -23,6 +30,13 @@ const DoQuizRoutes = {
         return { Component: ResultPage.default };
       },
     },
+    {
+      path: 'wait',
+      lazy: async () => {
+        const JoinWait = await import('../pages/customer/join/wait');
+        return { Component: JoinWait.default };
+      }
+    }
   ],
 };
 

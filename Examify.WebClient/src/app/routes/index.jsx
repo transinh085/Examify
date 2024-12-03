@@ -4,7 +4,6 @@ import AuthRoutes from './auth-routes';
 import AdminRoutes from './admin-routes';
 import ErrorRoutes from './error-routes';
 import QuizRoutes from '~/app/routes/quiz-routes';
-import JoinRoutes from '~/app/routes/join-routes';
 import ManagaerQuizRoutes from '~/app/routes/manager-routes';
 import DoQuizRoutes from './do-quiz-routes';
 
@@ -15,7 +14,6 @@ const createAppRouter = () =>
     AdminRoutes,
     ErrorRoutes,
     QuizRoutes,
-    JoinRoutes,
     ManagaerQuizRoutes,
     DoQuizRoutes,
   ]);

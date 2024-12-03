@@ -6,11 +6,6 @@ namespace Examify.Notification.Hubs;
 
 public class NotificationHub(INotificationMetaService notificationMetaService) : Hub
 {
-    public async Task SendMessage(string message)
-    {
-        await Clients.All.SendAsync("SendMessage", message);
-    }
-    
     public async Task JoinQuizAdmin(String quizId)
     {
         await Groups.AddToGroupAsync(Context.ConnectionId, quizId+"-admin");

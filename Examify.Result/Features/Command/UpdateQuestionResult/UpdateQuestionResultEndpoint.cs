@@ -1,5 +1,4 @@
-﻿using System.Security.Claims;
-using Examify.Core.Endpoints;
+﻿using Examify.Core.Endpoints;
 using MediatR;
 
 namespace Examify.Result.Features.Command.UpdateQuestionResult;
@@ -17,7 +16,7 @@ public class UpdateQuestionResultEndpoint : IEndpoint
     }
 }
 
-public class UpdateQuestionResultResponse // for swagger
+public class UpdateQuestionResultResponse 
 {
     public bool IsCorrect { get; set; }
     public List<string> CorrectOptions { get; set; }

@@ -19,6 +19,8 @@ const ManagerQuizStart = () => {
 
   const { tab, setTab, isPlayingSound, toggleSound, setIsStart, quiz } = useManagerQuizStore();
 
+  
+
   return (
     <Layout
         className="full-base-screen bg-ds-dark-500 fixed top-0 left-0 overflow-scroll h-screen w-screen"
