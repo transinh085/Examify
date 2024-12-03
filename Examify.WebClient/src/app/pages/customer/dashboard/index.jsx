@@ -1,4 +1,5 @@
 import { Button, Card, Col, Flex, Form, Input, Row } from 'antd';
+import { useNavigate } from 'react-router-dom';
 import SubjectQuizSection from '~/features/dashboard/components/SubjectQuizSection';
 const { Search } = Input;
 import useAuthStore from '~/stores/auth-store';
@@ -8,6 +9,7 @@ import useAuthStore from '~/stores/auth-store';
 
 const DashboardPage = () => {
   const { user } = useAuthStore();
+  const navigate = useNavigate();
   return (
     <div className="py-4">
       <Row gutter={[24, 24]}>
@@ -30,7 +32,12 @@ const DashboardPage = () => {
             </Flex>
             <Form onFinish={null} layout="inline">
               <Form.Item style={{ flex: 1 }}>
-                <Search placeholder="Tìm kiếm bài kiểm tra..." onSearch={() => {}} />
+                <Search
+                  placeholder="Search a quiz..."
+                  onSearch={(value) => {
+                    navigate('/search?keyword=' + value);
+                  }}
+                />
               </Form.Item>
               <Form.Item
                 name="username"
