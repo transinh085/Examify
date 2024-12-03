@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Examify.Identity.Features.Command.UpdateUser;
 
-public record UpdateUserCommand(string Id,string FirstName,string LastName) :IRequest<IResult>;
+public record UpdateUserCommand(string Id,string FirstName,string LastName,string ImageUrl) :IRequest<IResult>;
 
 public class UpdateUserValidator : AbstractValidator<UpdateUserCommand>
 {
@@ -15,6 +15,7 @@ public class UpdateUserValidator : AbstractValidator<UpdateUserCommand>
         RuleFor(x => x.Id).NotEmpty();
         RuleFor(x => x.FirstName).NotEmpty();
         RuleFor(x => x.LastName).NotEmpty();
+        RuleFor(x => x.ImageUrl).NotEmpty();
     }
    
 }
