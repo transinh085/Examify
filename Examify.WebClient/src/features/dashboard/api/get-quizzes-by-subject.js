@@ -1,26 +1,20 @@
 import { queryOptions, useQuery } from '@tanstack/react-query';
 import { api } from '~/lib/api';
 
-const getQuizBySubject = (subjectId, pageNumber, pageSize) => {
-  return api.get(`/quiz-service/api/quizzes/search`, {
-    params: {
-      subjectId,
-      pageNumber,
-      pageSize,
-    },
-  });
+const searchQuiz = (params) => {
+  return api.get(`/quiz-service/api/quizzes/search`, { params });
 };
 
-export const getQuizBySubjectOptions = (subjectId, pageNumber, pageSize) => {
+export const searchQuizOptions = (params) => {
   return queryOptions({
-    queryKey: ['quiz-subject', subjectId, pageNumber, pageSize],
-    queryFn: () => getQuizBySubject(subjectId, pageNumber, pageSize),
+    queryKey: ['quiz-subject', params.keyword, params.subjectId, params.pageNumber, params.pageSize],
+    queryFn: () => searchQuiz(params),
   });
 };
 
-export const useGetQuizBySubject = ({ subjectId, pageNumber, pageSize }, queryConfig = {}) => {
+export const useSearchQuiz = (params, queryConfig = {}) => {
   return useQuery({
-    ...getQuizBySubjectOptions(subjectId, pageNumber, pageSize),
+    ...searchQuizOptions(params),
     ...queryConfig,
   });
 };

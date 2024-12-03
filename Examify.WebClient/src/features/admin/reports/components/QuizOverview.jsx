@@ -11,6 +11,8 @@ const QuizOverview = ({ quizId }) => {
           <Space direction="vertical" size={1} className="w-full">
             <h1 className="text-lg font-semibold">{quiz?.title}</h1>
             <p>{quiz?.description}</p>
+            <p>100 lượt thi</p>
+            <p>20 câu hỏi</p>
           </Space>
         </Flex>
         <Space direction="vertical" size={1} align="center">
