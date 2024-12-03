@@ -36,8 +36,13 @@ const Header = () => {
         <Link to="/">
           <img src={logo} alt="logo" className="h-[40px] w-auto object-cover" />
         </Link>
-        <Input.Search placeholder="Find a quiz" style={{ width: 250 }} />
-
+        <Input.Search
+          placeholder="Find a quiz"
+          style={{ width: 250 }}
+          onSearch={(value) => {
+            navigate(`/search?keyword=${value}`);
+          }}
+        />
         <Menu theme="light" mode="horizontal" defaultSelectedKeys={['1']} items={items} className="flex-1" />
       </Flex>
 
