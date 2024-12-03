@@ -18,7 +18,7 @@ public class UpdateUserEndpoint : IEndpoint
                 {
                     return TypedResults.Unauthorized();
                 }
-                var result = await sender.Send(new UpdateUserCommand(userId,request.FirstName,request.LastName));
+                var result = await sender.Send(new UpdateUserCommand(userId,request.FirstName,request.LastName,request.ImageUrl));
                 return result;
             })
             .Produces<AppUserDto>()
@@ -31,4 +31,5 @@ public class UpdateUserRequest
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }
+    public string ImageUrl { get; set; }
 }

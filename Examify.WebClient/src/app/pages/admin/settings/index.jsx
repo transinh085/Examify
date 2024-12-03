@@ -1,17 +1,16 @@
-import { Alert, Button, Card, Flex, Form, Space, Watermark, Input, Divider, Select, Tabs, message } from 'antd';
-import { json } from 'react-router-dom';
+import { Button, Card, Flex, Form, Input, Tabs, message } from 'antd';
 import { useUpdatePasswordMutation } from '~/features/auth/api/update-password';
 import { useUpdateUserMutation } from '~/features/auth/api/update-user';
 import useAuthStore from '~/stores/auth-store';
 import UploadCover from '~/features/quiz/components/question/UploadCover';
 
 const SettingPage = () => {
-  const { user, resetUser, setUserProfile } = useAuthStore();
+  const { user, setUserProfile } = useAuthStore();
   const [form] = Form.useForm();
   const mutationPassword = useUpdatePasswordMutation({
     mutationConfig: {
       onSuccess: (data) => {
-        message.success('Update succeed')
+        message.success('Update succeed');
       },
       onError: ({ response }) => {
         message.error(response?.data?.detail || 'Something went wrong!');
@@ -23,8 +22,7 @@ const SettingPage = () => {
     mutationConfig: {
       onSuccess: (data) => {
         message.success('Update succeed');
-        setUserProfile({ lastName: data.lastName, firstName: data.firstName });
-
+        setUserProfile({ lastName: data.lastName, firstName: data.firstName, image: data.image });
       },
       onError: ({ response }) => {
         message.error(response?.data?.detail || 'Sai Sai Sai!');
@@ -44,21 +42,33 @@ const SettingPage = () => {
       id: user.id,
       firstName: data.firstName,
       lastName: data.lastName,
+      imageUrl: data.image,
     });
   };
   return (
-    <Flex className='justify-center'>
+    <Flex className="justify-center">
       <Card
         style={{
           width: 700,
         }}
       >
-        <h1 className='from-neutral-900 font-bold text-2xl'>Cài đặt</h1>
-        <Tabs size={'large'} className='px-8'>
+        <h1 className="from-neutral-900 font-bold text-2xl">Cài đặt</h1>
+        <Tabs size={'large'} className="px-8">
           <Tabs.TabPane tab={<span style={{ fontSize: '16px', fontWeight: 'bold' }}>Tài khoản</span>} key="tab 1">
-            <Form form={form} name="updateEmail" style={{ maxWidth: 600 }} layout="vertical" autoComplete="off"
-              initialValues={{ email: user.email, firstName: user.firstName, lastName: user.lastName, image: user.image }}
-              onFinish={handleUpdateUser}>
+            <Form
+              form={form}
+              name="updateEmail"
+              style={{ maxWidth: 600 }}
+              layout="vertical"
+              autoComplete="off"
+              initialValues={{
+                email: user.email,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                image: user.image,
+              }}
+              onFinish={handleUpdateUser}
+            >
               <Form.Item
                 hasFeedback
                 label="Email"
@@ -110,15 +120,24 @@ const SettingPage = () => {
                 <Input defaultValue={user.lastName} />
               </Form.Item>
               <Form.Item label="Image" name="image">
-                {/* <UploadCover url={user.image} setFieldsValue={(value) => form.setFieldsValue({ image: value })} /> */}
+                <UploadCover url={user.image} setFieldsValue={(value) => form.setFieldsValue({ image: value })} />
               </Form.Item>
               <Form.Item>
-                <Button block htmlType="submit">Lưu thay đổi</Button>
+                <Button block htmlType="submit">
+                  Lưu thay đổi
+                </Button>
               </Form.Item>
             </Form>
           </Tabs.TabPane>
           <Tabs.TabPane tab={<span style={{ fontSize: '16px', fontWeight: 'bold' }}>Mật khẩu</span>} key="tab 2">
-            <Form form={form} onFinish={handleUpdatePassword} name="updatePassword" style={{ maxWidth: 600 }} layout="vertical" autoComplete="off">
+            <Form
+              form={form}
+              onFinish={handleUpdatePassword}
+              name="updatePassword"
+              style={{ maxWidth: 600 }}
+              layout="vertical"
+              autoComplete="off"
+            >
               <Form.Item
                 hasFeedback
                 label="Last password"
@@ -128,7 +147,7 @@ const SettingPage = () => {
                   {
                     required: true,
                     message: 'Vui lòng nhập mật khẩu!',
-                  }
+                  },
                 ]}
               >
                 <Input.Password placeholder="Nhập mật khẩu!" />
@@ -176,16 +195,16 @@ const SettingPage = () => {
                 <Input.Password placeholder="Nhập lại mật khẩu mới" />
               </Form.Item>
               <Form.Item>
-                <Button block htmlType="submit">Lưu thay đổi</Button>
+                <Button block htmlType="submit">
+                  Lưu thay đổi
+                </Button>
               </Form.Item>
             </Form>
           </Tabs.TabPane>
         </Tabs>
       </Card>
-    </Flex >
+    </Flex>
   );
 };
 
 export default SettingPage;
-
-

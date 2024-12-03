@@ -15,6 +15,7 @@ public class UpdateUserHandler(IUserRepository userRepository,IMapper mapper): I
         Guard.Against.NotFound(request.Id, user);
         user.FirstName = request.FirstName;
         user.LastName = request.LastName;
+        user.Image = request.ImageUrl;
         await userRepository.UpdateUserAsync(user);
         return TypedResults.Ok(mapper.Map<AppUserDto>(user));
     }
