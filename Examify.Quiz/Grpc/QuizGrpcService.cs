@@ -41,6 +41,7 @@ namespace Examify.Quiz.Grpc
                 RandomQuestions = quiz.RandomQuestions,
                 RandomOptions = quiz.RandomOptions,
                 Visibility = (Visibility) quiz.Visibility,
+                PlayTime = quiz.PlayTime.ToString(),
                 Questions =
                 {
                     quiz.Questions.Select(q => new QuizQuestionMessage()

@@ -22,8 +22,10 @@ public class PopulatedQuizDto
     public bool RandomOptions { get; set; }
     
     public Visibility Visibility { get; set; }
-    
-    public List<PopulatedQuestionDto> Questions { get; set; }
+
+    public DateTime PlayTime { get; set; }
+
+	public List<PopulatedQuestionDto> Questions { get; set; }
     
     public class PopulatedQuestionDto
     {

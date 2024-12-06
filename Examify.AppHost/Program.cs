@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using Microsoft.Extensions.DependencyInjection;
 
 var builder = DistributedApplication.CreateBuilder(args);
@@ -35,7 +34,9 @@ var catalogService = builder.AddProject<Projects.Examify_Catalog>("catalog-api")
 
 var quizService = builder.AddProject<Projects.Examify_Quiz>("quiz-api")
     .WithReference(quizDb)
-    .WaitFor(quizDb);
+	.WithReference(rabbitMq)
+    .WaitFor(quizDb)
+	.WaitFor(rabbitMq);
 
 var resultService = builder.AddProject<Projects.Examify_Result>("result-api")
     .WithReference(resultDb)

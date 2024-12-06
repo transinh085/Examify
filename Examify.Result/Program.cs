@@ -6,6 +6,7 @@ using Examify.Result.Infrastructure.Data;
 using Examify.Result.Infrastructure.Messaging;
 using Examify.Result.Repositories;
 using Examify.Result.Infrastructure.GrpcClient;
+using Examify.Result.Grpc.Client;
 
 var builder = WebApplication.CreateBuilder(args);
 var assembly = Assembly.GetExecutingAssembly();
@@ -15,7 +16,6 @@ builder.AddPersistence();
 builder.Services.AddJwt(builder.Configuration);
 builder.Services.AddGrpc();
 builder.Services.AddGrpcServices();
-
 builder.AddMessaging();
 
 
@@ -23,6 +23,8 @@ builder.AddMessaging();
 builder.Services.AddScoped<IQuizResultRepository, QuizResultRepository>();
 builder.Services.AddScoped<IQuestionResultRepository, QuestionResultRepository>();
 builder.Services.AddScoped<IAnswerResultRepository, AnswerResultRepository>();
+builder.Services.AddScoped<IJoinQuizRepository, JoinQuizRepository>();
+builder.Services.AddScoped<IResultQuizMetaService, ResultQuizMetaService>();
 
 var app = builder.Build();
 app.UseInfrastructure(app.Environment, useAuthentication: true);

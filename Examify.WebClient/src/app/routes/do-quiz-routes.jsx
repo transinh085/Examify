@@ -31,9 +31,9 @@ const DoQuizRoutes = {
       },
     },
     {
-      path: 'wait',
+      path: 'wait/:code',
       lazy: async () => {
-        const JoinWait = await import('../pages/customer/join/wait');
+        const JoinWait = await import('../pages/customer/join/wait/[code]');
         return { Component: JoinWait.default };
       }
     }

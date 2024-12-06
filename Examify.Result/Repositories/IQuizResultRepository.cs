@@ -1,4 +1,5 @@
 ﻿using Examify.Quiz.Dtos;
+using Examify.Result.Dtos;
 using Examify.Result.Entities;
 
 namespace Examify.Result.Repositories;
@@ -24,4 +25,6 @@ public interface IQuizResultRepository
     Task<List<GetQuizResultsDto>> GetResultsOfQuiz(string quizId);
     
     Task<List<UserResultsDetailsDto>> GetQuizResultsByQuizAndUser(string quizId, string userId);
+
+    Task<GetLeaderBoardDto> GetStartQuiz(string Code);
 }
