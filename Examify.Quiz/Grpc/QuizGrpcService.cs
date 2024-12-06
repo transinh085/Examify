@@ -1,7 +1,7 @@
 ﻿using Examify.Quiz.Dtos;
 using Examify.Quiz.Repositories.Quiz;
-using Quiz;
 using Grpc.Core;
+using Quiz;
 
 namespace Examify.Quiz.Grpc
 {
@@ -14,7 +14,7 @@ namespace Examify.Quiz.Grpc
             logger.LogInformation("GRPC GetQuiz is called {quizId} {quizCode}", request.Id, request.Code);
             PopulatedQuizDto? quiz;
             // quiz = await quizRepository.GetQuizById("01937d4b-6f1e-7690-8350-4852408201a1");
-            if(request.Id != "")
+            if (request.Id != "")
             {
                 logger.LogInformation("GRPC GetQuiz request received: {Id}", request.Id);
                 quiz = await quizRepository.GetQuizById(request.Id);
@@ -40,7 +40,7 @@ namespace Examify.Quiz.Grpc
                 EndTime = quiz.EndTime.ToString(),
                 RandomQuestions = quiz.RandomQuestions,
                 RandomOptions = quiz.RandomOptions,
-                Visibility = (Visibility) quiz.Visibility,
+                Visibility = (Visibility)quiz.Visibility,
                 Questions =
                 {
                     quiz.Questions.Select(q => new QuizQuestionMessage()
@@ -59,7 +59,8 @@ namespace Examify.Quiz.Grpc
                             })
                         }
                     })
-                }
+                },
+                Cover = quiz.Cover
             };
             return reply;
         }

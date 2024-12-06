@@ -1,5 +1,5 @@
-import { SettingOutlined } from '@ant-design/icons';
-import { Button, Col, Flex, Row, Space } from 'antd';
+import { LoadingOutlined, SettingOutlined } from '@ant-design/icons';
+import { Button, Col, Flex, Row, Space, Spin } from 'antd';
 import { useEffect, useState } from 'react';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 import FullScreenButton from '~/features/do-quiz/components/FullScreenButton';
@@ -38,7 +38,11 @@ const DoQuizPage = () => {
     removeSelectedOption,
   } = useDoQuizStore();
 
-  const { data: quizResult, refetch } = useGetQuizResult(
+  const {
+    data: quizResult,
+    isFetching,
+    refetch,
+  } = useGetQuizResult(
     { id: result_id },
     {
       enabled: !!result_id,
@@ -137,6 +141,14 @@ const DoQuizPage = () => {
   };
 
   console.log('timer', { questionDuration, timeTakenOfCurrentQuestion });
+
+  if (isFetching) {
+    return (
+      <Flex className="w-full h-full" justify="center" align="center">
+        <Spin indicator={<LoadingOutlined className="text-white" />} size="large" />
+      </Flex>
+    );
+  }
 
   if (isFinished) {
     return <MyQuizResult />;

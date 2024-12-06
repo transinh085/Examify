@@ -1,10 +1,10 @@
-﻿using System.Text;
-using Examify.Identity.Entities;
+﻿using Examify.Identity.Entities;
 using Examify.Identity.Infrastructure.Data;
 using Examify.Infrastructure.Jwt;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Examify.Identity.Infrastructure.Identity;
 
@@ -42,7 +42,8 @@ public static class Extensions
                     ValidateIssuerSigningKey = true,
                     ValidIssuer = jwtOptions.Issuer,
                     ValidAudience = jwtOptions.Audience,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.Secret))
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.Secret)),
+                    ClockSkew = System.TimeSpan.Zero
                 };
             })
             .AddFacebook(options =>

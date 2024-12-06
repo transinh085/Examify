@@ -19,8 +19,8 @@ const LoginRoute = () => {
   const [form] = Form.useForm();
 
   const handleSetUser = (data) => {
-    Cookies.set('token', data?.token);
-    Cookies.set('refreshToken', data?.refreshToken);
+    Cookies.set('token', data?.token, { expires: 30 });
+    Cookies.set('refreshToken', data?.refreshToken, { expires: 30 });
     setUser(data);
     navigate(redirect ? redirect : '/');
   };

@@ -49,7 +49,7 @@ const RecentQuizList = () => {
     <>
       <Flex align="center" justify="space-between" className="w-full">
         <h1 className="text-lg font-semibold">Recent Activity</h1>
-        <Link to="/topics/1" className="text-blue-500">
+        <Link to="/activities" className="text-blue-500">
           <Button variant="outlined" color="primary" icon={<RightOutlined />} iconPosition="end">
             See more
           </Button>

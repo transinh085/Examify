@@ -1,4 +1,5 @@
 ﻿using Examify.Quiz.Dtos;
+using Examify.Result.Dtos;
 using Examify.Result.Entities;
 using Examify.Result.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +11,8 @@ namespace Examify.Result.Repositories;
 public class QuizResultRepository(
     QuizResultContext quizResultContext,
     Identity.IdentityClient identityClient,
-    QuizGrpcService.QuizGrpcServiceClient quizClient
+    QuizGrpcService.QuizGrpcServiceClient quizClient,
+    ILogger<QuizResultRepository> logger
 )
     : IQuizResultRepository
 {
@@ -119,7 +121,7 @@ public class QuizResultRepository(
         {
             var user = identityClient.GetIdentity(new IdentityRequest { Id = quizResult.UserId });
 
-            double correctRate = quizResult.QuestionResults.Count(q => q.IsCorrect)*1.0 / quizResult.QuestionResults.Count;
+            double correctRate = quizResult.QuestionResults.Count(q => q.IsCorrect) * 1.0 / quizResult.QuestionResults.Count;
 
             var quizResultDto = new GetQuizResultsDto
             {
@@ -142,7 +144,7 @@ public class QuizResultRepository(
 
         return quizResultsDto;
     }
-    
+
     public async Task<List<UserResultsDetailsDto>> GetQuizResultsByQuizAndUser(string quizId, string userId)
     {
         List<QuizResult> quizResults = await quizResultContext.QuizResults
@@ -179,12 +181,12 @@ public class QuizResultRepository(
             .ToListAsync();
 
         List<UserResultsDetailsDto> userResultsDetailsDtos = new();
-        
-        if(quizResults.Count == 0)
+
+        if (quizResults.Count == 0)
         {
             return userResultsDetailsDtos;
         }
-        
+
         var populatedQuiz = quizClient.GetQuiz(new QuizRequest
         {
             Id = quizId
@@ -267,5 +269,36 @@ public class QuizResultRepository(
         }
 
         return userResultsDetailsDtos;
+    }
+
+    public async Task<List<QuizRecentActivityDto>> GetListRecentActivity(string userId, int pageNumber, int pageSize)
+    {
+        var Ids = await quizResultContext.QuizResults
+            .Include(x => x.QuestionResults)
+            .Where(x => x.UserId == userId)
+            .OrderByDescending(x => x.SubmittedAt)
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        var quizzes = new List<QuizRecentActivityDto>();
+
+        foreach (var record in Ids)
+        {
+            var quiz = await quizClient.GetQuizAsync(new QuizRequest { Id = record.QuizId.ToString() });
+            quizzes.Add(new QuizRecentActivityDto
+            {
+                Id = record.Id,
+                QuizId = record.QuizId,
+                Title = quiz.Title,
+                Description = quiz.Description,
+                Code = quiz.Code,
+                Cover = quiz.Cover,
+                QuestionCount = quiz.Questions.Count,
+                CurrentProgress = (decimal)record.QuestionResults.Count(x => x.SubmittedAt != DateTime.MinValue) / record.QuestionResults.Count * 100
+            });
+        }
+
+        return quizzes;
     }
 }

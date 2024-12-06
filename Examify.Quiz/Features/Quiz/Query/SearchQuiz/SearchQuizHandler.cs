@@ -8,8 +8,8 @@ public class SearchQuizHandler(IQuizRepository repository) : IRequestHandler<Sea
     public async Task<IResult> Handle(SearchQuizQuery request, CancellationToken cancellationToken)
     {
         return TypedResults.Ok(await repository.SearchQuizzes(request.Keyword, request.SubjectId,
-            request.PageNumber.Value,
-            request.PageSize.Value,
+            request.GetPageNumber,
+            request.GetPageSize,
             cancellationToken));
     }
 }

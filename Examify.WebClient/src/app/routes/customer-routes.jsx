@@ -29,13 +29,6 @@ const CustomerRoutes = {
       },
     },
     {
-      path: '/topics/:id',
-      lazy: async () => {
-        const TopicDetailsPage = await import('../pages/customer/topics/[id]');
-        return { Component: TopicDetailsPage.default };
-      },
-    },
-    {
       path: 'search',
       lazy: async () => {
         const SearchPage = await import('../pages/customer/search');

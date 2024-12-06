@@ -12,6 +12,7 @@ const UserDropdown = () => {
 
   const handleLogout = () => {
     Cookies.remove('token');
+    Cookies.remove('refreshToken');
     resetUser();
     console.log('Logout');
     navigate('/auth/login');
@@ -19,11 +20,11 @@ const UserDropdown = () => {
 
   const moveProfile = () => {
     navigate('/admin/profile');
-  }
+  };
 
   const moveSetting = () => {
     navigate('/admin/settings');
-  }
+  };
 
   const { token } = useToken();
   const contentStyle = {

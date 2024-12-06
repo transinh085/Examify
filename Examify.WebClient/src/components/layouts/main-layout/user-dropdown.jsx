@@ -10,6 +10,7 @@ const UserDropdown = () => {
 
   const handleLogout = () => {
     Cookies.remove('token');
+    Cookies.remove('refreshToken');
     resetUser();
     console.log('Logout');
     navigate('/auth/login');

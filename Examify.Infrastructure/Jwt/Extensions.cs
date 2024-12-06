@@ -1,7 +1,7 @@
-﻿using System.Text;
-using Examify.Infrastructure.Options;
+﻿using Examify.Infrastructure.Options;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Examify.Infrastructure.Jwt;
 
@@ -30,7 +30,7 @@ public static class Extensions
                 };
             })
            ;
-        
+
         services.AddAuthorization(options =>
         {
             options.AddPolicy("Admin", policy => policy.RequireRole("Admin"));
@@ -39,8 +39,8 @@ public static class Extensions
 
         return services;
     }
-    
-    public static IServiceCollection AddJwtWithSignalR(this IServiceCollection services, 
+
+    public static IServiceCollection AddJwtWithSignalR(this IServiceCollection services,
         IConfiguration configuration,
         string hubPath)
     {
@@ -63,7 +63,7 @@ public static class Extensions
                     ValidAudience = jwtOptions.Audience,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.Secret))
                 };
-                
+
                 options.Events = new JwtBearerEvents
                 {
                     OnMessageReceived = context =>
@@ -79,7 +79,7 @@ public static class Extensions
                     }
                 };
             });
-        
+
         services.AddAuthorization(options =>
         {
             options.AddPolicy("Admin", policy => policy.RequireRole("Admin"));

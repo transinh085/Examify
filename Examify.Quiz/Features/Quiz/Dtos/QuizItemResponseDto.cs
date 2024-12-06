@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using Examify.Quiz.Enums;
-using Quiz;
 using Visibility = Examify.Quiz.Enums.Visibility;
 
 namespace Examify.Quiz.Features.Quiz.Dtos;
@@ -19,7 +17,7 @@ public class QuizItemResponseDto
     public int Duration { get; set; }
     public int QuestionCount { get; set; }
     public int AttemptCount { get; set; }
-    
+
     public string Code { get; set; }
 
     public DateTime CreatedDate { get; set; }

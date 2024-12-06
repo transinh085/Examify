@@ -9,8 +9,8 @@ public class GetQuizByCurrentUserHandler(IQuizRepository quizRepository)
     public async Task<IResult> Handle(GetQuizByCurrentUserQuery request, CancellationToken cancellationToken)
     {
         var quizzes = await quizRepository.GetQuizByUserId(request.UserId, request.IsPublished,
-            request.PageNumber.Value,
-            request.PageSize.Value, cancellationToken);
+            request.GetPageNumber,
+            request.GetPageSize, cancellationToken);
         return TypedResults.Ok(quizzes);
     }
 }

@@ -21,7 +21,9 @@ async function refreshAccessToken() {
     const response = await Axios.post(`${BACKEND_ENDPOINT}/identity-service/api/auth/refresh-token`, {
       token: refreshTokenLocal,
     });
+
     const { token, refreshToken, expiresIn } = response.data;
+    console.log('New token', { token, refreshToken, expiresIn });
 
     // Calculate the expiration date
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
@@ -49,12 +51,13 @@ api.interceptors.response.use(
   },
   async (error) => {
     const originalRequest = error.config;
-
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
-
       try {
         const newToken = await refreshAccessToken();
+
+        console.log('New token', newToken);
+
         originalRequest.headers['Authorization'] = `Bearer ${newToken}`;
         return api(originalRequest);
       } catch (refreshError) {

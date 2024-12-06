@@ -1,16 +1,15 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Security.Cryptography;
-using System.Text;
-using Examify.Identity.Dtos;
+﻿using Examify.Identity.Dtos;
 using Examify.Identity.Entities;
-using Examify.Identity.Features.Login;
 using Examify.Identity.Infrastructure.Data;
 using Examify.Infrastructure.Jwt;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Examify.Identity.Infrastructure.Jwt;
 
@@ -85,7 +84,7 @@ public class TokenProvider(UserManager<AppUser> userManager, IdentityContext con
             Issuer = _jwtOptions.Issuer,
             Expires = DateTime.UtcNow.AddMinutes(_jwtOptions.DurationInMinutes),
             SigningCredentials =
-                new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
         };
         var token = tokenHandler.CreateToken(tokenDescriptor);
         return tokenHandler.WriteToken(token);

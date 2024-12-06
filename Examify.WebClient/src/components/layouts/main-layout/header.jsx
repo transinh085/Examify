@@ -1,34 +1,35 @@
 import { Button, Flex, Input, Layout, Menu } from 'antd';
 import logo from '~/assets/examify-logo.png';
 import { ClockCircleOutlined, HomeOutlined, PlusCircleOutlined } from '@ant-design/icons';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useAuthStore from '~/stores/auth-store';
 import UserDropdown from '~/components/layouts/share/user-dropdown';
+import { useMemo } from 'react';
 const { Header: AntHeader } = Layout;
 
 const items = [
   {
     key: '1',
-    label: 'Home',
+    label: <Link to="/">Home</Link>,
     icon: <HomeOutlined />,
-    url: '/',
   },
   {
-    key: '3',
-    label: 'Activity',
+    key: '2',
+    label: <Link to="/activities">Recent activity</Link>,
     icon: <ClockCircleOutlined />,
-    url: '/activities',
   },
 ];
 
 const Header = () => {
   const navigate = useNavigate();
-
   const { isAuthenticated } = useAuthStore();
+  const location = useLocation();
 
-  const moveAdmin = () => {
-    navigate('/admin');
-  };
+  const currentKey = useMemo(() => {
+    return items.find((item) => item.label.props.to === location.pathname)?.key;
+  }, [location.pathname]);
+
+  console.log(location.pathname, currentKey);
 
   return (
     <AntHeader className="sticky top-0 z-50 flex items-center justify-between bg-white border-b px-4">
@@ -43,15 +44,23 @@ const Header = () => {
             navigate(`/search?keyword=${value}`);
           }}
         />
-        <Menu theme="light" mode="horizontal" defaultSelectedKeys={['1']} items={items} className="flex-1" />
+        <Menu
+          theme="light"
+          mode="horizontal"
+          selectedKeys={[currentKey ?? '1']}
+          items={items}
+          className="flex-1"
+        />
       </Flex>
 
       <Flex align="center" gap={20}>
         {isAuthenticated ? (
           <>
-            <Button variant="filled" color="default" icon={<PlusCircleOutlined />} onClick={moveAdmin}>
-              Create a quiz
-            </Button>
+            <Link to="/admin">
+              <Button variant="filled" color="default" icon={<PlusCircleOutlined />}>
+                Create a quiz
+              </Button>
+            </Link>
             <UserDropdown />
           </>
         ) : (
