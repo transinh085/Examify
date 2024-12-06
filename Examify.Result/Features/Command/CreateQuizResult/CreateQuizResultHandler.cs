@@ -4,15 +4,15 @@ using Result;
 
 namespace Examify.Result.Features.Command.CreateQuizResult;
 
-public class CreateQuizResultHandler (
+public class JoinQuizHandler (
     IQuizResultRepository quizResultRepository, 
     IQuestionResultRepository questionResultRepository,
     IAnswerResultRepository answerResultRepository,
     QuizGrpcService.QuizGrpcServiceClient quizClient,
-    ILogger<CreateQuizResultHandler> logger
-    ) : IRequestHandler<CreateQuizResultCommand, IResult>
+    ILogger<JoinQuizHandler> logger
+    ) : IRequestHandler<JoinQuizCommand, IResult>
 {
-    public async Task<IResult> Handle(CreateQuizResultCommand request, CancellationToken cancellationToken)
+    public async Task<IResult> Handle(JoinQuizCommand request, CancellationToken cancellationToken)
     {
         logger.LogInformation("Creating quiz result of quiz {QuizCode} for user {UserId}", request.Code, request.UserId);
         var populatedQuiz = quizClient.GetQuiz(new QuizRequest

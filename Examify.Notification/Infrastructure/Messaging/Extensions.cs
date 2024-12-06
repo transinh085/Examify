@@ -13,8 +13,10 @@ public static class Extensions
             x.AddConsumer<UserJoinedExamConsumer>();
             x.AddConsumer<UserPasswordResetConsumer>();
             x.AddConsumer<UserVerificationEmailConsumer>();
+            x.AddConsumer<StartExamComsumer>();
+            x.AddConsumer<UpdateExamComsumer>();
 
-            x.UsingRabbitMq(
+			x.UsingRabbitMq(
                 (context, cfg) =>
                 {
                     cfg.Host(builder.Configuration.GetConnectionString("RabbitMQ")!);

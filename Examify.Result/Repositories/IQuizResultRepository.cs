@@ -27,4 +27,6 @@ public interface IQuizResultRepository
     Task<List<UserResultsDetailsDto>> GetQuizResultsByQuizAndUser(string quizId, string userId);
 
     Task<List<QuizRecentActivityDto>> GetListRecentActivity(string userId, int pageNumber, int pageSize);
+    
+    Task<GetLeaderBoardDto> GetStartQuiz(string Code);
 }

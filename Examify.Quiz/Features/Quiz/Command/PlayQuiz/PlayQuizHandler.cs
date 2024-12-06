@@ -7,7 +7,12 @@ public class PlayQuizHandler(IQuizRepository quizRepository) : IRequestHandler<P
 {
     public async Task<IResult> Handle(PlayQuizCommand request, CancellationToken cancellationToken)
     {
-        await quizRepository.PlayQuiz(request.QuizId, cancellationToken);
+        var quiz = await quizRepository.FindQuizById(request.QuizId, cancellationToken);
+        if(quiz == null)
+		{
+			return TypedResults.NotFound("Quiz not found");
+		}
+        if(quiz.PlayTime == null) await quizRepository.PlayQuiz(request.QuizId, cancellationToken);
         return TypedResults.Ok();
     }
 }

@@ -40,7 +40,8 @@ namespace Examify.Quiz.Grpc
                 EndTime = quiz.EndTime.ToString(),
                 RandomQuestions = quiz.RandomQuestions,
                 RandomOptions = quiz.RandomOptions,
-                Visibility = (Visibility)quiz.Visibility,
+                Visibility = (Visibility) quiz.Visibility,
+                PlayTime = quiz.PlayTime.ToString(),
                 Questions =
                 {
                     quiz.Questions.Select(q => new QuizQuestionMessage()

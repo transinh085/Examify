@@ -4,6 +4,7 @@ using Examify.Infrastructure.Jwt;
 using Examify.Quiz.Grpc;
 using Examify.Quiz.Infrastructure.Data;
 using Examify.Quiz.Infrastructure.GrpcClient;
+using Examify.Quiz.Infrastructure.Message;
 using Examify.Quiz.Repositories.Questions;
 using Examify.Quiz.Repositories.Quiz;
 
@@ -14,6 +15,7 @@ builder.AddInfrashtructure(assembly);
 builder.AddPersistence();
 builder.Services.AddGrpcServices();
 builder.Services.AddJwt(builder.Configuration);
+builder.AddMessaging();
 
 // Register repositories
 builder.Services.AddScoped<IQuizRepository, QuizRepository>();

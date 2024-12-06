@@ -14,7 +14,7 @@ public class GetQuizResultsDto
     
     public UserDto User { get; set; }
     
-    public double CorrectRate { get; set; } // calculated field
+    public double CorrectRate { get; set; }
 }
 
 public class UserDto

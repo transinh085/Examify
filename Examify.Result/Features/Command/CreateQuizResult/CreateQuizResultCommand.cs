@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Examify.Result.Features.Command.CreateQuizResult;
 
-public record CreateQuizResultCommand : IRequest<IResult>
+public record JoinQuizCommand : IRequest<IResult>
 {
     public string Code { get; init; }
     
@@ -11,7 +11,7 @@ public record CreateQuizResultCommand : IRequest<IResult>
     
 }
 
-public class CreateQuizResultValidator : AbstractValidator<CreateQuizResultCommand>
+public class CreateQuizResultValidator : AbstractValidator<JoinQuizCommand>
 {
     public CreateQuizResultValidator()
     {

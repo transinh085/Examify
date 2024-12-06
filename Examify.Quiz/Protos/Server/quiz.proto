@@ -25,6 +25,7 @@ message QuizReply {
   bool random_options = 9;
   repeated QuizQuestionMessage questions = 10;
   string cover = 11;
+  string play_time = 12;
 }
 
 
