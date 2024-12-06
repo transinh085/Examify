@@ -8,36 +8,19 @@ import useManagerQuizStore from '~/stores/admin/manager-quiz-store';
 import HeaderManagerQuiz from '~/features/admin/activity/classic/components/HeaderManagerQuiz';
 import { useGetStartQuiz } from '~/features/admin/activity/classic/api/get-start-quiz';
 import { useEffect, useState } from 'react';
+import { useSignalRStore } from '~/stores/signalR-store';
+import { useQueryClient } from '@tanstack/react-query';
 
 const { Content } = Layout;
-
-export const users = Array.from({ length: 10 }, (_, index) => ({
-  id: `user-${index + 1}`,
-  name: `User ${index + 1}`,
-  score: Math.floor(Math.random() * 1000),
-  image: `https://i.pravatar.cc/150?img=${index + 1}`,
-}));
-
-export const questions = Array.from({ length: 3 }, (_, index) => ({
-  id: `question-${index + 1}`,
-  title: `Question ${index + 1}`,
-  description: `What is the answer to question ${index + 1}?`,
-  type: 'Multiple Choice',
-  progress: Math.floor(Math.random() * 100),
-  correct: Math.floor(Math.random() * 3) + 1,
-  incorrect: Math.floor(Math.random() * 3),
-  options: ['A', 'B', 'C', 'D'].map((opt) => ({
-    value: opt,
-    label: `Option ${opt}`,
-  })),
-}));
 
 const ManagerQuizStart = () => {
   const { tab, setTab, quiz } = useManagerQuizStore();
   const [ isCorrect, setIsCorrect ] = useState(0);
   const [ isWrong, setIsWrong ] = useState(0);
+  const queryClient = useQueryClient();
 
   const { data: startQuiz } = useGetStartQuiz({ code: quiz?.code });
+  const { initializeSignalR, addSignalRHandler, removeSignalRHandler, sendSignalRMessage, checkConnection } = useSignalRStore();
 
   useEffect(() => {
     if(startQuiz){
@@ -46,7 +29,27 @@ const ManagerQuizStart = () => {
     }
   }, [startQuiz])
 
-  console.log("startQuiz", startQuiz);
+  useEffect(() => {
+    initializeSignalR('https://localhost:8386/notification-service/api/notification-hub');
+
+    addSignalRHandler('UpdateQuiz', () => {
+      queryClient.invalidateQueries(['start-quiz', { code: quiz?.code }]);
+    });
+  
+    const interval = setInterval(() => {
+      if (checkConnection()) {
+        sendSignalRMessage('JoinQuizAdmin', quiz?.id);
+        clearInterval(interval); 
+      }
+    }, 1000);
+  
+    return () => {
+      removeSignalRHandler('JoinQuiz');
+      clearInterval(interval);
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initializeSignalR, addSignalRHandler, removeSignalRHandler, sendSignalRMessage, checkConnection, quiz]);
+
 
   return (
     <Layout
@@ -90,7 +93,7 @@ const ManagerQuizStart = () => {
             <Flex className="p-4 bg-ds-dark-500-50 w-full max-w-5xl rounded-lg" vertical>
               <Flex gap={10} className="mb-6 text-base font-medium text-white">
                 <UsergroupAddOutlined className="font-extrabold" />
-                <span>{users.length} paricipants</span>
+                <span>{startQuiz?.users.length} paricipants</span>
               </Flex>
               <Flex vertical gap={8}>
                 <table className="text-white">
@@ -107,7 +110,7 @@ const ManagerQuizStart = () => {
                         return (
                           <tr
                             key={user.id}
-                            className={`bg-ds-dark-500 ${index + 1 != users.length && 'border-b border-white/30'}`}
+                            className={`bg-ds-dark-500 ${index + 1 != startQuiz?.users.length && 'border-b border-white/30'}`}
                           >
                             <td className="py-4 px-6">
                               <span className="font-medium">{index + 1}</span>
@@ -135,7 +138,7 @@ const ManagerQuizStart = () => {
               <Flex justify="space-between" gap={10} className="mb-6 text-base font-medium text-white">
                 <Space>
                   <UsergroupAddOutlined />
-                  <span>3 Questions</span>
+                  <span>{startQuiz?.questions.length} Questions</span>
                 </Space>
                 <Space>
                   <span>Sort by Accuracy</span>

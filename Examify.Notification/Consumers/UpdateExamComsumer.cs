@@ -7,12 +7,12 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace Examify.Notification.Consumers
 {
-	public class StartExamComsumer(ILogger<UserJoinedExamConsumer> logger, IHubContext<NotificationHub> hubContext) : IConsumer<StartExamEvent>
+	public class UpdateExamComsumer(ILogger<UserJoinedExamConsumer> logger, IHubContext<NotificationHub> hubContext) : IConsumer<UpdateExamEvent>
 	{
-		public async Task Consume(ConsumeContext<StartExamEvent> context)
+		public async Task Consume(ConsumeContext<UpdateExamEvent> context)
 		{
 			logger.LogInformation("StartExamComsumer received: {QuizId}", context.Message.ExamId);
-			await hubContext.Clients.Group(context.Message.ExamId + "-user").SendAsync("StartQuiz");
+			await hubContext.Clients.Group(context.Message.ExamId + "-admin").SendAsync("UpdateQuiz");
 		}
 	}
 }

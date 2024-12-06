@@ -1,4 +1,6 @@
-﻿using Examify.Result.Repositories;
+﻿using Examify.Events;
+using Examify.Result.Repositories;
+using MassTransit;
 using MediatR;
 using Result;
 
@@ -8,7 +10,8 @@ public class UpdateQuestionResultHandler(
     IQuizResultRepository quizResultRepository,
     IQuestionResultRepository questionResultRepository,
     IAnswerResultRepository answerResultRepository,
-    QuestionGrpcService.QuestionGrpcServiceClient questionGrpcServiceClient)
+    QuestionGrpcService.QuestionGrpcServiceClient questionGrpcServiceClient,
+	IPublishEndpoint publishEndpoint)
     : IRequestHandler<UpdateQuestionResultCommand, IResult>
 {
     public async Task<IResult> Handle(UpdateQuestionResultCommand request, CancellationToken cancellationToken)
@@ -65,7 +68,12 @@ public class UpdateQuestionResultHandler(
 
         await quizResultRepository.SaveChangesAsync();
 
-        return Results.Ok(new
+        await publishEndpoint.Publish(new UpdateExamEvent
+        {
+            ExamId = quizResult.QuizId
+		});
+
+		return Results.Ok(new
         {
             IsCorrect = areEqual,
             CorrectOptions = correctAnswers,

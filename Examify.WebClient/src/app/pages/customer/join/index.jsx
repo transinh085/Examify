@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Button, Flex, Input, Layout, message } from 'antd';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useUserJoin } from '~/features/customer/join/api/user-join';
 
 const { Content } = Layout;
@@ -8,6 +9,8 @@ const { Content } = Layout;
 const JoinPage = () => {
   const navigate = useNavigate();
   const [code, setCode] = useState('');
+
+  const location = useLocation();
 
   const mutaUserJoin = useUserJoin({ mutationConfig: {
     onSuccess: (data) => {
@@ -17,7 +20,15 @@ const JoinPage = () => {
       console.log(error);
       message.error('Code is invalid');
     },
-  } });
+  }});
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const codeParam = queryParams.get('code');
+    if (codeParam) {
+      mutaUserJoin.mutate({ code: codeParam });
+    }
+  }, [location]);
 
  const handleUserJoin = () => {
   mutaUserJoin.mutate({ code });

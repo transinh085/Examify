@@ -9,10 +9,12 @@ const ModalEndQuiz = () => {
   const navigate = useNavigate();
 
   const mutaEndQuiz = useEndQuiz({
-    onSuccess: () => {
-      setOpenModalEnd(false);
-      navigate('/admin/my-library');
-    },
+    mutationConfig: {
+      onSuccess: () => {
+        setOpenModalEnd(false);
+        navigate('/admin/my-library');
+      },
+    }
   });
 
   const handleEndQuiz = () => {

@@ -306,20 +306,21 @@ public class QuizResultRepository(
 			var correctOption = questionQuiz.Options.FirstOrDefault(o => o.IsCorrect);
 			if (correctOption == null)
 			{
-				continue;
+				continue; // Skip this question if there is no correct option
 			}
 
 			var correctOptionId = Guid.Parse(correctOption.Id);
 
-			var correctCount = await quizResultContext.AnswerResults
-				.Where(answer => answer.QuestionResultId == Guid.Parse(questionQuiz.Id))
-				.Where(answer => answer.IsSelected && answer.OptionId == correctOptionId)
-				.CountAsync();
+            var correctCount = await quizResultContext.QuizResults
+                .Where(quiz => quiz.QuestionResults.Any(question => question.QuestionId == Guid.Parse(questionQuiz.Id) && question.IsCorrect))
+                .CountAsync();
 
-			var incorrectCount = await quizResultContext.AnswerResults
-				.Where(answer => answer.QuestionResultId == Guid.Parse(questionQuiz.Id))
-				.Where(answer => answer.IsSelected && answer.OptionId != correctOptionId)
-				.CountAsync();
+			var incorrectCount = await quizResultContext.QuizResults
+	            .Where(quiz => quiz.QuestionResults.Any(question =>
+		            question.QuestionId == Guid.Parse(questionQuiz.Id) && question.IsCorrect == false))
+	            .Where(quiz => quiz.QuestionResults.Any(question =>
+		            question.AnswerResults.Any(answer => answer.IsSelected)))
+	            .CountAsync();
 
 			var totalAnswers = correctCount + incorrectCount;
 			var correctPercentage = totalAnswers > 0 ? (double)correctCount / totalAnswers * 100 : 0;
@@ -351,6 +352,4 @@ public class QuizResultRepository(
 
 		return getLeaderBoardDto;
 	}
-
-
 }

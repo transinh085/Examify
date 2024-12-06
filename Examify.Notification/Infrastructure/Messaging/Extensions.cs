@@ -14,6 +14,7 @@ public static class Extensions
             x.AddConsumer<UserPasswordResetConsumer>();
             x.AddConsumer<UserVerificationEmailConsumer>();
             x.AddConsumer<StartExamComsumer>();
+            x.AddConsumer<UpdateExamComsumer>();
 
 			x.UsingRabbitMq(
                 (context, cfg) =>

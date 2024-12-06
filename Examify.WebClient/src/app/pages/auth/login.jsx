@@ -1,6 +1,5 @@
 import { Button, Divider, Flex, Form, Input, message, Space, Typography } from 'antd';
 import { useGoogleLoginMutation, useLoginMutation } from '~/features/auth/api/login';
-// import gg from '~/assets/svg/gg.svg';
 import fb from '~/assets/svg/fb.svg';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import Cookies from 'js-cookie';
