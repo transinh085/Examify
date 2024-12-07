@@ -2350,11 +2350,11 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
             },
             new Entities.Quiz
             {
-                Title = "Introduction to Chemistry",
+                Title = "Introduction to VietNam history",
                 Cover = "https://example.com/chemistry_intro.jpg",
-                Description = "Learn the basics of chemistry",
-                SubjectId = Guid.Parse("048d1a67-4ced-4189-85e6-c2803577f040"),
-                GradeId = Guid.Parse("eaae3de7-126e-4a1c-b301-236049605952"),
+                Description = "Learn the basics of VietNam history",
+                SubjectId = Guid.Parse("d34d0164-6d96-4e58-b732-abbc35ce4d28"),
+                GradeId = Guid.Parse("ccc9fa86-9ba3-438a-8930-8db470ed6d15"),
                 LanguageId = Guid.Parse("92458564-28b3-449c-b2c5-645740600368"),
                 OwnerId = "ea616dc0-e621-474e-a247-b823b9fe6004",
                 Visibility = Visibility.Public,
@@ -2363,28 +2363,163 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                 {
                     new Question
                     {
-                        Content = "What is the chemical symbol for water?",
+                        Content = "When did Vietnam gain independence from French colonial rule?",
                         Duration = 20,
                         Points = 1,
                         Type = QuestionType.MultipleChoice,
                         Order = 1,
                         Options = new List<Option>
                         {
-                            new Option { Content = "H2O", IsCorrect = true },
-                            new Option { Content = "O2H", IsCorrect = false },
-                            new Option { Content = "HO2", IsCorrect = false },
-                            new Option { Content = "H2", IsCorrect = false }
+                            new Option { Content = "1954", IsCorrect = true },
+                            new Option { Content = "1945", IsCorrect = false },
+                            new Option { Content = "1975", IsCorrect = false },
+                            new Option { Content = "1968", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "Who was the leader of the Vietnamese independence movement against French colonialism?",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 2,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Ho Chi Minh", IsCorrect = true },
+                            new Option { Content = "Ngo Dinh Diem", IsCorrect = false },
+                            new Option { Content = "Pham Van Dong", IsCorrect = false },
+                            new Option { Content = "Vo Nguyen Giap", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "What is the name of the ancient kingdom that existed in central Vietnam from the 2nd to the 15th century?",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 3,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Champa", IsCorrect = true },
+                            new Option { Content = "Dai Viet", IsCorrect = false },
+                            new Option { Content = "Nam Viet", IsCorrect = false },
+                            new Option { Content = "Tonkin", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "Which battle in 1954 marked the decisive victory of Vietnamese forces over the French?",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 4,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Battle of Dien Bien Phu", IsCorrect = true },
+                            new Option { Content = "Tet Offensive", IsCorrect = false },
+                            new Option { Content = "Battle of Hue", IsCorrect = false },
+                            new Option { Content = "Fall of Saigon", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "What event marked the reunification of North and South Vietnam?",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 5,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Fall of Saigon in 1975", IsCorrect = true },
+                            new Option { Content = "Geneva Accords in 1954", IsCorrect = false },
+                            new Option { Content = "Paris Peace Accords in 1973", IsCorrect = false },
+                            new Option { Content = "Tet Offensive in 1968", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "Which empire ruled Vietnam during the 19th and early 20th centuries?",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 6,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "French Empire", IsCorrect = true },
+                            new Option { Content = "Ming Dynasty", IsCorrect = false },
+                            new Option { Content = "Japanese Empire", IsCorrect = false },
+                            new Option { Content = "Mongol Empire", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "What dynasty ruled Vietnam during its golden age of Confucian culture?",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 7,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Nguyen Dynasty", IsCorrect = false },
+                            new Option { Content = "Tran Dynasty", IsCorrect = true },
+                            new Option { Content = "Le Dynasty", IsCorrect = false },
+                            new Option { Content = "Tay Son Dynasty", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "Who was the famous Vietnamese general who led the victory at Dien Bien Phu?",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 8,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Vo Nguyen Giap", IsCorrect = true },
+                            new Option { Content = "Ho Chi Minh", IsCorrect = false },
+                            new Option { Content = "Ngo Dinh Diem", IsCorrect = false },
+                            new Option { Content = "Pham Van Dong", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "What was the ancient name of Hanoi during the Ly Dynasty?",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 9,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Thang Long", IsCorrect = true },
+                            new Option { Content = "Dai Viet", IsCorrect = false },
+                            new Option { Content = "Tonkin", IsCorrect = false },
+                            new Option { Content = "Hoa Lu", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "What agreement in 1954 temporarily divided Vietnam along the 17th parallel?",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 10,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Geneva Accords", IsCorrect = true },
+                            new Option { Content = "Paris Peace Accords", IsCorrect = false },
+                            new Option { Content = "Treaty of Saigon", IsCorrect = false },
+                            new Option { Content = "Bangkok Declaration", IsCorrect = false }
                         }
                     }
                 }
             },
             new Entities.Quiz
             {
-                Title = "Introduction to Chemistry",
+                Title = "World War I",
                 Cover = "https://example.com/chemistry_intro.jpg",
-                Description = "Learn the basics of chemistry",
-                SubjectId = Guid.Parse("048d1a67-4ced-4189-85e6-c2803577f040"),
-                GradeId = Guid.Parse("eaae3de7-126e-4a1c-b301-236049605952"),
+                Description = "World War I",
+                SubjectId = Guid.Parse("d34d0164-6d96-4e58-b732-abbc35ce4d28"),
+                GradeId = Guid.Parse("ccc9fa86-9ba3-438a-8930-8db470ed6d15"),
                 LanguageId = Guid.Parse("92458564-28b3-449c-b2c5-645740600368"),
                 OwnerId = "ea616dc0-e621-474e-a247-b823b9fe6004",
                 Visibility = Visibility.Public,
@@ -2393,28 +2528,163 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                 {
                     new Question
                     {
-                        Content = "What is the chemical symbol for water?",
+                        Content = "Which event directly triggered the start of World War I?",
                         Duration = 20,
                         Points = 1,
                         Type = QuestionType.MultipleChoice,
                         Order = 1,
                         Options = new List<Option>
                         {
-                            new Option { Content = "H2O", IsCorrect = true },
-                            new Option { Content = "O2H", IsCorrect = false },
-                            new Option { Content = "HO2", IsCorrect = false },
-                            new Option { Content = "H2", IsCorrect = false }
+                            new Option { Content = "Assassination of Archduke Franz Ferdinand", IsCorrect = true },
+                            new Option { Content = "Invasion of Belgium", IsCorrect = false },
+                            new Option { Content = "Zimmermann Telegram", IsCorrect = false },
+                            new Option { Content = "Russian Revolution", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "Which countries made up the Triple Alliance during World War I?",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 2,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Germany, Austria-Hungary, Italy", IsCorrect = true },
+                            new Option { Content = "France, Russia, Britain", IsCorrect = false },
+                            new Option { Content = "Germany, Austria-Hungary, Ottoman Empire", IsCorrect = false },
+                            new Option { Content = "France, Italy, United States", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "Which country was the first to declare war in World War I?",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 3,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Austria-Hungary", IsCorrect = true },
+                            new Option { Content = "Germany", IsCorrect = false },
+                            new Option { Content = "Russia", IsCorrect = false },
+                            new Option { Content = "France", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "Who was the leader of Germany during World War I?",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 4,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Kaiser Wilhelm II", IsCorrect = true },
+                            new Option { Content = "Adolf Hitler", IsCorrect = false },
+                            new Option { Content = "Otto von Bismarck", IsCorrect = false },
+                            new Option { Content = "Erich Ludendorff", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "Which battle is considered the largest and bloodiest of World War I?",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 5,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Battle of the Somme", IsCorrect = true },
+                            new Option { Content = "Battle of Verdun", IsCorrect = false },
+                            new Option { Content = "Battle of Tannenberg", IsCorrect = false },
+                            new Option { Content = "Battle of Gallipoli", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "Which country joined the Allies in World War I in 1917, tipping the balance in favor of the Allies?",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 6,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "United States", IsCorrect = true },
+                            new Option { Content = "Italy", IsCorrect = false },
+                            new Option { Content = "Japan", IsCorrect = false },
+                            new Option { Content = "Romania", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "What was the name of the treaty that ended World War I?",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 7,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Treaty of Versailles", IsCorrect = true },
+                            new Option { Content = "Treaty of Paris", IsCorrect = false },
+                            new Option { Content = "Treaty of Trianon", IsCorrect = false },
+                            new Option { Content = "Treaty of Brest-Litovsk", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "Which empire collapsed after World War I, leading to the creation of new countries in Eastern Europe?",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 8,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Austro-Hungarian Empire", IsCorrect = true },
+                            new Option { Content = "Ottoman Empire", IsCorrect = false },
+                            new Option { Content = "Russian Empire", IsCorrect = false },
+                            new Option { Content = "British Empire", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "What was the primary cause of the U.S. joining World War I?",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 9,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Zimmermann Telegram", IsCorrect = true },
+                            new Option { Content = "Sinking of the Lusitania", IsCorrect = false },
+                            new Option { Content = "Invasion of Belgium", IsCorrect = false },
+                            new Option { Content = "Russian Revolution", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "Which new technology was introduced during World War I, contributing to the high casualties?",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 10,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Machine Guns", IsCorrect = true },
+                            new Option { Content = "Tanks", IsCorrect = false },
+                            new Option { Content = "Submarines", IsCorrect = false },
+                            new Option { Content = "Nuclear Weapons", IsCorrect = false }
                         }
                     }
                 }
             },
             new Entities.Quiz
             {
-                Title = "Introduction to Chemistry",
+                Title = "World War II",
                 Cover = "https://example.com/chemistry_intro.jpg",
-                Description = "Learn the basics of chemistry",
-                SubjectId = Guid.Parse("048d1a67-4ced-4189-85e6-c2803577f040"),
-                GradeId = Guid.Parse("eaae3de7-126e-4a1c-b301-236049605952"),
+                Description = "World War II",
+                SubjectId = Guid.Parse("d34d0164-6d96-4e58-b732-abbc35ce4d28"),
+                GradeId = Guid.Parse("ccc9fa86-9ba3-438a-8930-8db470ed6d15"),
                 LanguageId = Guid.Parse("92458564-28b3-449c-b2c5-645740600368"),
                 OwnerId = "ea616dc0-e621-474e-a247-b823b9fe6004",
                 Visibility = Visibility.Public,
@@ -2423,28 +2693,163 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                 {
                     new Question
                     {
-                        Content = "What is the chemical symbol for water?",
+                        Content = "What event directly triggered the start of World War II?",
                         Duration = 20,
                         Points = 1,
                         Type = QuestionType.MultipleChoice,
                         Order = 1,
                         Options = new List<Option>
                         {
-                            new Option { Content = "H2O", IsCorrect = true },
-                            new Option { Content = "O2H", IsCorrect = false },
-                            new Option { Content = "HO2", IsCorrect = false },
-                            new Option { Content = "H2", IsCorrect = false }
+                            new Option { Content = "Invasion of Poland by Germany", IsCorrect = true },
+                            new Option { Content = "Attack on Pearl Harbor", IsCorrect = false },
+                            new Option { Content = "Battle of Britain", IsCorrect = false },
+                            new Option { Content = "Signing of the Treaty of Versailles", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "Which countries were part of the Axis Powers during World War II?",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 2,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Germany, Italy, Japan", IsCorrect = true },
+                            new Option { Content = "France, Britain, Soviet Union", IsCorrect = false },
+                            new Option { Content = "Germany, France, Japan", IsCorrect = false },
+                            new Option { Content = "United States, Britain, USSR", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "Who was the leader of Nazi Germany during World War II?",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 3,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Adolf Hitler", IsCorrect = true },
+                            new Option { Content = "Joseph Stalin", IsCorrect = false },
+                            new Option { Content = "Benito Mussolini", IsCorrect = false },
+                            new Option { Content = "Emperor Hirohito", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "Which battle is considered the turning point in the Pacific War during World War II?",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 4,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Battle of Midway", IsCorrect = true },
+                            new Option { Content = "Battle of Stalingrad", IsCorrect = false },
+                            new Option { Content = "D-Day", IsCorrect = false },
+                            new Option { Content = "Battle of the Bulge", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "What was the name of the secret project to develop the atomic bomb in the United States?",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 5,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Manhattan Project", IsCorrect = true },
+                            new Option { Content = "Operation Overlord", IsCorrect = false },
+                            new Option { Content = "Project Hydra", IsCorrect = false },
+                            new Option { Content = "Operation Barbarossa", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "Which country was invaded by Germany in 1941, leading to its entry into World War II?",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 6,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Soviet Union", IsCorrect = true },
+                            new Option { Content = "France", IsCorrect = false },
+                            new Option { Content = "Poland", IsCorrect = false },
+                            new Option { Content = "Norway", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "Where did the D-Day landings take place in 1944?",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 7,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Normandy, France", IsCorrect = true },
+                            new Option { Content = "Iwo Jima, Japan", IsCorrect = false },
+                            new Option { Content = "Stalingrad, Soviet Union", IsCorrect = false },
+                            new Option { Content = "El Alamein, Egypt", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "Which event led to the United States' entry into World War II?",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 8,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Attack on Pearl Harbor", IsCorrect = true },
+                            new Option { Content = "Invasion of France", IsCorrect = false },
+                            new Option { Content = "Battle of Britain", IsCorrect = false },
+                            new Option { Content = "Sinking of the Lusitania", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "Which major conference in 1945 resulted in agreements about the post-war order and the division of Germany?",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 9,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Yalta Conference", IsCorrect = true },
+                            new Option { Content = "Munich Conference", IsCorrect = false },
+                            new Option { Content = "Paris Peace Talks", IsCorrect = false },
+                            new Option { Content = "Treaty of Versailles", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "What was the name of the largest and deadliest concentration camp in Nazi Germany?",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 10,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Auschwitz", IsCorrect = true },
+                            new Option { Content = "Dachau", IsCorrect = false },
+                            new Option { Content = "Treblinka", IsCorrect = false },
+                            new Option { Content = "Buchenwald", IsCorrect = false }
                         }
                     }
                 }
             },
             new Entities.Quiz
             {
-                Title = "Introduction to Chemistry",
-                Cover = "https://example.com/chemistry_intro.jpg",
-                Description = "Learn the basics of chemistry",
-                SubjectId = Guid.Parse("048d1a67-4ced-4189-85e6-c2803577f040"),
-                GradeId = Guid.Parse("eaae3de7-126e-4a1c-b301-236049605952"),
+                Title = "Introduction to programming",
+                Cover = "https://quizizz.com/media/resource/gs/quizizz-media/quizzes/a456289c-1456-433d-aac7-46f224d7c1e2",
+                Description = "Learn the basics of programming",
+                SubjectId = Guid.Parse("2f921f98-5b80-4916-943c-31c6a88ca70e"),
+                GradeId = Guid.Parse("e2cee932-4bce-40e5-b3be-16829008bb02"),
                 LanguageId = Guid.Parse("92458564-28b3-449c-b2c5-645740600368"),
                 OwnerId = "ea616dc0-e621-474e-a247-b823b9fe6004",
                 Visibility = Visibility.Public,
@@ -2453,28 +2858,155 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                 {
                     new Question
                     {
-                        Content = "What is the chemical symbol for water?",
+                        Content = "What is the only thing that computers understand?",
                         Duration = 20,
                         Points = 1,
                         Type = QuestionType.MultipleChoice,
                         Order = 1,
                         Options = new List<Option>
                         {
-                            new Option { Content = "H2O", IsCorrect = true },
-                            new Option { Content = "O2H", IsCorrect = false },
-                            new Option { Content = "HO2", IsCorrect = false },
-                            new Option { Content = "H2", IsCorrect = false }
+                            new Option { Content = "Machine Code", IsCorrect = true },
+                            new Option { Content = "Low Level Language", IsCorrect = false },
+                            new Option { Content = "High Level Language", IsCorrect = false },
+                            new Option { Content = "Algorithm", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "Before a computer can understand a program it must be...",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 2,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Translated into its machine code.", IsCorrect = true },
+                            new Option { Content = "Translated into a high level language.", IsCorrect = false },
+                            new Option { Content = "Translated into a low level language.", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "Java, Python, PHP, and C++ are examples of",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 3,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "low level languages", IsCorrect = false },
+                            new Option { Content = "Graphic arts languages", IsCorrect = false },
+                            new Option { Content = "medium level languages", IsCorrect = false },
+                            new Option { Content = "high level languages", IsCorrect = true }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "What is machine code?",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 4,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "A programming language that a computer understands", IsCorrect = true },
+                            new Option { Content = "The make and model of a computer", IsCorrect = false },
+                            new Option { Content = "The serial number of a computer", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "Which language is directly understood by the computer without translation program?",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 5,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "BASIC", IsCorrect = false },
+                            new Option { Content = "Assembly Language", IsCorrect = false },
+                            new Option { Content = "Machine Language", IsCorrect = true },
+                            new Option { Content = "C Language", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "Which of the following is not a high level programming language?",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 6,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Assembly", IsCorrect = true },
+                            new Option { Content = "C++", IsCorrect = false },
+                            new Option { Content = "Java", IsCorrect = false },
+                            new Option { Content = "Python", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "Which level of a programming language is Assembly Code?",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 7,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Low", IsCorrect = true },
+                            new Option { Content = "High", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "Which level would create the fastest code to execute?",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 8,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Low", IsCorrect = true },
+                            new Option { Content = "Assembly", IsCorrect = false },
+                            new Option { Content = "High", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "Which level would create the easiest code for humans to understand?",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 9,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Low", IsCorrect = false },
+                            new Option { Content = "Assembly", IsCorrect = false },
+                            new Option { Content = "High", IsCorrect = true }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "Machine Code uses mnemonics to represent instructions",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 10,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "True", IsCorrect = false },
+                            new Option { Content = "False", IsCorrect = true }
                         }
                     }
                 }
             },
             new Entities.Quiz
             {
-                Title = "Introduction to Chemistry",
-                Cover = "https://example.com/chemistry_intro.jpg",
-                Description = "Learn the basics of chemistry",
-                SubjectId = Guid.Parse("048d1a67-4ced-4189-85e6-c2803577f040"),
-                GradeId = Guid.Parse("eaae3de7-126e-4a1c-b301-236049605952"),
+                Title = "Software Engineering",
+                Cover = "https://quizizz.com/media/resource/gs/quizizz-media/quizzes/4fe44387-e5e5-4d56-bdd8-3b2cd7e3df5b",
+                Description = "Learn the basics of software engineering",
+                SubjectId = Guid.Parse("2f921f98-5b80-4916-943c-31c6a88ca70e"),
+                GradeId = Guid.Parse("45304ba8-da09-46b9-8400-d5b7a7bb718e"),
                 LanguageId = Guid.Parse("92458564-28b3-449c-b2c5-645740600368"),
                 OwnerId = "ea616dc0-e621-474e-a247-b823b9fe6004",
                 Visibility = Visibility.Public,
@@ -2483,28 +3015,159 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                 {
                     new Question
                     {
-                        Content = "What is the chemical symbol for water?",
+                        Content = "Dependency models the _________ relationship",
                         Duration = 20,
                         Points = 1,
                         Type = QuestionType.MultipleChoice,
                         Order = 1,
                         Options = new List<Option>
                         {
-                            new Option { Content = "H2O", IsCorrect = true },
-                            new Option { Content = "O2H", IsCorrect = false },
-                            new Option { Content = "HO2", IsCorrect = false },
-                            new Option { Content = "H2", IsCorrect = false }
+                            new Option { Content = "has-a", IsCorrect = true },
+                            new Option { Content = "is-a", IsCorrect = false },
+                            new Option { Content = "uses-a", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "Interfaces model the _________ relationship",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 2,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "has-a", IsCorrect = false },
+                            new Option { Content = "is-a", IsCorrect = true },
+                            new Option { Content = "uses-a", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "Aggregation models the _________ relationship",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 3,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "has-a", IsCorrect = true },
+                            new Option { Content = "is-a", IsCorrect = false },
+                            new Option { Content = "uses-a", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "Inheritance models the _________ relationship",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 4,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "has-a", IsCorrect = false },
+                            new Option { Content = "is-a", IsCorrect = true },
+                            new Option { Content = "uses-a", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "The analysis phase ____________________",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 5,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Determines what the program will do", IsCorrect = true },
+                            new Option { Content = "Determines how the program will work", IsCorrect = false },
+                            new Option { Content = "Determines whether or not the program works", IsCorrect = false },
+                            new Option { Content = "Adds new features to the delivered program", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "The operations and maintenance phase ____________________",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 6,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Determines what the program will do", IsCorrect = false },
+                            new Option { Content = "Determines how the program will work", IsCorrect = false },
+                            new Option { Content = "Determines whether or not the program works", IsCorrect = false },
+                            new Option { Content = "Adds new features to the delivered program", IsCorrect = true }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "The integration phase ____________________",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 7,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Determines what the program will do", IsCorrect = false },
+                            new Option { Content = "Determines how the program will work", IsCorrect = false },
+                            new Option { Content = "Determines whether or not the program works", IsCorrect = false },
+                            new Option { Content = "Adds new features to the delivered program", IsCorrect = true }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "The implementation phase ____________________",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 8,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Determines whether or not the program is feasible", IsCorrect = false },
+                            new Option { Content = "Determines which classes are needed and what they will do", IsCorrect = false },
+                            new Option { Content = "Determines whether or not the program works", IsCorrect = false },
+                            new Option { Content = "Implements the program code", IsCorrect = true }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "The design phase ____________________",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 9,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Determines whether or not the program is feasible", IsCorrect = false },
+                            new Option { Content = "Determines which classes are needed and what they will do", IsCorrect = true },
+                            new Option { Content = "Determines whether or not the program works", IsCorrect = false },
+                            new Option { Content = "Implements the program code", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "The analysis phase ____________________",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 10,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Creates a diagram of the planned classes and their relationships", IsCorrect = false },
+                            new Option { Content = "Creates a requirement specification", IsCorrect = true },
+                            new Option { Content = "Verifies whether or not the requirement specification has been met", IsCorrect = false },
+                            new Option { Content = "Implements the program code", IsCorrect = false }
                         }
                     }
                 }
             },
             new Entities.Quiz
             {
-                Title = "Introduction to Chemistry",
-                Cover = "https://example.com/chemistry_intro.jpg",
-                Description = "Learn the basics of chemistry",
-                SubjectId = Guid.Parse("048d1a67-4ced-4189-85e6-c2803577f040"),
-                GradeId = Guid.Parse("eaae3de7-126e-4a1c-b301-236049605952"),
+                Title = "Conditional Sentences",
+                Cover = "https://quizizz.com/media/resource/gs/quizizz-media/quizzes/ffb618cf-d46f-4a7d-bfae-b27907396e0b?w=200&h=200",
+                Description = "Learn the basics of Conditional Sentences",
+                SubjectId = Guid.Parse("f9c0f102-9fab-4f11-a76c-33efd4439af0"),
+                GradeId = Guid.Parse("6afce851-669f-4ee8-a082-814f3633d2a3"),
                 LanguageId = Guid.Parse("92458564-28b3-449c-b2c5-645740600368"),
                 OwnerId = "ea616dc0-e621-474e-a247-b823b9fe6004",
                 Visibility = Visibility.Public,
@@ -2513,28 +3176,163 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                 {
                     new Question
                     {
-                        Content = "What is the chemical symbol for water?",
-                        Duration = 20,
+                        Content = "I wouldn’t tell her if I ……….. you. She can’t keep a secret.",
+                        Duration = 45,
                         Points = 1,
                         Type = QuestionType.MultipleChoice,
                         Order = 1,
                         Options = new List<Option>
                         {
-                            new Option { Content = "H2O", IsCorrect = true },
-                            new Option { Content = "O2H", IsCorrect = false },
-                            new Option { Content = "HO2", IsCorrect = false },
-                            new Option { Content = "H2", IsCorrect = false }
+                            new Option { Content = "will be", IsCorrect = false },
+                            new Option { Content = "were", IsCorrect = true },
+                            new Option { Content = "am", IsCorrect = false },
+                            new Option { Content = "had been", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "Paul would be a good artist if he …….... more patience.",
+                        Duration = 45,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 2,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "had", IsCorrect = true },
+                            new Option { Content = "has", IsCorrect = false },
+                            new Option { Content = "will have", IsCorrect = false },
+                            new Option { Content = "have", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "If we walk so slowly, we ………………. late.",
+                        Duration = 30,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 3,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "will being", IsCorrect = false },
+                            new Option { Content = "will be", IsCorrect = true },
+                            new Option { Content = "be", IsCorrect = false },
+                            new Option { Content = "would be", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "If I …………. John, I’d ask Mary for a date.",
+                        Duration = 30,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 4,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "will be", IsCorrect = false },
+                            new Option { Content = "am", IsCorrect = false },
+                            new Option { Content = "were", IsCorrect = true },
+                            new Option { Content = "would be", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "If you ……….., you won’t find out the truth.",
+                        Duration = 30,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 5,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "will ask", IsCorrect = false },
+                            new Option { Content = "won't ask", IsCorrect = false },
+                            new Option { Content = "ask", IsCorrect = true },
+                            new Option { Content = "don't ask", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "If Amy does the washing up, her brother __________ the table.",
+                        Duration = 30,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 6,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "will clean", IsCorrect = true },
+                            new Option { Content = "would clean", IsCorrect = false },
+                            new Option { Content = "have cleaned", IsCorrect = false },
+                            new Option { Content = "cleaned", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "You would have slept much better, if you _______ your medicine.",
+                        Duration = 30,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 7,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "will take", IsCorrect = false },
+                            new Option { Content = "took", IsCorrect = false },
+                            new Option { Content = "had taken", IsCorrect = true },
+                            new Option { Content = "would take", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "If you wait a minute, I _______ with you.",
+                        Duration = 30,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 8,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "will go", IsCorrect = true },
+                            new Option { Content = "would go", IsCorrect = false },
+                            new Option { Content = "would have gone", IsCorrect = false },
+                            new Option { Content = "go", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "My uncle would stay longer in N.Y, if he ______ more time.",
+                        Duration = 30,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 9,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "has", IsCorrect = false },
+                            new Option { Content = "had", IsCorrect = true },
+                            new Option { Content = "would have", IsCorrect = false },
+                            new Option { Content = "had had", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "He wouldn't have been sleepy all the day if he _____________ late last night.",
+                        Duration = 30,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 10,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "didn't stay up", IsCorrect = false },
+                            new Option { Content = "stayed up", IsCorrect = false },
+                            new Option { Content = "hadn't stayed up", IsCorrect = true },
+                            new Option { Content = "stays up", IsCorrect = false }
                         }
                     }
                 }
             },
             new Entities.Quiz
             {
-                Title = "Introduction to Chemistry",
+                Title = "Modern History",
                 Cover = "https://example.com/chemistry_intro.jpg",
-                Description = "Learn the basics of chemistry",
-                SubjectId = Guid.Parse("048d1a67-4ced-4189-85e6-c2803577f040"),
-                GradeId = Guid.Parse("eaae3de7-126e-4a1c-b301-236049605952"),
+                Description = "Learn the basics of Modern History",
+                SubjectId = Guid.Parse("d34d0164-6d96-4e58-b732-abbc35ce4d280"),
+                GradeId = Guid.Parse("56873e58-0c4f-4f33-a7c6-faf1bb3e6b40"),
                 LanguageId = Guid.Parse("92458564-28b3-449c-b2c5-645740600368"),
                 OwnerId = "ea616dc0-e621-474e-a247-b823b9fe6004",
                 Visibility = Visibility.Public,
@@ -2543,28 +3341,140 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                 {
                     new Question
                     {
-                        Content = "What is the chemical symbol for water?",
-                        Duration = 20,
+                        Content = "Nobility and clergy lost their privileges and their power and wealth diminished",
+                        Duration = 30,
                         Points = 1,
                         Type = QuestionType.MultipleChoice,
                         Order = 1,
                         Options = new List<Option>
                         {
-                            new Option { Content = "H2O", IsCorrect = true },
-                            new Option { Content = "O2H", IsCorrect = false },
-                            new Option { Content = "HO2", IsCorrect = false },
-                            new Option { Content = "H2", IsCorrect = false }
+                            new Option { Content = "True", IsCorrect = true },
+                            new Option { Content = "False", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "Select the names of the periods of the Modern Age",
+                        Duration = 30,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 2,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Renaissance period", IsCorrect = true },
+                            new Option { Content = "Victorian era", IsCorrect = false },
+                            new Option { Content = "Baroque period", IsCorrect = true },
+                            new Option { Content = "Age of Enlightment", IsCorrect = true }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "What was the interest of people during the Renaissance period?",
+                        Duration = 30,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 3,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Ancient Greek and Roman culture", IsCorrect = true },
+                            new Option { Content = "French culture", IsCorrect = false },
+                            new Option { Content = "Authoritarian monarchies", IsCorrect = false },
+                            new Option { Content = "Other countries", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "The Baroque period had an impact on art, architecture and literature",
+                        Duration = 30,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 4,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "True", IsCorrect = true },
+                            new Option { Content = "False", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "During the Age of Enlightment, there were great advances in technology and healthcare",
+                        Duration = 30,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 5,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "True", IsCorrect = true },
+                            new Option { Content = "False", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "What was one of the most important inventions that appeared in the 15th century?",
+                        Duration = 30,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 6,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Light bulb", IsCorrect = false },
+                            new Option { Content = "Gunpowder", IsCorrect = false },
+                            new Option { Content = "Printing press", IsCorrect = true },
+                            new Option { Content = "Eyeglasses", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "The printing press was invented by Johannes Gutenberg in 1559",
+                        Duration = 30,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 7,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "True", IsCorrect = false },
+                            new Option { Content = "False", IsCorrect = true }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "What did the kings do to get more fame and money?",
+                        Duration = 30,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 8,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Be at war with other factions", IsCorrect = false },
+                            new Option { Content = "Sell lands to other countries", IsCorrect = false },
+                            new Option { Content = "Increase the taxes people had to pay", IsCorrect = false },
+                            new Option { Content = "Promote expeditions to discover new trade routes", IsCorrect = true }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "What is the name of this invention?",
+                        Duration = 30,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 9,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Compass", IsCorrect = false },
+                            new Option { Content = "Astrolabe", IsCorrect = true },
+                            new Option { Content = "Portolan charts", IsCorrect = false },
+                            new Option { Content = "Printing press", IsCorrect = false }
                         }
                     }
                 }
             },
             new Entities.Quiz
             {
-                Title = "Introduction to Chemistry",
+                Title = "Introduction to Modern History 2",
                 Cover = "https://example.com/chemistry_intro.jpg",
-                Description = "Learn the basics of chemistry",
-                SubjectId = Guid.Parse("048d1a67-4ced-4189-85e6-c2803577f040"),
-                GradeId = Guid.Parse("eaae3de7-126e-4a1c-b301-236049605952"),
+                Description = "Learn the basics of Modern History 2",
+                SubjectId = Guid.Parse("d34d0164-6d96-4e58-b732-abbc35ce4d28"),
+                GradeId = Guid.Parse("56873e58-0c4f-4f33-a7c6-faf1bb3e6b40"),
                 LanguageId = Guid.Parse("92458564-28b3-449c-b2c5-645740600368"),
                 OwnerId = "ea616dc0-e621-474e-a247-b823b9fe6004",
                 Visibility = Visibility.Public,
@@ -2573,28 +3483,151 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                 {
                     new Question
                     {
-                        Content = "What is the chemical symbol for water?",
-                        Duration = 20,
+                        Content = "Which two kingdoms unified at the end of the 15th century?",
+                        Duration = 60,
                         Points = 1,
                         Type = QuestionType.MultipleChoice,
-                        Order = 1,
                         Options = new List<Option>
                         {
-                            new Option { Content = "H2O", IsCorrect = true },
-                            new Option { Content = "O2H", IsCorrect = false },
-                            new Option { Content = "HO2", IsCorrect = false },
-                            new Option { Content = "H2", IsCorrect = false }
+                            new Option { Content = "Castilla y Navarra", IsCorrect = false },
+                            new Option { Content = "Castilla y Granada", IsCorrect = false },
+                            new Option { Content = "Castilla y Aragón", IsCorrect = true },
+                            new Option { Content = "Castilla y Portugal", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "The two kingdoms formed an alliance and changed their own laws, parliaments, and currencies to be the same.",
+                        Duration = 60,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "True", IsCorrect = false },
+                            new Option { Content = "False", IsCorrect = true }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "The Catholic Monarchs, Isabel and Fernando, were passionate defenders of:",
+                        Duration = 60,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Ancient Greek and Roman culture", IsCorrect = false },
+                            new Option { Content = "Peace and justice", IsCorrect = false },
+                            new Option { Content = "Money and taxes", IsCorrect = false },
+                            new Option { Content = "Christian faith", IsCorrect = true }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "What else happened in 1492 aside from the discovery of America?",
+                        Duration = 60,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Navarra became part of Castilla", IsCorrect = false },
+                            new Option { Content = "The printing press was invented", IsCorrect = false },
+                            new Option { Content = "Granada was taken from the Muslims", IsCorrect = true },
+                            new Option { Content = "Isabel and Fernando got married", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "The Catholic Monarchs expanded the kingdom by marrying their children into other countries. How many children did they have?",
+                        Duration = 60,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "2", IsCorrect = false },
+                            new Option { Content = "3", IsCorrect = false },
+                            new Option { Content = "4", IsCorrect = false },
+                            new Option { Content = "5", IsCorrect = true }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "During this time, Aragon expanded its territory along the:",
+                        Duration = 60,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Mediterranean Sea", IsCorrect = true },
+                            new Option { Content = "Pacific Ocean", IsCorrect = false },
+                            new Option { Content = "Atlantic Ocean", IsCorrect = false },
+                            new Option { Content = "North Sea", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "In which year did Castilla conquer the Canary Islands?",
+                        Duration = 60,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "1512", IsCorrect = false },
+                            new Option { Content = "1492", IsCorrect = true },
+                            new Option { Content = "1516", IsCorrect = false },
+                            new Option { Content = "1469", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "Which of these countries became part of the Catholic Monarchs' kingdom?",
+                        Duration = 60,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Austria", IsCorrect = false },
+                            new Option { Content = "Burgundy", IsCorrect = true },
+                            new Option { Content = "France", IsCorrect = false },
+                            new Option { Content = "England", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "When did Navarra become part of the Crown of Castilla?",
+                        Duration = 60,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "1502", IsCorrect = false },
+                            new Option { Content = "1469", IsCorrect = false },
+                            new Option { Content = "1512", IsCorrect = true },
+                            new Option { Content = "1492", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "Which countries did Castilla conquer in the North of Africa?",
+                        Duration = 60,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Oran", IsCorrect = true },
+                            new Option { Content = "Ceuta", IsCorrect = true },
+                            new Option { Content = "Melilla", IsCorrect = true },
+                            new Option { Content = "Algiers", IsCorrect = false }
                         }
                     }
                 }
             },
             new Entities.Quiz
             {
-                Title = "Introduction to Chemistry",
-                Cover = "https://example.com/chemistry_intro.jpg",
-                Description = "Learn the basics of chemistry",
-                SubjectId = Guid.Parse("048d1a67-4ced-4189-85e6-c2803577f040"),
-                GradeId = Guid.Parse("eaae3de7-126e-4a1c-b301-236049605952"),
+                Title = "Introduction to present perfect",
+                Cover = "https://quizizz.com/media/resource/gs/quizizz-media/quizzes/bc6448ec-c623-46ae-b11d-ea6900c43737",
+                Description = "Learn the basics of present perfect",
+                SubjectId = Guid.Parse("f9c0f102-9fab-4f11-a76c-33efd4439af0"),
+                GradeId = Guid.Parse("56873e58-0c4f-4f33-a7c6-faf1bb3e6b40"),
                 LanguageId = Guid.Parse("92458564-28b3-449c-b2c5-645740600368"),
                 OwnerId = "ea616dc0-e621-474e-a247-b823b9fe6004",
                 Visibility = Visibility.Public,
@@ -2603,28 +3636,156 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                 {
                     new Question
                     {
-                        Content = "What is the chemical symbol for water?",
-                        Duration = 20,
+                        Content = "I haven't ______________ your book.",
+                        Duration = 60,
                         Points = 1,
                         Type = QuestionType.MultipleChoice,
                         Order = 1,
                         Options = new List<Option>
                         {
-                            new Option { Content = "H2O", IsCorrect = true },
-                            new Option { Content = "O2H", IsCorrect = false },
-                            new Option { Content = "HO2", IsCorrect = false },
-                            new Option { Content = "H2", IsCorrect = false }
+                            new Option { Content = "taken", IsCorrect = true },
+                            new Option { Content = "take", IsCorrect = false },
+                            new Option { Content = "took", IsCorrect = false },
+                            new Option { Content = "takes", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "She ____________ eaten Asian food.",
+                        Duration = 60,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 2,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "has", IsCorrect = true },
+                            new Option { Content = "had", IsCorrect = false },
+                            new Option { Content = "hadn't", IsCorrect = false },
+                            new Option { Content = "hasn't", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "I _________________ my purse.",
+                        Duration = 60,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 3,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "I have lost my purse.", IsCorrect = true },
+                            new Option { Content = "I has lost my purse.", IsCorrect = false },
+                            new Option { Content = "I have losted my purse.", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "We _________________ this movie already.",
+                        Duration = 60,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 4,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "We have seen this movie already.", IsCorrect = true },
+                            new Option { Content = "We has seen this movie already.", IsCorrect = false },
+                            new Option { Content = "We have seed this movie already.", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "There _________________ an accident.",
+                        Duration = 60,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 5,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "There has been an accident.", IsCorrect = true },
+                            new Option { Content = "There have been an accident.", IsCorrect = false },
+                            new Option { Content = "There has beed an accident.", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "It's a great movie. I have ... that movie many times.",
+                        Duration = 60,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 6,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "saw", IsCorrect = false },
+                            new Option { Content = "seen", IsCorrect = true },
+                            new Option { Content = "see", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "Have you ... really strange or interesting food?",
+                        Duration = 60,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 7,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "ever eaten", IsCorrect = true },
+                            new Option { Content = "never eaten", IsCorrect = false },
+                            new Option { Content = "ate", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "(A) ... your brother talked to you yet? (B) Yes, he ... .",
+                        Duration = 60,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 8,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Has / did", IsCorrect = false },
+                            new Option { Content = "Have / have", IsCorrect = false },
+                            new Option { Content = "Has / has", IsCorrect = true }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "She has a car, so she ... there many times.",
+                        Duration = 60,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 9,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "have drive", IsCorrect = false },
+                            new Option { Content = "has driven", IsCorrect = true },
+                            new Option { Content = "has drove", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "I .............. never .................... a car before.",
+                        Duration = 60,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 10,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "have, had", IsCorrect = false },
+                            new Option { Content = "has, had", IsCorrect = false },
+                            new Option { Content = "have, have", IsCorrect = true },
+                            new Option { Content = "had, had", IsCorrect = false }
                         }
                     }
                 }
             },
             new Entities.Quiz
             {
-                Title = "Introduction to Chemistry",
-                Cover = "https://example.com/chemistry_intro.jpg",
-                Description = "Learn the basics of chemistry",
-                SubjectId = Guid.Parse("048d1a67-4ced-4189-85e6-c2803577f040"),
-                GradeId = Guid.Parse("eaae3de7-126e-4a1c-b301-236049605952"),
+                Title = "Introduction to English 10",
+                Cover = "https://quizizz.com/media/resource/gs/quizizz-media/quizzes/82d18683-e87f-45e3-b368-1880c15148dc",
+                Description = "Learn the basics of english",
+                SubjectId = Guid.Parse("f9c0f102-9fab-4f11-a76c-33efd4439af0"),
+                GradeId = Guid.Parse("953829bd-5e12-4799-8bd3-3d78d0507097"),
                 LanguageId = Guid.Parse("92458564-28b3-449c-b2c5-645740600368"),
                 OwnerId = "ea616dc0-e621-474e-a247-b823b9fe6004",
                 Visibility = Visibility.Public,
@@ -2633,17 +3794,152 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                 {
                     new Question
                     {
-                        Content = "What is the chemical symbol for water?",
+                        Content = "Which of the following are synonyms for 'happy'?",
                         Duration = 20,
                         Points = 1,
                         Type = QuestionType.MultipleChoice,
                         Order = 1,
                         Options = new List<Option>
                         {
-                            new Option { Content = "H2O", IsCorrect = true },
-                            new Option { Content = "O2H", IsCorrect = false },
-                            new Option { Content = "HO2", IsCorrect = false },
-                            new Option { Content = "H2", IsCorrect = false }
+                            new Option { Content = "Sad", IsCorrect = false },
+                            new Option { Content = "Joyful", IsCorrect = true },
+                            new Option { Content = "Angry", IsCorrect = false },
+                            new Option { Content = "Cheerful", IsCorrect = true }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "What is the past tense form of 'run'?",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 2,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Ran", IsCorrect = true },
+                            new Option { Content = "Runed", IsCorrect = false },
+                            new Option { Content = "Runned", IsCorrect = false },
+                            new Option { Content = "Rang", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "Which of the following sentences are grammatically correct?",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 3,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "She don't like pizza.", IsCorrect = false },
+                            new Option { Content = "She doesn't like pizza.", IsCorrect = true },
+                            new Option { Content = "She don't likes pizza.", IsCorrect = false },
+                            new Option { Content = "She doesn't like pizza at all.", IsCorrect = true }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "Which words are adjectives?",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 4,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Quickly", IsCorrect = false },
+                            new Option { Content = "Beautiful", IsCorrect = true },
+                            new Option { Content = "Running", IsCorrect = false },
+                            new Option { Content = "Large", IsCorrect = true }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "What is the plural form of 'child'?",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 5,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Children", IsCorrect = true },
+                            new Option { Content = "Childs", IsCorrect = false },
+                            new Option { Content = "Childes", IsCorrect = false },
+                            new Option { Content = "Childer", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "Which of the following sentences use correct punctuation?",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 6,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "I like ice cream, chocolate and cookies.", IsCorrect = true },
+                            new Option { Content = "I like ice cream chocolate, and cookies.", IsCorrect = false },
+                            new Option { Content = "I like ice cream, chocolate, and cookies.", IsCorrect = true },
+                            new Option { Content = "I like ice cream chocolate and, cookies.", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "Which of the following are prepositions?",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 7,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Cat", IsCorrect = false },
+                            new Option { Content = "Under", IsCorrect = true },
+                            new Option { Content = "Dance", IsCorrect = false },
+                            new Option { Content = "Through", IsCorrect = true }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "Which words are antonyms of 'easy'?",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 8,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Hard", IsCorrect = true },
+                            new Option { Content = "Smooth", IsCorrect = false },
+                            new Option { Content = "Simple", IsCorrect = false },
+                            new Option { Content = "Difficult", IsCorrect = true }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "Which of the following are correct spellings?",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 9,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "Accomodation", IsCorrect = false },
+                            new Option { Content = "Accomadation", IsCorrect = false },
+                            new Option { Content = "Accommodation", IsCorrect = true },
+                            new Option { Content = "Accommadation", IsCorrect = false }
+                        }
+                    },
+                    new Question
+                    {
+                        Content = "What is the correct form of 'to be' in the sentence: 'She ___ a doctor.'",
+                        Duration = 20,
+                        Points = 1,
+                        Type = QuestionType.MultipleChoice,
+                        Order = 10,
+                        Options = new List<Option>
+                        {
+                            new Option { Content = "am", IsCorrect = false },
+                            new Option { Content = "is", IsCorrect = true },
+                            new Option { Content = "are", IsCorrect = false },
+                            new Option { Content = "was", IsCorrect = false }
                         }
                     }
                 }
