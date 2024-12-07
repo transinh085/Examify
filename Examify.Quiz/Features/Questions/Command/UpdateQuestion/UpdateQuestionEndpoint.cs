@@ -7,13 +7,10 @@ public class UpdateQuestionEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPut("questions/{Id:guid}",
-                async (Guid Id, UpdateQuestionCommand request, ISender sender,
-                    CancellationToken cancellationToken, ILogger<UpdateQuestionEndpoint> logger) =>
-                {
-                    logger.LogInformation($"UpdateQuestionEndpoint - questionId: {Id}");
-                    return await sender.Send(request with { Id = Id }, cancellationToken);
-                })
+        app.MapPut("questions/{id:guid}",
+                async (Guid id, UpdateQuestionCommand request, ISender sender, CancellationToken cancellationToken) =>
+                     await sender.Send(request with { Id = id }, cancellationToken)
+                )
             .Produces<IResult>(StatusCodes.Status204NoContent);
     }
 }

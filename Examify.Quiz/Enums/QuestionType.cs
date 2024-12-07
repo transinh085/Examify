@@ -4,5 +4,4 @@ public enum QuestionType
 {
     SingleChoice,
     MultipleChoice,
-    FillInTheBlank,
 }

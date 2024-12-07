@@ -1,6 +1,7 @@
 using Ardalis.GuardClauses;
 using AutoMapper;
 using Examify.Quiz.Dtos;
+using Examify.Quiz.Entities;
 using Examify.Quiz.Features.Questions.Command.BulkUpdateQuestion;
 using Examify.Quiz.Features.Questions.Command.PatchQuestionAttributes;
 using Examify.Quiz.Infrastructure.Data;
@@ -139,4 +140,64 @@ public class QuestionRepository(QuizContext quizContext, IMapper mapper) : IQues
 
         return mapper.Map<PopulatedQuestionDto>(question);
     }
+
+    public async Task UpdateQuestion(Question question, CancellationToken cancellationToken)
+    {
+        var existingQuestion = await quizContext.Questions
+            .FirstOrDefaultAsync(x => x.Id == question.Id, cancellationToken);
+
+        Guard.Against.NotFound(question.Id, existingQuestion);
+
+        existingQuestion.Content = question.Content;
+        existingQuestion.Duration = question.Duration;
+        existingQuestion.Points = question.Points;
+        existingQuestion.Type = question.Type;
+        existingQuestion.Order = question.Order;
+
+        var existingOptions = await quizContext.Options
+            .Where(x => x.QuestionId == question.Id)
+            .ToListAsync(cancellationToken);
+
+        var existingOptionDict = existingOptions.ToDictionary(x => x.Id);
+
+        var optionsToRemove = new List<Option>();
+        var optionsToAdd = new List<Option>();
+        var optionsToUpdate = new List<Option>();
+
+        foreach (var option in question.Options)
+        {
+            if (existingOptionDict.TryGetValue(option.Id, out var existingOption))
+            {
+                existingOption.Content = option.Content;
+                existingOption.IsCorrect = option.IsCorrect;
+                optionsToUpdate.Add(existingOption);
+            }
+            else
+            {
+                optionsToAdd.Add(new Option
+                {
+                    Content = option.Content,
+                    IsCorrect = option.IsCorrect,
+                    QuestionId = question.Id
+                });
+            }
+        }
+
+        optionsToRemove = existingOptions
+            .Where(existingOption => !question.Options.Any(option => option.Id == existingOption.Id))
+            .ToList();
+
+        if (optionsToRemove.Any())
+        {
+            quizContext.Options.RemoveRange(optionsToRemove);
+        }
+
+        if (optionsToAdd.Any())
+        {
+            await quizContext.Options.AddRangeAsync(optionsToAdd, cancellationToken);
+        }
+
+        await quizContext.SaveChangesAsync(cancellationToken);
+    }
+
 }

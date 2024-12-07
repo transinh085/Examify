@@ -1,14 +1,11 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { api } from '~/lib/api';
 
-export const patchQuestion = ({ id, duration, points }) => {
-  return api.patch(`/quiz-service/api/questions/${id}/attributes`, {
-    duration,
-    points,
-  });
+export const updateQuestion = ({ id, data }) => {
+  return api.put(`/quiz-service/api/questions/${id}`, data);
 };
 
-export const usePatchQuestion = ({ mutationConfig }) => {
+export const useUpdateQuestion = ({ mutationConfig }) => {
   const queryClient = useQueryClient();
   const { onSuccess, ...restConfig } = mutationConfig || {};
   return useMutation({
@@ -19,6 +16,6 @@ export const usePatchQuestion = ({ mutationConfig }) => {
       onSuccess?.(data, ...args);
     },
     ...restConfig,
-    mutationFn: patchQuestion,
+    mutationFn: updateQuestion,
   });
 };

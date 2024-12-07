@@ -52,6 +52,8 @@ public class QuizRepository(
     {
         var quiz = await quizContext.Quizzes.FindAsync(id, cancellationToken);
         quiz.IsPublished = true;
+        Random random = new();
+        quiz.Code = random.Next(100000, 999999).ToString();
         await quizContext.SaveChangesAsync(cancellationToken);
     }
 
@@ -145,6 +147,7 @@ public class QuizRepository(
         }
 
         query = query.Where(q => q.IsPublished && q.Visibility == Visibility.Public)
+            .OrderByDescending(x => x.CreatedDate)
             .AsNoTracking();
 
         var quizzes = await query

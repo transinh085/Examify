@@ -1,8 +1,6 @@
-﻿using Examify.Quiz.Infrastructure.Data;
-using Examify.Quiz.Repositories.Questions;
+﻿using Examify.Quiz.Repositories.Questions;
 using FluentValidation;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace Examify.Quiz.Features.Questions.Command.DeleteQuestion;
 
@@ -14,7 +12,7 @@ public class DeleteQuestionValidator : AbstractValidator<DeleteQuestionCommand>
     {
         RuleFor(x => x.Id)
             .NotEmpty().WithMessage("Id is required")
-            .MustAsync(async (id, cancellationToken) => await repository.IsQuestionExists(id, cancellationToken))
+            .MustAsync(async (id, cancellationToken) => !(await repository.IsQuestionExists(id, cancellationToken)))
             .WithMessage("Question not found");
     }
 }

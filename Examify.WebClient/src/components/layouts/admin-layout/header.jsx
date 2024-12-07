@@ -1,6 +1,6 @@
 import { BellOutlined, MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import { Avatar, Button, Flex, Grid, Input, Layout, Popover } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import UserDropdown from '~/components/layouts/share/user-dropdown';
 import useMenuStore from '~/stores/menu-store';
 const { Header } = Layout;
@@ -11,9 +11,6 @@ const HeaderAdmin = () => {
   const isMobile = typeof breakpoint.lg === 'undefined' ? false : !breakpoint.lg;
   const navigate = useNavigate();
 
-  const moveJoin = () => {
-    navigate('/join');
-  };
   return (
     <Header className="p-0 bg-white sticky top-0 z-50 shadow-sm flex justify-between items-center px-5">
       <Flex gap={20} align="center">
@@ -35,9 +32,9 @@ const HeaderAdmin = () => {
         ) : (
           <>
             <NotificationButton />
-            <Button className="font-bold" onClick={moveJoin}>
-              Enter code
-            </Button>
+            <Link to="/join">
+              <Button className="font-bold">Enter code</Button>
+            </Link>
             <UserDropdown />
           </>
         )}

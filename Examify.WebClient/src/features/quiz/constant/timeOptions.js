@@ -4,4 +4,5 @@ export const timeOptions = [
   { label: '20 seconds', value: 20 },
   { label: '30 seconds', value: 30 },
   { label: '45 seconds', value: 45 },
+  { label: '1 minute', value: 60 },
 ];
