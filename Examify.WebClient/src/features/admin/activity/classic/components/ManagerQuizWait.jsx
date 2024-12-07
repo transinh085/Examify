@@ -112,7 +112,7 @@ const ManagerQuizWait = () => {
                 <div className="text-base w-[98px] font-medium break-words">Enter the join code</div>
                 <Space size="middle" className="w-[400px] justify-between">
                   <div className="flex justify-center items-center space-x-4">
-                    {quiz?.code.split('').map((item, index) => (
+                    {quiz?.code?.split('').map((item, index) => (
                       <span key={index} className="text-6xl font-bold">
                         {item}
                       </span>
