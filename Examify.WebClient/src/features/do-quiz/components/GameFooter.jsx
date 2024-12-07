@@ -1,9 +1,11 @@
 import { Avatar, Button, Divider, Flex, Space } from 'antd';
 import runningCatGift from '~/assets/images/running-cat.gif';
 import { QUESTION_TYPE } from '~/config/enums';
+import useAuthStore from '~/stores/auth-store';
 import useDoQuizStore from '~/stores/do-quiz-store';
 
 const GameFooter = ({ handleSubmit, loading }) => {
+  const { user } = useAuthStore();
   const { questionResults, currentQuestion } = useDoQuizStore();
   return (
     <Flex justify="space-between" className="relative bg-[#3e084a] px-4 py-3">
@@ -11,10 +13,12 @@ const GameFooter = ({ handleSubmit, loading }) => {
         <img src={runningCatGift} alt="" className="w-[40px] scale-x-[-1]" />
       </div>
       <Space>
-        <Avatar size="large" src="https://avatars.githubusercontent.com/u/93178609?v=4" />
+        <Avatar size="large" src={user?.image} />
         <Space direction="vertical" size={0}>
-          <h1 className="font-semibold">Phat Le</h1>
-          <p className="opacity-80">lequanphat@gmail.com</p>
+          <h1 className="font-semibold">
+            {user?.firstName} {user?.lastName}
+          </h1>
+          <p className="opacity-80">{user?.email}</p>
         </Space>
       </Space>
 

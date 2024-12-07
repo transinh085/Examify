@@ -18,14 +18,16 @@ message QuizReply {
   string title = 2;
   string description = 3;
   string code = 4;
-  string start_time = 5;
-  string end_time = 6;
-  Visibility visibility = 7;
-  bool random_questions = 8;
-  bool random_options = 9;
-  repeated QuizQuestionMessage questions = 10;
-  string cover = 11;
-  string play_time = 12;
+  bool user_timer = 5;
+  bool is_start = 6;
+  string start_time = 7;
+  string end_time = 8;
+  Visibility visibility = 9;
+  bool random_questions = 10;
+  bool random_options = 11;
+  repeated QuizQuestionMessage questions = 12;
+  string cover = 13;
+  string play_time = 14;
 }
 
 
