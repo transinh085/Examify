@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { LoadingOutlined, SettingOutlined } from '@ant-design/icons';
 import { Button, Col, Flex, Row, Space, Spin } from 'antd';
 import { useEffect, useState } from 'react';
@@ -16,6 +17,7 @@ import useDoQuizStore from '~/stores/do-quiz-store';
 import MyQuizResult from '~/features/do-quiz/components/MyQuizResult';
 import { useGetQuizResult } from '~/features/do-quiz/api/get-quiz-result';
 import { useSubmitAnswersMutation } from '~/features/do-quiz/api/submit-answer';
+import { useSignalRStore } from '~/stores/signalR-store';
 
 const DoQuizPage = () => {
   const { result_id } = useParams();
@@ -72,6 +74,30 @@ const DoQuizPage = () => {
     });
     setQuestionDuration(quizResult?.questionResults?.[0]?.question?.duration);
   }, [initDoQuizStore, setQuestionDuration, quizResult]);
+
+
+  const { initializeSignalR, addSignalRHandler, removeSignalRHandler, sendSignalRMessage, checkConnection } = useSignalRStore();
+
+
+  useEffect(() => {
+    initializeSignalR('https://localhost:8386/notification-service/api/notification-hub');
+
+    addSignalRHandler('EndQuiz', () => {
+      setIsFinished(true);
+    });
+  
+    const interval = setInterval(() => {
+      if (checkConnection()) {
+        sendSignalRMessage('JoinQuizUser', quiz?.id);
+        clearInterval(interval); 
+      }
+    }, 1000);
+  
+    return () => {
+      removeSignalRHandler('JoinQuiz');
+      clearInterval(interval);
+    };
+  }, [initializeSignalR, addSignalRHandler, removeSignalRHandler, sendSignalRMessage, checkConnection, quiz]);
 
   // Count up time taken of the current question
   useEffect(() => {
