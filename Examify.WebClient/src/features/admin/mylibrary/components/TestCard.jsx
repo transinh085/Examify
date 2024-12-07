@@ -19,7 +19,7 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import blankImage from '~/assets/images/blank-thumbnail.jpg';
 dayjs.extend(relativeTime);
 
-const TestCard = ({ id, title, cover, subject, grade, owner, questionCount, createDate }) => {
+const TestCard = ({ id, title, cover, subject, grade, owner, questionCount, createDate, visibility }) => {
   const navigate = useNavigate();
 
   const mutePlayQuiz = usePlayQuiz({
@@ -48,7 +48,7 @@ const TestCard = ({ id, title, cover, subject, grade, owner, questionCount, crea
           />
         </Link>
         <Space direction="vertical" size="small">
-          <Tag color="cyan">Assessment</Tag>
+          {visibility ? <Tag color="cyan">Public</Tag> : <Tag color="gold-inverse">Private</Tag>}
           <Link to={`/admin/quiz/${id}`}>
             <h1 className="font-bold cursor-pointer hover:underline">{title}</h1>
           </Link>

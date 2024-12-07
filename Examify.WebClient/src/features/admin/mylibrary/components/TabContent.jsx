@@ -80,6 +80,7 @@ const TabContent = ({ params, setParams, isPublished = false }) => {
           owner={item.owner}
           questionCount={item.questionCount}
           createDate={item.createdDate}
+          visibility={item.visibility}
         />
       ))}
       <Pagination

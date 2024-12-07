@@ -14,7 +14,7 @@ const ReportList = () => {
   } = useGetQuizUser({
     isPublished: true,
     pageNumber: params.get('pageNumber') || 1,
-    pageSize: params.get('pageSize') || 6,
+    pageSize: params.get('pageSize') || 8,
   });
 
   if (isLoading)

@@ -1,21 +1,28 @@
-import { Button, Col, Flex, Row } from 'antd';
+import { Button, Col, Flex, Row, Space } from 'antd';
 import { Link } from 'react-router-dom';
-import { RightOutlined } from '@ant-design/icons';
+import { RightOutlined, StarFilled } from '@ant-design/icons';
 import { useGetRecentActivity } from '~/features/customer/dashboard/api/get-recent-activity';
-import RecentQuiz from '~/features/customer/dashboard/components/RecentQuiz';
+import RecentQuiz from '~/features/customer/dashboard/components/RecentQuizItem';
+import QuizItemSkeleton from '~/features/customer/dashboard/components/QuizItemSkeleton';
 
 const RecentQuizList = () => {
-  const { data = [] } = useGetRecentActivity({
+  const {
+    data = {
+      items: [],
+    },
+    isLoading,
+  } = useGetRecentActivity({
     pageNumber: 1,
-    pageSize: 8,
+    pageSize: 4,
   });
 
-  console.log(data);
-
   return (
-    <>
-      <Flex align="center" justify="space-between" className="w-full">
-        <h1 className="text-lg font-semibold">Recent Activity</h1>
+    <div>
+      <Flex align="center" justify="space-between" className="w-full mb-4">
+        <Space align="center">
+          <StarFilled className="text-yellow-500 text-xl sm:text-2xl" />
+          <h1 className="text-lg font-semibold">Recent Activity</h1>
+        </Space>
         <Link to="/activities" className="text-blue-500">
           <Button variant="outlined" color="primary" icon={<RightOutlined />} iconPosition="end">
             See more
@@ -23,13 +30,19 @@ const RecentQuizList = () => {
         </Link>
       </Flex>
       <Row gutter={[16, 16]}>
-        {data.map((quiz) => (
-          <Col xs={24} sm={12} md={8} lg={6} key={quiz.id}>
-            <RecentQuiz {...quiz} />
-          </Col>
-        ))}
+        {isLoading
+          ? Array.from({ length: 4 }).map((_, index) => (
+              <Col xs={24} sm={12} md={8} lg={6} key={index}>
+                <QuizItemSkeleton />
+              </Col>
+            ))
+          : data.items.map((quiz) => (
+              <Col xs={24} sm={12} md={8} lg={6} key={quiz.id}>
+                <RecentQuiz {...quiz} />
+              </Col>
+            ))}
       </Row>
-    </>
+    </div>
   );
 };
 

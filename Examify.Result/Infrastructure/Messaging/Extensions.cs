@@ -1,4 +1,5 @@
-﻿using MassTransit;
+﻿using Examify.Result.Consumers;
+using MassTransit;
 
 namespace Examify.Result.Infrastructure.Messaging;
 
@@ -8,6 +9,9 @@ public static class Extensions
     {
         builder.Services.AddMassTransit(x =>
         {
+            x.SetKebabCaseEndpointNameFormatter();
+            x.AddConsumer<QuizDeletedConsumer>();
+
             x.UsingRabbitMq(
                 (context, cfg) =>
                 {
@@ -16,7 +20,6 @@ public static class Extensions
                 });
         });
 
-        builder.Services.AddMassTransitHostedService();
         return builder;
     }
 }

@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Ardalis.GuardClauses;
+using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Examify.Core.Pagination;
 using Examify.Quiz.Dtos;
@@ -35,6 +36,9 @@ public class QuizRepository(
     public async Task DeleteQuizById(Guid id, CancellationToken cancellationToken)
     {
         var quiz = await quizContext.Quizzes.FindAsync(id, cancellationToken);
+
+        Guard.Against.NotFound(id, quiz);
+
         quizContext.Quizzes.Remove(quiz);
         await quizContext.SaveChangesAsync(cancellationToken);
     }

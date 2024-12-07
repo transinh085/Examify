@@ -1,4 +1,5 @@
-﻿using Examify.Quiz.Dtos;
+﻿using Examify.Core.Pagination;
+using Examify.Quiz.Dtos;
 using Examify.Result.Dtos;
 using Examify.Result.Entities;
 
@@ -26,7 +27,11 @@ public interface IQuizResultRepository
 
     Task<List<UserResultsDetailsDto>> GetQuizResultsByQuizAndUser(string quizId, string userId);
 
-    Task<List<QuizRecentActivityDto>> GetListRecentActivity(string userId, int pageNumber, int pageSize);
-    
+    Task<PagedList<QuizRecentActivityDto>> GetListRecentActivity(string userId, string isCompleted, int pageNumber, int pageSize);
+
     Task<GetLeaderBoardDto> GetStartQuiz(string Code);
+
+    Task<bool> DeleteAllResultsOfQuiz(Guid quizId);
+
+    Task<bool> DeleteResultById(Guid id);
 }

@@ -1,8 +1,8 @@
 import { Col, Pagination, Row } from 'antd';
 import { useSearchParams } from 'react-router-dom';
+import { useSearchQuiz } from '~/features/customer/dashboard/api/search-quizzes';
 import QuizItem from '~/features/customer/dashboard/components/QuizItem';
 import QuizItemSkeleton from '~/features/customer/dashboard/components/QuizItemSkeleton';
-import { useSearchQuiz } from '~/features/dashboard/api/get-quizzes-by-subject';
 
 const SearchPage = () => {
   const [params, setParams] = useSearchParams();
@@ -16,10 +16,8 @@ const SearchPage = () => {
     keyword: params.get('keyword') || '',
     subjectId: params.get('subjectId'),
     pageNumber: params.get('pageNumber') || 1,
-    pageSize: params.get('pageSize') || 4,
+    pageSize: params.get('pageSize') || 8,
   });
-
-  //   '2f921f98-5b80-4916-943c-31c6a88ca70e'
 
   return (
     <div className="py-4">
