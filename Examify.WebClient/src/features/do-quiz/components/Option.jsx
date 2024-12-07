@@ -2,9 +2,10 @@ import { Card, Flex, Tooltip } from 'antd';
 import PropTypes from 'prop-types';
 import { useMemo } from 'react';
 import { IGNORED_OPTION_OPACITY, OPTION_COLOR_ARRAY, SELECTED_OPTION_COLOR_CONFIG } from '~/config/constants';
+import { QUESTION_TYPE } from '~/config/enums';
 import useDoQuizStore from '~/stores/do-quiz-store';
 
-const Option = ({ number, option, handleSelect, pending }) => {
+const Option = ({ number, option, handleSelect, pending, questionType = QUESTION_TYPE.SINGLE_CHOICE }) => {
   const { waitingDuration, selectedOptions, correctOptions } = useDoQuizStore();
 
   const optionStyles = useMemo(() => {
@@ -46,7 +47,9 @@ const Option = ({ number, option, handleSelect, pending }) => {
           flex={1}
           align="center"
           justify="center"
-          className="absolute top-2 right-2 w-[34px] h-[34px] border border-[#ccc] rounded-md"
+          className={`absolute top-2 right-2 w-[34px] h-[34px] border-2 border-[#ccc] ${
+            questionType === QUESTION_TYPE.MULTIPLE_CHOICE ? 'rounded-md' : 'rounded-full'
+          }`}
           style={{
             backgroundColor: selectedOptions.includes(option?.id) ? 'white' : 'transparent',
           }}

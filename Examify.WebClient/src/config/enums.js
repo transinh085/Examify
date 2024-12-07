@@ -1,6 +1,6 @@
 const QUESTION_TYPE = {
-  MULTIPLE_CHOICE: 'MULTIPLE_CHOICE',
-  SINGLE_CHOICE: 'SINGLE_CHOICE',
+  MULTIPLE_CHOICE: 'MultipleChoice',
+  SINGLE_CHOICE: 'SingleChoice',
 };
 
 const USER_ROLES = {
