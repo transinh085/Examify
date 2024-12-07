@@ -36,6 +36,8 @@ namespace Examify.Quiz.Grpc
                 Title = quiz.Title,
                 Description = quiz.Description ?? "",
                 Code = quiz.Code ?? "",
+                UserTimer = quiz.UserTimer,
+                IsStart = quiz.IsStart,
                 StartTime = quiz.StartTime.ToString(),
                 EndTime = quiz.EndTime.ToString(),
                 RandomQuestions = quiz.RandomQuestions,

@@ -7,6 +7,8 @@ const useDoQuizStore = create((set) => ({
     description: '',
     code: '',
     useTimer: false,
+    isPrivate: false,
+    isStart: true,
   },
   questionResults: [],
   currentQuestion: -1,

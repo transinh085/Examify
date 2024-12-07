@@ -36,7 +36,10 @@ public class GetQuizResultHandler(
                 Id = Guid.Parse(populatedQuiz.Id),
                 Title = populatedQuiz.Title,
                 Description = populatedQuiz.Description,
-                Code = populatedQuiz.Code
+                Code = populatedQuiz.Code,
+                UseTimer = populatedQuiz.UserTimer,
+                IsStart = populatedQuiz.IsStart,
+                IsPrivate = populatedQuiz.Visibility == Visibility.Private
             },
             
             QuestionResults = quizResult.QuestionResults.Select(qr => new QuestionResultDto
