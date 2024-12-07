@@ -357,7 +357,8 @@ public class QuizResultRepository(
             var correctOptionId = Guid.Parse(correctOption.Id);
 
             var correctCount = await quizResultContext.QuizResults
-                .Where(quiz => quiz.QuestionResults.Any(question => question.QuestionId == Guid.Parse(questionQuiz.Id) && question.IsCorrect))
+                .Where(quizResult => quizResult.CreatedDate >= playTime)
+				.Where(quiz => quiz.QuestionResults.Any(question => question.QuestionId == Guid.Parse(questionQuiz.Id) && question.IsCorrect))
                 .CountAsync();
 
             var incorrectCount = await quizResultContext.QuizResults
