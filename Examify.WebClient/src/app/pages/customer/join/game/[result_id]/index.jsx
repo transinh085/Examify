@@ -232,7 +232,7 @@ const DoQuizPage = () => {
           ))}
         </Row>
       </Flex>
-      <GameFooter handleSubmit={handleSubmitMultipleChoice} />
+      <GameFooter loading={submitAnswersMutation.isPending} handleSubmit={handleSubmitMultipleChoice} />
       <SettingDrawer open={isOpenSettings} setOpen={setIsOpenSettings} />
       <BackgroundAudio />
     </Flex>

@@ -1,11 +1,11 @@
 import { Button, Col, Flex, Row } from 'antd';
-import QuizItem from '../../../components/ui/quizzes/QuizItem';
 import PropTypes from 'prop-types';
 import StartIcon from '~/components/icons/StartIcon';
 import { Link } from 'react-router-dom';
 import { RightOutlined } from '@ant-design/icons';
-import { useSearchQuiz } from '~/features/dashboard/api/get-quizzes-by-subject';
-import QuizItemSkeleton from '~/components/ui/quizzes/QuizItemSkeleton';
+import QuizItemSkeleton from '~/features/customer/dashboard/components/QuizItemSkeleton';
+import QuizItem from '~/features/customer/dashboard/components/QuizItem';
+import { useSearchQuiz } from '~/features/customer/dashboard/api/search-quizzes';
 
 const QuizListBySubject = ({ id, name }) => {
   const { data = [], isLoading } = useSearchQuiz({ subjectId: id, pageNumber: 1, pageSize: 4 });

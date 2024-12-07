@@ -13,7 +13,7 @@ const Activities = () => {
         <Segmented
           value={tab}
           options={[
-            { label: 'Đang diễn ra', value: 'ONGOING' },
+            { label: 'Chưa hoàn thành', value: 'ONGOING' },
             {
               label: 'Hoàn thành',
               value: 'COMPLETED',

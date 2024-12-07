@@ -1,7 +1,7 @@
 import { Col, Pagination, Row } from 'antd';
 import { useSearchParams } from 'react-router-dom';
-import QuizItem from '~/components/ui/quizzes/QuizItem';
-import QuizItemSkeleton from '~/components/ui/quizzes/QuizItemSkeleton';
+import QuizItem from '~/features/customer/dashboard/components/QuizItem';
+import QuizItemSkeleton from '~/features/customer/dashboard/components/QuizItemSkeleton';
 import { useSearchQuiz } from '~/features/dashboard/api/get-quizzes-by-subject';
 
 const SearchPage = () => {
