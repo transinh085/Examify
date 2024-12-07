@@ -1,6 +1,6 @@
 import { Col, Flex, Pagination, Row, Space, Spin } from 'antd';
 
-import { useGetQuizUser } from '~/features/quiz/api/quizzes/get-quiz-user';
+import { useGetQuizUser } from '~/features/admin/mylibrary/api/get-quiz-user';
 import QuizItem from './QuizItem';
 import { useSearchParams } from 'react-router-dom';
 

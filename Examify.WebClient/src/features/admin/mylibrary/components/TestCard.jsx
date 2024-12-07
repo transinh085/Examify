@@ -17,6 +17,7 @@ import { usePlayQuiz } from '~/features/admin/mylibrary/api/play-quiz';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import blankImage from '~/assets/images/blank-thumbnail.jpg';
+import { useDeleteQuiz } from '~/features/admin/mylibrary/api/delete-quiz';
 dayjs.extend(relativeTime);
 
 const TestCard = ({ id, title, cover, subject, grade, owner, questionCount, createDate, visibility }) => {
@@ -76,7 +77,7 @@ const TestCard = ({ id, title, cover, subject, grade, owner, questionCount, crea
         </Space>
       </Space>
       <Flex justify="space-between" vertical align="end">
-        <DropdownMenu title={title} />
+        <DropdownMenu title={title} id={id} />
         <Space>
           <Button onClick={handlePlayQuiz} loading={mutePlayQuiz.isPending} icon={<PlayCircleOutlined />}>
             Play
@@ -88,13 +89,16 @@ const TestCard = ({ id, title, cover, subject, grade, owner, questionCount, crea
   );
 };
 
-const DropdownMenu = ({ title }) => {
+const DropdownMenu = ({ id, title }) => {
   const { value: isSettingModalOpen, setTrue: openSettingModal, setFalse: closeSettingModal } = useBoolean();
   const handleMenuClick = ({ key }) => {
     if (key === '2') {
       openSettingModal();
     }
   };
+
+  const deleteQuizMutation = useDeleteQuiz();
+
   const items = [
     {
       label: 'Like',
@@ -110,13 +114,16 @@ const DropdownMenu = ({ title }) => {
       label: 'Settings',
       key: '2',
       icon: <SettingOutlined />,
-      onclick: openSettingModal,
+      onClick: openSettingModal,
     },
     {
       label: 'Delete',
       key: '3',
       icon: <DeleteOutlined />,
       danger: true,
+      onClick: () => {
+        deleteQuizMutation.mutate({ id });
+      },
     },
   ];
   return (

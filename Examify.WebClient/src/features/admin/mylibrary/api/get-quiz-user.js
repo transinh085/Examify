@@ -13,7 +13,7 @@ export const getQuizUser = ({ isPublished, pageNumber, pageSize }) => {
 
 export const useGetQuizUser = ({ isPublished, pageNumber, pageSize }) => {
   return useQuery({
-    queryKey: ['quiz-user', isPublished, pageNumber, pageSize],
+    queryKey: ['quiz-user', { isPublished, pageNumber, pageSize }],
     queryFn: () => getQuizUser({ isPublished, pageNumber, pageSize }),
   });
 };
