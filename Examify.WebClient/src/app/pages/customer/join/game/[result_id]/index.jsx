@@ -87,7 +87,7 @@ const DoQuizPage = () => {
   }, [setQuestionDuration, questionResults, currentQuestion]);
 
   useNumberKeyPress((key) => {
-    const option = questionResults?.[currentQuestion]?.options?.[key - 1];
+    const option = questionResults?.[currentQuestion]?.answerResults?.[key - 1]?.option;
     if (!option) return;
 
     handleChooseOption(option.id);
@@ -98,7 +98,7 @@ const DoQuizPage = () => {
 
     const mutationResponse = await submitAnswersMutation.mutateAsync({
       Answers: yourAnswers,
-      TimeTaken: timeTakenOfCurrentQuestion, // timeTaken of the current question
+      TimeTaken: timeTakenOfCurrentQuestion + 1, // timeTaken of the current question
       TimeSpent: timeTaken, // timeTaken of the whole quiz
       questionResultId: questionResults[currentQuestion]?.id,
     });
@@ -114,8 +114,8 @@ const DoQuizPage = () => {
       return;
     }
     addSelectedOption(optionId);
-    if (questionResults?.[currentQuestion]?.type === QUESTION_TYPE.SINGLE_CHOICE) {
-      handleSubmitAnswer([...selectedOptions, optionId]);
+    if (questionResults?.[currentQuestion]?.question?.type === QUESTION_TYPE.SINGLE_CHOICE) {
+      handleSubmitAnswer([optionId]);
       setWaitingDuration(3);
       setQuestionDuration(0);
     }
@@ -139,8 +139,6 @@ const DoQuizPage = () => {
     setWaitingDuration(0);
     setTimeTakenOfCurrentQuestion(0);
   };
-
-  console.log('timer', { questionDuration, timeTakenOfCurrentQuestion });
 
   if (isFetching) {
     return (
@@ -227,6 +225,7 @@ const DoQuizPage = () => {
                   handleChooseOption(answerResult?.option?.id);
                 }}
                 pending={submitAnswersMutation.isPending}
+                questionType={questionResults?.[currentQuestion]?.question?.type}
               />
             </Col>
           ))}
