@@ -159,7 +159,6 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         [
                             new Option
                                 { Content = "Stop the execution of the code and start debugging", IsCorrect = true },
-
                             new Option { Content = "Define a debug level", IsCorrect = false },
                             new Option { Content = "Set a breakpoint", IsCorrect = false },
                             new Option { Content = "Display debugging information", IsCorrect = false }
@@ -711,7 +710,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
             new Entities.Quiz
             {
                 Title = "Basic Physics Quiz",
-                Cover = "https://example.com/physics_quiz.jpg",
+                Cover = "https://media.quizizz.com/_mdserver/main/media/resource/gs/quizizz-media/quizzes/6bad597e-142c-4b7c-b1e9-76626a8c8ff2-v2?w=200&h=200",
                 Description = "Test your fundamental physics knowledge",
                 SubjectId = Guid.Parse("462175fb-55b4-40e0-b317-8f4d58ca9615"),
                 GradeId = Guid.Parse("56873e58-0c4f-4f33-a7c6-faf1bb3e6b40"),
@@ -719,6 +718,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                 OwnerId = "ea616dc0-e621-474e-a247-b823b9fe6004",
                 Visibility = Visibility.Public,
                 IsPublished = true,
+                Code = "QWEQWE",
                 Questions = new List<Question>
                 {
                     new Question
@@ -876,7 +876,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
             new Entities.Quiz
             {
                 Title = "Basic Physics Quiz 2",
-                Cover = "https://example.com/physics_quiz.jpg",
+                Cover = "https://media.quizizz.com/_mdserver/main/media/resource/gs/quizizz-media/quizzes/6bad597e-142c-4b7c-b1e9-76626a8c8ff2-v2?w=200&h=200",
                 Description = "Test your fundamental physics knowledge 2",
                 SubjectId = Guid.Parse("462175fb-55b4-40e0-b317-8f4d58ca9615"),
                 GradeId = Guid.Parse("56873e58-0c4f-4f33-a7c6-faf1bb3e6b40"),
@@ -884,6 +884,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                 OwnerId = "ea616dc0-e621-474e-a247-b823b9fe6004",
                 Visibility = Visibility.Public,
                 IsPublished = true,
+                Code = "ASDASD",
                 Questions = new List<Question>
                 {
                     new Question
@@ -1041,7 +1042,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
             new Entities.Quiz
             {
                 Title = "Math grade 2",
-                Cover = "https://example.com/chemistry_intro.jpg",
+                Cover = "https://quizizz.com/media/resource/gs/quizizz-media/quizzes/cacd1311-e0a2-41ba-85bd-309e1d3474a6?w=200&h=200",
                 Description = "Learn the basics of Math 2",
                 SubjectId = Guid.Parse("59820f61-ada9-44e8-9a45-790981fe05f0"),
                 GradeId = Guid.Parse("bac8156d-9e33-4054-8a56-8d8ca6647cfb"),
@@ -1049,6 +1050,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                 OwnerId = "ea616dc0-e621-474e-a247-b823b9fe6004",
                 Visibility = Visibility.Public,
                 IsPublished = true,
+                Code = "ZXCZXC",
                 Questions = new List<Question>
                 {
                     new Question
@@ -1194,7 +1196,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
             new Entities.Quiz
             {
                 Title = "Math grade 3",
-                Cover = "https://example.com/chemistry_intro.jpg",
+                Cover = "https://quizizz.com/media/resource/gs/quizizz-media/quizzes/cacd1311-e0a2-41ba-85bd-309e1d3474a6?w=200&h=200",
                 Description = "Learn the basics of chemistry",
                 SubjectId = Guid.Parse("59820f61-ada9-44e8-9a45-790981fe05f0"),
                 GradeId = Guid.Parse("fe1ab3da-f5d9-4b63-ba57-3dbc14a9a82b"),
@@ -1202,6 +1204,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                 OwnerId = "ea616dc0-e621-474e-a247-b823b9fe6004",
                 Visibility = Visibility.Public,
                 IsPublished = true,
+                Code = "WERWER",
                 Questions = new List<Question>
                 {
                     new Question
@@ -1358,7 +1361,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
             new Entities.Quiz
             {
                 Title = "Basic English",
-                Cover = "https://example.com/chemistry_intro.jpg",
+                Cover = "https://quizizz.com/media/resource/gs/quizizz-media/quizzes/ed713aa3-7040-4a1d-98b6-833d6f9726e8?w=200&h=200",
                 Description = "Learn the basics of english",
                 SubjectId = Guid.Parse("f9c0f102-9fab-4f11-a76c-33efd4439af0"),
                 GradeId = Guid.Parse("953829bd-5e12-4799-8bd3-3d78d0507097"),
@@ -1366,6 +1369,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                 OwnerId = "ea616dc0-e621-474e-a247-b823b9fe6004",
                 Visibility = Visibility.Public,
                 IsPublished = true,
+                Code = "XCVXCV",
                 Questions = new List<Question>
                 {
                     new Question
@@ -1523,7 +1527,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
             new Entities.Quiz
             {
                 Title = "Basic English 2",
-                Cover = "https://example.com/chemistry_intro.jpg",
+                Cover = "https://quizizz.com/media/resource/gs/quizizz-media/quizzes/ed713aa3-7040-4a1d-98b6-833d6f9726e8?w=200&h=200",
                 Description = "Learn the basics of english",
                 SubjectId = Guid.Parse("f9c0f102-9fab-4f11-a76c-33efd4439af0"),
                 GradeId = Guid.Parse("953829bd-5e12-4799-8bd3-3d78d0507097"),
@@ -1531,6 +1535,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                 OwnerId = "ea616dc0-e621-474e-a247-b823b9fe6004",
                 Visibility = Visibility.Public,
                 IsPublished = true,
+                Code = "QAZQAZ",
                 Questions = new List<Question>
                 {
                     new Question
@@ -1688,7 +1693,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
             new Entities.Quiz
             {
                 Title = "Introduction to Geography",
-                Cover = "https://example.com/chemistry_intro.jpg",
+                Cover = "https://quizizz.com/media/resource/gs/quizizz-media/quizzes/6da8c5e8-8182-430e-b32b-317746c72632?w=200&h=200",
                 Description = "Learn the basics of Geography",
                 SubjectId = Guid.Parse("deb9e2f7-6c42-43bd-a675-bf5f59b9f821"),
                 GradeId = Guid.Parse("45304ba8-da09-46b9-8400-d5b7a7bb718e"),
@@ -1696,6 +1701,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                 OwnerId = "ea616dc0-e621-474e-a247-b823b9fe6004",
                 Visibility = Visibility.Public,
                 IsPublished = true,
+                Code = "QAXQAX",
                 Questions = new List<Question>
                 {
                     new Question
@@ -1853,7 +1859,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
             new Entities.Quiz
             {
                 Title = "Introduction to Geography 2",
-                Cover = "https://example.com/chemistry_intro.jpg",
+                Cover = "https://media.quizizz.com/_mdserver/main/media/resource/gs/quizizz-media/quizzes/6682d09a-bf50-4ec9-900d-975bc235a631-v2?w=200&h=200",
                 Description = "Learn the basics of Geography",
                 SubjectId = Guid.Parse("deb9e2f7-6c42-43bd-a675-bf5f59b9f821"),
                 GradeId = Guid.Parse("45304ba8-da09-46b9-8400-d5b7a7bb718e"),
@@ -1861,6 +1867,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                 OwnerId = "ea616dc0-e621-474e-a247-b823b9fe6004",
                 Visibility = Visibility.Public,
                 IsPublished = true,
+                Code = "QACQAC",
                 Questions = new List<Question>
                 {
                     new Question
@@ -2019,7 +2026,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
             new Entities.Quiz
             {
                 Title = "Introduction to Chemistry",
-                Cover = "https://example.com/chemistry_intro.jpg",
+                Cover = "https://quizizz.com/media/resource/gs/quizizz-media/quizzes/e69c1c65-8fad-4d7a-93c9-999a618f98f2?w=200&h=200",
                 Description = "Learn the basics of chemistry",
                 SubjectId = Guid.Parse("048d1a67-4ced-4189-85e6-c2803577f040"),
                 GradeId = Guid.Parse("f2fe3f16-41f4-43da-b253-14873bb07100"),
@@ -2027,6 +2034,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                 OwnerId = "ea616dc0-e621-474e-a247-b823b9fe6004",
                 Visibility = Visibility.Public,
                 IsPublished = true,
+                Code = "QSZQSZ",
                 Questions = new List<Question>
                 {
                     new Question
@@ -2185,7 +2193,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
             new Entities.Quiz
             {
                 Title = "Introduction to Chemistry 2",
-                Cover = "https://example.com/chemistry_intro.jpg",
+                Cover = "https://quizizz.com/media/resource/gs/quizizz-media/quizzes/6cec8a67-8bf1-474d-addb-625792d74819?w=200&h=200",
                 Description = "Learn the basics of chemistry",
                 SubjectId = Guid.Parse("048d1a67-4ced-4189-85e6-c2803577f040"),
                 GradeId = Guid.Parse("f2fe3f16-41f4-43da-b253-14873bb07100"),
@@ -2193,6 +2201,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                 OwnerId = "ea616dc0-e621-474e-a247-b823b9fe6004",
                 Visibility = Visibility.Public,
                 IsPublished = true, 
+                Code = "QSXQSX",
                 Questions = new List<Question>
                 {
                     new Question
@@ -2351,7 +2360,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
             new Entities.Quiz
             {
                 Title = "Introduction to VietNam history",
-                Cover = "https://example.com/chemistry_intro.jpg",
+                Cover = "https://quizizz.com/media/resource/gs/quizizz-media/quizzes/71cb4af4-3149-4bf3-a7ce-1038b4f732ea?w=200&h=200",
                 Description = "Learn the basics of VietNam history",
                 SubjectId = Guid.Parse("d34d0164-6d96-4e58-b732-abbc35ce4d28"),
                 GradeId = Guid.Parse("ccc9fa86-9ba3-438a-8930-8db470ed6d15"),
@@ -2359,6 +2368,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                 OwnerId = "ea616dc0-e621-474e-a247-b823b9fe6004",
                 Visibility = Visibility.Public,
                 IsPublished = true,
+                Code = "QSCQSC",
                 Questions = new List<Question>
                 {
                     new Question
@@ -2516,7 +2526,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
             new Entities.Quiz
             {
                 Title = "World War I",
-                Cover = "https://example.com/chemistry_intro.jpg",
+                Cover = "https://media.quizizz.com/_mdserver/main/media/resource/gs/quizizz-media/quizzes/b7286c32-f7a1-44ad-a70e-e44730867c8a-v2?w=200&h=200",
                 Description = "World War I",
                 SubjectId = Guid.Parse("d34d0164-6d96-4e58-b732-abbc35ce4d28"),
                 GradeId = Guid.Parse("ccc9fa86-9ba3-438a-8930-8db470ed6d15"),
@@ -2524,6 +2534,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                 OwnerId = "ea616dc0-e621-474e-a247-b823b9fe6004",
                 Visibility = Visibility.Public,
                 IsPublished = true,
+                Code = "QDZQDZ",
                 Questions = new List<Question>
                 {
                     new Question
@@ -2681,7 +2692,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
             new Entities.Quiz
             {
                 Title = "World War II",
-                Cover = "https://example.com/chemistry_intro.jpg",
+                Cover = "https://media.quizizz.com/_mdserver/main/media/resource/gs/quizizz-media/quizzes/b7286c32-f7a1-44ad-a70e-e44730867c8a-v2?w=200&h=200",
                 Description = "World War II",
                 SubjectId = Guid.Parse("d34d0164-6d96-4e58-b732-abbc35ce4d28"),
                 GradeId = Guid.Parse("ccc9fa86-9ba3-438a-8930-8db470ed6d15"),
@@ -2689,6 +2700,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                 OwnerId = "ea616dc0-e621-474e-a247-b823b9fe6004",
                 Visibility = Visibility.Public,
                 IsPublished = true,
+                Code = "QDCQDC",
                 Questions = new List<Question>
                 {
                     new Question
@@ -2854,6 +2866,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                 OwnerId = "ea616dc0-e621-474e-a247-b823b9fe6004",
                 Visibility = Visibility.Public,
                 IsPublished = true,
+                Code = "WAZWAZ",
                 Questions = new List<Question>
                 {
                     new Question
@@ -3011,6 +3024,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                 OwnerId = "ea616dc0-e621-474e-a247-b823b9fe6004",
                 Visibility = Visibility.Public,
                 IsPublished = true,
+                Code = "WAXWAX",
                 Questions = new List<Question>
                 {
                     new Question
@@ -3172,6 +3186,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                 OwnerId = "ea616dc0-e621-474e-a247-b823b9fe6004",
                 Visibility = Visibility.Public,
                 IsPublished = true,
+                Code = "BNVBNV",
                 Questions = new List<Question>
                 {
                     new Question
@@ -3329,7 +3344,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
             new Entities.Quiz
             {
                 Title = "Modern History",
-                Cover = "https://example.com/chemistry_intro.jpg",
+                Cover = "https://quizizz.com/media/resource/gs/quizizz-media/quizzes/e1fa8a41-cead-4bd0-a782-26f99a77b3db?w=200&h=200",
                 Description = "Learn the basics of Modern History",
                 SubjectId = Guid.Parse("d34d0164-6d96-4e58-b732-abbc35ce4d28"),
                 GradeId = Guid.Parse("56873e58-0c4f-4f33-a7c6-faf1bb3e6b40"),
@@ -3337,6 +3352,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                 OwnerId = "ea616dc0-e621-474e-a247-b823b9fe6004",
                 Visibility = Visibility.Public,
                 IsPublished = true,
+                Code = "YHNYHN",
                 Questions = new List<Question>
                 {
                     new Question
@@ -3471,7 +3487,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
             new Entities.Quiz
             {
                 Title = "Introduction to Modern History 2",
-                Cover = "https://example.com/chemistry_intro.jpg",
+                Cover = "https://quizizz.com/media/resource/gs/quizizz-media/quizzes/e1fa8a41-cead-4bd0-a782-26f99a77b3db?w=200&h=200",
                 Description = "Learn the basics of Modern History 2",
                 SubjectId = Guid.Parse("d34d0164-6d96-4e58-b732-abbc35ce4d28"),
                 GradeId = Guid.Parse("56873e58-0c4f-4f33-a7c6-faf1bb3e6b40"),
@@ -3479,6 +3495,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                 OwnerId = "ea616dc0-e621-474e-a247-b823b9fe6004",
                 Visibility = Visibility.Public,
                 IsPublished = true,
+                Code = "POIPOI",
                 Questions = new List<Question>
                 {
                     new Question
@@ -3632,6 +3649,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                 OwnerId = "ea616dc0-e621-474e-a247-b823b9fe6004",
                 Visibility = Visibility.Public,
                 IsPublished = true,
+                Code = "MNBMNB",
                 Questions = new List<Question>
                 {
                     new Question
@@ -3790,6 +3808,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                 OwnerId = "ea616dc0-e621-474e-a247-b823b9fe6004",
                 Visibility = Visibility.Public,
                 IsPublished = true,
+                Code = "WFVWFV",
                 Questions = new List<Question>
                 {
                     new Question
