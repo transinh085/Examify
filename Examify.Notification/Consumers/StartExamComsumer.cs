@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Examify.Events;
-using Examify.Notification.Grpc.Clients;
 using Examify.Notification.Hubs;
 using MassTransit;
 using Microsoft.AspNetCore.SignalR;

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Avatar, Button, Col, Flex, Layout, QRCode, Row, Space } from 'antd';
 import {
   ClockCircleOutlined,
