@@ -1,6 +1,6 @@
 import { Button, Card, Col, Flex, Form, Input, Row } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import SubjectQuizSection from '~/features/dashboard/components/SubjectQuizSection';
+import SubjectQuizSection from '~/features/customer/dashboard/components/SubjectQuizSection';
 const { Search } = Input;
 import useAuthStore from '~/stores/auth-store';
 

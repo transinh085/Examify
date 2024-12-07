@@ -33,7 +33,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is JavaScript?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 1,
                         Options = new List<Option>
                         {
@@ -48,7 +48,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which company developed JavaScript?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 2,
                         Options =
                         [
@@ -63,7 +63,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What does 'var' do in JavaScript?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 3,
                         Options =
                         [
@@ -78,7 +78,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which operator is used for comparison in JavaScript?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 4,
                         Options =
                         [
@@ -93,7 +93,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which of the following is a correct way to create an array in JavaScript?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 5,
                         Options =
                         [
@@ -108,7 +108,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What does 'this' refer to in JavaScript?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 6,
                         Options =
                         [
@@ -123,7 +123,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "How do you create a function in JavaScript?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 7,
                         Options =
                         [
@@ -138,7 +138,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which of the following is not a JavaScript data type?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 8,
                         Options =
                         [
@@ -153,7 +153,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is the purpose of the 'debugger' keyword in JavaScript?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 9,
                         Options =
                         [
@@ -170,7 +170,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which method is used to parse a JSON string in JavaScript?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 10,
                         Options =
                         [
@@ -205,7 +205,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is the default web server for ASP.NET Core?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 1,
                         Options =
                         [
@@ -221,7 +221,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which of the following is used for dependency injection in ASP.NET Core?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 2,
                         Options =
                         [
@@ -239,7 +239,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "In ASP.NET Core, which method is used to configure services?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 3,
                         Options =
                         [
@@ -255,7 +255,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which file contains the configuration for the ASP.NET Core application?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 4,
                         Options =
                         [
@@ -271,7 +271,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What does the 'UseRouting' method do in ASP.NET Core?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 5,
                         Options =
                         [
@@ -289,7 +289,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is the purpose of the 'app.UseEndpoints()' method in ASP.NET Core?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 6,
                         Options =
                         [
@@ -306,7 +306,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                             "Which of the following middleware is responsible for handling static files in ASP.NET Core?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 7,
                         Options =
                         [
@@ -323,7 +323,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                             "In ASP.NET Core, which attribute is used to map HTTP request methods to controller actions?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 8,
                         Options =
                         [
@@ -339,7 +339,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "How do you enable CORS in ASP.NET Core?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 9,
                         Options =
                         [
@@ -355,7 +355,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is the default port for ASP.NET Core development server?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 10,
                         Options =
                         [
@@ -390,7 +390,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is 5 + 3?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 1,
                         Options = new List<Option>
                         {
@@ -405,7 +405,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is the square root of 16?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 2,
                         Options = new List<Option>
                         {
@@ -420,7 +420,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is 9 x 9?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 3,
                         Options = new List<Option>
                         {
@@ -435,7 +435,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is 15 - 7?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 4,
                         Options = new List<Option>
                         {
@@ -450,7 +450,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is the value of π (pi) approximately?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 5,
                         Options = new List<Option>
                         {
@@ -465,7 +465,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is 12 ÷ 4?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 6,
                         Options = new List<Option>
                         {
@@ -480,7 +480,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is 7 x 6?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 7,
                         Options = new List<Option>
                         {
@@ -495,7 +495,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is the next prime number after 7?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 8,
                         Options = new List<Option>
                         {
@@ -510,7 +510,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is 100 ÷ 10?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 9,
                         Options = new List<Option>
                         {
@@ -525,7 +525,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is 3²?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 10,
                         Options = new List<Option>
                         {
@@ -561,7 +561,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is the value of 2³ + 3²?",
                         Duration = 40,
                         Points = 2,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 1,
                         Options = new List<Option>
                         {
@@ -576,7 +576,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is the greatest common divisor (GCD) of 48 and 180?",
                         Duration = 40,
                         Points = 2,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 2,
                         Options = new List<Option>
                         {
@@ -591,7 +591,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Solve for x: 5x - 7 = 18",
                         Duration = 45,
                         Points = 2,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 3,
                         Options = new List<Option>
                         {
@@ -606,7 +606,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is the next number in the sequence: 2, 6, 12, 20, 30, ?",
                         Duration = 45,
                         Points = 2,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 4,
                         Options = new List<Option>
                         {
@@ -621,7 +621,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is the value of 7! (7 factorial)?",
                         Duration = 60,
                         Points = 2,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 5,
                         Options = new List<Option>
                         {
@@ -636,7 +636,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is the sum of the interior angles of a hexagon?",
                         Duration = 40,
                         Points = 2,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 6,
                         Options = new List<Option>
                         {
@@ -651,7 +651,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Solve for y: 3y + 4 = 25",
                         Duration = 40,
                         Points = 2,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 7,
                         Options = new List<Option>
                         {
@@ -666,7 +666,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which is the largest prime number less than 50?",
                         Duration = 40,
                         Points = 2,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 8,
                         Options = new List<Option>
                         {
@@ -681,7 +681,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is the equation of a line with slope 3 and y-intercept 5?",
                         Duration = 50,
                         Points = 2,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 9,
                         Options = new List<Option>
                         {
@@ -696,7 +696,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is the discriminant of the quadratic equation x² - 4x + 4 = 0?",
                         Duration = 40,
                         Points = 2,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 10,
                         Options = new List<Option>
                         {

@@ -11,7 +11,7 @@ const AppProvider = ({ children }) => {
       <ConfigProvider
         theme={{
           token: {
-            fontFamily: 'Inter',
+            fontFamily: 'Be Vietnam Pro',
             borderRadius: 6,
             controlHeight: 34,
             colorPrimary: '#027f91',

@@ -3,7 +3,7 @@ import runningCatGift from '~/assets/images/running-cat.gif';
 import { QUESTION_TYPE } from '~/config/enums';
 import useDoQuizStore from '~/stores/do-quiz-store';
 
-const GameFooter = ({ handleSubmit }) => {
+const GameFooter = ({ handleSubmit, loading }) => {
   const { questionResults, currentQuestion } = useDoQuizStore();
   return (
     <Flex justify="space-between" className="relative bg-[#3e084a] px-4 py-3">
@@ -37,7 +37,9 @@ const GameFooter = ({ handleSubmit }) => {
         <Divider type="vertical" className="bg-gray-400 h-[34px]" />
         {(questionResults?.[currentQuestion]?.question?.type === QUESTION_TYPE.MULTIPLE_CHOICE ||
           questionResults?.[currentQuestion]?.question?.type === 'MultipleChoice') && (
-          <Button onClick={handleSubmit}>Submit</Button>
+          <Button onClick={handleSubmit} loading={loading}>
+            Submit
+          </Button>
         )}
       </Space>
     </Flex>

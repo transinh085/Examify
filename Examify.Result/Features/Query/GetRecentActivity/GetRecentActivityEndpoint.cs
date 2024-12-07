@@ -8,7 +8,7 @@ public class GetRecentActivityEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapGet("recent-activity", async ([AsParameters] GetRecentActivityQuery query, ClaimsPrincipal user, ISender sender) =>
+        app.MapGet("recent-activities", async ([AsParameters] GetRecentActivityQuery query, ClaimsPrincipal user, ISender sender) =>
             await sender.Send(query with { UserId = user.Identity.Name }
         )).RequireAuthorization();
     }
