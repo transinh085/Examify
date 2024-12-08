@@ -1,9 +1,9 @@
-﻿using System.Text.Json.Serialization;
-using AutoMapper;
+﻿using AutoMapper;
 using Examify.Quiz.Entities;
 using Examify.Quiz.Enums;
 using FluentValidation;
 using MediatR;
+using System.Text.Json.Serialization;
 
 namespace Examify.Quiz.Features.Questions.Command.CreateQuestion;
 
@@ -17,6 +17,8 @@ public record CreateQuestionCommand : IRequest<IResult>
 
     public QuestionType Type { get; init; }
 
+    public int Order { get; init; }
+
     public Guid QuizId { get; init; }
 
     public List<CreateOptionsDto> Options { get; init; }
@@ -25,7 +27,7 @@ public record CreateQuestionCommand : IRequest<IResult>
 public record CreateOptionsDto
 {
     public string Content { get; set; }
-    
+
     [JsonPropertyName("is_correct")]
     public bool IsCorrect { get; set; }
 }

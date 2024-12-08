@@ -1,30 +1,35 @@
-import { Flex, Segmented, Typography } from 'antd';
-import { useState } from 'react';
+import { Flex, Segmented, Space, Typography } from 'antd';
+import { useSearchParams } from 'react-router-dom';
+import RecentQuizTable from '~/features/customer/acitivities/components/RecentQuizTable';
 
 const Activities = () => {
-  const [tab, setTab] = useState('ONGOING');
+  const [params, setParams] = useSearchParams();
 
   return (
-    <div className="mt-6">
+    <Space size="middle" direction="vertical" className="mt-6 w-full">
       <Flex align="center" justify="space-between">
         <Typography.Title level={4} className="!mb-0">
           Recent activity
         </Typography.Title>
         <Segmented
-          value={tab}
+          value={params.get('status') || 'all'}
           options={[
-            { label: 'Chưa hoàn thành', value: 'ONGOING' },
+            { label: 'All', value: 'all' },
+            { label: 'In complete', value: 'incomplete' },
             {
-              label: 'Hoàn thành',
-              value: 'COMPLETED',
+              label: 'Completed',
+              value: 'completed',
             },
           ]}
           onChange={(value) => {
-            setTab(value);
+            params.set('status', value);
+            params.set('pageNumber', 1);
+            setParams(params);
           }}
         />
       </Flex>
-    </div>
+      <RecentQuizTable params={params} setParams={setParams} />
+    </Space>
   );
 };
 

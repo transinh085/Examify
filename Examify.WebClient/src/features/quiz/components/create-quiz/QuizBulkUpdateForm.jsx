@@ -36,8 +36,8 @@ const QuizBulkUpdateForm = ({ quizId, questions }) => {
   };
 
   return (
-    <Card title="Bulk update">
-      <Form form={form} layout="vertical" onFinish={onFinish} variant='filled'>
+    <Card title="Bulk update" className="sticky top-20">
+      <Form form={form} layout="vertical" onFinish={onFinish} variant="filled">
         <Form.Item name="duration" label="Time">
           <Select placeholder="Select time" options={timeOptions} />
         </Form.Item>

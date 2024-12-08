@@ -22,6 +22,12 @@ public class QuizDto
     public string Description { get; set; }
     
     public string Code { get; set; }
+    
+    public bool UseTimer { get; set; }
+    
+    public bool IsPrivate { get; set; }
+    
+    public bool IsStart { get; set; }
 }
 
 public class QuestionResultDto

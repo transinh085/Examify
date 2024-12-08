@@ -31,9 +31,6 @@ const ModalEndQuiz = () => {
       onCancel={handleCancel}
       footer={null}
       centered
-      bodyStyle={{ backgroundColor: 'black', color: 'white' }}
-      titleStyle={{ backgroundColor: 'black', color: 'white' }}
-      style={{ backgroundColor: 'black', color: 'white' }}
     >
       <div className="p-4">
         <p className="text-xl text-center">Are you sure you want to end this quiz?</p>

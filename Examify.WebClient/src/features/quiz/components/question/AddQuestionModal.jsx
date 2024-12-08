@@ -3,9 +3,8 @@ import { CustomerServiceOutlined, DeleteOutlined, EditOutlined, OpenAIOutlined, 
 import { useCreateQuestion } from '~/features/quiz/api/questions/create-question';
 import { timeOptions } from '~/features/quiz/constant/timeOptions';
 import { pointOptions } from '~/features/quiz/constant/pointOptions';
-import { questionTypesOptions } from '~/features/quiz/constant/questionTypesOptions';
 
-const AddQuestionModal = ({ quizId, open, onCancel }) => {
+const AddQuestionModal = ({ quizId, open, onCancel, questionLength }) => {
   const [form] = Form.useForm();
   const { message } = App.useApp();
 
@@ -33,9 +32,14 @@ const AddQuestionModal = ({ quizId, open, onCancel }) => {
     if (!values.options.some((option) => option.is_correct)) {
       return message.error('Please select the correct answer');
     }
+
     createQuestionMutation.mutate({
       quizId,
-      data: values,
+      data: {
+        type: values.options.filter((option) => option.is_correct).length > 1 ? 1 : 0,
+        order: questionLength + 1,
+        ...values,
+      },
     });
   };
 
@@ -66,7 +70,9 @@ const AddQuestionModal = ({ quizId, open, onCancel }) => {
       >
         <Flex align="center" justify="space-between" className="mb-5">
           <Space>
-            <p className="inline-block bg-primary text-white px-3 py-[2px] rounded-full ">Câu 1</p>
+            <p className="inline-block bg-primary text-white px-3 py-[2px] rounded-full ">
+              Question {questionLength + 1}
+            </p>
             <Tooltip title="Add voice">
               <Button shape="circle" size="small" variant="filled" color="primary" icon={<CustomerServiceOutlined />} />
             </Tooltip>
@@ -75,14 +81,11 @@ const AddQuestionModal = ({ quizId, open, onCancel }) => {
             </Popover>
           </Space>
           <Space align="center">
-            <Form.Item name="type">
-              <Select options={questionTypesOptions} size="small" style={{ width: 150 }} />
-            </Form.Item>
             <Form.Item name="duration">
-              <Select options={timeOptions} size="small" />
+              <Select options={timeOptions} size="small" style={{ width: 120 }} />
             </Form.Item>
             <Form.Item name="points">
-              <Select options={pointOptions} size="small" style={{ width: 90 }} />
+              <Select options={pointOptions} size="small" style={{ width: 110 }} />
             </Form.Item>
           </Space>
         </Flex>

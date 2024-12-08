@@ -75,9 +75,8 @@ const DoQuizPage = () => {
     setQuestionDuration(quizResult?.questionResults?.[0]?.question?.duration);
   }, [initDoQuizStore, setQuestionDuration, quizResult]);
 
-
-  const { initializeSignalR, addSignalRHandler, removeSignalRHandler, sendSignalRMessage, checkConnection } = useSignalRStore();
-
+  const { initializeSignalR, addSignalRHandler, removeSignalRHandler, sendSignalRMessage, checkConnection } =
+    useSignalRStore();
 
   useEffect(() => {
     initializeSignalR('https://localhost:8386/notification-service/api/notification-hub');
@@ -85,14 +84,14 @@ const DoQuizPage = () => {
     addSignalRHandler('EndQuiz', () => {
       setIsFinished(true);
     });
-  
+
     const interval = setInterval(() => {
       if (checkConnection()) {
         sendSignalRMessage('JoinQuizUser', quiz?.id);
-        clearInterval(interval); 
+        clearInterval(interval);
       }
     }, 1000);
-  
+
     return () => {
       removeSignalRHandler('JoinQuiz');
       clearInterval(interval);
@@ -121,6 +120,8 @@ const DoQuizPage = () => {
 
   const handleSubmitAnswer = async (yourAnswers) => {
     // call api to submit your answers
+
+    if (waitingDuration > 0) return;
 
     const mutationResponse = await submitAnswersMutation.mutateAsync({
       Answers: yourAnswers,
@@ -174,7 +175,7 @@ const DoQuizPage = () => {
     );
   }
 
-  if (isFinished) {
+  if (isFinished || (quiz?.isPrivate && !quiz?.isStart)) {
     return <MyQuizResult />;
   }
 
@@ -226,6 +227,7 @@ const DoQuizPage = () => {
           )}
           {quiz?.useTimer && questionDuration > 0 && (
             <CountdownCircleTimer
+              key={currentQuestion}
               isPlaying
               duration={questionDuration}
               colors="#00a2ae"

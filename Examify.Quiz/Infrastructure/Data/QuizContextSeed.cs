@@ -322,7 +322,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                             "In ASP.NET Core, which attribute is used to map HTTP request methods to controller actions?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.SingleChoice,
+                        Type = QuestionType.MultipleChoice,
                         Order = 8,
                         Options =
                         [

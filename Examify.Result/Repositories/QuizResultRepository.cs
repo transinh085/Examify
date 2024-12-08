@@ -1,4 +1,6 @@
-﻿using Examify.Quiz.Dtos;
+﻿using Ardalis.GuardClauses;
+using Examify.Core.Pagination;
+using Examify.Quiz.Dtos;
 using Examify.Result.Dtos;
 using Examify.Result.Entities;
 using Examify.Result.Infrastructure.Data;
@@ -271,19 +273,29 @@ public class QuizResultRepository(
         return userResultsDetailsDtos;
     }
 
-    public async Task<List<QuizRecentActivityDto>> GetListRecentActivity(string userId, int pageNumber, int pageSize)
+    public async Task<PagedList<QuizRecentActivityDto>> GetListRecentActivity(string userId, string status, int pageNumber, int pageSize)
     {
-        var Ids = await quizResultContext.QuizResults
+        var query = quizResultContext.QuizResults
             .Include(x => x.QuestionResults)
             .Where(x => x.UserId == userId)
             .OrderByDescending(x => x.SubmittedAt)
-            .Skip((pageNumber - 1) * pageSize)
-            .Take(pageSize)
-            .ToListAsync();
+            .AsQueryable();
+
+        if (status == "completed")
+        {
+            query = query.Where(x => x.QuestionResults.Count(x => x.SubmittedAt != DateTime.MinValue) == x.QuestionResults.Count);
+        }
+
+        if (status == "incomplete")
+        {
+            query = query.Where(x => x.QuestionResults.Count(x => x.SubmittedAt != DateTime.MinValue) != x.QuestionResults.Count);
+        }
+
+        var quizPaginated = await query.PaginatedListAsync(pageNumber, pageSize);
 
         var quizzes = new List<QuizRecentActivityDto>();
 
-        foreach (var record in Ids)
+        foreach (var record in quizPaginated.Items)
         {
             var quiz = await quizClient.GetQuizAsync(new QuizRequest { Id = record.QuizId.ToString() });
             quizzes.Add(new QuizRecentActivityDto
@@ -295,93 +307,112 @@ public class QuizResultRepository(
                 Code = quiz.Code,
                 Cover = quiz.Cover,
                 QuestionCount = quiz.Questions.Count,
-                CurrentProgress = (decimal)record.QuestionResults.Count(x => x.SubmittedAt != DateTime.MinValue) / record.QuestionResults.Count * 100
+                AttemptedNumber = record.AttemptedNumber,
+                CurrentProgress = (decimal)record.QuestionResults.Count(x => x.SubmittedAt != DateTime.MinValue) / record.QuestionResults.Count * 100,
+                CreatedDate = record.CreatedDate
             });
         }
-
-        return quizzes;
+        return new PagedList<QuizRecentActivityDto>(quizzes, quizPaginated.Meta.TotalCount, pageNumber, pageSize);
     }
-    
-	public async Task<GetLeaderBoardDto> GetStartQuiz(string Code)
-	{
-		var populatedQuiz = quizClient.GetQuiz(new QuizRequest
-		{
-			Code = Code,
-			Id = ""
-		});
 
-		var playTime = DateTime.SpecifyKind(DateTime.Parse(populatedQuiz.PlayTime), DateTimeKind.Utc);
+    public async Task<GetLeaderBoardDto> GetStartQuiz(string Code)
+    {
+        var populatedQuiz = quizClient.GetQuiz(new QuizRequest
+        {
+            Code = Code,
+            Id = ""
+        });
 
-		var listQuizResult = await quizResultContext.QuizResults
-			.Where(quiz => quiz.QuizId == Guid.Parse(populatedQuiz.Id))
-			.Where(quiz => quiz.CreatedDate >= playTime)
-			.ToListAsync();
+        var playTime = DateTime.SpecifyKind(DateTime.Parse(populatedQuiz.PlayTime), DateTimeKind.Utc);
 
-		List<UserStartQuizDto> listUsers = new();
-		List<QuestionStartQuizDto> listQuestions = new();
+        var listQuizResult = await quizResultContext.QuizResults
+            .Where(quiz => quiz.QuizId == Guid.Parse(populatedQuiz.Id))
+            .Where(quiz => quiz.CreatedDate >= playTime)
+            .ToListAsync();
 
-		foreach (var item in listQuizResult)
-		{
-			var user = identityClient.GetIdentity(new IdentityRequest { Id = item.UserId });
-			UserStartQuizDto userStartQuizDto = new UserStartQuizDto
-			{
-				Id = user.Id,
-				Name = user.Name,
-				Score = item.TotalPoints,
-				Image = user.Image
-			};
-			listUsers.Add(userStartQuizDto);
-		}
+        List<UserStartQuizDto> listUsers = new();
+        List<QuestionStartQuizDto> listQuestions = new();
 
-		foreach (var questionQuiz in populatedQuiz.Questions)
-		{
-			var correctOption = questionQuiz.Options.FirstOrDefault(o => o.IsCorrect);
-			if (correctOption == null)
-			{
-				continue; // Skip this question if there is no correct option
-			}
+        foreach (var item in listQuizResult)
+        {
+            var user = identityClient.GetIdentity(new IdentityRequest { Id = item.UserId });
+            UserStartQuizDto userStartQuizDto = new UserStartQuizDto
+            {
+                Id = user.Id,
+                Name = user.Name,
+                Score = item.TotalPoints,
+                Image = user.Image
+            };
+            listUsers.Add(userStartQuizDto);
+        }
 
-			var correctOptionId = Guid.Parse(correctOption.Id);
+        foreach (var questionQuiz in populatedQuiz.Questions)
+        {
+            var correctOption = questionQuiz.Options.FirstOrDefault(o => o.IsCorrect);
+            if (correctOption == null)
+            {
+                continue; // Skip this question if there is no correct option
+            }
+
+            var correctOptionId = Guid.Parse(correctOption.Id);
 
             var correctCount = await quizResultContext.QuizResults
-                .Where(quiz => quiz.QuestionResults.Any(question => question.QuestionId == Guid.Parse(questionQuiz.Id) && question.IsCorrect))
+                .Where(quizResult => quizResult.CreatedDate >= playTime)
+				.Where(quiz => quiz.QuestionResults.Any(question => question.QuestionId == Guid.Parse(questionQuiz.Id) && question.IsCorrect))
                 .CountAsync();
 
-			var incorrectCount = await quizResultContext.QuizResults
-	            .Where(quiz => quiz.QuestionResults.Any(question =>
-		            question.QuestionId == Guid.Parse(questionQuiz.Id) && question.IsCorrect == false))
-	            .Where(quiz => quiz.QuestionResults.Any(question =>
-		            question.AnswerResults.Any(answer => answer.IsSelected)))
-	            .CountAsync();
+            var incorrectCount = await quizResultContext.QuizResults
+                .Where(quiz => quiz.QuestionResults.Any(question =>
+                    question.QuestionId == Guid.Parse(questionQuiz.Id) && question.IsCorrect == false))
+                .Where(quiz => quiz.QuestionResults.Any(question =>
+                    question.AnswerResults.Any(answer => answer.IsSelected)))
+                .CountAsync();
 
-			var totalAnswers = correctCount + incorrectCount;
-			var correctPercentage = totalAnswers > 0 ? (double)correctCount / totalAnswers * 100 : 0;
+            var totalAnswers = correctCount + incorrectCount;
+            var correctPercentage = totalAnswers > 0 ? (double)correctCount / totalAnswers * 100 : 0;
 
-			var question = new QuestionStartQuizDto
-			{
-				Id = questionQuiz.Id,
-				Title = questionQuiz.Content,
-				Description = questionQuiz.Content,
-				Type = questionQuiz.Type,
-				Progress = 0,
-				Correct = correctCount,
-				Incorrect = incorrectCount,
-				Options = questionQuiz.Options.Select(option => new Dtos.OptionDto
-				{
-					Id = option.Id,
-					Content = option.Content,
-					IsCorrect = option.IsCorrect
-				}).ToList()
-			};
-			listQuestions.Add(question);
-		}
+            var question = new QuestionStartQuizDto
+            {
+                Id = questionQuiz.Id,
+                Title = questionQuiz.Content,
+                Description = questionQuiz.Content,
+                Type = questionQuiz.Type,
+                Progress = 0,
+                Correct = correctCount,
+                Incorrect = incorrectCount,
+                Options = questionQuiz.Options.Select(option => new Dtos.OptionDto
+                {
+                    Id = option.Id,
+                    Content = option.Content,
+                    IsCorrect = option.IsCorrect
+                }).ToList()
+            };
+            listQuestions.Add(question);
+        }
 
-		GetLeaderBoardDto getLeaderBoardDto = new GetLeaderBoardDto
-		{
-			users = listUsers,
-			questions = listQuestions
-		};
+        GetLeaderBoardDto getLeaderBoardDto = new GetLeaderBoardDto
+        {
+            users = listUsers,
+            questions = listQuestions
+        };
 
-		return getLeaderBoardDto;
-	}
+        return getLeaderBoardDto;
+    }
+
+    public Task<bool> DeleteAllResultsOfQuiz(Guid quizId)
+    {
+        var results = quizResultContext.QuizResults.Where(x => x.QuizId == quizId);
+        quizResultContext.QuizResults.RemoveRange(results);
+        quizResultContext.SaveChanges();
+        return Task.FromResult(true);
+    }
+
+    public async Task<bool> DeleteResultById(Guid id)
+    {
+        var entity = await quizResultContext.QuizResults.FindAsync(id);
+        Guard.Against.NotFound(id, entity);
+        quizResultContext.QuizResults.Remove(entity);
+        quizResultContext.SaveChanges();
+        return true;
+    }
 }

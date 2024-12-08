@@ -14,6 +14,10 @@ public class PopulatedQuizDto
     public string Cover { get; set; }
 
     public string? Code { get; set; }
+    
+    public bool UserTimer { get; set; }
+    
+    public bool IsStart { get; set; }
 
     public DateTime StartTime { get; set; }
 

@@ -86,9 +86,12 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="Google.Protobuf" Version="3.28.3" />
-		<PackageReference Include="MassTransit" Version="8.3.2" />
-		<PackageReference Include="MassTransit.RabbitMQ" Version="8.3.1" />
     </ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="MassTransit" Version="8.3.2" />
+		<PackageReference Include="MassTransit.RabbitMQ" Version="8.3.0" />
+	</ItemGroup>
 
     <ItemGroup>
         <Compile Include="..\Shared\ActivityExtensions.cs" Link="Extensions\ActivityExtensions.cs" />

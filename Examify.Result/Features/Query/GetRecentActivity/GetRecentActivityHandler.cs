@@ -7,7 +7,7 @@ public class GetRecentActivityHandler(IQuizResultRepository resultRepository, IL
 {
     public async Task<IResult> Handle(GetRecentActivityQuery request, CancellationToken cancellationToken)
     {
-        var result = await resultRepository.GetListRecentActivity(request.UserId, request.GetPageNumber, request.GetPageSize);
+        var result = await resultRepository.GetListRecentActivity(request.UserId, request.Status, request.GetPageNumber, request.GetPageSize);
         return TypedResults.Ok(result);
     }
 }

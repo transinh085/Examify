@@ -1,4 +1,4 @@
-import { Button, Col, Flex, Layout, Row, Space } from 'antd';
+import { Button, Col, Flex, Layout, Row, Skeleton, Space } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { useBoolean } from '~/hooks/useBoolean';
 import AddQuestionModal from '~/features/quiz/components/question/AddQuestionModal';
@@ -21,7 +21,7 @@ export const CreateQuizLoader =
 const CreateQuizPage = () => {
   const initialQuizData = useLoaderData();
 
-  const { data: questions = [] } = useGetQuestionByQuizId({
+  const { data: questions = [], isLoading } = useGetQuestionByQuizId({
     quizId: initialQuizData.id,
   });
 
@@ -39,7 +39,7 @@ const CreateQuizPage = () => {
             <QuizBulkUpdateForm quizId={initialQuizData.id} questions={questions} />
           </Col>
           <Col span={18}>
-            <QuestionSection quizId={initialQuizData.id} questions={questions} />
+            <QuestionSection quizId={initialQuizData.id} questions={questions} loading={isLoading} />
           </Col>
         </Row>
       </Content>
@@ -47,7 +47,7 @@ const CreateQuizPage = () => {
   );
 };
 
-const QuestionSection = ({ quizId, questions }) => {
+const QuestionSection = ({ quizId, questions, loading }) => {
   const {
     value: isAddQuestionModalOpen,
     setTrue: openAddQuestionModal,
@@ -58,16 +58,25 @@ const QuestionSection = ({ quizId, questions }) => {
   return (
     <>
       <Flex align="center" justify="space-between" className="mb-4">
-        <Space className="text-lg">
-          <span className="font-semibold">{questions.length} questions</span>
-          <span>({points} points)</span>
-        </Space>
+        {loading ? (
+          <Skeleton.Input active />
+        ) : (
+          <Space className="text-lg">
+            <span className="font-semibold">{questions.length} questions</span>
+            <span>({points} points)</span>
+          </Space>
+        )}
         <Button color="primary" variant="filled" icon={<PlusOutlined />} onClick={openAddQuestionModal}>
           Add question
         </Button>
       </Flex>
-      <QuestionList quizId={quizId} questions={questions} />
-      <AddQuestionModal quizId={quizId} open={isAddQuestionModalOpen} onCancel={closeAddQuestionModal} />
+      <QuestionList quizId={quizId} questions={questions} loading={loading} />
+      <AddQuestionModal
+        quizId={quizId}
+        open={isAddQuestionModalOpen}
+        onCancel={closeAddQuestionModal}
+        questionLength={questions.length}
+      />
     </>
   );
 };

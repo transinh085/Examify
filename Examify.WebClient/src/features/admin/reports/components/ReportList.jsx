@@ -1,6 +1,6 @@
 import { Col, Flex, Pagination, Row, Space, Spin } from 'antd';
 
-import { useGetQuizUser } from '~/features/quiz/api/quizzes/get-quiz-user';
+import { useGetQuizUser } from '~/features/admin/mylibrary/api/get-quiz-user';
 import QuizItem from './QuizItem';
 import { useSearchParams } from 'react-router-dom';
 
@@ -14,7 +14,7 @@ const ReportList = () => {
   } = useGetQuizUser({
     isPublished: true,
     pageNumber: params.get('pageNumber') || 1,
-    pageSize: params.get('pageSize') || 6,
+    pageSize: params.get('pageSize') || 8,
   });
 
   if (isLoading)

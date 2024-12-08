@@ -51,10 +51,10 @@ const QuizDetailModal = ({
         }}
       >
         <Tag color="green" className="absolute bottom-2 left-2">
-          {questionCount} câu hỏi
+          {questionCount} questions
         </Tag>
         <Tag color="cyan" className="absolute bottom-2 right-2">
-          {attemptCount} lượt thi
+          {attemptCount} attempts
         </Tag>
       </div>
       <div className="p-4">

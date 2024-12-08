@@ -7,7 +7,7 @@ const getRecentActivity = (params) => {
 
 export const getRecentActivityOptions = (params) => {
   return queryOptions({
-    queryKey: ['recent-activities', params.pageNumber, params.pageSize],
+    queryKey: ['recent-activities', params.pageNumber, params.pageSize, params.status],
     queryFn: () => getRecentActivity(params),
   });
 };

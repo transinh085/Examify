@@ -1,12 +1,6 @@
-import {
-  BellOutlined,
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  QuestionOutlined,
-  SearchOutlined,
-} from '@ant-design/icons';
-import { Avatar, Button, Flex, Grid, Input, Layout, Popover, Space } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { BellOutlined, MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
+import { Avatar, Button, Flex, Grid, Input, Layout, Popover } from 'antd';
+import { Link, useNavigate } from 'react-router-dom';
 import UserDropdown from '~/components/layouts/share/user-dropdown';
 import useMenuStore from '~/stores/menu-store';
 const { Header } = Layout;
@@ -17,31 +11,30 @@ const HeaderAdmin = () => {
   const isMobile = typeof breakpoint.lg === 'undefined' ? false : !breakpoint.lg;
   const navigate = useNavigate();
 
-  const moveJoin = () => {
-    navigate('/join');
-  };
   return (
     <Header className="p-0 bg-white sticky top-0 z-50 shadow-sm flex justify-between items-center px-5">
-      <Space>
+      <Flex gap={20} align="center">
         <Button
           type="text"
           icon={siderVisible ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
           onClick={() => setSiderVisible(!siderVisible)}
         />
-        <Input placeholder="Tìm kiếm..." variant="filled" suffix={<SearchOutlined />} />
-      </Space>
-      <Flex gap={10}>
+        <Input.Search
+          placeholder="Search here..."
+          onSearch={(value) => {
+            navigate(`/search?keyword=${value}`);
+          }}
+        />
+      </Flex>
+      <Flex gap={20} align="center">
         {isMobile ? (
           <UserDropdown />
         ) : (
           <>
             <NotificationButton />
-            <Button className="font-bold" onClick={moveJoin}>
-              Enter code
-            </Button>
-            <Button className="font-bold" icon={<QuestionOutlined />}>
-              Help
-            </Button>
+            <Link to="/join">
+              <Button className="font-bold">Enter code</Button>
+            </Link>
             <UserDropdown />
           </>
         )}

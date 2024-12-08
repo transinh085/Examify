@@ -1,9 +1,11 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { getQuestionByQuizIdQueryOptions } from '~/features/quiz/api/questions/get-question-by-quiz-id';
 import { api } from '~/lib/api';
 
-export const patchQuestion = ({ quizId, data }) => {
-  return api.patch(`/quiz-service/api/quizzes/${quizId}/questions/bulk`, data);
+export const patchQuestion = ({ id, duration, points }) => {
+  return api.patch(`/quiz-service/api/questions/${id}/attributes`, {
+    duration,
+    points,
+  });
 };
 
 export const usePatchQuestion = ({ mutationConfig }) => {
@@ -12,7 +14,7 @@ export const usePatchQuestion = ({ mutationConfig }) => {
   return useMutation({
     onSuccess: async (data, variables, ...args) => {
       queryClient.invalidateQueries({
-        queryKey: getQuestionByQuizIdQueryOptions(variables.quizId).queryKey,
+        queryKey: ['questions'],
       });
       onSuccess?.(data, ...args);
     },

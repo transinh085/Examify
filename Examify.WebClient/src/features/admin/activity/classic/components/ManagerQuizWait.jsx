@@ -14,6 +14,7 @@ import { useGetJoinQuiz } from '~/features/admin/activity/classic/api/get-user-j
 import HeaderManagerQuiz from '~/features/admin/activity/classic/components/HeaderManagerQuiz';
 import { useStartQuiz } from '~/features/admin/activity/classic/api/start-quiz';
 import { useQueryClient } from '@tanstack/react-query';
+import { VITE_ENDPOINT } from '~/config/env';
 
 const {  Content } = Layout;
 
@@ -111,7 +112,7 @@ const ManagerQuizWait = () => {
                 <div className="text-base w-[98px] font-medium break-words">Enter the join code</div>
                 <Space size="middle" className="w-[400px] justify-between">
                   <div className="flex justify-center items-center space-x-4">
-                    {quiz?.code.split('').map((item, index) => (
+                    {quiz?.code?.split('').map((item, index) => (
                       <span key={index} className="text-6xl font-bold">
                         {item}
                       </span>
@@ -123,7 +124,7 @@ const ManagerQuizWait = () => {
             </Flex>
             <Flex gap={2} className="p-4 bg-ds-light-500-20" style={{ borderRadius: '0 0 24px 24px' }} vertical>
               <Flex className="bg-white" vertical gap={4}>
-                <QRCode errorLevel="H" value={`http://localhost:3000/join?code=${quiz?.code}`} size={130} />
+                <QRCode errorLevel="H" value={`${VITE_ENDPOINT}/join?code=${quiz?.code}`} size={130} />
               </Flex>
             </Flex>
           </Flex>
@@ -135,7 +136,7 @@ const ManagerQuizWait = () => {
             gutter={12}
           >
             <Col span={12} className="bg-ds-light-500-20 px-10 py-3 rounded-md">
-              <Flex className="text-white text-xl" justify="space-between" align="center" gap={4}>
+              <Flex className="text-white text-xl px-2" justify="space-between" align="center" gap={4}>
                 <Space size={'middle'}>
                   <ClockCircleOutlined />
                   <span className="text-lg font-bold">Auto start your quiz</span>
@@ -172,7 +173,7 @@ const ManagerQuizWait = () => {
                 gap={3}
               >
                 <Avatar src={user.avatar} alt={user.name} size={30} />
-                <span className="text-white text-lg">{user.name}</span>
+                <span className="text-white text-lg pr-2">{user.name}</span>
               </Space>
             ))}
         </Flex>

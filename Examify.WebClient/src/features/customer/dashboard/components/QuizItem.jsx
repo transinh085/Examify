@@ -40,10 +40,10 @@ const QuizItem = ({
           }}
         >
           <Tag color="green" className="absolute bottom-1 left-1">
-            {questionCount} câu hỏi
+            {questionCount} questions
           </Tag>
           <Tag color="cyan" className="absolute bottom-1 right-1">
-            {attemptCount} lượt thi
+            {attemptCount} attempts
           </Tag>
         </div>
         <Flex vertical justify="space-between" className="p-3 h-[130px]" gap={2}>
@@ -60,8 +60,6 @@ const QuizItem = ({
     </>
   );
 };
-
-
 
 QuizItem.propTypes = {
   title: PropTypes.string,

@@ -25,7 +25,6 @@ public static class Extensions
                 });
         });
 
-        builder.Services.AddMassTransitHostedService();
         return builder;
     }
 }

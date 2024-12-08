@@ -3,7 +3,7 @@ import { Button, Flex, message, Pagination, Spin, Typography } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useCreateQuiz } from '~/features/quiz/api/quizzes/create-quiz';
 import TestCard from '~/features/admin/mylibrary/components/TestCard';
-import { useGetQuizUser } from '~/features/quiz/api/quizzes/get-quiz-user';
+import { useGetQuizUser } from '~/features/admin/mylibrary/api/get-quiz-user';
 
 const TabContent = ({ params, setParams, isPublished = false }) => {
   const {
@@ -80,11 +80,14 @@ const TabContent = ({ params, setParams, isPublished = false }) => {
           owner={item.owner}
           questionCount={item.questionCount}
           createDate={item.createdDate}
+
           code={item.code}
           randomQuestions={item.randomQuestions}
           randomOptions={item.randomOptions}
           startTime={item.startTime}
           endTime={item.endTime}
+
+          visibility={item.visibility}
         />
       ))}
       <Pagination

@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Ardalis.GuardClauses;
+using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Examify.Core.Pagination;
 using Examify.Quiz.Dtos;
@@ -35,6 +36,9 @@ public class QuizRepository(
     public async Task DeleteQuizById(Guid id, CancellationToken cancellationToken)
     {
         var quiz = await quizContext.Quizzes.FindAsync(id, cancellationToken);
+
+        Guard.Against.NotFound(id, quiz);
+
         quizContext.Quizzes.Remove(quiz);
         await quizContext.SaveChangesAsync(cancellationToken);
     }
@@ -48,6 +52,8 @@ public class QuizRepository(
     {
         var quiz = await quizContext.Quizzes.FindAsync(id, cancellationToken);
         quiz.IsPublished = true;
+        Random random = new();
+        quiz.Code = random.Next(100000, 999999).ToString();
         await quizContext.SaveChangesAsync(cancellationToken);
     }
 
@@ -141,6 +147,7 @@ public class QuizRepository(
         }
 
         query = query.Where(q => q.IsPublished && q.Visibility == Visibility.Public)
+            .OrderByDescending(x => x.CreatedDate)
             .AsNoTracking();
 
         var quizzes = await query
