@@ -3,7 +3,7 @@ using Examify.Quiz.Dtos;
 using Examify.Result.Dtos;
 using Examify.Result.Entities;
 
-namespace Examify.Result.Repositories;
+namespace Examify.Result.Repositories.QuizResults;
 
 public interface IQuizResultRepository
 {

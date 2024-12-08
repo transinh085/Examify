@@ -1,4 +1,4 @@
-﻿using Examify.Result.Repositories;
+﻿using Examify.Result.Repositories.JoinQuizzes;
 using MediatR;
 using Result;
 namespace Examify.Result.Features.Query.GetUserJoinQuiz;

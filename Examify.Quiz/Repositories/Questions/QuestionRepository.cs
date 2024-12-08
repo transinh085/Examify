@@ -1,15 +1,17 @@
 using Ardalis.GuardClauses;
 using AutoMapper;
+using Examify.Events;
 using Examify.Quiz.Dtos;
 using Examify.Quiz.Entities;
 using Examify.Quiz.Features.Questions.Command.BulkUpdateQuestion;
 using Examify.Quiz.Features.Questions.Command.PatchQuestionAttributes;
 using Examify.Quiz.Infrastructure.Data;
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
 
 namespace Examify.Quiz.Repositories.Questions;
 
-public class QuestionRepository(QuizContext quizContext, IMapper mapper) : IQuestionRepository
+public class QuestionRepository(QuizContext quizContext, IMapper mapper, IPublishEndpoint publishEndpoint) : IQuestionRepository
 {
     public async Task BulkUpdateQuestion(BulkUpdateQuestionCommand request, CancellationToken cancellationToken)
     {
@@ -190,6 +192,11 @@ public class QuestionRepository(QuizContext quizContext, IMapper mapper) : IQues
         if (optionsToRemove.Any())
         {
             quizContext.Options.RemoveRange(optionsToRemove);
+            await publishEndpoint.Publish<OptionDeletedEvent>(new
+            {
+                OptionIds = optionsToRemove.Select(x => x.Id),
+                DeletedAt = DateTime.UtcNow
+            });
         }
 
         if (optionsToAdd.Any())

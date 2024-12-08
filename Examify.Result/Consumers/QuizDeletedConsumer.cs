@@ -1,15 +1,13 @@
 ﻿using Examify.Events;
-using Examify.Result.Repositories;
+using Examify.Result.Repositories.QuizResults;
 using MassTransit;
 
 namespace Examify.Result.Consumers;
 
-public class QuizDeletedConsumer(ILogger<QuizDeletedConsumer> logger, IQuizResultRepository quizResultRepository) : IConsumer<QuizDeletedEvent>
+public class QuizDeletedConsumer(IQuizResultRepository quizResultRepository) : IConsumer<QuizDeletedEvent>
 {
-    public Task Consume(ConsumeContext<QuizDeletedEvent> context)
+    public async Task Consume(ConsumeContext<QuizDeletedEvent> context)
     {
-        logger.LogInformation("Quiz Deleted Event Consumed");
-        quizResultRepository.DeleteAllResultsOfQuiz(context.Message.QuizId);
-        return Task.CompletedTask;
+        await quizResultRepository.DeleteAllResultsOfQuiz(context.Message.QuizId);
     }
 }

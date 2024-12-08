@@ -8,13 +8,12 @@ using Microsoft.EntityFrameworkCore;
 using Result;
 using QuizResult = Examify.Result.Entities.QuizResult;
 
-namespace Examify.Result.Repositories;
+namespace Examify.Result.Repositories.QuizResults;
 
 public class QuizResultRepository(
     QuizResultContext quizResultContext,
     Identity.IdentityClient identityClient,
-    QuizGrpcService.QuizGrpcServiceClient quizClient,
-    ILogger<QuizResultRepository> logger
+    QuizGrpcService.QuizGrpcServiceClient quizClient
 )
     : IQuizResultRepository
 {
@@ -308,7 +307,7 @@ public class QuizResultRepository(
                 Cover = quiz.Cover,
                 QuestionCount = quiz.Questions.Count,
                 AttemptedNumber = record.AttemptedNumber,
-                CurrentProgress = (decimal)record.QuestionResults.Count(x => x.SubmittedAt != DateTime.MinValue) / record.QuestionResults.Count * 100,
+                CurrentProgress = Math.Round((decimal)record.QuestionResults.Count(x => x.SubmittedAt != DateTime.MinValue) / record.QuestionResults.Count * 100, 2),
                 CreatedDate = record.CreatedDate
             });
         }
@@ -358,7 +357,7 @@ public class QuizResultRepository(
 
             var correctCount = await quizResultContext.QuizResults
                 .Where(quizResult => quizResult.CreatedDate >= playTime)
-				.Where(quiz => quiz.QuestionResults.Any(question => question.QuestionId == Guid.Parse(questionQuiz.Id) && question.IsCorrect))
+                .Where(quiz => quiz.QuestionResults.Any(question => question.QuestionId == Guid.Parse(questionQuiz.Id) && question.IsCorrect))
                 .CountAsync();
 
             var incorrectCount = await quizResultContext.QuizResults

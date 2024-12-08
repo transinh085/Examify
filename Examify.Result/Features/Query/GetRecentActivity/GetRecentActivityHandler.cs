@@ -1,4 +1,4 @@
-﻿using Examify.Result.Repositories;
+﻿using Examify.Result.Repositories.QuizResults;
 using MediatR;
 
 namespace Examify.Result.Features.Query.GetRecentActivity;

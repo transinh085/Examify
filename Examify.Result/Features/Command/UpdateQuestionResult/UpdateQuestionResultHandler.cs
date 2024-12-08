@@ -1,5 +1,7 @@
 ﻿using Examify.Events;
-using Examify.Result.Repositories;
+using Examify.Result.Repositories.AnswerResults;
+using Examify.Result.Repositories.QuestionResults;
+using Examify.Result.Repositories.QuizResults;
 using MassTransit;
 using MediatR;
 using Result;
@@ -11,7 +13,7 @@ public class UpdateQuestionResultHandler(
     IQuestionResultRepository questionResultRepository,
     IAnswerResultRepository answerResultRepository,
     QuestionGrpcService.QuestionGrpcServiceClient questionGrpcServiceClient,
-	IPublishEndpoint publishEndpoint)
+    IPublishEndpoint publishEndpoint)
     : IRequestHandler<UpdateQuestionResultCommand, IResult>
 {
     public async Task<IResult> Handle(UpdateQuestionResultCommand request, CancellationToken cancellationToken)
@@ -56,7 +58,7 @@ public class UpdateQuestionResultHandler(
 
         // update currentQuestion and timeTaken of quizResult
         var quizResult = await quizResultRepository.FindById(questionResult.QuizResultId);
-        
+
         if (quizResult is not null)
         {
             quizResult.CurrentQuestion++;
@@ -71,9 +73,9 @@ public class UpdateQuestionResultHandler(
         await publishEndpoint.Publish(new UpdateExamEvent
         {
             ExamId = quizResult.QuizId
-		});
+        });
 
-		return Results.Ok(new
+        return Results.Ok(new
         {
             IsCorrect = areEqual,
             CorrectOptions = correctAnswers,

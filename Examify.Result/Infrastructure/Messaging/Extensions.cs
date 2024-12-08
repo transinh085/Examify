@@ -11,6 +11,8 @@ public static class Extensions
         {
             x.SetKebabCaseEndpointNameFormatter();
             x.AddConsumer<QuizDeletedConsumer>();
+            x.AddConsumer<QuestionDeletedConsumer>();
+            x.AddConsumer<OptionDeletedConsumer>();
 
             x.UsingRabbitMq(
                 (context, cfg) =>

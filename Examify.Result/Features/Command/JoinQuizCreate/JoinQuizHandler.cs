@@ -1,6 +1,6 @@
 ﻿using Examify.Events;
 using Examify.Result.Entities;
-using Examify.Result.Repositories;
+using Examify.Result.Repositories.JoinQuizzes;
 using MassTransit;
 using MediatR;
 using Result;

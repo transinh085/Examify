@@ -2,7 +2,7 @@
 using Examify.Result.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace Examify.Result.Repositories;
+namespace Examify.Result.Repositories.QuestionResults;
 
 public class QuestionResultRepository(QuizResultContext quizResultContext)
     : IQuestionResultRepository
@@ -24,6 +24,19 @@ public class QuestionResultRepository(QuizResultContext quizResultContext)
         return questionResult;
     }
 
+    public async Task<bool> DeleteByQuestionId(Guid id)
+    {
+        var list = quizResultContext.QuestionResults.Where(x => x.QuestionId == id);
+
+        if (list != null)
+        {
+            quizResultContext.QuestionResults.RemoveRange(list);
+            await quizResultContext.SaveChangesAsync();
+            return true;
+        }
+        return false;
+    }
+
     public async Task<QuestionResult?> FindById(Guid id)
     {
         return await quizResultContext.QuestionResults.AsTracking(QueryTrackingBehavior.NoTracking)
@@ -33,6 +46,7 @@ public class QuestionResultRepository(QuizResultContext quizResultContext)
     public async Task<bool> Update(QuestionResult questionResult)
     {
         quizResultContext.QuestionResults.Update(questionResult);
+        await quizResultContext.SaveChangesAsync();
         return true;
     }
 }

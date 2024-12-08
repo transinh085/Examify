@@ -1,5 +1,5 @@
 ﻿using Examify.Quiz.Dtos;
-using Examify.Result.Repositories;
+using Examify.Result.Repositories.QuizResults;
 using MediatR;
 using Result;
 

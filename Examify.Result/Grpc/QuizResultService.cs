@@ -1,4 +1,4 @@
-﻿using Examify.Result.Repositories;
+﻿using Examify.Result.Repositories.QuizResults;
 using Grpc.Core;
 using Result;
 

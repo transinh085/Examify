@@ -11,7 +11,7 @@ namespace Examify.Quiz.Grpc
     {
         public override async Task<QuestionReply> GetQuestion(QuestionRequest request, ServerCallContext context)
         {
-            logger.LogCritical("GRPC GetQuestion request received: {Id}", request.Id);
+            logger.LogInformation("GRPC GetQuestion request received: {Id}", request.Id);
             PopulatedQuestionDto? question = await questionRepository.FindById(Guid.Parse(request.Id));
 
             if (question == null)

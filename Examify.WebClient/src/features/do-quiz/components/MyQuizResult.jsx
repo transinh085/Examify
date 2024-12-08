@@ -14,13 +14,8 @@ const MyQuizResult = () => {
   return (
     <Flex justify="space-between" className="py-8 h-full">
       <Space direction="vertical" size={24} className="w-[640px] mx-auto h-full overflow-y-auto px-4 custom-scrollbar">
-        <Link to={'/'}>
-          <Button type="primary" shape="default" className="!bg-[#6d387d] !hover:bg-[red] float-end" onClick={null}>
-            Back to home
-          </Button>
-        </Link>
         <Card className="bg-[#2a0830] border-none">
-          <Space direction="vertical" size={24} className="w-full text-white">
+          <Flex size={24} className="w-full text-white">
             <Space className="w-full">
               <Avatar size="large" src={user?.image} />
               <Space direction="vertical" align="start" size={0}>
@@ -30,7 +25,12 @@ const MyQuizResult = () => {
                 <p className="opacity-80 text-xs">{user?.email}</p>
               </Space>
             </Space>
-          </Space>
+            <Link to={'/'}>
+              <Button type="primary" shape="default" className="!bg-[#6d387d] !hover:bg-[red] float-end" onClick={null}>
+                Back to home
+              </Button>
+            </Link>
+          </Flex>
         </Card>
         <Card className="bg-[#2a0830] border-none">
           <Row gutter={[24, 24]}>
