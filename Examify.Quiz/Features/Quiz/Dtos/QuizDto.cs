@@ -25,6 +25,10 @@ public class QuizDto
     
     public DateTime CreatedDate { get; set; }
     
+    public DateTime StartTime { get; set; }
+    
+    public DateTime EndTime { get; set; }
+    
     public class OwnerDto
     {
         public string Id { get; set; }

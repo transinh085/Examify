@@ -20,7 +20,21 @@ import blankImage from '~/assets/images/blank-thumbnail.jpg';
 import { useDeleteQuiz } from '~/features/admin/mylibrary/api/delete-quiz';
 dayjs.extend(relativeTime);
 
-const TestCard = ({ id, title, cover, subject, grade, owner, questionCount, createDate, visibility }) => {
+const TestCard = ({
+  id,
+  title,
+  cover,
+  subject,
+  grade,
+  owner,
+  questionCount,
+  createDate,
+  code,
+  randomQuestions,
+  randomOptions,
+  startTime,
+  endTime,
+}) => {
   const navigate = useNavigate();
 
   const mutePlayQuiz = usePlayQuiz({
@@ -49,7 +63,9 @@ const TestCard = ({ id, title, cover, subject, grade, owner, questionCount, crea
           />
         </Link>
         <Space direction="vertical" size="small">
-          {visibility ? <Tag color="cyan">Public</Tag> : <Tag color="gold-inverse">Private</Tag>}
+          {
+          
+          ? <Tag color="cyan">Public</Tag> : <Tag color="gold-inverse">Private</Tag>}
           <Link to={`/admin/quiz/${id}`}>
             <h1 className="font-bold cursor-pointer hover:underline">{title}</h1>
           </Link>
@@ -77,7 +93,17 @@ const TestCard = ({ id, title, cover, subject, grade, owner, questionCount, crea
         </Space>
       </Space>
       <Flex justify="space-between" vertical align="end">
-        <DropdownMenu title={title} id={id} />
+
+        <DropdownMenu
+          id={id}
+          title={title}
+          code={code}
+          randomQuestions={randomQuestions}
+          randomOptions={randomOptions}
+          startTime={startTime}
+          endTime={endTime}
+        />
+
         <Space>
           <Button onClick={handlePlayQuiz} loading={mutePlayQuiz.isPending} icon={<PlayCircleOutlined />}>
             Play
@@ -89,7 +115,8 @@ const TestCard = ({ id, title, cover, subject, grade, owner, questionCount, crea
   );
 };
 
-const DropdownMenu = ({ id, title }) => {
+const DropdownMenu = ({ id, title, code, randomQuestions, randomOptions, startTime, endTime }) => {
+
   const { value: isSettingModalOpen, setTrue: openSettingModal, setFalse: closeSettingModal } = useBoolean();
   const handleMenuClick = ({ key }) => {
     if (key === '2') {
@@ -133,7 +160,17 @@ const DropdownMenu = ({ id, title }) => {
           <Button type="text" icon={<MoreOutlined />} size="small" />
         </a>
       </Dropdown>
-      <SettingModal data={title} open={isSettingModalOpen} onCancel={closeSettingModal} />
+      <SettingModal
+        id={id}
+        data={title}
+        open={isSettingModalOpen}
+        onCancel={closeSettingModal}
+        code={code}
+        randomQuestions={randomQuestions}
+        randomOptions={randomOptions}
+        startTime={startTime}
+        endTime={endTime}
+      />
     </>
   );
 };

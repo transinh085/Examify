@@ -13,7 +13,16 @@ public class QuizItemResponseDto
     public GradeDto? Grade { get; set; }
     public LanguageDto? Language { get; set; }
     public OwnerDto? Owner { get; set; }
+    
     public Visibility Visibility { get; set; }
+    
+    public bool RandomQuestions { get; set; }
+    
+    public bool RandomOptions { get; set; }
+    
+    public DateTime StartTime { get; set; }
+    
+    public DateTime EndTime { get; set; }
     public int Duration { get; set; }
     public int QuestionCount { get; set; }
     public int AttemptCount { get; set; }
