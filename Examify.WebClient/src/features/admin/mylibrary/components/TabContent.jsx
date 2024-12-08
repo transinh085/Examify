@@ -80,6 +80,13 @@ const TabContent = ({ params, setParams, isPublished = false }) => {
           owner={item.owner}
           questionCount={item.questionCount}
           createDate={item.createdDate}
+
+          code={item.code}
+          randomQuestions={item.randomQuestions}
+          randomOptions={item.randomOptions}
+          startTime={item.startTime}
+          endTime={item.endTime}
+
           visibility={item.visibility}
         />
       ))}

@@ -192,7 +192,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                 OwnerId = "ea616dc0-e621-474e-a247-b823b9fe6004",
                 Visibility = Visibility.Public,
                 IsPublished = true,
-                Code = "CSHARPBASIC",
+                Code = "C#BASIC",
                 StartTime = DateTime.UtcNow,
                 EndTime = DateTime.UtcNow.AddDays(7),
                 RandomQuestions = true,
@@ -726,7 +726,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is the speed of light in vacuum?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 1,
                         Options = new List<Option>
                         {
@@ -741,7 +741,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which of the following objects is not a source of light?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 2,
                         Options = new List<Option>
                         {
@@ -756,7 +756,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "A luminous object is:",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 3,
                         Options = new List<Option>
                         {
@@ -771,7 +771,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Choose the correct statement:",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 4,
                         Options = new List<Option>
                         {
@@ -786,7 +786,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Under which condition do we observe a lunar eclipse from Earth?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 5,
                         Options = new List<Option>
                         {
@@ -801,7 +801,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Why are multiple light bulbs installed in different positions in a classroom instead of using one large bulb? Which explanation is correct?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 6,
                         Options = new List<Option>
                         {
@@ -816,7 +816,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "During a solar eclipse, what is the relative position of the Earth, Sun, and Moon (assuming their centers lie on the same straight line)? Select the correct answer from the options below:",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 7,
                         Options = new List<Option>
                         {
@@ -838,7 +838,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                             new Option { Content = "The reflected ray lies in the plane containing the incident ray and the normal to the mirror at the point of incidence.", IsCorrect = true },
                             new Option { Content = "The reflected ray, incident ray, and the normal to the mirror at the point of incidence all lie in the same plane.", IsCorrect = true },
                             new Option { Content = "The plane containing the incident ray and the normal to the mirror at the point of incidence also contains the reflected ray.", IsCorrect = true },
-                            new Option { Content = "All of the above.", IsCorrect = true }
+                            new Option { Content = "All false", IsCorrect = false }
                         }
                     },
                     new Question
@@ -846,7 +846,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which of the following cannot be considered a plane mirror?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 9,
                         Options = new List<Option>
                         {
@@ -861,7 +861,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                     Content = "Choose the correct statement:",
                     Duration = 30,
                     Points = 1,
-                    Type = QuestionType.MultipleChoice,
+                    Type = QuestionType.SingleChoice,
                     Order = 10,
                     Options = new List<Option>
                         {
@@ -892,7 +892,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "A person who is 1.6 meters tall stands in front of a plane mirror, and the image is 1.5 meters away from the mirror. How far is the person from the mirror?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 1,
                         Options = new List<Option>
                         {
@@ -907,7 +907,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "The image of an object formed by a convex mirror has the following characteristic:",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 2,
                         Options = new List<Option>
                         {
@@ -922,7 +922,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "We can see the filament of a light bulb because:",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 3,
                         Options = new List<Option>
                         {
@@ -937,7 +937,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "A person who is 1.6 meters tall stands in front of a plane mirror. What is the height of their image?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 4,
                         Options = new List<Option>
                         {
@@ -952,7 +952,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "A convex mirror is used as a rearview mirror (mirror for looking behind) on cars and motorcycles because:",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 5,
                         Options = new List<Option>
                         {
@@ -967,7 +967,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "We can perceive light when:",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 6,
                         Options = new List<Option>
                         {
@@ -982,7 +982,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which of the following homogeneous environments does not satisfy the condition for the straight-line propagation of light?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 7,
                         Options = new List<Option>
                         {
@@ -1004,7 +1004,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                             new Option { Content = "Do not intersect.", IsCorrect = true },
                             new Option { Content = "Meet at infinity.", IsCorrect = true },
                             new Option { Content = "Neither converge nor diverge.", IsCorrect = true },
-                            new Option { Content = "All of the above.", IsCorrect = true }
+                            new Option { Content = "All false.", IsCorrect = false }
                         }
                     },
                     new Question
@@ -1027,7 +1027,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Why do we see an object?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 10,
                         Options = new List<Option>
                         {
@@ -1058,7 +1058,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "7+5=",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 1,
                         Options = new List<Option>
                         {
@@ -1072,7 +1072,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "9+6+4+2=",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 2,
                         Options = new List<Option>
                         {
@@ -1086,7 +1086,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "3+4+9+2",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 3,
                         Options = new List<Option>
                         {
@@ -1100,7 +1100,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "2+5+4+7+6+8",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 4,
                         Options = new List<Option>
                         {
@@ -1114,7 +1114,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "2-1+3+4-6",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 5,
                         Options = new List<Option>
                         {
@@ -1128,7 +1128,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "9-6+5-2+7+9+3-10",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 6,
                         Options = new List<Option>
                         {
@@ -1142,7 +1142,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "7+5=",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 7,
                         Options = new List<Option>
                         {
@@ -1170,7 +1170,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "2-1+3= 5",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 9,
                         Options = new List<Option>
                         {
@@ -1182,7 +1182,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Choose (>, <, =).    23__31-7",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 10,
                         Options = new List<Option>
                         {
@@ -1218,7 +1218,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         {
                             new Option { Content = "3408kg", IsCorrect = false },
                             new Option { Content = "5503kg", IsCorrect = true },
-                            new Option { Content = "5503", IsCorrect = false },
+                            new Option { Content = "5503", IsCorrect = true },
                             new Option { Content = "3408", IsCorrect = false }
                         }
                     },
@@ -1227,7 +1227,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "When dividing a two-digit number by 8, the quotient is 5 and the remainder is 6. What is the dividend?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 2,
                         Options = new List<Option>
                         {
@@ -1242,7 +1242,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is the remainder when 358 is divided by 5?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 3,
                         Options = new List<Option>
                         {
@@ -1257,7 +1257,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "A rectangle has a length of 124 cm and a width of 86 cm. What is its perimeter?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 4,
                         Options = new List<Option>
                         {
@@ -1272,7 +1272,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Fill in the appropriate symbol for the comparison: 1234 x 2 .... 1234 x 3",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 5,
                         Options = new List<Option>
                         {
@@ -1286,7 +1286,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "A transport company has 4 teams of vehicles. The first team has 10 cars, and each of the remaining 3 teams has 9 cars. How many cars does the company have?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 6,
                         Options = new List<Option>
                         {
@@ -1301,7 +1301,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "A container initially holds 36 liters of oil. After usage, the remaining oil is 1/3 of the initial amount. How many liters of oil remain in the container?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 7,
                         Options = new List<Option>
                         {
@@ -1316,7 +1316,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Class 3A plants 42 trees, and Class 3B plants 4 times the number of trees Class 3A plants. How many trees do both classes plant together?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 8,
                         Options = new List<Option>
                         {
@@ -1331,7 +1331,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is the value of the expression 840 ÷ (2 + 2)?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 9,
                         Options = new List<Option>
                         {
@@ -1346,7 +1346,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Solve the equation x ÷ 5 = 83. What is the value of x?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 10,
                         Options = new List<Option>
                         {
@@ -1377,7 +1377,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is the plural form of 'child'?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 1,
                         Options = new List<Option>
                         {
@@ -1392,7 +1392,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which of the following is the correct past tense of 'go'?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 2,
                         Options = new List<Option>
                         {
@@ -1407,7 +1407,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which word is an antonym of 'happy'?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 3,
                         Options = new List<Option>
                         {
@@ -1422,7 +1422,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which sentence is in the passive voice?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 4,
                         Options = new List<Option>
                         {
@@ -1437,7 +1437,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is the comparative form of 'good'?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 5,
                         Options = new List<Option>
                         {
@@ -1452,7 +1452,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What does the word 'benevolent' mean?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 6,
                         Options = new List<Option>
                         {
@@ -1467,7 +1467,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which word is a synonym of 'intelligent'?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 7,
                         Options = new List<Option>
                         {
@@ -1482,7 +1482,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is the correct way to ask for the time?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 8,
                         Options = new List<Option>
                         {
@@ -1497,7 +1497,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which of the following sentences is grammatically correct?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 9,
                         Options = new List<Option>
                         {
@@ -1512,7 +1512,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which of these is an example of a compound sentence?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 10,
                         Options = new List<Option>
                         {
@@ -1543,7 +1543,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which of the following is the correct spelling?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 1,
                         Options = new List<Option>
                         {
@@ -1558,7 +1558,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is the opposite of 'arrive'?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 2,
                         Options = new List<Option>
                         {
@@ -1573,7 +1573,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What does the word 'altruistic' mean?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 3,
                         Options = new List<Option>
                         {
@@ -1588,7 +1588,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which of these is an example of a conjunction?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 4,
                         Options = new List<Option>
                         {
@@ -1603,7 +1603,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is the superlative form of 'bad'?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 5,
                         Options = new List<Option>
                         {
@@ -1618,7 +1618,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which of the following words is a noun?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 6,
                         Options = new List<Option>
                         {
@@ -1633,7 +1633,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which sentence is correct?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 7,
                         Options = new List<Option>
                         {
@@ -1648,7 +1648,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is the past tense of 'eat'?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 8,
                         Options = new List<Option>
                         {
@@ -1663,7 +1663,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which of the following is a synonym of 'brave'?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 9,
                         Options = new List<Option>
                         {
@@ -1678,7 +1678,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which of these sentences uses the word 'literally' correctly?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 10,
                         Options = new List<Option>
                         {
@@ -1709,7 +1709,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is the capital city of France?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 1,
                         Options = new List<Option>
                         {
@@ -1724,7 +1724,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which continent is known as the 'Frozen Continent'?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 2,
                         Options = new List<Option>
                         {
@@ -1739,7 +1739,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is the longest river in the world?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 3,
                         Options = new List<Option>
                         {
@@ -1754,7 +1754,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which is the largest ocean on Earth?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 4,
                         Options = new List<Option>
                         {
@@ -1769,7 +1769,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is the smallest country in the world?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 5,
                         Options = new List<Option>
                         {
@@ -1784,7 +1784,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which desert is the largest in the world?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 6,
                         Options = new List<Option>
                         {
@@ -1799,7 +1799,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which country has the largest population?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 7,
                         Options = new List<Option>
                         {
@@ -1814,7 +1814,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which mountain range is home to Mount Everest?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 8,
                         Options = new List<Option>
                         {
@@ -1829,7 +1829,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which country is known as the 'Land of the Rising Sun'?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 9,
                         Options = new List<Option>
                         {
@@ -1844,7 +1844,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is the largest island in the world?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 10,
                         Options = new List<Option>
                         {
@@ -1875,7 +1875,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which country has the largest land area in the world?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 1,
                         Options = new List<Option>
                         {
@@ -1890,7 +1890,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which U.S. state is known as the 'Sunshine State'?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 2,
                         Options = new List<Option>
                         {
@@ -1905,7 +1905,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is the name of the imaginary line that divides the Earth into Northern and Southern Hemispheres?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 3,
                         Options = new List<Option>
                         {
@@ -1920,7 +1920,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which country is famous for its pyramids and the Sphinx?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 4,
                         Options = new List<Option>
                         {
@@ -1935,7 +1935,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which river flows through the city of London?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 5,
                         Options = new List<Option>
                         {
@@ -1950,7 +1950,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which country is home to the Great Barrier Reef?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 6,
                         Options = new List<Option>
                         {
@@ -1965,7 +1965,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is the smallest continent by land area?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 7,
                         Options = new List<Option>
                         {
@@ -1980,7 +1980,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which African country is known as the 'Rainbow Nation'?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 8,
                         Options = new List<Option>
                         {
@@ -1995,7 +1995,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is the capital city of Japan?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 9,
                         Options = new List<Option>
                         {
@@ -2010,7 +2010,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which country shares the longest border with the United States?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 10,
                         Options = new List<Option>
                         {
@@ -2042,7 +2042,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is the chemical symbol for water?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 1,
                         Options = new List<Option>
                         {
@@ -2057,7 +2057,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is the atomic number of hydrogen?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 2,
                         Options = new List<Option>
                         {
@@ -2072,7 +2072,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is the most abundant gas in Earth’s atmosphere?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 3,
                         Options = new List<Option>
                         {
@@ -2087,7 +2087,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which subatomic particle has a positive charge?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 4,
                         Options = new List<Option>
                         {
@@ -2102,7 +2102,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is the pH value of a neutral substance like pure water?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 5,
                         Options = new List<Option>
                         {
@@ -2117,7 +2117,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which element is commonly known as the 'King of Chemicals'?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 6,
                         Options = new List<Option>
                         {
@@ -2132,7 +2132,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is the chemical formula for table salt?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 7,
                         Options = new List<Option>
                         {
@@ -2147,7 +2147,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which element is represented by the symbol 'O'?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 8,
                         Options = new List<Option>
                         {
@@ -2162,7 +2162,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What type of bond is formed when two atoms share electrons?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 9,
                         Options = new List<Option>
                         {
@@ -2177,7 +2177,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which element is the main component of diamonds?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 10,
                         Options = new List<Option>
                         {
@@ -2209,7 +2209,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is the most abundant element in the universe?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 1,
                         Options = new List<Option>
                         {
@@ -2224,7 +2224,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is the periodic table symbol for gold?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 2,
                         Options = new List<Option>
                         {
@@ -2239,7 +2239,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which scientist is credited with creating the periodic table?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 3,
                         Options = new List<Option>
                         {
@@ -2254,7 +2254,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is the pH value of a strong acid?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 4,
                         Options = new List<Option>
                         {
@@ -2269,7 +2269,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is the chemical formula for carbon dioxide?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 5,
                         Options = new List<Option>
                         {
@@ -2284,7 +2284,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which gas is known as a greenhouse gas?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 6,
                         Options = new List<Option>
                         {
@@ -2299,7 +2299,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is the charge of an electron?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 7,
                         Options = new List<Option>
                         {
@@ -2314,7 +2314,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which element is liquid at room temperature?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 8,
                         Options = new List<Option>
                         {
@@ -2329,7 +2329,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What type of reaction involves the combination of two or more substances to form one product?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 9,
                         Options = new List<Option>
                         {
@@ -2344,7 +2344,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which element is the lightest and first in the periodic table?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 10,
                         Options = new List<Option>
                         {
@@ -2376,7 +2376,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "When did Vietnam gain independence from French colonial rule?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 1,
                         Options = new List<Option>
                         {
@@ -2391,7 +2391,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Who was the leader of the Vietnamese independence movement against French colonialism?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 2,
                         Options = new List<Option>
                         {
@@ -2406,7 +2406,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is the name of the ancient kingdom that existed in central Vietnam from the 2nd to the 15th century?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 3,
                         Options = new List<Option>
                         {
@@ -2421,7 +2421,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which battle in 1954 marked the decisive victory of Vietnamese forces over the French?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 4,
                         Options = new List<Option>
                         {
@@ -2436,7 +2436,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What event marked the reunification of North and South Vietnam?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 5,
                         Options = new List<Option>
                         {
@@ -2451,7 +2451,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which empire ruled Vietnam during the 19th and early 20th centuries?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 6,
                         Options = new List<Option>
                         {
@@ -2466,7 +2466,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What dynasty ruled Vietnam during its golden age of Confucian culture?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 7,
                         Options = new List<Option>
                         {
@@ -2481,7 +2481,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Who was the famous Vietnamese general who led the victory at Dien Bien Phu?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 8,
                         Options = new List<Option>
                         {
@@ -2496,7 +2496,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What was the ancient name of Hanoi during the Ly Dynasty?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 9,
                         Options = new List<Option>
                         {
@@ -2511,7 +2511,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What agreement in 1954 temporarily divided Vietnam along the 17th parallel?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 10,
                         Options = new List<Option>
                         {
@@ -2542,7 +2542,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which event directly triggered the start of World War I?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 1,
                         Options = new List<Option>
                         {
@@ -2557,7 +2557,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which countries made up the Triple Alliance during World War I?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 2,
                         Options = new List<Option>
                         {
@@ -2572,7 +2572,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which country was the first to declare war in World War I?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 3,
                         Options = new List<Option>
                         {
@@ -2587,7 +2587,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Who was the leader of Germany during World War I?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 4,
                         Options = new List<Option>
                         {
@@ -2602,7 +2602,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which battle is considered the largest and bloodiest of World War I?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 5,
                         Options = new List<Option>
                         {
@@ -2617,7 +2617,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which country joined the Allies in World War I in 1917, tipping the balance in favor of the Allies?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 6,
                         Options = new List<Option>
                         {
@@ -2632,7 +2632,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What was the name of the treaty that ended World War I?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 7,
                         Options = new List<Option>
                         {
@@ -2647,7 +2647,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which empire collapsed after World War I, leading to the creation of new countries in Eastern Europe?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 8,
                         Options = new List<Option>
                         {
@@ -2662,7 +2662,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What was the primary cause of the U.S. joining World War I?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 9,
                         Options = new List<Option>
                         {
@@ -2677,7 +2677,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which new technology was introduced during World War I, contributing to the high casualties?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 10,
                         Options = new List<Option>
                         {
@@ -2708,7 +2708,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What event directly triggered the start of World War II?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 1,
                         Options = new List<Option>
                         {
@@ -2723,7 +2723,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which countries were part of the Axis Powers during World War II?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 2,
                         Options = new List<Option>
                         {
@@ -2738,7 +2738,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Who was the leader of Nazi Germany during World War II?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 3,
                         Options = new List<Option>
                         {
@@ -2753,7 +2753,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which battle is considered the turning point in the Pacific War during World War II?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 4,
                         Options = new List<Option>
                         {
@@ -2768,7 +2768,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What was the name of the secret project to develop the atomic bomb in the United States?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 5,
                         Options = new List<Option>
                         {
@@ -2783,7 +2783,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which country was invaded by Germany in 1941, leading to its entry into World War II?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 6,
                         Options = new List<Option>
                         {
@@ -2798,7 +2798,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Where did the D-Day landings take place in 1944?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 7,
                         Options = new List<Option>
                         {
@@ -2813,7 +2813,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which event led to the United States' entry into World War II?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 8,
                         Options = new List<Option>
                         {
@@ -2828,7 +2828,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which major conference in 1945 resulted in agreements about the post-war order and the division of Germany?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 9,
                         Options = new List<Option>
                         {
@@ -2843,7 +2843,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What was the name of the largest and deadliest concentration camp in Nazi Germany?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 10,
                         Options = new List<Option>
                         {
@@ -2874,7 +2874,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is the only thing that computers understand?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 1,
                         Options = new List<Option>
                         {
@@ -2889,7 +2889,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Before a computer can understand a program it must be...",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 2,
                         Options = new List<Option>
                         {
@@ -2903,7 +2903,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Java, Python, PHP, and C++ are examples of",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 3,
                         Options = new List<Option>
                         {
@@ -2918,7 +2918,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is machine code?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 4,
                         Options = new List<Option>
                         {
@@ -2932,7 +2932,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which language is directly understood by the computer without translation program?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 5,
                         Options = new List<Option>
                         {
@@ -2947,7 +2947,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which of the following is not a high level programming language?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 6,
                         Options = new List<Option>
                         {
@@ -2962,7 +2962,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which level of a programming language is Assembly Code?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 7,
                         Options = new List<Option>
                         {
@@ -2975,7 +2975,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which level would create the fastest code to execute?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 8,
                         Options = new List<Option>
                         {
@@ -2989,7 +2989,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which level would create the easiest code for humans to understand?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 9,
                         Options = new List<Option>
                         {
@@ -3003,7 +3003,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Machine Code uses mnemonics to represent instructions",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 10,
                         Options = new List<Option>
                         {
@@ -3032,7 +3032,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Dependency models the _________ relationship",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 1,
                         Options = new List<Option>
                         {
@@ -3046,7 +3046,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Interfaces model the _________ relationship",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 2,
                         Options = new List<Option>
                         {
@@ -3060,7 +3060,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Aggregation models the _________ relationship",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 3,
                         Options = new List<Option>
                         {
@@ -3074,7 +3074,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Inheritance models the _________ relationship",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 4,
                         Options = new List<Option>
                         {
@@ -3088,7 +3088,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "The analysis phase ____________________",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 5,
                         Options = new List<Option>
                         {
@@ -3103,7 +3103,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "The operations and maintenance phase ____________________",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 6,
                         Options = new List<Option>
                         {
@@ -3118,7 +3118,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "The integration phase ____________________",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 7,
                         Options = new List<Option>
                         {
@@ -3133,7 +3133,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "The implementation phase ____________________",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 8,
                         Options = new List<Option>
                         {
@@ -3148,7 +3148,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "The design phase ____________________",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 9,
                         Options = new List<Option>
                         {
@@ -3163,7 +3163,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "The analysis phase ____________________",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 10,
                         Options = new List<Option>
                         {
@@ -3194,7 +3194,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "I wouldn’t tell her if I ……….. you. She can’t keep a secret.",
                         Duration = 45,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 1,
                         Options = new List<Option>
                         {
@@ -3209,7 +3209,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Paul would be a good artist if he …….... more patience.",
                         Duration = 45,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 2,
                         Options = new List<Option>
                         {
@@ -3224,7 +3224,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "If we walk so slowly, we ………………. late.",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 3,
                         Options = new List<Option>
                         {
@@ -3239,7 +3239,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "If I …………. John, I’d ask Mary for a date.",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 4,
                         Options = new List<Option>
                         {
@@ -3254,7 +3254,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "If you ……….., you won’t find out the truth.",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 5,
                         Options = new List<Option>
                         {
@@ -3269,7 +3269,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "If Amy does the washing up, her brother __________ the table.",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 6,
                         Options = new List<Option>
                         {
@@ -3284,7 +3284,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "You would have slept much better, if you _______ your medicine.",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 7,
                         Options = new List<Option>
                         {
@@ -3299,7 +3299,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "If you wait a minute, I _______ with you.",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 8,
                         Options = new List<Option>
                         {
@@ -3314,7 +3314,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "My uncle would stay longer in N.Y, if he ______ more time.",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 9,
                         Options = new List<Option>
                         {
@@ -3329,7 +3329,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "He wouldn't have been sleepy all the day if he _____________ late last night.",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 10,
                         Options = new List<Option>
                         {
@@ -3360,7 +3360,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Nobility and clergy lost their privileges and their power and wealth diminished",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 1,
                         Options = new List<Option>
                         {
@@ -3388,7 +3388,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What was the interest of people during the Renaissance period?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 3,
                         Options = new List<Option>
                         {
@@ -3403,7 +3403,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "The Baroque period had an impact on art, architecture and literature",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 4,
                         Options = new List<Option>
                         {
@@ -3416,7 +3416,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "During the Age of Enlightment, there were great advances in technology and healthcare",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 5,
                         Options = new List<Option>
                         {
@@ -3429,7 +3429,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What was one of the most important inventions that appeared in the 15th century?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 6,
                         Options = new List<Option>
                         {
@@ -3444,7 +3444,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "The printing press was invented by Johannes Gutenberg in 1559",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 7,
                         Options = new List<Option>
                         {
@@ -3457,7 +3457,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What did the kings do to get more fame and money?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 8,
                         Options = new List<Option>
                         {
@@ -3472,7 +3472,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is the name of this invention?",
                         Duration = 30,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 9,
                         Options = new List<Option>
                         {
@@ -3503,7 +3503,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which two kingdoms unified at the end of the 15th century?",
                         Duration = 60,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Options = new List<Option>
                         {
                             new Option { Content = "Castilla y Navarra", IsCorrect = false },
@@ -3517,7 +3517,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "The two kingdoms formed an alliance and changed their own laws, parliaments, and currencies to be the same.",
                         Duration = 60,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Options = new List<Option>
                         {
                             new Option { Content = "True", IsCorrect = false },
@@ -3529,7 +3529,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "The Catholic Monarchs, Isabel and Fernando, were passionate defenders of:",
                         Duration = 60,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Options = new List<Option>
                         {
                             new Option { Content = "Ancient Greek and Roman culture", IsCorrect = false },
@@ -3543,7 +3543,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What else happened in 1492 aside from the discovery of America?",
                         Duration = 60,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Options = new List<Option>
                         {
                             new Option { Content = "Navarra became part of Castilla", IsCorrect = false },
@@ -3557,7 +3557,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "The Catholic Monarchs expanded the kingdom by marrying their children into other countries. How many children did they have?",
                         Duration = 60,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Options = new List<Option>
                         {
                             new Option { Content = "2", IsCorrect = false },
@@ -3571,7 +3571,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "During this time, Aragon expanded its territory along the:",
                         Duration = 60,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Options = new List<Option>
                         {
                             new Option { Content = "Mediterranean Sea", IsCorrect = true },
@@ -3585,7 +3585,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "In which year did Castilla conquer the Canary Islands?",
                         Duration = 60,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Options = new List<Option>
                         {
                             new Option { Content = "1512", IsCorrect = false },
@@ -3599,7 +3599,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which of these countries became part of the Catholic Monarchs' kingdom?",
                         Duration = 60,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Options = new List<Option>
                         {
                             new Option { Content = "Austria", IsCorrect = false },
@@ -3613,7 +3613,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "When did Navarra become part of the Crown of Castilla?",
                         Duration = 60,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Options = new List<Option>
                         {
                             new Option { Content = "1502", IsCorrect = false },
@@ -3657,7 +3657,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "I haven't ______________ your book.",
                         Duration = 60,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 1,
                         Options = new List<Option>
                         {
@@ -3672,7 +3672,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "She ____________ eaten Asian food.",
                         Duration = 60,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 2,
                         Options = new List<Option>
                         {
@@ -3687,7 +3687,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "I _________________ my purse.",
                         Duration = 60,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 3,
                         Options = new List<Option>
                         {
@@ -3701,7 +3701,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "We _________________ this movie already.",
                         Duration = 60,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 4,
                         Options = new List<Option>
                         {
@@ -3715,12 +3715,13 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "There _________________ an accident.",
                         Duration = 60,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 5,
                         Options = new List<Option>
                         {
                             new Option { Content = "There has been an accident.", IsCorrect = true },
                             new Option { Content = "There have been an accident.", IsCorrect = false },
+                            new Option { Content = "There has beed an accident.", IsCorrect = false },
                             new Option { Content = "There has beed an accident.", IsCorrect = false }
                         }
                     },
@@ -3729,7 +3730,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "It's a great movie. I have ... that movie many times.",
                         Duration = 60,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 6,
                         Options = new List<Option>
                         {
@@ -3743,7 +3744,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Have you ... really strange or interesting food?",
                         Duration = 60,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 7,
                         Options = new List<Option>
                         {
@@ -3757,7 +3758,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "(A) ... your brother talked to you yet? (B) Yes, he ... .",
                         Duration = 60,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 8,
                         Options = new List<Option>
                         {
@@ -3771,7 +3772,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "She has a car, so she ... there many times.",
                         Duration = 60,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 9,
                         Options = new List<Option>
                         {
@@ -3785,7 +3786,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "I .............. never .................... a car before.",
                         Duration = 60,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 10,
                         Options = new List<Option>
                         {
@@ -3831,7 +3832,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is the past tense form of 'run'?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 2,
                         Options = new List<Option>
                         {
@@ -3876,7 +3877,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "What is the plural form of 'child'?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 5,
                         Options = new List<Option>
                         {
@@ -3936,7 +3937,7 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                         Content = "Which of the following are correct spellings?",
                         Duration = 20,
                         Points = 1,
-                        Type = QuestionType.MultipleChoice,
+                        Type = QuestionType.SingleChoice,
                         Order = 9,
                         Options = new List<Option>
                         {
@@ -3948,14 +3949,14 @@ public class QuizContextSeed : IDbSeeder<QuizContext>
                     },
                     new Question
                     {
-                        Content = "What is the correct form of 'to be' in the sentence: 'She ___ a doctor.'",
-                        Duration = 20,
+                        Content = "What is the correct form of 'to be' in the sentence: 'I/She ___ a doctor.'",
+                        Duration = 10,
                         Points = 1,
                         Type = QuestionType.MultipleChoice,
                         Order = 10,
                         Options = new List<Option>
                         {
-                            new Option { Content = "am", IsCorrect = false },
+                            new Option { Content = "am", IsCorrect = true },
                             new Option { Content = "is", IsCorrect = true },
                             new Option { Content = "are", IsCorrect = false },
                             new Option { Content = "was", IsCorrect = false }

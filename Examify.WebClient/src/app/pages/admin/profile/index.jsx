@@ -1,4 +1,4 @@
-import { Avatar, Button, Card, Flex, Tabs, Upload, Space } from 'antd';
+import { Avatar, Button, Card, Flex, Tabs, Space } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 import useAuthStore from '~/stores/auth-store';
@@ -7,8 +7,8 @@ import TabContent from '~/features/admin/mylibrary/components/TabContent';
 import { useSearchParams } from 'react-router-dom';
 
 const ProfilePage = () => {
-  const { user, resetUser } = useAuthStore();
-  const [imageUrl, setImageUrl] = useState(user.image);
+  const { user } = useAuthStore();
+  const [imageUrl] = useState(user.image);
 
   const navigate = useNavigate();
 
