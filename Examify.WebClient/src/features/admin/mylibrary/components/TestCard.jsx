@@ -34,6 +34,7 @@ const TestCard = ({
   randomOptions,
   startTime,
   endTime,
+  visibility,
 }) => {
   const navigate = useNavigate();
 
@@ -63,9 +64,7 @@ const TestCard = ({
           />
         </Link>
         <Space direction="vertical" size="small">
-          {
-          
-          ? <Tag color="cyan">Public</Tag> : <Tag color="gold-inverse">Private</Tag>}
+          {visibility == 1 ? <Tag color="cyan">Public</Tag> : <Tag color="gold-inverse">Private</Tag>}
           <Link to={`/admin/quiz/${id}`}>
             <h1 className="font-bold cursor-pointer hover:underline">{title}</h1>
           </Link>
@@ -93,7 +92,6 @@ const TestCard = ({
         </Space>
       </Space>
       <Flex justify="space-between" vertical align="end">
-
         <DropdownMenu
           id={id}
           title={title}
@@ -116,7 +114,6 @@ const TestCard = ({
 };
 
 const DropdownMenu = ({ id, title, code, randomQuestions, randomOptions, startTime, endTime }) => {
-
   const { value: isSettingModalOpen, setTrue: openSettingModal, setFalse: closeSettingModal } = useBoolean();
   const handleMenuClick = ({ key }) => {
     if (key === '2') {

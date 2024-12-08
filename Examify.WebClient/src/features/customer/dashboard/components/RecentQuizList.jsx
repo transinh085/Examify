@@ -1,4 +1,4 @@
-import { Button, Col, Flex, Row, Space } from 'antd';
+import { Button, Col, Empty, Flex, Row, Space } from 'antd';
 import { Link } from 'react-router-dom';
 import { RightOutlined, StarFilled } from '@ant-design/icons';
 import { useGetRecentActivity } from '~/features/customer/dashboard/api/get-recent-activity';
@@ -30,17 +30,26 @@ const RecentQuizList = () => {
         </Link>
       </Flex>
       <Row gutter={[16, 16]}>
-        {isLoading
-          ? Array.from({ length: 4 }).map((_, index) => (
-              <Col xs={24} sm={12} md={8} lg={6} key={index}>
-                <QuizItemSkeleton />
-              </Col>
-            ))
-          : data.items.map((quiz) => (
-              <Col xs={24} sm={12} md={8} lg={6} key={quiz.id}>
-                <RecentQuiz {...quiz} />
-              </Col>
-            ))}
+        {isLoading ? (
+          Array.from({ length: 4 }).map((_, index) => (
+            <Col xs={24} sm={12} md={8} lg={6} key={index}>
+              <QuizItemSkeleton />
+            </Col>
+          ))
+        ) : data.items.length > 0 ? (
+          data.items.map((quiz) => (
+            <Col xs={24} sm={12} md={8} lg={6} key={quiz.id}>
+              <RecentQuiz {...quiz} />
+            </Col>
+          ))
+        ) : (
+          <div className='flex justify-center w-full'>
+            <Empty
+              image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+              description="No recent activity"
+            />
+          </div>
+        )}
       </Row>
     </div>
   );
