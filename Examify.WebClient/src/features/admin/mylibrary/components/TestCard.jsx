@@ -19,7 +19,21 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import blankImage from '~/assets/images/blank-thumbnail.jpg';
 dayjs.extend(relativeTime);
 
-const TestCard = ({ id, title, cover, subject, grade, owner, questionCount, createDate }) => {
+const TestCard = ({
+  id,
+  title,
+  cover,
+  subject,
+  grade,
+  owner,
+  questionCount,
+  createDate,
+  code,
+  randomQuestions,
+  randomOptions,
+  startTime,
+  endTime,
+}) => {
   const navigate = useNavigate();
 
   const mutePlayQuiz = usePlayQuiz({
@@ -76,7 +90,15 @@ const TestCard = ({ id, title, cover, subject, grade, owner, questionCount, crea
         </Space>
       </Space>
       <Flex justify="space-between" vertical align="end">
-        <DropdownMenu title={title} />
+        <DropdownMenu
+          id={id}
+          title={title}
+          code={code}
+          randomQuestions={randomQuestions}
+          randomOptions={randomOptions}
+          startTime={startTime}
+          endTime={endTime}
+        />
         <Space>
           <Button onClick={handlePlayQuiz} loading={mutePlayQuiz.isPending} icon={<PlayCircleOutlined />}>
             Play
@@ -88,7 +110,7 @@ const TestCard = ({ id, title, cover, subject, grade, owner, questionCount, crea
   );
 };
 
-const DropdownMenu = ({ title }) => {
+const DropdownMenu = ({ id, title, code, randomQuestions, randomOptions, startTime, endTime }) => {
   const { value: isSettingModalOpen, setTrue: openSettingModal, setFalse: closeSettingModal } = useBoolean();
   const handleMenuClick = ({ key }) => {
     if (key === '2') {
@@ -126,7 +148,17 @@ const DropdownMenu = ({ title }) => {
           <Button type="text" icon={<MoreOutlined />} size="small" />
         </a>
       </Dropdown>
-      <SettingModal data={title} open={isSettingModalOpen} onCancel={closeSettingModal} />
+      <SettingModal
+        id={id}
+        data={title}
+        open={isSettingModalOpen}
+        onCancel={closeSettingModal}
+        code={code}
+        randomQuestions={randomQuestions}
+        randomOptions={randomOptions}
+        startTime={startTime}
+        endTime={endTime}
+      />
     </>
   );
 };
